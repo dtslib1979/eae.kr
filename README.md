@@ -161,6 +161,16 @@ Your content here with full MDX support...
 
 The site automatically deploys to GitHub Pages when changes are pushed to the `main` branch.
 
+### Prerequisites
+
+**Important:** GitHub Pages must be enabled in the repository settings before deployment will work.
+
+1. Go to repository **Settings** → **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. Save the settings
+
+The workflow will fail with a 404 error if GitHub Pages is not enabled.
+
 ### GitHub Actions Workflow
 
 The deployment workflow:

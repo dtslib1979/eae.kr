@@ -1,16 +1,180 @@
-# React + Vite
+# EAE PWA Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional Progressive Web App built with React, Vite, MDX, TailwindCSS, and deployed on GitHub Pages.
 
-Currently, two official plugins are available:
+**Live Site:** [www.eae.kr](https://www.eae.kr)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## React Compiler
+- **React 19** - UI library
+- **Vite** - Build tool and dev server
+- **React Router** - Client-side routing
+- **MDX** - Markdown with JSX support
+  - `@mdx-js/react` - React integration
+  - `@mdx-js/rollup` - Rollup plugin
+  - `remark-gfm` - GitHub Flavored Markdown
+  - `rehype-slug` - Add IDs to headings
+- **TailwindCSS v4** - Utility-first CSS framework
+- **vite-plugin-pwa** - PWA support with Workbox
+- **GitHub Actions** - CI/CD for automated deployment
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
 
-## Expanding the ESLint configuration
+```
+.
+├── .github/workflows/    # GitHub Actions deployment
+├── public/
+│   ├── icons/           # Category and PWA icons
+│   └── CNAME            # Custom domain configuration
+├── src/
+│   ├── components/      # React components (Layout)
+│   ├── content/         # MDX content organized by category
+│   │   ├── qsketch/    # Quick Sketch posts
+│   │   ├── penon/      # Penon posts
+│   │   ├── mal/        # Mal posts
+│   │   ├── patchtech/  # Patchtech posts
+│   │   ├── eml/        # EML posts
+│   │   └── phl/        # PHL posts
+│   ├── pages/          # Page components
+│   │   ├── Home.jsx    # Homepage with categories and latest posts
+│   │   ├── Category.jsx # Category listing page
+│   │   ├── Post.jsx    # Individual post page
+│   │   ├── Archive.jsx # Archive page with all posts
+│   │   └── About.jsx   # About page
+│   ├── utils/          # Utility functions
+│   │   └── posts.js    # MDX import and processing
+│   └── App.jsx         # Router configuration
+├── vite.config.js      # Vite configuration with MDX and PWA
+├── tailwind.config.js  # TailwindCSS configuration
+└── postcss.config.js   # PostCSS configuration
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+### Pages
+
+- **Home (/)** - Displays 6 categories with post counts and latest 3 posts
+- **Category (/category/:slug)** - Lists all posts in a category
+- **Post (/category/:slug/:post)** - Individual post rendered from MDX
+- **Archive (/archive)** - All posts grouped by category
+- **About (/about)** - About page with site information
+
+### Categories
+
+1. **qsketch** - Quick Sketch
+2. **penon** - Penon
+3. **mal** - Mal
+4. **patchtech** - Patchtech
+5. **eml** - EML
+6. **phl** - PHL
+
+### PWA Features
+
+- ✅ Service Worker with Workbox
+- ✅ Web App Manifest
+- ✅ Offline support
+- ✅ Installable on mobile and desktop
+- ✅ 192x192 and 512x512 app icons
+
+### GitHub Pages Deployment
+
+- ✅ Automated deployment via GitHub Actions
+- ✅ Custom domain support (www.eae.kr)
+- ✅ SPA routing support (404.html fallback)
+- ✅ Asset optimization and minification
+
+## Development
+
+### Prerequisites
+
+- Node.js 20.x or higher
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development Server
+
+```bash
+npm run dev
+```
+
+Runs the app in development mode at `http://localhost:5173`
+
+### Build
+
+```bash
+npm run build
+```
+
+Builds the app for production to the `dist` folder.  
+Also copies `index.html` to `404.html` for SPA routing support.
+
+### Preview
+
+```bash
+npm run preview
+```
+
+Preview the production build locally at `http://localhost:4173`
+
+### Lint
+
+```bash
+npm run lint
+```
+
+Runs ESLint to check code quality.
+
+## Adding Content
+
+### Create a New Post
+
+1. Navigate to the appropriate category folder in `src/content/`
+2. Create a new `.mdx` file with frontmatter:
+
+```mdx
+---
+title: "Your Post Title"
+date: "2025-01-15"
+category: "qsketch"
+---
+
+# Your Post Title
+
+Your content here with full MDX support...
+```
+
+3. The post will automatically appear in the category list and home page
+
+### Create a New Category
+
+1. Add a new folder under `src/content/`
+2. Update `src/utils/posts.js` to include the new category in `getCategoryCounts()`
+3. Update `src/pages/Home.jsx` to add the category to the categories array
+4. Create placeholder MDX files in the new category folder
+
+## Deployment
+
+The site automatically deploys to GitHub Pages when changes are pushed to the `main` branch.
+
+### GitHub Actions Workflow
+
+The deployment workflow:
+1. Checks out the code
+2. Sets up Node.js 20
+3. Installs dependencies with `npm ci`
+4. Builds the project with `npm run build`
+5. Uploads the `dist` folder as a Pages artifact
+6. Deploys to GitHub Pages
+
+### Custom Domain
+
+The CNAME file in the `public` folder configures the custom domain `www.eae.kr`.
+
+## License
+
+MIT

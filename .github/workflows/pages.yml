@@ -28,10 +28,27 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       
       - name: Build
         run: npm run build
+      
+      - name: Verify CNAME in dist
+        run: |
+          echo "Checking if CNAME exists in dist..."
+          if [ -f "./dist/CNAME" ]; then
+            echo "✅ CNAME found in dist"
+            cat ./dist/CNAME
+          else
+            echo "❌ CNAME not found in dist"
+            echo "Copying CNAME from public..."
+            cp ./public/CNAME ./dist/CNAME
+          fi
+      
+      - name: List dist contents
+        run: |
+          echo "Contents of dist folder:"
+          ls -la ./dist/
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

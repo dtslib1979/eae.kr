@@ -105,13 +105,14 @@ precache  15 entries (184.68 KiB)
      - Custom domain이 www.eae.kr로 설정되어 있는지
      - HTTPS 강제 적용 여부
 
-2. **DNS 설정 확인 필요**
-   - www.eae.kr 도메인의 DNS 레코드 확인
-   - GitHub Pages를 가리키는지 확인
-   - DNS 전파 상태 확인
+2. **⚠️ DNS 설정 확인 필요** (중요!)
+   - **현재 상태**: www.eae.kr 도메인의 DNS가 설정되지 않음
+   - **DNS 조회 결과**: `server can't find www.eae.kr: REFUSED`
+   - **필요한 조치**: 도메인 등록 업체에서 DNS 레코드 설정 필요
+   - DNS 전파는 최대 24-48시간 소요 가능
 
 3. **사이트 접근성 테스트**
-   - https://dtslib1979.github.io/eae.kr/ 접근 테스트
+   - https://dtslib1979.github.io/eae.kr/ 접근 테스트 권장
    - https://www.eae.kr 접근 테스트 (DNS 설정 완료 후)
 
 ## 7. 권장 사항

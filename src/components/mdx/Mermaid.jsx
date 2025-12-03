@@ -11,7 +11,7 @@ export default function Mermaid({ children }) {
       mermaid.initialize({ 
         startOnLoad: false,
         theme: 'default',
-        securityLevel: 'loose',
+        securityLevel: 'strict',
       });
       hasRendered.current = true;
     }
@@ -19,7 +19,7 @@ export default function Mermaid({ children }) {
     // Render mermaid diagram
     if (containerRef.current && children) {
       const code = typeof children === 'string' ? children : children.props?.children || '';
-      const id = `mermaid-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const id = `mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
       
       // Create a temporary div for mermaid content
       const tempDiv = document.createElement('div');

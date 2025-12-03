@@ -143,43 +143,54 @@ SVG 코드 또는 이미지를 children으로 전달합니다.
 
 ---
 
-### 2-3. `<Mermaid />` (Part3 내부 코드블록으로 사용)
+### 2-3. `<Mermaid />` (Standalone Component)
 
 #### 목적
 
 학문적/개념적 구조를 도식화 (Proof Layer)
 
-#### 사용 방법
+#### 중요한 사용 지침
 
-`<Mermaid>` 컴포넌트는 별도로 존재하지 않습니다.
-대신 **Part3 내부에서 mermaid 코드블록**을 사용합니다.
+**표준 리포트에서는:** Part3 내부에서 mermaid 코드블록을 사용하세요 (권장).
 
-Part3 컴포넌트가 자동으로 mermaid 다이어그램을 렌더링합니다.
+```mdx
+<Part3>
+```mermaid
+graph TD
+  A --> B
+```
+</Part3>
+```
+
+**특수한 경우에만:** 독립적인 Mermaid 다이어그램이 필요한 경우 standalone 컴포넌트 사용.
+
+```mdx
+<Mermaid>
+graph TD
+  A[Concept] --> B[Concept]
+</Mermaid>
+```
+
+Part3 컴포넌트가 자동으로 mermaid 다이어그램을 렌더링하므로, 대부분의 경우 standalone 컴포넌트는 필요하지 않습니다.
 
 #### 규칙
 
 * 반드시 `graph TD` 또는 `graph LR` 또는 `mindmap`
 * Node label은 짧게
-* 문서당 Mermaid는 1개만 사용 (Part3 안에서)
+* 표준 리포트에서는 Part3 안에 1개만 사용 (mermaid 코드블록으로)
 
-#### 예시
+#### 예시 (특수 케이스)
 
 ```mdx
-<Part3>
-
-## Theory Map
-
-```mermaid
+<Mermaid>
 graph TD
   A[EduArt] --> B[Feed]
   B --> C[Digest]
   C --> D[Expression]
+</Mermaid>
 ```
 
-철학적 배경 설명...
-
-</Part3>
-```
+**참고:** 일반적인 리포트 작성 시에는 Part3의 예시를 따르세요.
 
 ---
 

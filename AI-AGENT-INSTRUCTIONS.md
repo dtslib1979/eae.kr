@@ -236,7 +236,7 @@ Mode 1 - Image URL:
 />
 ```
 
-Mode 2 - Inline SVG:
+Mode 2 - Inline SVG (demonstrated in gold-template.mdx):
 ```mdx
 <SketchCard title="Custom Sketch">
   <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
@@ -245,6 +245,8 @@ Mode 2 - Inline SVG:
   </svg>
 </SketchCard>
 ```
+
+**Note:** When both `src` and `children` are provided, `src` takes precedence.
 
 ### SpotifyEmbed (Optional)
 

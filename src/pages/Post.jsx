@@ -1,5 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
+import { MDXProvider } from '@mdx-js/react';
 import { getPost } from '../utils/posts';
+import * as MDXComponents from '../components/mdx';
 
 export default function Post() {
   const { slug, postSlug } = useParams();
@@ -24,15 +26,17 @@ export default function Post() {
         </Link>
       </div>
       
-      <article className="prose lg:prose-xl mx-auto">
+      <article className="prose lg:prose-xl mx-auto max-w-4xl">
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-2">{title}</h1>
           <p className="text-gray-600">{date}</p>
         </header>
         
-        <div className="mt-8">
-          <Component />
-        </div>
+        <MDXProvider components={MDXComponents}>
+          <div className="mt-8">
+            <Component />
+          </div>
+        </MDXProvider>
       </article>
     </div>
   );

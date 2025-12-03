@@ -47,7 +47,7 @@ export function getCategoryCounts() {
   const posts = getAllPosts();
   const counts = {};
   
-  ['qsketch', 'penon', 'mal', 'patchtech', 'eml', 'phl'].forEach(cat => {
+  ['qsketch', 'penon', 'mal', 'patchtech', 'eml', 'phl', 'eae-blueprint'].forEach(cat => {
     counts[cat] = posts.filter(post => post.category === cat).length;
   });
   

@@ -31,8 +31,10 @@ export default function OpeningFrame({ src, title = "Opening Frame" }) {
             alt={title}
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.parentElement.innerHTML = '<div class="text-white text-2xl font-bold">Opening Frame</div>';
+              const fallback = document.createElement('div');
+              fallback.className = 'text-white text-2xl font-bold';
+              fallback.textContent = 'Opening Frame';
+              e.target.parentElement.replaceChild(fallback, e.target);
             }}
           />
         </div>

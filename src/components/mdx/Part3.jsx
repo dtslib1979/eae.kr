@@ -3,14 +3,18 @@ import mermaid from 'mermaid';
 
 export default function Part3({ children }) {
   const mermaidRef = useRef(null);
+  const hasRendered = useRef(false);
 
   useEffect(() => {
-    // Initialize mermaid
-    mermaid.initialize({ 
-      startOnLoad: true,
-      theme: 'default',
-      securityLevel: 'loose',
-    });
+    // Initialize mermaid only once
+    if (!hasRendered.current) {
+      mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'default',
+        securityLevel: 'loose',
+      });
+      hasRendered.current = true;
+    }
 
     // Render mermaid diagrams
     if (mermaidRef.current) {
@@ -22,10 +26,19 @@ export default function Part3({ children }) {
         container.className = 'mermaid';
         container.id = id;
         container.textContent = code;
-        element.parentElement.replaceWith(container);
+        
+        // Check if parentElement exists before replacing
+        if (element.parentElement) {
+          element.parentElement.replaceWith(container);
+        }
       });
       
-      mermaid.run();
+      // Use timeout to prevent rapid re-renders
+      const timer = setTimeout(() => {
+        mermaid.run();
+      }, 100);
+
+      return () => clearTimeout(timer);
     }
   }, [children]);
 

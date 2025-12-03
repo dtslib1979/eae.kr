@@ -16,14 +16,14 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'icons/*.svg', 'icons/*.png'],
+      includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'EAE',
+        name: 'EAE PWA',
         short_name: 'EAE',
-        description: 'EAE PWA Site',
-        theme_color: '#3B82F6',
-        background_color: '#ffffff',
+        start_url: '/',
         display: 'standalone',
+        background_color: '#0b0b10',
+        theme_color: '#22d3ee',
         icons: [
           {
             src: '/icons/icon-192.png',
@@ -39,5 +39,7 @@ export default defineConfig({
       }
     })
   ],
-  base: '/',
+  build: {
+    outDir: 'dist',
+  }
 })

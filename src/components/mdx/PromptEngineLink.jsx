@@ -1,5 +1,6 @@
 export default function PromptEngineLink({ 
   href = "https://parksy.kr/prompt-engine/eae-skillset6",
+  label = "Prompt Engine으로 이동 →",
   title = "Prompt Engine Portal"
 }) {
   return (
@@ -16,7 +17,7 @@ export default function PromptEngineLink({
           rel="noopener noreferrer"
           className="inline-block px-8 py-4 bg-white text-indigo-700 font-bold text-lg rounded-full hover:bg-indigo-50 transition-all transform hover:scale-105 shadow-lg"
         >
-          Prompt Engine으로 이동 →
+          {label}
         </a>
       </div>
       <div className="mt-6 pt-6 border-t border-indigo-400 text-center text-sm text-indigo-200">

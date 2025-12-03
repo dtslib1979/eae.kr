@@ -2,7 +2,7 @@
 
 **EAE Skillset6 / EduArt OS – Universal Report Template Engine v1.0**
 
-This directory contains the 7 universal MDX components that form the foundation of the EAE Report Template Engine.
+This directory contains the universal MDX components that form the foundation of the EAE Report Template Engine.
 
 ## Components Overview
 
@@ -12,10 +12,27 @@ This directory contains the 7 universal MDX components that form the foundation 
 **Usage:**
 ```jsx
 <OpeningFrame 
+  videoId="VIDEO_ID"
+  title="Video Title"
+  description="Optional description"
+/>
+```
+
+Or using URL:
+```jsx
+<OpeningFrame 
   src="https://www.youtube.com/watch?v=VIDEO_ID" 
   title="Video Title"
 />
 ```
+
+**Props:**
+- `videoId` (string, optional): YouTube video ID
+- `src` (string, optional): YouTube URL or image URL
+- `title` (string, optional): Video/frame title
+- `description` (string, optional): Brief description shown below the frame
+
+**Note:** Either `videoId` or `src` must be provided.
 
 **Features:**
 - Automatic YouTube video ID extraction
@@ -99,10 +116,40 @@ This directory contains the 7 universal MDX components that form the foundation 
 
 ---
 
-### 5. SketchCard
-**Purpose:** Display Excalidraw-style SVG drawings and visual sketches
+### 5. Mermaid (Standalone)
+**Purpose:** Render Mermaid diagrams independently
 
 **Usage:**
+```jsx
+<Mermaid>
+graph TD
+  A[Concept] --> B[Concept]
+  B --> C[Result]
+</Mermaid>
+```
+
+**Features:**
+- Can be used outside Part3 if needed
+- Auto-initializes and renders diagrams
+- Supports all Mermaid diagram types
+
+**Note:** For standard reports, use Mermaid code blocks within Part3 instead.
+
+---
+
+### 6. SketchCard
+**Purpose:** Display Excalidraw-style SVG drawings, visual sketches, or images
+
+**Usage:**
+```jsx
+<SketchCard 
+  title="My Sketch"
+  src="/images/sketch.png"
+  caption="One-line caption"
+/>
+```
+
+Or with SVG children:
 ```jsx
 <SketchCard title="My Sketch">
   <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
@@ -111,14 +158,20 @@ This directory contains the 7 universal MDX components that form the foundation 
 </SketchCard>
 ```
 
+**Props:**
+- `title` (string, optional): Sketch title (default: "Sketch")
+- `src` (string, optional): Image URL
+- `caption` (string, optional): Caption shown below the image
+
 **Features:**
 - Dashed border styling
-- Default placeholder when no children provided
+- Default placeholder when no children/src provided
 - Flexible container for custom SVG or images
+- Optional caption support
 
 ---
 
-### 6. SpotifyEmbed
+### 7. SpotifyEmbed
 **Purpose:** Integrate music tracks related to the content
 
 **Theme:** Green (#10B981)
@@ -131,6 +184,10 @@ This directory contains the 7 universal MDX components that form the foundation 
 />
 ```
 
+**Props:**
+- `track` (string, required): Spotify track ID, URI, or URL
+- `title` (string, optional): Music section title (default: "Music Track")
+
 **Accepts:**
 - Spotify track ID: `3n3Ppam7vgaVa1iaRUc9Lp`
 - Spotify URI: `spotify:track:3n3Ppam7vgaVa1iaRUc9Lp`
@@ -138,7 +195,7 @@ This directory contains the 7 universal MDX components that form the foundation 
 
 ---
 
-### 7. PromptEngineLink
+### 8. PromptEngineLink
 **Purpose:** Provide exit portal to Prompt Engine for report regeneration (MANDATORY at end of every report)
 
 **Usage:**
@@ -147,6 +204,15 @@ This directory contains the 7 universal MDX components that form the foundation 
   href="https://parksy.kr/prompt-engine/eae-skillset6" 
 />
 ```
+
+Or use defaults:
+```jsx
+<PromptEngineLink />
+```
+
+**Props:**
+- `href` (string, optional): Prompt Engine URL (has default)
+- `title` (string, optional): Portal title (default: "Prompt Engine Portal")
 
 **Important:**
 - **MUST** be the last component in every report
@@ -166,7 +232,7 @@ date: "YYYY-MM-DD"
 category: "category-name"
 ---
 
-<OpeningFrame src="..." />
+<OpeningFrame videoId="..." title="..." />
 
 <Part1>
   비유와 서사로 쉽게 설명
@@ -177,12 +243,15 @@ category: "category-name"
 </Part2>
 
 <Part3>
+  ```mermaid
+  graph TD
+    A --> B
+  ```
+  
   Mermaid 다이어그램과 철학적 배경
 </Part3>
 
-<SketchCard title="...">
-  SVG 스케치
-</SketchCard>
+<SketchCard title="..." src="..." caption="..." />
 
 <SpotifyEmbed track="..." />
 
@@ -213,5 +282,6 @@ To add a new component:
 
 ## See Also
 
+- [MDX Template Specification](/MDX-TEMPLATE-SPECIFICATION.md) - Complete MDX writing rules
 - [BLUEPRINT.md](/BLUEPRINT.md) - Complete architecture specification
 - [Sample Report](/src/content/eae-blueprint/sample-report.mdx) - Full example

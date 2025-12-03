@@ -11,7 +11,7 @@ export default function Part3({ children }) {
       mermaid.initialize({ 
         startOnLoad: true,
         theme: 'default',
-        securityLevel: 'loose',
+        securityLevel: 'strict',
       });
       hasRendered.current = true;
     }

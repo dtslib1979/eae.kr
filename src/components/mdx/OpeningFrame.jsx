@@ -1,4 +1,4 @@
-export default function OpeningFrame({ src, title = "Opening Frame" }) {
+export default function OpeningFrame({ src, videoId, title = "Opening Frame", description }) {
   // Extract YouTube video ID if it's a YouTube URL
   const getYouTubeId = (url) => {
     if (!url) return null;
@@ -7,7 +7,8 @@ export default function OpeningFrame({ src, title = "Opening Frame" }) {
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
-  const youtubeId = getYouTubeId(src);
+  // Use videoId prop if provided, otherwise extract from src
+  const youtubeId = videoId || getYouTubeId(src);
 
   return (
     <div className="opening-frame my-8 rounded-lg overflow-hidden shadow-lg">
@@ -37,6 +38,11 @@ export default function OpeningFrame({ src, title = "Opening Frame" }) {
               e.target.parentElement.replaceChild(fallback, e.target);
             }}
           />
+        </div>
+      )}
+      {description && (
+        <div className="p-4 bg-gray-50 text-gray-700 text-sm">
+          {description}
         </div>
       )}
     </div>

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { getCategoryCounts, getLatestPosts } from '../utils/posts';
 
 const categories = [
+  { slug: 'eae-blueprint', name: '🏗️ EAE Blueprint', icon: '🏗️' },
   { slug: 'qsketch', name: 'Quick Sketch' },
   { slug: 'penon', name: 'Penon' },
   { slug: 'mal', name: 'Mal' },

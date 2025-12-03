@@ -5,7 +5,47 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        eae: {
+          primary: '#4F46E5',     // Indigo - Main brand color
+          secondary: '#7C3AED',   // Purple - Accent color
+          accent: '#F59E0B',      // Amber - Highlight color
+          grandpa: '#F59E0B',     // Amber - Part1 theme
+          architect: '#3B82F6',   // Blue - Part2 theme
+          theory: '#9333EA',      // Purple - Part3 theme
+          sketch: '#6B7280',      // Gray - Sketch theme
+          music: '#10B981',       // Green - Spotify theme
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'Pretendard', 'sans-serif'],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: '#1F2937',
+            p: {
+              marginTop: '1.25em',
+              marginBottom: '1.25em',
+            },
+            'h1, h2, h3, h4': {
+              fontWeight: '700',
+            },
+            code: {
+              backgroundColor: '#F3F4F6',
+              padding: '0.2em 0.4em',
+              borderRadius: '0.25rem',
+              fontWeight: '500',
+            },
+          },
+        },
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

@@ -24,7 +24,7 @@ export default function Post() {
         </Link>
       </div>
       
-      <article className="prose lg:prose-xl mx-auto">
+      <article className="prose lg:prose-xl mx-auto max-w-4xl">
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-2">{title}</h1>
           <p className="text-gray-600">{date}</p>

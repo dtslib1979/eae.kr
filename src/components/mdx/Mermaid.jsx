@@ -18,7 +18,7 @@ export default function Mermaid({ children }) {
 
     // Render the diagram
     if (mermaidRef.current && children) {
-      const id = `mermaid-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const id = `mermaid-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
       const container = document.createElement('div');
       container.className = 'mermaid';
       container.id = id;

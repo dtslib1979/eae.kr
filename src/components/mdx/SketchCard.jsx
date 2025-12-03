@@ -1,4 +1,4 @@
-export default function SketchCard({ children, title = "Sketch" }) {
+export default function SketchCard({ children, title = "Sketch", src, caption }) {
   return (
     <div className="sketch-card my-8 p-6 bg-white rounded-xl border-2 border-dashed border-gray-300 shadow-lg">
       <div className="flex items-center gap-2 mb-4">
@@ -6,7 +6,11 @@ export default function SketchCard({ children, title = "Sketch" }) {
         <h3 className="text-xl font-bold text-gray-800">{title}</h3>
       </div>
       <div className="sketch-content bg-gray-50 p-4 rounded-lg min-h-[200px] flex items-center justify-center">
-        {children || (
+        {src ? (
+          <img src={src} alt={caption || title} className="max-w-full h-auto" />
+        ) : children ? (
+          children
+        ) : (
           <div className="text-center">
             <svg className="mx-auto mb-2" width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
               <rect x="10" y="20" width="80" height="60" fill="none" stroke="#4B5563" strokeWidth="2" strokeDasharray="5,5"/>
@@ -19,6 +23,9 @@ export default function SketchCard({ children, title = "Sketch" }) {
           </div>
         )}
       </div>
+      {caption && (
+        <p className="mt-3 text-sm text-gray-600 text-center italic">{caption}</p>
+      )}
     </div>
   );
 }

@@ -11,6 +11,7 @@ export default defineConfig({
     { enforce: 'pre', ...mdx({
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypeSlug],
+      providerImportSource: '@mdx-js/react',
     })},
     react(),
     VitePWA({

@@ -8,3 +8,4 @@ export { default as Part3 } from './Part3';
 export { default as SketchCard } from './SketchCard';
 export { default as SpotifyEmbed } from './SpotifyEmbed';
 export { default as PromptEngineLink } from './PromptEngineLink';
+export { default as Mermaid } from './Mermaid';

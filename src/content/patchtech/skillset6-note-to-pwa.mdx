@@ -1,0 +1,167 @@
+---
+title: "Skillset6: Note → PWA Thinking"
+date: "2025-03-06"
+category: "patchtech"
+layout: "R"
+---
+
+<OpeningFrame 
+  videoId="abcd1234" 
+  title="From Notebook to Pocket App – in 3 Steps"
+/>
+
+# Part 1 – Grandpa Mode
+
+Imagine you have a small, messy notebook on the kitchen table.  
+You scribble ideas, diagrams, and arrows everywhere.
+
+Now imagine that **each page can jump into your phone**  
+and become a tiny app you can tap.
+
+- No code on the surface  
+- Just your notes, but **cleaned, framed, and tappable**  
+- Like a "digital index card" that remembers what you meant
+
+Skillset6 is simply:  
+
+> "How do we turn *one honest note*  
+> into *a small, living tool* inside your phone?"
+
+We keep the feeling of handwriting,  
+but let the phone handle the boring parts.
+
+---
+
+# Part 2 – System Architect Mode
+
+Now we switch to system language.
+
+At runtime, one idea travels through this pipeline:
+
+1. **Feed** – You talk, scribble, or type  
+   - Source: Samsung Notes, Excalidraw, voice → text  
+   - Output: a rough **note blob** (Korean/English 혼합 OK)
+
+2. **Digest** – We normalize it into a **Skillset6 MDX file**
+   - Decide the **role** of the note:
+     - `qsketch` (quick visual idea)  
+     - `penon` (essay / reflection)  
+     - `mal` (language / wording)  
+     - `patchtech` (how-to / tech notes)  
+     - `eml` (emotion mapping)  
+     - `phl` (philosophy / theory)
+   - Wrap it in our **PWA-ready structure**:
+
+```mdx
+---
+title: "Short, clear title"
+date: "2025-03-06"
+category: "patchtech"
+layout: "R"
+---
+
+<OpeningFrame ... />
+
+# Part 1 – Grandpa Mode
+...
+
+# Part 2 – System Architect Mode
+...
+
+# Part 3 – Theory Map
+<Mermaid>...</Mermaid>
+
+<SketchCard ... />
+<SpotifyEmbed ... />
+
+---
+
+## Prompt Engine
+<PromptEngineLink href="..." />
+```
+
+3. **Expression** – Build + Deploy
+
+   * MDX passes through the PWA stack:
+     - `React + Vite + MDX + Tailwind + vite-plugin-pwa`
+     - GitHub Actions on `main` branch:
+       - `npm ci`
+       - `npm run build`
+       - upload `dist` to GitHub Pages
+     - Custom domain: `www.eae.kr`
+
+   * 최종 결과:
+     - 모바일에서:
+       - 홈 화면에 "EAE" 아이콘
+       - Skillset6 리포트가 **책이 아니라 화면**으로 열린다
+     - PC에서는:
+       - 강의 슬라이드 대신 "한 장짜리 OS 문서"
+
+### Folder perspective
+
+For this report:
+
+* Source MDX:
+  - `src/content/patchtech/skillset6-note-to-pwa.mdx`
+* It shows up automatically in:
+  - `/` (Home: latest posts)
+  - `/category/patchtech`
+  - `/archive`
+
+No manual routing edits:
+**MDX = source of truth.**
+
+---
+
+# Part 3 – Theory Map (Mermaid)
+
+Now we prove we didn't just make this up.
+
+Skillset6 sits on top of a few big ideas:
+
+<Mermaid>
+graph TD
+  A[Note] --> B[Externalization]
+  B --> C[EduArt Engineer]
+
+  C --> D[Feed]
+  C --> E[Digest]
+  C --> F[Expression]
+
+  C --> G[McLuhan: Medium is the Message]
+  C --> H[Levi-Strauss: Structure]
+  C --> I[Foucault: Power / System]
+
+  D --> G
+  E --> H
+  F --> I
+</Mermaid>
+
+* **McLuhan** – the format (PWA page) changes the meaning of the note
+* **Levi-Strauss** – we restructure raw life into modules (Skillset6)
+* **Foucault** – whoever controls the tools controls the workflow & time
+
+So "Note → PWA Thinking" is not just dev practice.
+It's a small **power shift**:
+from platform → creator,
+from random thought → reusable system.
+
+---
+
+<SketchCard
+  src="/images/eae/skillset6-note-to-pwa-sketch.svg"
+  caption="One idea moving through Feed → Digest → Expression and landing as a PWA page."
+/>
+
+<SpotifyEmbed track="4uLU6hMCjMI75M1A2tKUQC" />
+
+---
+
+## Prompt Engine
+
+Want to generate your own Skillset6 report with this exact template?
+
+<PromptEngineLink 
+  href="https://parksy.kr/prompt-engine/eae-skillset6"
+  label="Open the Skillset6 Report Prompt Engine"
+/>

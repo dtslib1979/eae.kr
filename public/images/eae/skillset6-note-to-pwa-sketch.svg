@@ -1,0 +1,76 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Skillset6: Note → PWA Pipeline
+  </text>
+  
+  <!-- Feed Section -->
+  <g>
+    <rect x="50" y="100" width="200" height="120" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+    <text x="150" y="130" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#92400e">Feed</text>
+    <text x="150" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#78350f">Samsung Notes</text>
+    <text x="150" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#78350f">Excalidraw</text>
+    <text x="150" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#78350f">Voice → Text</text>
+  </g>
+  
+  <!-- Arrow 1 -->
+  <g>
+    <path d="M 250 160 L 290 160" stroke="#64748b" stroke-width="3" fill="none"/>
+    <polygon points="290,160 280,155 280,165" fill="#64748b"/>
+  </g>
+  
+  <!-- Digest Section -->
+  <g>
+    <rect x="300" y="100" width="200" height="120" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="3"/>
+    <text x="400" y="130" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1e40af">Digest</text>
+    <text x="400" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#1e3a8a">Skillset6 MDX</text>
+    <text x="400" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#1e3a8a">Structure</text>
+    <text x="400" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#1e3a8a">Components</text>
+  </g>
+  
+  <!-- Arrow 2 -->
+  <g>
+    <path d="M 500 160 L 540 160" stroke="#64748b" stroke-width="3" fill="none"/>
+    <polygon points="540,160 530,155 530,165" fill="#64748b"/>
+  </g>
+  
+  <!-- Expression Section -->
+  <g>
+    <rect x="550" y="100" width="200" height="120" rx="10" fill="#dcfce7" stroke="#10b981" stroke-width="3"/>
+    <text x="650" y="130" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#065f46">Expression</text>
+    <text x="650" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#064e3b">React + Vite</text>
+    <text x="650" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#064e3b">PWA Build</text>
+    <text x="650" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#064e3b">Deploy</text>
+  </g>
+  
+  <!-- PWA Output -->
+  <g>
+    <rect x="200" y="280" width="400" height="280" rx="15" fill="#f1f5f9" stroke="#475569" stroke-width="4"/>
+    <rect x="220" y="300" width="360" height="40" rx="5" fill="#334155"/>
+    <text x="400" y="327" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">www.eae.kr</text>
+    
+    <!-- Mobile Icon -->
+    <circle cx="280" cy="400" r="40" fill="#6366f1"/>
+    <text x="280" y="410" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#ffffff">📱</text>
+    <text x="280" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">Mobile PWA</text>
+    
+    <!-- Desktop Icon -->
+    <rect x="360" y="360" width="80" height="60" rx="5" fill="#8b5cf6"/>
+    <rect x="365" y="365" width="70" height="45" fill="#ffffff"/>
+    <text x="400" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">Desktop</text>
+    
+    <!-- Cloud Icon -->
+    <ellipse cx="520" cy="390" rx="30" ry="20" fill="#ec4899"/>
+    <ellipse cx="540" cy="395" rx="25" ry="18" fill="#ec4899"/>
+    <ellipse cx="500" cy="395" rx="25" ry="18" fill="#ec4899"/>
+    <text x="520" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">GitHub Pages</text>
+  </g>
+  
+  <!-- Bottom note -->
+  <text x="400" y="580" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#64748b">
+    One idea moving through Feed → Digest → Expression and landing as a PWA page.
+  </text>
+</svg>

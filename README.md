@@ -28,7 +28,9 @@ A fully functional Progressive Web App built with React, Vite, MDX, TailwindCSS,
 │   └── CNAME            # Custom domain configuration
 ├── src/
 │   ├── components/      # React components (Layout)
+│   │   └── mdx/        # MDX-specific components
 │   ├── content/         # MDX content organized by category
+│   │   ├── eae-blueprint/ # EAE architecture & templates
 │   │   ├── qsketch/    # Quick Sketch posts
 │   │   ├── penon/      # Penon posts
 │   │   ├── mal/        # Mal posts
@@ -44,6 +46,10 @@ A fully functional Progressive Web App built with React, Vite, MDX, TailwindCSS,
 │   ├── utils/          # Utility functions
 │   │   └── posts.js    # MDX import and processing
 │   └── App.jsx         # Router configuration
+├── PROMPT-ENGINE-SPECIFICATION.md  # Prompt Generation Engine v1.0
+├── PROMPT-ENGINE-QUICKSTART.md     # Quick start guide
+├── BLUEPRINT.md                     # Universal Report Template Engine
+├── MDX-TEMPLATE-SPECIFICATION.md   # MDX component specifications
 ├── vite.config.js      # Vite configuration with MDX and PWA
 ├── tailwind.config.js  # TailwindCSS configuration
 └── postcss.config.js   # PostCSS configuration
@@ -61,12 +67,24 @@ A fully functional Progressive Web App built with React, Vite, MDX, TailwindCSS,
 
 ### Categories
 
-1. **qsketch** - Quick Sketch
-2. **penon** - Penon
-3. **mal** - Mal
-4. **patchtech** - Patchtech
-5. **eml** - EML
-6. **phl** - PHL
+1. **eae-blueprint** - EAE architecture, templates, and prompt engine
+2. **qsketch** - Quick Sketch
+3. **penon** - Penon
+4. **mal** - Mal
+5. **patchtech** - Patchtech
+6. **eml** - EML
+7. **phl** - PHL
+
+### Prompt Generation Engine v1.0
+
+- ✅ **Automated MDX Report Generation** - AI-powered content creation
+- ✅ **8-Slot Input System** - Standardized input format
+- ✅ **3-Part Structure** - Grandpa Mode, Architect Mode, Theory Map
+- ✅ **Master Prompt Template** - Ready-to-use LLM prompt
+- ✅ **Full MDX Component Support** - OpeningFrame, Parts, Mermaid, etc.
+- ✅ **Quick Start Guide** - Easy onboarding for new users
+
+See [PROMPT-ENGINE-SPECIFICATION.md](./PROMPT-ENGINE-SPECIFICATION.md) for details.
 
 ### PWA Features
 
@@ -131,7 +149,7 @@ Runs ESLint to check code quality.
 
 ## Adding Content
 
-### Create a New Post
+### Create a New Post (Manual Method)
 
 1. Navigate to the appropriate category folder in `src/content/`
 2. Create a new `.mdx` file with frontmatter:
@@ -149,6 +167,26 @@ Your content here with full MDX support...
 ```
 
 3. The post will automatically appear in the category list and home page
+
+### Create a New Post (Automated with Prompt Engine)
+
+Use the **Prompt Generation Engine v1.0** to automatically generate MDX reports:
+
+1. Read [PROMPT-ENGINE-QUICKSTART.md](./PROMPT-ENGINE-QUICKSTART.md)
+2. Prepare your 8-slot INPUT:
+   - ReportTitle
+   - Category
+   - CoreIdea
+   - Keywords
+   - YouTubeID (optional)
+   - MermaidNodes
+   - MusicEmbed (optional)
+   - PromptLink
+3. Use the master prompt with ChatGPT/Claude
+4. Save the generated MDX to `src/content/{category}/`
+5. Commit and push to deploy
+
+See [PROMPT-ENGINE-SPECIFICATION.md](./PROMPT-ENGINE-SPECIFICATION.md) for full details.
 
 ### Create a New Category
 

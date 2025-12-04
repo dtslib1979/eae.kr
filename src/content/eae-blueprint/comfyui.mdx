@@ -1,0 +1,45 @@
+---
+title: "dtslib1979/eae.kr – 카테고리 롤업 & 카운트 자동화 인스트럭션"
+date: "2025-03-04"
+category: "eae-blueprint"
+youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+spotify: "https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp"
+---
+
+# dtslib1979/eae.kr – 카테고리 롤업 & 카운트 자동화 인스트럭션
+
+이 텍스트는 GitHub Copilot SWE Agent(또는 다른 에이전트)에게 그대로 붙여넣어서 실행시키기 위한 작업 지시서다.
+
+## Part 1 – Grandpa Mode
+
+상상해보세요. 박씨가 폴더에 파일 하나 던지면, 그게 자동으로 웹사이트의 카드로 바뀐다.
+
+마치 레고 블록 하나를 추가하면 자동으로 성이 높아지는 것처럼!
+
+## Part 2 – System Architect
+
+카테고리 시스템은 다음과 같이 작동합니다:
+
+1. `src/content/` 폴더 구조를 스캔
+2. 각 서브폴더를 카테고리로 인식
+3. MDX 파일의 frontmatter를 파싱
+4. 카운트를 동적으로 계산
+5. UI에 자동 반영
+
+```
+src/content/
+├── eae-blueprint/
+│   ├── post1.mdx
+│   └── post2.mdx
+├── qsketch/
+│   └── post1.mdx
+└── ...
+```
+
+## Part 3 – Theory Map
+
+이 구조는 "Convention over Configuration" 철학을 따릅니다.
+
+파일 시스템 자체가 데이터베이스가 되고, 폴더 구조가 스키마가 됩니다.
+
+레비 스트로스의 구조주의처럼, 명시적 설정 없이도 구조 자체가 의미를 만들어냅니다.

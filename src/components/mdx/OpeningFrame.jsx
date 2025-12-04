@@ -1,13 +1,14 @@
 export default function OpeningFrame({ src, videoId, title = "Opening Frame", description }) {
-  // Extract YouTube video ID if it's a YouTube URL
+  // Extract YouTube video ID from various URL formats or use videoId prop
   const getYouTubeId = (url) => {
     if (!url) return null;
+    // Pattern matches: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID, etc.
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
-  // Use videoId prop if provided, otherwise extract from src
+  // Priority: videoId prop > extracted from src
   const youtubeId = videoId || getYouTubeId(src);
 
   return (

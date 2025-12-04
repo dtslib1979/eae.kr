@@ -12,16 +12,32 @@
  * To add a new category:
  * 1. Create a new folder in src/content/<new-category>/
  * 2. Add MDX files with proper frontmatter (title, date, category)
- * 3. The category will automatically appear in the home page, archive, and category pages
+ * 3. Optionally include youtube/spotify URLs in frontmatter for automatic preset rendering
+ * 4. The category will automatically appear in the home page, archive, and category pages
+ * 
+ * Frontmatter structure:
+ * ---
+ * title: "Post Title"
+ * date: "YYYY-MM-DD"
+ * category: "category-slug"
+ * youtube: "https://www.youtube.com/watch?v=XXXXXXXXXXX" (optional)
+ * spotify: "https://open.spotify.com/track/YYYYYYYYYYYYYY" (optional)
+ * ---
  */
 
 // Import all MDX files
 const modules = import.meta.glob('/src/content/**/*.mdx', { eager: true });
 
 // Parse frontmatter from MDX modules
+// Ensures all required fields have fallback values
 function parseFrontmatter(module) {
   const { frontmatter, default: Component } = module;
   return {
+    title: frontmatter?.title || '',
+    date: frontmatter?.date || '',
+    category: frontmatter?.category || '',
+    youtube: frontmatter?.youtube || null,
+    spotify: frontmatter?.spotify || null,
     ...frontmatter,
     Component,
   };

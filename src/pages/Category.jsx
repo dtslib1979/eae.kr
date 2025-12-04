@@ -23,7 +23,7 @@ export default function Category() {
               to={`/category/${slug}/${post.slug}`}
               className="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
             >
-              <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
+              <h2 className="text-2xl font-semibold mb-2">{post.title || '(제목 없음)'}</h2>
               <p className="text-gray-600">{post.date}</p>
             </Link>
           ))

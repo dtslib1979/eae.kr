@@ -1,50 +1,47 @@
-export default function SpotifyEmbed({ track, title = "Music Track" }) {
-  // Extract Spotify track ID from various URL formats
-  const getSpotifyTrackId = (input) => {
+export default function SpotifyEmbed({ track, title, spotifyUrl, label }) {
+  // Support both old (track) and new (spotifyUrl) prop names
+  const url = spotifyUrl || track;
+  const displayLabel = label || title || "Play on Spotify";
+
+  if (!url) return null;
+
+  // Normalize URL - if it's a track ID, convert to full URL
+  const getSpotifyUrl = (input) => {
     if (!input) return null;
     
-    // If it's already just an ID (22 alphanumeric characters)
-    if (input.match(/^[a-zA-Z0-9]{22}$/)) return input;
-    
-    // Extract from spotify:track:ID format
-    if (input.startsWith('spotify:track:')) {
-      return input.split(':')[2];
+    // If it's already a full URL, return as-is
+    if (input.startsWith('http://') || input.startsWith('https://')) {
+      return input;
     }
     
-    // Extract from URL format (https://open.spotify.com/track/ID)
-    const match = input.match(/track\/([a-zA-Z0-9]{22})/);
-    return match ? match[1] : null;
+    // If it's a spotify: URI, convert to URL
+    if (input.startsWith('spotify:track:')) {
+      const trackId = input.split(':')[2];
+      return `https://open.spotify.com/track/${trackId}`;
+    }
+    
+    // If it's just an ID (22 alphanumeric characters), build URL
+    if (input.match(/^[a-zA-Z0-9]{22}$/)) {
+      return `https://open.spotify.com/track/${input}`;
+    }
+    
+    return input; // Return as-is if format is unknown
   };
 
-  const trackId = getSpotifyTrackId(track);
-
-  if (!trackId) {
-    // In development, log invalid track ID to help with debugging
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(
-        '[SpotifyEmbed] Invalid Spotify track ID or URL:', track,
-        '\nExpected format: https://open.spotify.com/track/TRACK_ID or just the 22-character track ID'
-      );
-    }
-    return null; // Don't render anything if invalid track ID
-  }
+  const finalUrl = getSpotifyUrl(url);
 
   return (
-    <div className="spotify-embed my-8 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 shadow-md">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-xl">🎵</span>
-        <h3 className="text-lg font-bold text-green-800">{title}</h3>
-      </div>
-      <iframe
-        style={{ borderRadius: '12px' }}
-        src={`https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`}
-        width="100%"
-        height="80"
-        frameBorder="0"
-        allowFullScreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      />
+    <div className="my-4 w-full flex justify-center">
+      <a
+        href={finalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-full bg-green-500 px-4 py-2 text-sm font-medium text-white hover:opacity-90 transition"
+      >
+        {/* 아이콘 느낌 (텍스트로 처리, SVG 넣어도 됨) */}
+        <span className="text-base">▶</span>
+        <span>{displayLabel}</span>
+      </a>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 /**
- * posts.js - Single Source of Truth for MDX Content
+ * posts.ts - Single Source of Truth for MDX Content
  * 
  * This file is responsible for loading and providing access to all MDX posts in the application.
  * It automatically discovers MDX files in src/content/** and extracts their metadata.
@@ -12,6 +12,7 @@
  * Published status:
  * - Posts with published: false are hidden from all lists and counts
  * - Posts without a published field are treated as published: true by default
+ * - Posts with dates more than 24 hours in the future (KST) are hidden
  * - Direct access to unpublished posts should be handled at the page level (404)
  * 
  * To add a new category:
@@ -30,6 +31,8 @@
  * spotify: "https://open.spotify.com/track/YYYYYYYYYYYYYY" (optional)
  * ---
  */
+
+import { isPostVisible } from '../lib/date';
 
 // Import all MDX files
 const modules = import.meta.glob('/src/content/**/*.mdx', { eager: true });
@@ -67,9 +70,11 @@ export function getAllPosts() {
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
-// Get all published posts (filters out unpublished posts)
+// Get all published posts (filters out unpublished posts and future posts beyond grace period)
 export function getPublishedPosts() {
-  return getAllPosts().filter(post => post.published !== false);
+  return getAllPosts().filter(post => 
+    post.published !== false && isPostVisible(post.date)
+  );
 }
 
 // Get posts by category (only published posts)

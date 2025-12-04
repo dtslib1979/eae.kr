@@ -22,6 +22,9 @@ const MERMAID_CONFIG = {
   securityLevel: 'strict',
 };
 
+// Delay to wait for Mermaid SVG rendering before applying animations
+const PULSE_ANIMATION_DELAY = 150;
+
 export default function Mermaid({ children, chart }) {
   const containerRef = useRef(null);
   const hasRendered = useRef(false);
@@ -87,13 +90,13 @@ export default function Mermaid({ children, chart }) {
   useEffect(() => {
     if (!containerRef.current) return;
     
-    // Wait a bit for mermaid to fully render
+    // Wait for mermaid to fully render the SVG
     const pulseTimer = setTimeout(() => {
       const firstNode = containerRef.current?.querySelector('.node');
       if (firstNode && !firstNode.classList.contains('node--pulse')) {
         firstNode.classList.add('node--pulse');
       }
-    }, 150);
+    }, PULSE_ANIMATION_DELAY);
 
     return () => clearTimeout(pulseTimer);
   }, [children, chart]);

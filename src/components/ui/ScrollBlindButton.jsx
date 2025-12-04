@@ -48,9 +48,9 @@ export function ScrollBlindButton({
     };
   }, []);
 
-  // Position buttons vertically:
-  // - "up" button: top 1/3 of screen (top-0 to top-1/3)
-  // - "down" button: middle 1/3 of screen (top-1/3 to top-2/3)
+  // Position buttons vertically - each occupies exactly 1/3 of screen height:
+  // - "up" button: from top-0 to top-1/3 (first third of screen)
+  // - "down" button: from top-1/3 to top-2/3 (second third of screen)
   const positionClasses = direction === "up" 
     ? ["top-0", "h-1/3"]
     : ["top-1/3", "h-1/3"];

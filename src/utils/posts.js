@@ -1,3 +1,20 @@
+/**
+ * posts.js - Single Source of Truth for MDX Content
+ * 
+ * This file is responsible for loading and providing access to all MDX posts in the application.
+ * It automatically discovers MDX files in src/content/** and extracts their metadata.
+ * 
+ * Category determination:
+ * - The category is extracted from the folder structure (src/content/<category>/post.mdx)
+ * - The folder name becomes the category slug
+ * - All posts and counts are dynamically calculated from the actual MDX files
+ * 
+ * To add a new category:
+ * 1. Create a new folder in src/content/<new-category>/
+ * 2. Add MDX files with proper frontmatter (title, date, category)
+ * 3. The category will automatically appear in the home page, archive, and category pages
+ */
+
 // Import all MDX files
 const modules = import.meta.glob('/src/content/**/*.mdx', { eager: true });
 
@@ -42,13 +59,16 @@ export function getPost(category, slug) {
   return getAllPosts().find(post => post.category === category && post.slug === slug);
 }
 
-// Get category counts
+// Get category counts (dynamically calculated from all posts)
 export function getCategoryCounts() {
   const posts = getAllPosts();
   const counts = {};
   
-  ['qsketch', 'penon', 'mal', 'patchtech', 'eml', 'phl', 'eae-blueprint'].forEach(cat => {
-    counts[cat] = posts.filter(post => post.category === cat).length;
+  // Dynamically count posts per category
+  posts.forEach(post => {
+    if (post.category) {
+      counts[post.category] = (counts[post.category] || 0) + 1;
+    }
   });
   
   return counts;

@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import mdx from '@mdx-js/rollup'
 import remarkGfm from 'remark-gfm'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import rehypeSlug from 'rehype-slug'
 import { VitePWA } from 'vite-plugin-pwa'
 
@@ -9,7 +11,11 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
     { enforce: 'pre', ...mdx({
-      remarkPlugins: [remarkGfm],
+      remarkPlugins: [
+        remarkGfm, 
+        remarkFrontmatter, 
+        [remarkMdxFrontmatter, { name: 'frontmatter' }]
+      ],
       rehypePlugins: [rehypeSlug],
       providerImportSource: '@mdx-js/react',
     })},

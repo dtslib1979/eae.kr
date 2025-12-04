@@ -1,26 +1,20 @@
-import { useState, useId } from 'react';
+import { useState, useId, useRef, useEffect } from 'react';
 
-export default function Accordion({ title, children, defaultOpen = false }) {
-  const [open, setOpen] = useState(defaultOpen);
-  const uniqueId = useId();
-  const id = `accordion-${uniqueId}`;
-
+/**
+ * Accordion wrapper component for grouping multiple AccordionItem components
+ * This is a simple container - the actual accordion behavior is in AccordionItem
+ * Used in MDX via global MDXProvider configuration
+ * 
+ * Usage:
+ * <Accordion>
+ *   <AccordionItem title="Section 1">content</AccordionItem>
+ *   <AccordionItem title="Section 2">content</AccordionItem>
+ * </Accordion>
+ */
+export default function Accordion({ children }) {
   return (
-    <div className="my-2 border-b border-slate-600 pb-2">
-      <button
-        id={id}
-        onClick={() => setOpen(!open)}
-        className="w-full text-left font-semibold py-1 text-slate-100 hover:text-amber-400 transition-colors flex items-center gap-2"
-        aria-expanded={open}
-      >
-        <span className="text-xs">{open ? "▼" : "▶"}</span>
-        <span>{title}</span>
-      </button>
-      {open && (
-        <div className="mt-2 pl-4 text-fg-soft" role="region" aria-labelledby={id}>
-          {children}
-        </div>
-      )}
+    <div className="accordion-wrapper">
+      {children}
     </div>
   );
 }

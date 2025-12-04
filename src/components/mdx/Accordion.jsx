@@ -1,25 +1,44 @@
 import { useState } from 'react';
 
-export default function Accordion({ title, children }) {
-  const [open, setOpen] = useState(false);
+export function AccordionItem({ title, defaultOpen = false, children }) {
+  const [open, setOpen] = useState(defaultOpen);
   const id = `accordion-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
-    <div className="my-2 border-b border-slate-600 pb-2">
+    <section className="mdx-accordion-item border-b border-soft/40">
       <button
-        id={id}
-        onClick={() => setOpen(!open)}
-        className="w-full text-left font-semibold py-1 text-slate-100 hover:text-amber-400 transition-colors flex items-center gap-2"
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between py-3 md:py-4 text-left"
         aria-expanded={open}
+        aria-controls={id}
       >
-        <span className="text-xs">{open ? "▼" : "▶"}</span>
-        <span>{title}</span>
+        <span className="font-semibold text-lg text-[color:var(--fg)]">
+          {title}
+        </span>
+        <span
+          className={`transition-transform duration-200 ${
+            open ? "rotate-90" : ""
+          }`}
+          aria-hidden="true"
+        >
+          ▸
+        </span>
       </button>
-      {open && (
-        <div className="mt-2 pl-4 text-slate-100" role="region" aria-labelledby={id}>
+      <div
+        id={id}
+        className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
+          open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="pb-4 md:pb-5 text-[color:var(--fg)] space-y-3">
           {children}
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
+}
+
+export default function Accordion({ children }) {
+  return <div className="mdx-accordion divide-y divide-soft/30">{children}</div>;
 }

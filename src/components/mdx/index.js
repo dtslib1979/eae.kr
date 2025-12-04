@@ -9,5 +9,5 @@ export { default as Mermaid } from './Mermaid';
 export { default as SketchCard } from './SketchCard';
 export { default as SpotifyEmbed } from './SpotifyEmbed';
 export { default as PromptEngineLink } from './PromptEngineLink';
-export { default as Accordion } from './Accordion';
+export { default as Accordion, AccordionItem } from './Accordion';
 export { YouTubeEmbed } from '../YouTubeEmbed';

@@ -32,15 +32,17 @@
   --parksy-vignette: inset 0 0 180px 70px rgba(0,0,0,0.8);
 
   /* Typography colors for dark mode */
-  --fg: #f1f5f9; /* slate-100 - main readable text */
+  --fg: rgba(255,255,255,0.95); /* main headings stay strong */
+  --fg-soft: rgba(255,255,255,0.25); /* body = new target (25%) */
+  --fg-softer: rgba(255,255,255,0.18); /* tertiary */
   --accent: #fbbf24; /* amber-400 - code and highlights */
   --accent-hover: #fcd34d; /* amber-300 - hover state for links */
   --soft: #475569; /* slate-600 - borders and subtle elements */
 
   /* Chalkboard text hierarchy */
   --chalk-fg-strong: #F3F7F4;  /* headings, key labels (거의 흰색이지만 살짝 눌린 톤) */
-  --chalk-fg-body:   #CED9D2;  /* 본문 텍스트용, 중간 그레이-그린 */
-  --chalk-fg-muted:  #9AA8A0;  /* 캡션, 메타 정보 */
+  --chalk-fg-body:   rgba(255,255,255,0.25);  /* 본문 텍스트용, 25% gray target */
+  --chalk-fg-muted:  rgba(255,255,255,0.18);  /* 캡션, 메타 정보 */
 }
 
 /* 전체 배경 레이어 – 이 클래스만 body나 메인 컨테이너에 주면 끝 */
@@ -126,12 +128,29 @@ body:hover .parksy-cursor-dust {
 .mdx-content p,
 .mdx-content li,
 .mdx-content blockquote {
-  color: var(--chalk-fg-body);
+  color: var(--chalk-fg-body) !important;
 }
 
 .mdx-content small,
 .mdx-content figcaption {
   color: var(--chalk-fg-muted);
+}
+
+.mdx-content a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.mdx-content a:hover {
+  color: var(--accent-hover);
+}
+
+/* Ensure prose and typography utilities match */
+.prose,
+.markdown-body,
+.text-muted,
+.text-soft {
+  color: rgba(255,255,255,0.25) !important;
 }
 
 .mdx-content a {

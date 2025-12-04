@@ -17,6 +17,12 @@ export default {
           sketch: '#6B7280',      // Gray - Sketch theme
           music: '#10B981',       // Green - Spotify theme
         },
+        fg: {
+          DEFAULT: "rgba(255,255,255,0.95)",     // main headings stay strong
+          soft: "rgba(255,255,255,0.25)",        // body = new target (25%)
+          softer: "rgba(255,255,255,0.18)",      // tertiary
+        },
+        muted: "rgba(255,255,255,0.25)",          // unify with soft
       },
       fontFamily: {
         sans: ['Inter', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],

@@ -34,12 +34,18 @@
 
 import { isPostVisible } from '../lib/date';
 
+// Type definition for MDX module
+interface MDXModule {
+  frontmatter?: Record<string, any>;
+  default: any;
+}
+
 // Import all MDX files
 const modules = import.meta.glob('/src/content/**/*.mdx', { eager: true });
 
 // Parse frontmatter from MDX modules
 // Ensures all required fields have fallback values
-function parseFrontmatter(module: any) {
+function parseFrontmatter(module: MDXModule) {
   const { frontmatter, default: Component } = module;
   return {
     title: frontmatter?.title || '',
@@ -67,7 +73,7 @@ export function getAllPosts() {
   });
 
   // Sort by date descending
-  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 // Get all published posts (filters out unpublished posts and future posts beyond grace period)
@@ -95,7 +101,7 @@ export function getPost(category: string, slug: string) {
 // Get category counts (dynamically calculated from published posts only)
 export function getCategoryCounts() {
   const posts = getPublishedPosts();
-  const counts = {};
+  const counts: Record<string, number> = {};
   
   // Dynamically count posts per category
   posts.forEach(post => {

@@ -149,3 +149,87 @@ body:hover .parksy-cursor-dust {
 .mdx-content a:hover {
   color: #93c5fd;
 }
+
+/* Chalkboard Mermaid – Sketchy Style + Animations */
+
+/* Common wrapper */
+.mermaid-wrapper {
+  margin: 1.5rem 0;
+}
+
+.mermaid-wrapper svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Excalidraw feel: rounded lines + slightly wobbly feel */
+.mermaid-sketchy svg path,
+.mermaid-sketchy svg rect,
+.mermaid-sketchy svg polygon {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Edges (arrows) – dashed + subtle pulse animation */
+.mermaid-sketchy svg .edgePath path {
+  stroke-dasharray: 4 3;
+  animation: edgePulse 2.8s ease-in-out infinite;
+  stroke-width: 1.3px;
+}
+
+@keyframes edgePulse {
+  0%, 100% {
+    stroke-opacity: 0.5;
+  }
+  50% {
+    stroke-opacity: 1;
+    stroke-width: 1.7px;
+  }
+}
+
+/* Node boxes – slightly skewed drop shadow */
+.mermaid-sketchy svg .node rect,
+.mermaid-sketchy svg .node polygon {
+  rx: 10px; /* Rounded corners */
+  ry: 10px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
+}
+
+/* Default text color – chalkboard medium tone */
+.mermaid-sketchy svg text {
+  fill: var(--chalk-fg-body, #dde7e0);
+  font-family: "'Annie Use Your Telescope', system-ui";
+}
+
+/* Focus node – automatically applied to first node */
+.mermaid-sketchy svg .node--pulse rect,
+.mermaid-sketchy svg .node--pulse polygon {
+  stroke-width: 2.4px;
+  animation: nodePulse 3.2s ease-in-out infinite;
+}
+
+@keyframes nodePulse {
+  0%, 100% {
+    stroke-opacity: 0.6;
+  }
+  50% {
+    stroke-opacity: 1;
+    stroke-width: 3px;
+  }
+}
+
+/* For manual emphasis (can be used with Mermaid classDef) */
+.mermaid-sketchy svg .node-emphasis rect,
+.mermaid-sketchy svg .node-emphasis polygon {
+  stroke-width: 3px;
+  stroke-dasharray: 6 3;
+  animation: nodePulse 2.4s ease-in-out infinite;
+}
+
+/* Support for classDef emphasis in Mermaid code */
+.mermaid-sketchy svg .emphasis rect,
+.mermaid-sketchy svg .emphasis polygon {
+  stroke-width: 3px;
+  stroke-dasharray: 6 3;
+  animation: nodePulse 2.4s ease-in-out infinite;
+}

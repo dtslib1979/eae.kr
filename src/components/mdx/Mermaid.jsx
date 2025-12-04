@@ -1,6 +1,30 @@
 import { useEffect, useRef } from 'react';
 import mermaid from 'mermaid';
 
+// Excalidraw-like sketchy style configuration
+const MERMAID_CONFIG = {
+  startOnLoad: false,
+  theme: 'dark',
+  flowchart: {
+    curve: 'basis',        // Smooth curved lines instead of straight
+    padding: 12,
+    htmlLabels: true,
+  },
+  themeVariables: {
+    fontFamily: "'Annie Use Your Telescope', system-ui",
+    primaryColor: '#111827',
+    primaryBorderColor: '#EEF8F2',
+    primaryTextColor: '#EEF8F2',
+    lineColor: '#EEF8F2',
+    secondaryColor: '#111827',
+    tertiaryColor: '#111827',
+  },
+  securityLevel: 'strict',
+};
+
+// Delay to wait for Mermaid SVG rendering before applying animations
+const PULSE_ANIMATION_DELAY = 150;
+
 export default function Mermaid({ children, chart }) {
   const containerRef = useRef(null);
   const hasRendered = useRef(false);
@@ -8,20 +32,7 @@ export default function Mermaid({ children, chart }) {
   useEffect(() => {
     // Initialize mermaid only once
     if (!hasRendered.current) {
-      mermaid.initialize({ 
-        startOnLoad: false,
-        theme: 'base',
-        themeVariables: {
-          primaryColor: 'transparent',
-          primaryTextColor: '#ffffff',
-          lineColor: '#ffffff',
-          textColor: '#ffffff',
-          primaryBorderColor: '#ffffff',
-          secondaryColor: 'rgba(255, 255, 255, 0.1)',
-          tertiaryColor: 'rgba(255, 255, 255, 0.05)',
-        },
-        securityLevel: 'strict',
-      });
+      mermaid.initialize(MERMAID_CONFIG);
       hasRendered.current = true;
     }
 
@@ -75,8 +86,23 @@ export default function Mermaid({ children, chart }) {
     }
   }, [children, chart]);
 
+  // Add pulse animation to the first node after SVG is rendered
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    // Wait for mermaid to fully render the SVG
+    const pulseTimer = setTimeout(() => {
+      const firstNode = containerRef.current?.querySelector('.node');
+      if (firstNode && !firstNode.classList.contains('node--pulse')) {
+        firstNode.classList.add('node--pulse');
+      }
+    }, PULSE_ANIMATION_DELAY);
+
+    return () => clearTimeout(pulseTimer);
+  }, [children, chart]);
+
   return (
-    <div ref={containerRef} className="mermaid-wrapper my-6 flex justify-center">
+    <div ref={containerRef} className="mermaid-wrapper mermaid-sketchy my-6 flex justify-center">
       {/* Mermaid content will be rendered here */}
     </div>
   );

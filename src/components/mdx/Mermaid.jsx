@@ -10,7 +10,16 @@ export default function Mermaid({ children, chart }) {
     if (!hasRendered.current) {
       mermaid.initialize({ 
         startOnLoad: false,
-        theme: 'default',
+        theme: 'base',
+        themeVariables: {
+          primaryColor: 'transparent',
+          primaryTextColor: '#ffffff',
+          lineColor: '#ffffff',
+          textColor: '#ffffff',
+          primaryBorderColor: '#ffffff',
+          secondaryColor: 'rgba(255, 255, 255, 0.1)',
+          tertiaryColor: 'rgba(255, 255, 255, 0.05)',
+        },
         securityLevel: 'strict',
       });
       hasRendered.current = true;
@@ -36,7 +45,7 @@ export default function Mermaid({ children, chart }) {
       
       // Create a temporary div for mermaid content
       const tempDiv = document.createElement('div');
-      tempDiv.className = 'mermaid';
+      tempDiv.className = 'mermaid text-white';
       tempDiv.textContent = code.trim();
       tempDiv.id = id;
       

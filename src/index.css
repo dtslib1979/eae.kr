@@ -181,3 +181,14 @@ body:hover .parksy-cursor-dust {
 .mdx-zoom-target:hover {
   transform: scale(1.03);
 }
+
+/* ZoomOnHover component styles - for chalkboard lecture mode */
+.zoom-hover-target {
+  transition: transform 0.22s ease-out, filter 0.22s ease-out;
+  transform-origin: center left;
+}
+
+.zoom-hover-target.zoomed {
+  transform: scale(1.06);
+  filter: brightness(1.1);
+}

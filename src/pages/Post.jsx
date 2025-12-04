@@ -21,18 +21,18 @@ export default function Post() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <Link to={`/category/${category}`} className="text-blue-500 hover:underline">
+        <Link to={`/category/${category}`} className="text-slate-50/90 hover:text-slate-50 hover:underline transition-colors">
           &larr; Back to {category}
         </Link>
       </div>
       
-      <article className="prose lg:prose-xl mx-auto max-w-4xl">
+      <article className="prose prose-invert prose-neutral lg:prose-xl mx-auto max-w-4xl">
         {/* Auto-render OpeningFrame if youtube URL exists in frontmatter */}
         {youtube && <OpeningFrame src={youtube} title={title} />}
         
         <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">{title || '(제목 없음)'}</h1>
-          <p className="text-gray-600">{date}</p>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-slate-50">{title || '(제목 없음)'}</h1>
+          <p className="text-sm text-slate-300 mb-6">{date}</p>
         </header>
         
         <div className="mt-8">

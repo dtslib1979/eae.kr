@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply text-slate-50;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-slate-50;
+  }
+}
+
 /* PARKSY WORLD Chalkboard Global Theme */
 :root {
   /* 1. Core Base – 네가 사랑한 원조 초록 */

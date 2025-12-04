@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getPost } from '../utils/posts';
 import OpeningFrame from '../components/mdx/OpeningFrame';

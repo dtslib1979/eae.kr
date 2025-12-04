@@ -10,17 +10,25 @@ export default function Mermaid({ children, chart }) {
     if (!hasRendered.current) {
       mermaid.initialize({ 
         startOnLoad: false,
-        theme: 'neutral',
+        theme: 'base',
         look: 'handDrawn',
-        fontFamily: 'Marker Felt, Cabin Sketch, Comic Sans MS',
+        fontFamily: '"Annie Use Your Telescope", "Courier New", monospace',
         themeVariables: {
-          primaryColor: 'transparent',
-          primaryTextColor: 'rgba(255,255,255,0.25)',   // new target (25%)
-          lineColor: 'rgba(255,255,255,0.25)',
-          textColor: 'rgba(255,255,255,0.25)',
-          primaryBorderColor: 'rgba(255,255,255,0.25)',
-          secondaryColor: 'rgba(255, 255, 255, 0.1)',
-          tertiaryColor: 'rgba(255, 255, 255, 0.05)',
+          primaryColor: '#253A2F',
+          primaryTextColor: '#F7FFF5',
+          primaryBorderColor: '#E6F2E8',
+          lineColor: '#E6F2E8',
+          secondaryColor: '#253A2F',
+          tertiaryColor: '#253A2F',
+          textColor: '#F7FFF5',
+          mainBkg: 'transparent',
+          nodeBorder: '#E6F2E8',
+          clusterBkg: 'transparent',
+          clusterBorder: '#E6F2E8',
+          defaultLinkColor: '#E6F2E8',
+          titleColor: '#F7FFF5',
+          edgeLabelBackground: '#253A2F',
+          edgeLabelColor: '#F7FFF5',
         },
         securityLevel: 'strict',
       });
@@ -47,7 +55,7 @@ export default function Mermaid({ children, chart }) {
       
       // Create a temporary div for mermaid content
       const tempDiv = document.createElement('div');
-      tempDiv.className = 'mermaid text-white';
+      tempDiv.className = 'mermaid';
       tempDiv.textContent = code.trim();
       tempDiv.id = id;
       
@@ -78,7 +86,7 @@ export default function Mermaid({ children, chart }) {
   }, [children, chart]);
 
   return (
-    <div ref={containerRef} className="mermaid-wrapper my-6 flex justify-center">
+    <div ref={containerRef} className="mermaid-wrapper mermaid-chalk my-6 flex justify-center">
       {/* Mermaid content will be rendered here */}
     </div>
   );

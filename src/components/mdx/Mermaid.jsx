@@ -19,47 +19,50 @@ export default function Mermaid({ children, chart }) {
     // Support both 'chart' prop and 'children' for backwards compatibility
     const content = chart || children;
 
-    // Render mermaid diagram
-    if (containerRef.current && content) {
-      try {
-        const code = typeof content === 'string' ? content : content.props?.children || '';
-        
-        // Skip rendering if code is empty or whitespace only
-        if (!code || !code.trim()) {
-          return;
-        }
-        
-        const id = `mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
-        
-        // Create a temporary div for mermaid content
-        const tempDiv = document.createElement('div');
-        tempDiv.className = 'mermaid';
-        tempDiv.textContent = code.trim();
-        tempDiv.id = id;
-        
-        // Clear previous content and append new
-        containerRef.current.innerHTML = '';
-        containerRef.current.appendChild(tempDiv);
-        
-        // Use timeout to prevent rapid re-renders
-        const timer = setTimeout(() => {
-          mermaid.run({ nodes: [tempDiv] }).catch(error => {
-            console.error('Mermaid rendering error:', error);
-            // Display error message instead of breaking the page (safe from XSS)
-            if (containerRef.current) {
-              const errorDiv = document.createElement('div');
-              errorDiv.className = 'text-red-500 p-4 border border-red-500 rounded';
-              errorDiv.textContent = `Mermaid diagram error: ${error.message}`;
-              containerRef.current.innerHTML = '';
-              containerRef.current.appendChild(errorDiv);
-            }
-          });
-        }, 100);
+    // Render mermaid diagram only if conditions are met
+    if (!containerRef.current || !content) {
+      return undefined;
+    }
 
-        return () => clearTimeout(timer);
-      } catch (error) {
-        console.error('Mermaid setup error:', error);
+    try {
+      const code = typeof content === 'string' ? content : content.props?.children || '';
+      
+      // Skip rendering if code is empty or whitespace only
+      if (!code || !code.trim()) {
+        return undefined;
       }
+      
+      const id = `mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+      
+      // Create a temporary div for mermaid content
+      const tempDiv = document.createElement('div');
+      tempDiv.className = 'mermaid';
+      tempDiv.textContent = code.trim();
+      tempDiv.id = id;
+      
+      // Clear previous content and append new
+      containerRef.current.innerHTML = '';
+      containerRef.current.appendChild(tempDiv);
+      
+      // Use timeout to prevent rapid re-renders
+      const timer = setTimeout(() => {
+        mermaid.run({ nodes: [tempDiv] }).catch(error => {
+          console.error('Mermaid rendering error:', error);
+          // Display error message instead of breaking the page (safe from XSS)
+          if (containerRef.current) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'text-red-500 p-4 border border-red-500 rounded';
+            errorDiv.textContent = `Mermaid diagram error: ${error.message}`;
+            containerRef.current.innerHTML = '';
+            containerRef.current.appendChild(errorDiv);
+          }
+        });
+      }, 100);
+
+      return () => clearTimeout(timer);
+    } catch (error) {
+      console.error('Mermaid setup error:', error);
+      return undefined;
     }
   }, [children, chart]);
 

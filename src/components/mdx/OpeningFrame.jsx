@@ -17,8 +17,8 @@ export default function OpeningFrame({ src, videoId, title = "Opening Frame", de
 
   // Priority: videoId prop > extracted from src
   // Filter out empty strings by treating them as falsy
-  const cleanVideoId = (videoId && videoId.trim() !== '') ? videoId : null;
-  const cleanSrc = (src && src.trim() !== '') ? src : null;
+  const cleanVideoId = (videoId && typeof videoId === 'string' && videoId.trim() !== '') ? videoId : null;
+  const cleanSrc = (src && typeof src === 'string' && src.trim() !== '') ? src : null;
   const youtubeId = cleanVideoId || getYouTubeId(cleanSrc);
 
   // If no valid video ID or src, don't render anything (graceful degradation)

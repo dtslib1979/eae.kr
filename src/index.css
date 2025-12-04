@@ -181,3 +181,109 @@ body:hover .parksy-cursor-dust {
 .mdx-zoom-target:hover {
   transform: scale(1.03);
 }
+
+/* ===========================================
+   Mermaid Chalkboard × Excalidraw Styling
+   =========================================== */
+
+/* Mermaid 공통 래퍼 – 칠판 위 초크 느낌 */
+.mermaid-chalk svg {
+  width: 100%;
+  height: auto;
+  max-width: 640px;
+  margin: 0 auto;
+  font-family: "Annie Use Your Telescope", "Courier New", monospace;
+  color: #F7FFF5;
+}
+
+/* 노드 스타일 - 손그림 박스 + 살짝 거친 느낌 */
+.mermaid-chalk .node rect,
+.mermaid-chalk .node path,
+.mermaid-chalk .label-container {
+  fill: rgba(10, 30, 22, 0.9);         /* 거의 검정에 가까운 녹색 */
+  stroke: #E6F2E8;
+  stroke-width: 2.2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* 손그림 느낌 */
+  stroke-dasharray: 3 2;
+}
+
+/* 텍스트 – 항상 잘 보이게 */
+.mermaid-chalk .label,
+.mermaid-chalk .node text,
+.mermaid-chalk text {
+  fill: #F7FFF5 !important;
+  font-size: 0.8rem;
+}
+
+/* 엣지(화살표) - 초크로 긋는 선 느낌 */
+.mermaid-chalk .edgePath path {
+  stroke: #E6F2E8;
+  stroke-width: 1.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 3 3;
+}
+
+/* 화살표 마커 */
+.mermaid-chalk .marker {
+  fill: #E6F2E8;
+  stroke: #E6F2E8;
+}
+
+/* 엣지 레이블 배경 */
+.mermaid-chalk .edgeLabel rect {
+  fill: #253A2F;
+  stroke: #E6F2E8;
+  stroke-width: 1.5px;
+}
+
+.mermaid-chalk .edgeLabel span {
+  color: #F7FFF5;
+}
+
+/* 전체 hover 시 살짝 강조 */
+.mermaid-chalk {
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.45));
+  transition: transform 0.25s ease-out, filter 0.25s ease-out;
+}
+
+.mermaid-chalk:hover {
+  transform: translateY(-4px) scale(1.01);
+  filter: drop-shadow(0 0 14px rgba(0, 0, 0, 0.65));
+}
+
+/* 개별 노드 hover 강조 */
+.mermaid-chalk .node:hover rect,
+.mermaid-chalk .node:hover path {
+  fill: rgba(20, 60, 45, 0.95);
+}
+
+.mermaid-chalk .node:hover text {
+  fill: #FFFFFF !important;
+}
+
+/* 클러스터/서브그래프 스타일링 */
+.mermaid-chalk .cluster rect {
+  fill: rgba(10, 30, 22, 0.5);
+  stroke: #E6F2E8;
+  stroke-width: 1.8px;
+  stroke-dasharray: 5 3;
+}
+
+.mermaid-chalk .cluster text {
+  fill: #F7FFF5 !important;
+}
+
+/* 모바일에서도 글씨가 안 뭉개지도록 */
+@media (max-width: 640px) {
+  .mermaid-chalk .label,
+  .mermaid-chalk .node text {
+    font-size: 0.75rem;
+  }
+  
+  .mermaid-chalk svg {
+    max-width: 100%;
+  }
+}

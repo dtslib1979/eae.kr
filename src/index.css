@@ -34,6 +34,7 @@
   /* Typography colors for dark mode */
   --fg: #f1f5f9; /* slate-100 - main readable text */
   --accent: #fbbf24; /* amber-400 - code and highlights */
+  --accent-hover: #fcd34d; /* amber-300 - hover state for links */
   --soft: #475569; /* slate-600 - borders and subtle elements */
 
   /* Chalkboard text hierarchy */
@@ -139,7 +140,7 @@ body:hover .parksy-cursor-dust {
 }
 
 .mdx-content a:hover {
-  color: #fcd34d;
+  color: var(--accent-hover);
 }
 
 /* 코드나 인라인 강조는 살짝 강하게 */

@@ -15,10 +15,10 @@ export default function Mermaid({ children, chart }) {
         fontFamily: 'Marker Felt, Cabin Sketch, Comic Sans MS',
         themeVariables: {
           primaryColor: 'transparent',
-          primaryTextColor: '#ffffff',
-          lineColor: '#ffffff',
-          textColor: '#ffffff',
-          primaryBorderColor: '#ffffff',
+          primaryTextColor: 'rgba(255,255,255,0.25)',   // new target (25%)
+          lineColor: 'rgba(255,255,255,0.25)',
+          textColor: 'rgba(255,255,255,0.25)',
+          primaryBorderColor: 'rgba(255,255,255,0.25)',
           secondaryColor: 'rgba(255, 255, 255, 0.1)',
           tertiaryColor: 'rgba(255, 255, 255, 0.05)',
         },

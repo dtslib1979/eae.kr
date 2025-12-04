@@ -17,7 +17,7 @@ export default function AccordionItem({ title, children, defaultOpen = false }) 
         <span>{title}</span>
       </button>
       {open && (
-        <div className="mt-2 pl-4 text-slate-100" role="region" aria-labelledby={id}>
+        <div className="mt-2 pl-4 text-fg-soft" role="region" aria-labelledby={id}>
           {children}
         </div>
       )}

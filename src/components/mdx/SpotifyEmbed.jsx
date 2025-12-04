@@ -22,7 +22,6 @@ export default function SpotifyEmbed({ track, title, spotifyUrl, label }) {
         if (process.env.NODE_ENV === 'development') {
           console.warn('[SpotifyEmbed] Invalid URL:', input);
         }
-        return null;
       }
       return null;
     }

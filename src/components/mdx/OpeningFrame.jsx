@@ -11,7 +11,15 @@ export default function OpeningFrame({ src, videoId, title = "Opening Frame", de
   };
 
   // Priority: videoId prop > extracted from src
-  const youtubeId = videoId || getYouTubeId(src);
+  // Filter out empty strings by treating them as falsy
+  const cleanVideoId = videoId || null;
+  const cleanSrc = src || null;
+  const youtubeId = cleanVideoId || getYouTubeId(cleanSrc);
+
+  // If no valid video ID or src, don't render anything
+  if (!youtubeId && !cleanSrc) {
+    return null;
+  }
 
   return (
     <div className="opening-frame my-8 rounded-lg overflow-hidden shadow-lg">
@@ -20,10 +28,10 @@ export default function OpeningFrame({ src, videoId, title = "Opening Frame", de
           url={`https://www.youtube.com/watch?v=${youtubeId}`}
           title={title}
         />
-      ) : (
+      ) : cleanSrc ? (
         <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
           <img 
-            src={src} 
+            src={cleanSrc} 
             alt={title}
             className="w-full h-full object-cover"
             onError={(e) => {
@@ -34,7 +42,7 @@ export default function OpeningFrame({ src, videoId, title = "Opening Frame", de
             }}
           />
         </div>
-      )}
+      ) : null}
       {description && (
         <div className="p-4 bg-gray-50 text-gray-700 text-sm">
           {description}

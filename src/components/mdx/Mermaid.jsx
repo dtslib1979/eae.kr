@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import mermaid from 'mermaid';
 
-export default function Mermaid({ children }) {
+export default function Mermaid({ children, chart }) {
   const containerRef = useRef(null);
   const hasRendered = useRef(false);
 
@@ -16,9 +16,12 @@ export default function Mermaid({ children }) {
       hasRendered.current = true;
     }
 
+    // Support both 'chart' prop and 'children' for backwards compatibility
+    const content = chart || children;
+
     // Render mermaid diagram
-    if (containerRef.current && children) {
-      const code = typeof children === 'string' ? children : children.props?.children || '';
+    if (containerRef.current && content) {
+      const code = typeof content === 'string' ? content : content.props?.children || '';
       const id = `mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
       
       // Create a temporary div for mermaid content
@@ -38,7 +41,7 @@ export default function Mermaid({ children }) {
 
       return () => clearTimeout(timer);
     }
-  }, [children]);
+  }, [children, chart]);
 
   return (
     <div ref={containerRef} className="mermaid-wrapper my-6 flex justify-center">

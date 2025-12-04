@@ -1,5 +1,8 @@
 import { useState, useId, useRef, useEffect } from 'react';
 
+// Animation duration in ms - must match CSS transition duration
+const ANIMATION_DURATION = 300;
+
 /**
  * AccordionItem component for nested collapsible sections within Accordion
  * Provides smooth height/opacity animations and ARIA-compliant keyboard navigation
@@ -11,22 +14,37 @@ export default function AccordionItem({ title, children, defaultOpen = false }) 
   const id = `accordion-item-${uniqueId}`;
   const contentRef = useRef(null);
   const [height, setHeight] = useState(defaultOpen ? 'auto' : '0px');
+  const timeoutRef = useRef(null);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
     if (contentRef.current) {
       if (open) {
         // Set to scrollHeight to trigger animation
         const scrollHeight = contentRef.current.scrollHeight;
         setHeight(scrollHeight + 'px');
         // After animation, set to auto for dynamic content
-        setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           if (open) setHeight('auto');
-        }, 300);
+        }, ANIMATION_DURATION);
       } else {
         // Set to exact height first
         setHeight(contentRef.current.scrollHeight + 'px');
         // Then animate to 0
-        setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           setHeight('0px');
         }, 10);
       }

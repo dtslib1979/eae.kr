@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 /**
  * ZoomOnHover component for subtle zoom effect on hover
@@ -20,6 +20,15 @@ export default function ZoomOnHover({
 }) {
   const ref = useRef(null);
   const timer = useRef(null);
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (timer.current) {
+        window.clearTimeout(timer.current);
+      }
+    };
+  }, []);
 
   const handleEnter = () => {
     if (timer.current) window.clearTimeout(timer.current);

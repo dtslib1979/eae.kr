@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 export function AccordionItem({ title, defaultOpen = false, children }) {
   const [open, setOpen] = useState(defaultOpen);
+  const id = `accordion-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
     <section className="mdx-accordion-item border-b border-soft/40">
@@ -9,6 +10,8 @@ export function AccordionItem({ title, defaultOpen = false, children }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between py-3 md:py-4 text-left"
+        aria-expanded={open}
+        aria-controls={id}
       >
         <span className="font-semibold text-lg text-[color:var(--fg)]">
           {title}
@@ -17,11 +20,13 @@ export function AccordionItem({ title, defaultOpen = false, children }) {
           className={`transition-transform duration-200 ${
             open ? "rotate-90" : ""
           }`}
+          aria-hidden="true"
         >
           ▸
         </span>
       </button>
       <div
+        id={id}
         className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
           open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
         }`}

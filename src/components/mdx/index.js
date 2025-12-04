@@ -10,4 +10,5 @@ export { default as SketchCard } from './SketchCard';
 export { default as SpotifyEmbed } from './SpotifyEmbed';
 export { default as PromptEngineLink } from './PromptEngineLink';
 export { default as Accordion } from './Accordion';
+export { default as AccordionItem } from './AccordionItem';
 export { YouTubeEmbed } from '../YouTubeEmbed';

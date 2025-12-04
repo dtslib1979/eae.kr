@@ -161,3 +161,13 @@ body:hover .parksy-cursor-dust {
   background-color: transparent;
   padding: 0;
 }
+
+/* Hover zoom effect for content blocks */
+.mdx-zoom-target {
+  transition: transform 0.22s ease-out 0.45s;
+  cursor: default;
+}
+
+.mdx-zoom-target:hover {
+  transform: scale(1.03);
+}

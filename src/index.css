@@ -149,3 +149,13 @@ body:hover .parksy-cursor-dust {
 .mdx-content a:hover {
   color: #93c5fd;
 }
+
+/* Accordion list styling */
+.mdx-accordion .mdx-accordion-item ul {
+  margin-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.mdx-accordion .mdx-accordion-item li {
+  margin-bottom: 0.25rem;
+}

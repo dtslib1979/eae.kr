@@ -7,8 +7,8 @@ const categories = [
     slug: 'eae-blueprint', 
     name: '🏗️ EAE Blueprint', 
     icon: '🏗️',
-    // YouTube Shorts for EAE Blueprint category card
-    youtubeShorts: 'https://youtube.com/shorts/iJ3Gb5yMKiI?si=Z59u3BpZAoLNBs38'
+    // YouTube video for EAE Blueprint category card
+    youtubeShorts: 'https://youtu.be/6T3mibse3Q4?si=bgubKNvV6LjEobqC'
   },
   { slug: 'qsketch', name: 'Quick Sketch' },
   { slug: 'penon', name: 'Penon' },

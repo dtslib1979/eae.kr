@@ -6,8 +6,8 @@ export default function Layout() {
       <nav className="bg-white/10 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-slate-50">
-              EAE
+            <Link to="/" className="text-2xl font-bold text-slate-50 leading-tight">
+              EDU × ART × ENGINEER
             </Link>
             <div className="flex gap-6">
               <Link to="/" className="text-slate-50/90 hover:text-slate-50 transition-colors">

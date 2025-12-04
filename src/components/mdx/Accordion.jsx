@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useId } from 'react';
 
 export default function Accordion({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
-  const id = `accordion-${title.replace(/\s+/g, '-').toLowerCase()}`;
+  const uniqueId = useId();
+  const id = `accordion-${uniqueId}`;
 
   return (
     <div className="my-2 border-b border-slate-600 pb-2">

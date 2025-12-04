@@ -1,0 +1,47 @@
+---
+title: "EAE Test Post"
+date: "2025-03-04"
+category: "qsketch"
+summary: "EAE PWA 파이프라인이 잘 도는지 확인하기 위한 테스트 포스트."
+---
+
+# EAE Test Post
+
+이 글은 **eae.kr MDX 파이프라인 테스트용 포스트**야.
+
+- 위치: `src/content/qsketch/000-test-eae.mdx`
+- 기대 동작:
+  - 홈(/) 최신 글 섹션에 뜨고
+  - `qsketch` 카테고리 리스트에 뜨고
+  - 클릭하면 단일 포스트 페이지가 열리면 성공.
+
+---
+
+## Part 1 – Grandpa Mode
+
+“지금 이 글 하나만 잘 보이면,  
+앞으로는 그냥 같은 폴더에 MDX만 계속 던지면 된다”  
+이걸 확인하는 테스트야.
+
+---
+
+## Part 2 – System Check
+
+이 포스트가 잘 보인다는 건:
+
+1. Vite + MDX 설정이 정상이고  
+2. `src/utils/posts.js`가 이 파일을 잘 읽고 있고  
+3. Home / Category / Post 라우팅이 다 연결돼 있다는 뜻이고  
+4. GitHub Actions + Pages 배포도 잘 돌아간다는 의미야.
+
+---
+
+## Part 3 – Next Step
+
+이 테스트가 통과하면 이제부터는:
+
+- 구조/디자인은 그대로 두고
+- 내용(MDX)만 계속 추가하면 됨.
+
+즉, **박씨는 말(텍스트)만 던지고,  
+사이트는 자동으로 “교재/리포트”처럼 쌓이는 구조** 완성.

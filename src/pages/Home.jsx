@@ -2,7 +2,13 @@ import { Link } from 'react-router-dom';
 import { getCategoryCounts, getLatestPosts } from '../utils/posts';
 
 const categories = [
-  { slug: 'eae-blueprint', name: '🏗️ EAE Blueprint', icon: '🏗️' },
+  { 
+    slug: 'eae-blueprint', 
+    name: '🏗️ EAE Blueprint', 
+    icon: '🏗️',
+    // YouTube Shorts for EAE Blueprint category card
+    youtubeShorts: 'QXiE8MTZ85U'
+  },
   { slug: 'qsketch', name: 'Quick Sketch' },
   { slug: 'penon', name: 'Penon' },
   { slug: 'mal', name: 'Mal' },
@@ -25,14 +31,45 @@ export default function Home() {
           <Link
             key={category.slug}
             to={`/category/${category.slug}`}
-            className="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
+            className="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow overflow-hidden"
           >
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold">{category.name}</h2>
-              <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-                {counts[category.slug] || 0}
-              </span>
-            </div>
+            {/* Special rendering for EAE Blueprint with YouTube Shorts */}
+            {category.youtubeShorts ? (
+              <div className="relative">
+                {/* YouTube Shorts embed with autoplay */}
+                <div className="aspect-video bg-black">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${category.youtubeShorts}?autoplay=1&mute=1&loop=1&playlist=${category.youtubeShorts}&controls=0&modestbranding=1&rel=0`}
+                    title={category.name}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+                {/* Overlay with category info */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-semibold">{category.name}</h2>
+                    <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
+                      {counts[category.slug] || 0}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Standard category card */
+              <div className="p-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-semibold">{category.name}</h2>
+                  <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
+                    {counts[category.slug] || 0}
+                  </span>
+                </div>
+              </div>
+            )}
           </Link>
         ))}
       </div>

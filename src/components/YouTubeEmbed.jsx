@@ -5,8 +5,8 @@ function normalizeYouTubeUrl(input) {
   if (!input) return null;
 
   try {
-    // Shorts, watch, embed 모두 처리
-    // 예:
+    // Handle Shorts, watch, and embed URL formats
+    // Examples:
     // https://youtube.com/shorts/MEGM9SO6QPg?si=...
     // https://www.youtube.com/watch?v=MEGM9SO6QPg
     // https://www.youtube.com/embed/MEGM9SO6QPg
@@ -52,20 +52,17 @@ export function YouTubeEmbed({ url, title = "YouTube video", className = "" }) {
 
   return (
     <div
-      className={
-        "relative overflow-hidden rounded-2xl border border-soft bg-card aspect-video " +
-        (loaded ? "opacity-100" : "opacity-0") +
-        " transition-opacity duration-150 pointer-events-none " +
-        className
-      }
+      className={`relative overflow-hidden rounded-2xl border border-soft bg-card aspect-video transition-opacity duration-150 pointer-events-none ${
+        loaded ? "opacity-100" : "opacity-0"
+      } ${className}`}
     >
       <iframe
         src={embedUrl}
         title={title}
         className="w-full h-full"
+        style={{ border: 'none' }}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         onLoad={() => setLoaded(true)}
-        frameBorder="0"
       />
     </div>
   );

@@ -10,7 +10,9 @@ export default function Part3({ children }) {
     if (!hasRendered.current) {
       mermaid.initialize({ 
         startOnLoad: true,
-        theme: 'default',
+        theme: 'neutral',
+        look: 'handDrawn',
+        fontFamily: 'Marker Felt, Cabin Sketch, Comic Sans MS',
         securityLevel: 'strict',
       });
       hasRendered.current = true;

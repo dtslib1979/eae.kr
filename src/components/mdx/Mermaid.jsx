@@ -10,7 +10,9 @@ export default function Mermaid({ children, chart }) {
     if (!hasRendered.current) {
       mermaid.initialize({ 
         startOnLoad: false,
-        theme: 'base',
+        theme: 'neutral',
+        look: 'handDrawn',
+        fontFamily: 'Marker Felt, Cabin Sketch, Comic Sans MS',
         themeVariables: {
           primaryColor: 'transparent',
           primaryTextColor: '#ffffff',

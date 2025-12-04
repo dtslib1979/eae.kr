@@ -13,5 +13,80 @@
       <div id="root"></div>
       <script type="module" src="/src/main.jsx"></script>
     </div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Configuration constants
+  const ANIMATION_CONSTANTS = {
+    TRANSITION_DURATION: '0.2s',
+    GLOW_COLOR: 'rgba(255,165,0,0.8)',
+    GLOW_BLUR: '6px',
+    SCALE_FACTOR: '1.03',
+    STROKE_TRANSITION: 'stroke-dashoffset 1.2s ease-in-out',
+    STROKE_DASHARRAY: '5',
+    DASH_OFFSET_ON: '10',
+    DASH_OFFSET_OFF: '0',
+    PULSE_INTERVAL: 1200
+  };
+
+  // Store interval IDs for cleanup
+  const activeIntervals = new Set();
+
+  function addNodeAnimation(node) {
+    node.addEventListener("mouseenter", () => {
+      node.style.filter = `drop-shadow(0 0 ${ANIMATION_CONSTANTS.GLOW_BLUR} ${ANIMATION_CONSTANTS.GLOW_COLOR})`;
+      node.style.transform = `scale(${ANIMATION_CONSTANTS.SCALE_FACTOR})`;
+      node.style.transition = ANIMATION_CONSTANTS.TRANSITION_DURATION;
+    });
+    node.addEventListener("mouseleave", () => {
+      node.style.filter = "none";
+      node.style.transform = "scale(1)";
+    });
+  }
+
+  function addEdgeAnimation(edge) {
+    edge.style.transition = ANIMATION_CONSTANTS.STROKE_TRANSITION;
+    edge.style.strokeDasharray = ANIMATION_CONSTANTS.STROKE_DASHARRAY;
+    let toggle = false;
+    const intervalId = setInterval(() => {
+      toggle = !toggle;
+      edge.style.strokeDashoffset = toggle ? ANIMATION_CONSTANTS.DASH_OFFSET_ON : ANIMATION_CONSTANTS.DASH_OFFSET_OFF;
+    }, ANIMATION_CONSTANTS.PULSE_INTERVAL);
+    activeIntervals.add(intervalId);
+  }
+
+  function applyAnimations() {
+    // Apply animations to all nodes and edges
+    document.querySelectorAll("svg g.node").forEach(addNodeAnimation);
+    document.querySelectorAll("svg path").forEach(addEdgeAnimation);
+  }
+
+  // Apply animations to existing elements
+  applyAnimations();
+
+  // Watch for dynamically added Mermaid diagrams
+  const observer = new MutationObserver((mutations) => {
+    let shouldReapply = false;
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1 && (node.tagName === 'SVG' || node.querySelector('svg'))) {
+          shouldReapply = true;
+        }
+      });
+    });
+    if (shouldReapply) {
+      applyAnimations();
+    }
+  });
+
+  // Observe the entire document for SVG additions
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Cleanup intervals when page is unloaded
+  window.addEventListener('beforeunload', () => {
+    activeIntervals.forEach(clearInterval);
+    activeIntervals.clear();
+  });
+});
+    </script>
   </body>
 </html>

@@ -87,8 +87,8 @@ After enabling, you can verify it's working:
 
 **Still not working?**
 - Clear browser cache
-- Check `.env` file is not in `.gitignore` exclusions
-- Verify Vite is loading the environment variable (check build output)
+- Verify `.env` file is in the project root directory
+- Check that Vite is loading the environment variable (check build output)
 
 ---
 

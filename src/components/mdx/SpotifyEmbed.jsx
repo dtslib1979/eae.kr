@@ -11,9 +11,18 @@ export default function SpotifyEmbed({ track, title, spotifyUrl, label }) {
     
     // If it's already a full URL, validate it's a Spotify URL
     if (input.startsWith('http://') || input.startsWith('https://')) {
-      // Only accept Spotify URLs
-      if (input.includes('spotify.com')) {
-        return input;
+      try {
+        const urlObj = new URL(input);
+        // Only accept open.spotify.com URLs
+        if (urlObj.hostname === 'open.spotify.com') {
+          return input;
+        }
+      } catch (e) {
+        // Invalid URL
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('[SpotifyEmbed] Invalid URL:', input);
+        }
+        return null;
       }
       return null;
     }
@@ -21,7 +30,13 @@ export default function SpotifyEmbed({ track, title, spotifyUrl, label }) {
     // If it's a spotify: URI, convert to URL
     if (input.startsWith('spotify:track:')) {
       const trackId = input.split(':')[2];
-      return trackId ? `https://open.spotify.com/track/${trackId}` : null;
+      if (trackId && trackId.match(/^[a-zA-Z0-9]{22}$/)) {
+        return `https://open.spotify.com/track/${trackId}`;
+      }
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('[SpotifyEmbed] Invalid spotify URI:', input);
+      }
+      return null;
     }
     
     // If it's just an ID (22 alphanumeric characters), build URL
@@ -29,7 +44,14 @@ export default function SpotifyEmbed({ track, title, spotifyUrl, label }) {
       return `https://open.spotify.com/track/${input}`;
     }
     
-    return null; // Return null for unknown/invalid formats
+    // Unknown format
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        '[SpotifyEmbed] Invalid Spotify track ID or URL:', input,
+        '\nExpected format: https://open.spotify.com/track/TRACK_ID, spotify:track:TRACK_ID, or a 22-character track ID'
+      );
+    }
+    return null;
   };
 
   const finalUrl = getSpotifyUrl(url);

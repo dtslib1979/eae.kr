@@ -30,6 +30,7 @@ ChatGPT/Claude/Agent 전부 이 포맷을 따라야 리포트가 정확하게 �
 title: "Report Title"
 date: "YYYY-MM-DD"
 category: "category-name"
+published: true
 ---
 
 <OpeningFrame 
@@ -504,10 +505,15 @@ graph TD
 title: "명확한 제목"
 date: "YYYY-MM-DD"
 category: "카테고리명"
+published: true
 ---
 ```
 
 **모든 MDX 파일은 반드시 Frontmatter로 시작**
+
+**published 필드:**
+- `published: true` - 포스트가 공개되어 리스트와 카운트에 포함됨 (기본값)
+- `published: false` - 포스트가 숨겨지고 직접 URL 접근 시 404 반환
 
 ---
 
@@ -520,6 +526,7 @@ category: "카테고리명"
 title: "Understanding Skillset6"
 date: "2025-12-03"
 category: "eae"
+published: true
 ---
 
 <OpeningFrame 

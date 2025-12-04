@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { getAllPosts } from '../utils/posts';
+import { getPublishedPosts } from '../utils/posts';
 
 export default function Archive() {
-  const posts = getAllPosts();
+  const posts = getPublishedPosts();
 
   // Group posts by category
   const postsByCategory = posts.reduce((acc, post) => {

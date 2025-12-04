@@ -9,9 +9,14 @@
  * - The folder name becomes the category slug
  * - All posts and counts are dynamically calculated from the actual MDX files
  * 
+ * Published status:
+ * - Posts with published: false are hidden from all lists and counts
+ * - Posts without a published field are treated as published: true by default
+ * - Direct access to unpublished posts should be handled at the page level (404)
+ * 
  * To add a new category:
  * 1. Create a new folder in src/content/<new-category>/
- * 2. Add MDX files with proper frontmatter (title, date, category)
+ * 2. Add MDX files with proper frontmatter (title, date, category, published)
  * 3. Optionally include youtube/spotify URLs in frontmatter for automatic preset rendering
  * 4. The category will automatically appear in the home page, archive, and category pages
  * 
@@ -20,6 +25,7 @@
  * title: "Post Title"
  * date: "YYYY-MM-DD"
  * category: "category-slug"
+ * published: true  # or false to hide from lists
  * youtube: "https://www.youtube.com/watch?v=XXXXXXXXXXX" (optional)
  * spotify: "https://open.spotify.com/track/YYYYYYYYYYYYYY" (optional)
  * ---
@@ -36,6 +42,7 @@ function parseFrontmatter(module) {
     title: frontmatter?.title || '',
     date: frontmatter?.date || '',
     category: frontmatter?.category || '',
+    published: frontmatter?.published !== false, // Default to true if not specified
     youtube: frontmatter?.youtube || null,
     spotify: frontmatter?.spotify || null,
     ...frontmatter,
@@ -60,14 +67,19 @@ export function getAllPosts() {
   return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
-// Get posts by category
-export function getPostsByCategory(category) {
-  return getAllPosts().filter(post => post.category === category);
+// Get all published posts (filters out unpublished posts)
+export function getPublishedPosts() {
+  return getAllPosts().filter(post => post.published !== false);
 }
 
-// Get latest posts (limit)
+// Get posts by category (only published posts)
+export function getPostsByCategory(category) {
+  return getPublishedPosts().filter(post => post.category === category);
+}
+
+// Get latest posts (limit) - only published posts
 export function getLatestPosts(limit = 3) {
-  return getAllPosts().slice(0, limit);
+  return getPublishedPosts().slice(0, limit);
 }
 
 // Get post by slug and category
@@ -75,9 +87,9 @@ export function getPost(category, slug) {
   return getAllPosts().find(post => post.category === category && post.slug === slug);
 }
 
-// Get category counts (dynamically calculated from all posts)
+// Get category counts (dynamically calculated from published posts only)
 export function getCategoryCounts() {
-  const posts = getAllPosts();
+  const posts = getPublishedPosts();
   const counts = {};
   
   // Dynamically count posts per category

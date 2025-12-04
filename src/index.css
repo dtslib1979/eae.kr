@@ -35,7 +35,7 @@
   background-blend-mode: overlay, soft-light, overlay, normal;
   box-shadow: var(--parksy-vignette);
   filter: contrast(112%) brightness(92%);
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -80,4 +80,10 @@
 
 body:hover .parksy-cursor-dust {
   opacity: 1;
+}
+
+/* 메인 콘텐츠 컨테이너용 유틸 (기존 본문 위에 띄우는 박스 느낌) */
+.parksy-main {
+  position: relative;
+  z-index: 2;
 }

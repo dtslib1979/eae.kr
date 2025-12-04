@@ -3,7 +3,7 @@ export default function SpotifyEmbed({ track, title = "Music Track" }) {
   const getSpotifyTrackId = (input) => {
     if (!input) return null;
     
-    // If it's already just an ID
+    // If it's already just an ID (22 alphanumeric characters)
     if (input.match(/^[a-zA-Z0-9]{22}$/)) return input;
     
     // Extract from spotify:track:ID format
@@ -11,7 +11,7 @@ export default function SpotifyEmbed({ track, title = "Music Track" }) {
       return input.split(':')[2];
     }
     
-    // Extract from URL format
+    // Extract from URL format (https://open.spotify.com/track/ID)
     const match = input.match(/track\/([a-zA-Z0-9]{22})/);
     return match ? match[1] : null;
   };
@@ -19,28 +19,27 @@ export default function SpotifyEmbed({ track, title = "Music Track" }) {
   const trackId = getSpotifyTrackId(track);
 
   if (!trackId) {
-    return (
-      <div className="spotify-embed my-8 p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-300">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-2xl">🎵</span>
-          <h3 className="text-xl font-bold text-green-800">Music Track</h3>
-        </div>
-        <p className="text-gray-600">Invalid Spotify track ID</p>
-      </div>
-    );
+    // In development, log invalid track ID to help with debugging
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        '[SpotifyEmbed] Invalid Spotify track ID or URL:', track,
+        '\nExpected format: https://open.spotify.com/track/TRACK_ID or just the 22-character track ID'
+      );
+    }
+    return null; // Don't render anything if invalid track ID
   }
 
   return (
-    <div className="spotify-embed my-8 p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 shadow-md">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="text-2xl">🎵</span>
-        <h3 className="text-xl font-bold text-green-800">{title}</h3>
+    <div className="spotify-embed my-8 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 shadow-md">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-xl">🎵</span>
+        <h3 className="text-lg font-bold text-green-800">{title}</h3>
       </div>
       <iframe
         style={{ borderRadius: '12px' }}
-        src={`https://open.spotify.com/embed/track/${trackId}?utm_source=generator`}
+        src={`https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`}
         width="100%"
-        height="152"
+        height="80"
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"

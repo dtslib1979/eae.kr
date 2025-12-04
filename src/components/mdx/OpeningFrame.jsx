@@ -4,19 +4,24 @@ export default function OpeningFrame({ src, videoId, title = "Opening Frame", de
   // Extract YouTube video ID from various URL formats or use videoId prop
   const getYouTubeId = (url) => {
     if (!url) return null;
-    // Pattern matches: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID, etc.
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
+    try {
+      // Pattern matches: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID, etc.
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    } catch (error) {
+      console.error('Error parsing YouTube URL:', error);
+      return null;
+    }
   };
 
   // Priority: videoId prop > extracted from src
   // Filter out empty strings by treating them as falsy
-  const cleanVideoId = videoId || null;
-  const cleanSrc = src || null;
+  const cleanVideoId = (videoId && typeof videoId === 'string' && videoId.trim() !== '') ? videoId : null;
+  const cleanSrc = (src && typeof src === 'string' && src.trim() !== '') ? src : null;
   const youtubeId = cleanVideoId || getYouTubeId(cleanSrc);
 
-  // If no valid video ID or src, don't render anything
+  // If no valid video ID or src, don't render anything (graceful degradation)
   if (!youtubeId && !cleanSrc) {
     return null;
   }

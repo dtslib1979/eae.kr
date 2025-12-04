@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export default function Accordion({ title, children }) {
-  const [open, setOpen] = useState(false);
+export default function Accordion({ title, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
   const id = `accordion-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (

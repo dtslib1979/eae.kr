@@ -46,12 +46,20 @@ Content for the third subtopic.
 
 ### Component Props
 
-**Accordion:**
+**Both Accordion and AccordionItem:**
 - `title` (string, required): The section heading
-
-**AccordionItem:**
-- `title` (string, required): The subsection heading
 - `defaultOpen` (boolean, optional): Whether the section starts expanded (default: false)
+
+**Examples:**
+```mdx
+<Accordion title="Main Section" defaultOpen={true}>
+This accordion starts open!
+</Accordion>
+
+<AccordionItem title="Subsection" defaultOpen={true}>
+This subsection starts open!
+</AccordionItem>
+```
 
 ### When to Use Accordions
 

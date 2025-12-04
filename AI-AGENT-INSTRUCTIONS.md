@@ -277,6 +277,15 @@ Content that can be collapsed and expanded.
 </Accordion>
 ```
 
+**Accordion with defaultOpen:**
+```mdx
+<Accordion title="Important Section" defaultOpen={true}>
+
+This section starts expanded by default.
+
+</Accordion>
+```
+
 **Nested AccordionItem:**
 ```mdx
 <Accordion title="Main Section">
@@ -296,8 +305,8 @@ Content for subsection 2. This one starts open!
 </Accordion>
 ```
 
-**Props:**
-- `title` (string): Section heading
+**Props (both Accordion and AccordionItem):**
+- `title` (string, required): Section heading
 - `defaultOpen` (boolean, optional): Whether section starts expanded (default: false)
 
 **Best practices:**

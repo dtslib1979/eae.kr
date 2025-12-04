@@ -2,10 +2,16 @@ import { Link, useParams } from 'react-router-dom';
 import { getPost } from '../utils/posts';
 import OpeningFrame from '../components/mdx/OpeningFrame';
 import SpotifyEmbed from '../components/mdx/SpotifyEmbed';
+import { BlindScrollHandle } from '../components/ui/BlindScrollHandle';
 
 export default function Post() {
   const { slug, postSlug } = useParams();
   const post = getPost(slug, postSlug);
+
+  // Check if teacher scroll is enabled via environment variable
+  const teacherScrollEnabled =
+    typeof import.meta !== "undefined" &&
+    import.meta.env.VITE_TEACHER_SCROLL === "1";
 
   // Return 404 if post not found or unpublished
   if (!post || post.published === false) {
@@ -24,7 +30,11 @@ export default function Post() {
   const spotifyUrl = spotify?.url ?? spotify ?? "";
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <>
+      {/* Render BlindScrollHandle for teacher/recording mode */}
+      {teacherScrollEnabled && <BlindScrollHandle />}
+      
+      <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <Link to={`/category/${category}`} className="text-slate-50/90 hover:text-slate-50 hover:underline transition-colors">
           &larr; Back to {category}
@@ -48,5 +58,6 @@ export default function Post() {
         {spotifyUrl && <SpotifyEmbed track={spotifyUrl} title={title ? `${title} - Music` : 'Music'} />}
       </article>
     </div>
+    </>
   );
 }

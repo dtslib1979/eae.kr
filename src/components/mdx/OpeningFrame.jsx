@@ -3,7 +3,7 @@ import { YouTubeEmbed } from '../YouTubeEmbed';
 export default function OpeningFrame({ src, videoId, title = "Opening Frame", description }) {
   // Extract YouTube video ID from various URL formats or use videoId prop
   const getYouTubeId = (url) => {
-    if (!url || url === '') return null;
+    if (!url) return null;
     // Pattern matches: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID, etc.
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
@@ -11,9 +11,9 @@ export default function OpeningFrame({ src, videoId, title = "Opening Frame", de
   };
 
   // Priority: videoId prop > extracted from src
-  // Filter out empty strings
-  const cleanVideoId = videoId && videoId !== '' ? videoId : null;
-  const cleanSrc = src && src !== '' ? src : null;
+  // Filter out empty strings by treating them as falsy
+  const cleanVideoId = videoId || null;
+  const cleanSrc = src || null;
   const youtubeId = cleanVideoId || getYouTubeId(cleanSrc);
 
   // If no valid video ID or src, don't render anything

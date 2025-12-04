@@ -1,0 +1,24 @@
+---
+title: "Test Automatic Count - EAE Blueprint"
+date: "2025-12-04"
+category: "eae-blueprint"
+---
+
+# Test Automatic Count
+
+This is a test post to verify that:
+1. Adding a new MDX file to the eae-blueprint category
+2. Automatically increases the count badge on the home page
+3. Shows up in the /category/eae-blueprint page
+
+If you can see this post in the category list, the automation is working correctly!
+
+## 할아버지 모드로 설명하면?
+
+새로운 글을 추가하면, 자동으로 숫자가 올라가는 마법 같은 시스템이야.
+
+## 아키텍트 모드로 설명하면?
+
+- `src/utils/posts.js`의 `getCategoryCounts()` 함수가 동적으로 계산
+- 하드코딩된 카테고리 리스트 제거
+- MDX 파일을 glob으로 스캔하여 실시간 카운트 생성

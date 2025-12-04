@@ -45,9 +45,13 @@ export default function Mermaid({ children, chart }) {
         const timer = setTimeout(() => {
           mermaid.run({ nodes: [tempDiv] }).catch(error => {
             console.error('Mermaid rendering error:', error);
-            // Display error message instead of breaking the page
+            // Display error message instead of breaking the page (safe from XSS)
             if (containerRef.current) {
-              containerRef.current.innerHTML = `<div class="text-red-500 p-4 border border-red-500 rounded">Mermaid diagram error: ${error.message}</div>`;
+              const errorDiv = document.createElement('div');
+              errorDiv.className = 'text-red-500 p-4 border border-red-500 rounded';
+              errorDiv.textContent = `Mermaid diagram error: ${error.message}`;
+              containerRef.current.innerHTML = '';
+              containerRef.current.appendChild(errorDiv);
             }
           });
         }, 100);

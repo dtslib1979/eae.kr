@@ -5,11 +5,12 @@ function normalizeYouTubeUrl(input) {
   if (!input) return null;
 
   try {
-    // Handle Shorts, watch, and embed URL formats
+    // Handle Shorts, watch, embed, and youtu.be URL formats
     // Examples:
     // https://youtube.com/shorts/iJ3Gb5yMKiI?si=...
     // https://www.youtube.com/watch?v=iJ3Gb5yMKiI
     // https://www.youtube.com/embed/iJ3Gb5yMKiI
+    // https://youtu.be/6T3mibse3Q4?si=...
     const url = new URL(input);
     let videoId = null;
 
@@ -19,6 +20,9 @@ function normalizeYouTubeUrl(input) {
       videoId = url.searchParams.get("v");
     } else if (url.pathname.startsWith("/embed/")) {
       videoId = url.pathname.split("/embed/")[1].split("/")[0];
+    } else if (url.hostname === "youtu.be") {
+      // Handle youtu.be short URLs: https://youtu.be/VIDEO_ID
+      videoId = url.pathname.substring(1).split("/")[0];
     }
 
     if (!videoId) return null;

@@ -39,7 +39,7 @@ const modules = import.meta.glob('/src/content/**/*.mdx', { eager: true });
 
 // Parse frontmatter from MDX modules
 // Ensures all required fields have fallback values
-function parseFrontmatter(module) {
+function parseFrontmatter(module: any) {
   const { frontmatter, default: Component } = module;
   return {
     title: frontmatter?.title || '',
@@ -78,7 +78,7 @@ export function getPublishedPosts() {
 }
 
 // Get posts by category (only published posts)
-export function getPostsByCategory(category) {
+export function getPostsByCategory(category: string) {
   return getPublishedPosts().filter(post => post.category === category);
 }
 
@@ -88,7 +88,7 @@ export function getLatestPosts(limit = 3) {
 }
 
 // Get post by slug and category
-export function getPost(category, slug) {
+export function getPost(category: string, slug: string) {
   return getAllPosts().find(post => post.category === category && post.slug === slug);
 }
 

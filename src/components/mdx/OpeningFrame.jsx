@@ -1,3 +1,5 @@
+import { YouTubeEmbed } from '../YouTubeEmbed';
+
 export default function OpeningFrame({ src, videoId, title = "Opening Frame", description }) {
   // Extract YouTube video ID from various URL formats or use videoId prop
   const getYouTubeId = (url) => {
@@ -14,18 +16,10 @@ export default function OpeningFrame({ src, videoId, title = "Opening Frame", de
   return (
     <div className="opening-frame my-8 rounded-lg overflow-hidden shadow-lg">
       {youtubeId ? (
-        <div className="aspect-video">
-          <iframe
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${youtubeId}`}
-            title={title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full"
-          />
-        </div>
+        <YouTubeEmbed 
+          url={`https://www.youtube.com/watch?v=${youtubeId}`}
+          title={title}
+        />
       ) : (
         <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
           <img 

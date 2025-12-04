@@ -9,3 +9,4 @@ export { default as Mermaid } from './Mermaid';
 export { default as SketchCard } from './SketchCard';
 export { default as SpotifyEmbed } from './SpotifyEmbed';
 export { default as PromptEngineLink } from './PromptEngineLink';
+export { YouTubeEmbed } from '../YouTubeEmbed';

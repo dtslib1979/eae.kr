@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getCategoryCounts, getLatestPosts } from '../utils/posts';
+import { YouTubeEmbed } from '../components/YouTubeEmbed';
 
 const categories = [
   { 
@@ -7,7 +8,7 @@ const categories = [
     name: '🏗️ EAE Blueprint', 
     icon: '🏗️',
     // YouTube Shorts for EAE Blueprint category card
-    youtubeShorts: 'QXiE8MTZ85U'
+    youtubeShorts: 'https://youtube.com/shorts/MEGM9SO6QPg?si=jEeBbP9QxLi-lbKF'
   },
   { slug: 'qsketch', name: 'Quick Sketch' },
   { slug: 'penon', name: 'Penon' },
@@ -37,19 +38,10 @@ export default function Home() {
             {category.youtubeShorts ? (
               <div className="relative">
                 {/* YouTube Shorts embed with autoplay */}
-                <div className="aspect-video bg-black">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${encodeURIComponent(category.youtubeShorts)}?autoplay=1&mute=1&loop=1&playlist=${encodeURIComponent(category.youtubeShorts)}&controls=0&modestbranding=1&rel=0`}
-                    title={category.name}
-                    aria-label={`${category.name} promotional video`}
-                    style={{ border: 'none' }}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  />
-                </div>
+                <YouTubeEmbed 
+                  url={category.youtubeShorts}
+                  title={category.name}
+                />
                 {/* Overlay with category info */}
                 <div className="p-6">
                   <div className="flex items-center justify-between">

@@ -21,25 +21,41 @@ export default function Mermaid({ children, chart }) {
 
     // Render mermaid diagram
     if (containerRef.current && content) {
-      const code = typeof content === 'string' ? content : content.props?.children || '';
-      const id = `mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
-      
-      // Create a temporary div for mermaid content
-      const tempDiv = document.createElement('div');
-      tempDiv.className = 'mermaid';
-      tempDiv.textContent = code.trim();
-      tempDiv.id = id;
-      
-      // Clear previous content and append new
-      containerRef.current.innerHTML = '';
-      containerRef.current.appendChild(tempDiv);
-      
-      // Use timeout to prevent rapid re-renders
-      const timer = setTimeout(() => {
-        mermaid.run({ nodes: [tempDiv] });
-      }, 100);
+      try {
+        const code = typeof content === 'string' ? content : content.props?.children || '';
+        
+        // Skip rendering if code is empty or whitespace only
+        if (!code || !code.trim()) {
+          return;
+        }
+        
+        const id = `mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+        
+        // Create a temporary div for mermaid content
+        const tempDiv = document.createElement('div');
+        tempDiv.className = 'mermaid';
+        tempDiv.textContent = code.trim();
+        tempDiv.id = id;
+        
+        // Clear previous content and append new
+        containerRef.current.innerHTML = '';
+        containerRef.current.appendChild(tempDiv);
+        
+        // Use timeout to prevent rapid re-renders
+        const timer = setTimeout(() => {
+          mermaid.run({ nodes: [tempDiv] }).catch(error => {
+            console.error('Mermaid rendering error:', error);
+            // Display error message instead of breaking the page
+            if (containerRef.current) {
+              containerRef.current.innerHTML = `<div class="text-red-500 p-4 border border-red-500 rounded">Mermaid diagram error: ${error.message}</div>`;
+            }
+          });
+        }, 100);
 
-      return () => clearTimeout(timer);
+        return () => clearTimeout(timer);
+      } catch (error) {
+        console.error('Mermaid setup error:', error);
+      }
     }
   }, [children, chart]);
 

@@ -30,6 +30,11 @@
 
   /* 5. Deep Vignette (화면이 석판 안으로 빨려 들어가는 핵심 효과) */
   --parksy-vignette: inset 0 0 180px 70px rgba(0,0,0,0.8);
+
+  /* Typography colors for dark mode */
+  --fg: #f1f5f9; /* slate-100 - main readable text */
+  --accent: #fbbf24; /* amber-400 - code and highlights */
+  --soft: #475569; /* slate-600 - borders and subtle elements */
 }
 
 /* 전체 배경 레이어 – 이 클래스만 body나 메인 컨테이너에 주면 끝 */
@@ -96,4 +101,51 @@ body:hover .parksy-cursor-dust {
 .parksy-main {
   position: relative;
   z-index: 2;
+}
+
+/* Global MDX text styles for dark mode visibility */
+.mdx-content {
+  color: var(--fg);
+}
+
+.mdx-content h1,
+.mdx-content h2,
+.mdx-content h3,
+.mdx-content h4,
+.mdx-content h5,
+.mdx-content h6 {
+  color: var(--fg);
+}
+
+.mdx-content p,
+.mdx-content li,
+.mdx-content blockquote {
+  color: var(--fg);
+}
+
+.mdx-content code {
+  color: var(--accent);
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+}
+
+.mdx-content pre {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.mdx-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.mdx-content a {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.mdx-content a:hover {
+  color: #93c5fd;
 }

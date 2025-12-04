@@ -1,5 +1,9 @@
 import { useEffect, useRef } from "react";
 
+// Scroll configuration constants
+const SCROLL_DISTANCE_PX = 64; // Pixels to scroll per interval
+const SCROLL_INTERVAL_MS = 50; // Milliseconds between scroll updates
+
 /**
  * BlindScrollHandle - An invisible touch zone for auto-scrolling content upward
  * 
@@ -19,15 +23,15 @@ export function BlindScrollHandle() {
 
   const startScroll = () => {
     if (typeof window === "undefined") return;
-    if (timerRef.current != null) return; // Already scrolling
+    if (timerRef.current !== null) return; // Already scrolling
     
     timerRef.current = window.setInterval(() => {
-      window.scrollBy({ top: 64, left: 0, behavior: "auto" });
-    }, 50);
+      window.scrollBy({ top: SCROLL_DISTANCE_PX, left: 0, behavior: "auto" });
+    }, SCROLL_INTERVAL_MS);
   };
 
   const stopScroll = () => {
-    if (timerRef.current != null) {
+    if (timerRef.current !== null) {
       window.clearInterval(timerRef.current);
       timerRef.current = null;
     }

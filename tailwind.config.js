@@ -7,6 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        soft: '#475569',        // slate-600 - borders and subtle elements
+        card: 'rgba(15, 23, 42, 0.6)', // Translucent card background
         eae: {
           primary: '#4F46E5',     // Indigo - Main brand color
           secondary: '#7C3AED',   // Purple - Accent color

@@ -23,7 +23,7 @@ export function AccordionItem({ title, defaultOpen = false, children }) {
       </button>
       <div
         className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
-          open ? "max-h-[999px] opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="pb-4 md:pb-5 text-[color:var(--fg)] space-y-3">

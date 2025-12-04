@@ -7,7 +7,8 @@ export default function Post() {
   const { slug, postSlug } = useParams();
   const post = getPost(slug, postSlug);
 
-  if (!post) {
+  // Return 404 if post not found or unpublished
+  if (!post || post.published === false) {
     return (
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-4">Post not found</h1>

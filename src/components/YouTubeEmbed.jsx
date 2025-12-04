@@ -7,9 +7,9 @@ function normalizeYouTubeUrl(input) {
   try {
     // Handle Shorts, watch, and embed URL formats
     // Examples:
-    // https://youtube.com/shorts/MEGM9SO6QPg?si=...
-    // https://www.youtube.com/watch?v=MEGM9SO6QPg
-    // https://www.youtube.com/embed/MEGM9SO6QPg
+    // https://youtube.com/shorts/iJ3Gb5yMKiI?si=...
+    // https://www.youtube.com/watch?v=iJ3Gb5yMKiI
+    // https://www.youtube.com/embed/iJ3Gb5yMKiI
     const url = new URL(input);
     let videoId = null;
 

@@ -131,6 +131,12 @@ Runs ESLint to check code quality.
 
 ## Adding Content
 
+### Documentation
+
+- **[AI Agent Instructions](AI-AGENT-INSTRUCTIONS.md)** - Complete guide for generating MDX reports
+- **[Blueprint](BLUEPRINT.md)** - Universal Report Template Engine architecture
+- **[Accordion & Hover Zoom Guide](ACCORDION-AND-HOVER-ZOOM-GUIDE.md)** - How to use Accordion components and hover zoom effects
+
 ### Create a New Post
 
 1. Navigate to the appropriate category folder in `src/content/`

@@ -17,7 +17,7 @@ export default function Accordion({ title, children, defaultOpen = false }) {
         <span>{title}</span>
       </button>
       {open && (
-        <div className="mt-2 pl-4" style={{ color: 'rgba(255,255,255,0.25)' }} role="region" aria-labelledby={id}>
+        <div className="mt-2 pl-4 text-fg-soft" role="region" aria-labelledby={id}>
           {children}
         </div>
       )}

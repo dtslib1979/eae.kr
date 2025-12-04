@@ -153,15 +153,6 @@ body:hover .parksy-cursor-dust {
   color: rgba(255,255,255,0.25) !important;
 }
 
-.mdx-content a {
-  color: var(--accent);
-  text-decoration: underline;
-}
-
-.mdx-content a:hover {
-  color: var(--accent-hover);
-}
-
 /* 코드나 인라인 강조는 살짝 강하게 */
 .mdx-content code {
   color: var(--chalk-fg-strong);

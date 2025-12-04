@@ -13,5 +13,32 @@
       <div id="root"></div>
       <script type="module" src="/src/main.jsx"></script>
     </div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const nodes = document.querySelectorAll("svg g.node");
+  nodes.forEach(node => {
+    node.addEventListener("mouseenter", () => {
+      node.style.filter = "drop-shadow(0 0 6px rgba(255,165,0,0.8))";
+      node.style.transform = "scale(1.03)";
+      node.style.transition = "0.2s";
+    });
+    node.addEventListener("mouseleave", () => {
+      node.style.filter = "none";
+      node.style.transform = "scale(1)";
+    });
+  });
+
+  const edges = document.querySelectorAll("svg path");
+  edges.forEach(edge => {
+    edge.style.transition = "stroke-dashoffset 1.2s ease-in-out";
+    edge.style.strokeDasharray = "5";
+    let toggle = false;
+    setInterval(() => {
+      toggle = !toggle;
+      edge.style.strokeDashoffset = toggle ? "10" : "0";
+    }, 1200);
+  });
+});
+    </script>
   </body>
 </html>

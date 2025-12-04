@@ -264,6 +264,85 @@ Mode 2 - Inline SVG (demonstrated in gold-template.mdx):
 - URI: `spotify:track:3n3Ppam7vgaVa1iaRUc9Lp`
 - URL: `https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp`
 
+### Accordion & AccordionItem (Optional)
+
+**Use when:** Organizing long content into collapsible sections
+
+**Basic Accordion:**
+```mdx
+<Accordion title="Section Title">
+
+Content that can be collapsed and expanded.
+
+</Accordion>
+```
+
+**Accordion with defaultOpen:**
+```mdx
+<Accordion title="Important Section" defaultOpen={true}>
+
+This section starts expanded by default.
+
+</Accordion>
+```
+
+**Nested AccordionItem:**
+```mdx
+<Accordion title="Main Section">
+
+<AccordionItem title="Subsection 1">
+
+Content for subsection 1.
+
+</AccordionItem>
+
+<AccordionItem title="Subsection 2" defaultOpen={true}>
+
+Content for subsection 2. This one starts open!
+
+</AccordionItem>
+
+</Accordion>
+```
+
+**Props (both Accordion and AccordionItem):**
+- `title` (string, required): Section heading
+- `defaultOpen` (boolean, optional): Whether section starts expanded (default: false)
+
+**Best practices:**
+- Use for long documentation or educational content
+- Keep titles concise and descriptive
+- Use AccordionItem for hierarchical organization within an Accordion
+
+### Hover Zoom Effect (Optional)
+
+**Use when:** Emphasizing content blocks for focus and readability
+
+Add the `mdx-zoom-target` className to any content block for a subtle hover zoom effect:
+
+```mdx
+<div className="mdx-zoom-target p-4 bg-slate-800 rounded-lg my-4">
+
+### Important Section
+
+This content will slightly scale up (1.03x) when hovered, with a smooth 0.45s delay.
+Perfect for highlighting key sections in long-form content.
+
+</div>
+```
+
+**Effect details:**
+- Scale: 1.03x (subtle, professional)
+- Transition: 0.22s ease-out
+- Delay: 0.45s (prevents accidental triggers)
+- Recommended scale range: 1.02 - 1.04
+
+**Best practices:**
+- Use selectively on important content blocks
+- Don't overuse - can cause eye strain if applied globally
+- Works great for educational content on projectors/tablets
+- Helps readers maintain focus during scrolling
+
 ### PromptEngineLink (REQUIRED)
 
 **Always use at the end:**
@@ -460,15 +539,16 @@ Before submitting your generated MDX, verify:
 - [ ] All JSX components properly closed
 - [ ] Mobile-friendly paragraph lengths
 - [ ] No code blocks outside Part2 (except Mermaid in Part3)
+- [ ] Accordion/AccordionItem properly nested if used
+- [ ] mdx-zoom-target class used sparingly (not on every element)
 
 ---
 
-## Example Reference
+## Example References
 
-See the gold template example:
-`/src/content/eae-blueprint/gold-template.mdx`
-
-This demonstrates perfect structure and style.
+See these example templates:
+- `/src/content/eae-blueprint/gold-template.mdx` - Perfect structure and style
+- `/src/content/eae-blueprint/accordion-demo.mdx` - Accordion and hover zoom examples
 
 ---
 

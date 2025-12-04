@@ -9,15 +9,19 @@ export default function SpotifyEmbed({ track, title, spotifyUrl, label }) {
   const getSpotifyUrl = (input) => {
     if (!input) return null;
     
-    // If it's already a full URL, return as-is
+    // If it's already a full URL, validate it's a Spotify URL
     if (input.startsWith('http://') || input.startsWith('https://')) {
-      return input;
+      // Only accept Spotify URLs
+      if (input.includes('spotify.com')) {
+        return input;
+      }
+      return null;
     }
     
     // If it's a spotify: URI, convert to URL
     if (input.startsWith('spotify:track:')) {
       const trackId = input.split(':')[2];
-      return `https://open.spotify.com/track/${trackId}`;
+      return trackId ? `https://open.spotify.com/track/${trackId}` : null;
     }
     
     // If it's just an ID (22 alphanumeric characters), build URL
@@ -25,10 +29,12 @@ export default function SpotifyEmbed({ track, title, spotifyUrl, label }) {
       return `https://open.spotify.com/track/${input}`;
     }
     
-    return input; // Return as-is if format is unknown
+    return null; // Return null for unknown/invalid formats
   };
 
   const finalUrl = getSpotifyUrl(url);
+
+  if (!finalUrl) return null;
 
   return (
     <div className="my-4 w-full flex justify-center">

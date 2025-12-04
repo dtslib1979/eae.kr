@@ -35,6 +35,11 @@
   --fg: #f1f5f9; /* slate-100 - main readable text */
   --accent: #fbbf24; /* amber-400 - code and highlights */
   --soft: #475569; /* slate-600 - borders and subtle elements */
+
+  /* Chalkboard text hierarchy */
+  --chalk-fg-strong: #F3F7F4;  /* headings, key labels (거의 흰색이지만 살짝 눌린 톤) */
+  --chalk-fg-body:   #CED9D2;  /* 본문 텍스트용, 중간 그레이-그린 */
+  --chalk-fg-muted:  #9AA8A0;  /* 캡션, 메타 정보 */
 }
 
 /* 전체 배경 레이어 – 이 클래스만 body나 메인 컨테이너에 주면 끝 */
@@ -105,7 +110,7 @@ body:hover .parksy-cursor-dust {
 
 /* Global MDX text styles for dark mode visibility */
 .mdx-content {
-  color: var(--fg);
+  color: var(--chalk-fg-body);
 }
 
 .mdx-content h1,
@@ -114,17 +119,32 @@ body:hover .parksy-cursor-dust {
 .mdx-content h4,
 .mdx-content h5,
 .mdx-content h6 {
-  color: var(--fg);
+  color: var(--chalk-fg-strong);
 }
 
 .mdx-content p,
 .mdx-content li,
 .mdx-content blockquote {
-  color: var(--fg);
+  color: var(--chalk-fg-body);
 }
 
-.mdx-content code {
+.mdx-content small,
+.mdx-content figcaption {
+  color: var(--chalk-fg-muted);
+}
+
+.mdx-content a {
   color: var(--accent);
+  text-decoration: underline;
+}
+
+.mdx-content a:hover {
+  color: #fcd34d;
+}
+
+/* 코드나 인라인 강조는 살짝 강하게 */
+.mdx-content code {
+  color: var(--chalk-fg-strong);
   background-color: rgba(0, 0, 0, 0.3);
   padding: 0.2em 0.4em;
   border-radius: 0.25rem;
@@ -139,13 +159,4 @@ body:hover .parksy-cursor-dust {
 .mdx-content pre code {
   background-color: transparent;
   padding: 0;
-}
-
-.mdx-content a {
-  color: #60a5fa;
-  text-decoration: underline;
-}
-
-.mdx-content a:hover {
-  color: #93c5fd;
 }

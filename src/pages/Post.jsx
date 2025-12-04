@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getPost } from '../utils/posts';
 import OpeningFrame from '../components/mdx/OpeningFrame';
 import SpotifyEmbed from '../components/mdx/SpotifyEmbed';
-import { BlindScrollHandle } from '../components/ui/BlindScrollHandle';
+import { ScrollBlindButton } from '../components/ui/ScrollBlindButton';
 
 export default function Post() {
   const { slug, postSlug } = useParams();
@@ -31,8 +31,13 @@ export default function Post() {
 
   return (
     <>
-      {/* Render BlindScrollHandle for teacher/recording mode */}
-      {teacherScrollEnabled && <BlindScrollHandle />}
+      {/* Render ScrollBlindButton for teacher/recording mode */}
+      {teacherScrollEnabled && (
+        <>
+          <ScrollBlindButton direction="up" debug={false} />
+          <ScrollBlindButton direction="down" debug={false} />
+        </>
+      )}
       
       <div className="container mx-auto px-4 py-8">
       <div className="mb-8">

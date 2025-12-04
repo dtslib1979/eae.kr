@@ -19,6 +19,13 @@ export default function SpotifyEmbed({ track, title = "Music Track" }) {
   const trackId = getSpotifyTrackId(track);
 
   if (!trackId) {
+    // In development, log invalid track ID to help with debugging
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        '[SpotifyEmbed] Invalid Spotify track ID or URL:', track,
+        '\nExpected format: https://open.spotify.com/track/TRACK_ID or just the 22-character track ID'
+      );
+    }
     return null; // Don't render anything if invalid track ID
   }
 

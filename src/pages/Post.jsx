@@ -40,7 +40,7 @@ export default function Post() {
         </div>
         
         {/* Auto-render SpotifyEmbed if spotify URL exists in frontmatter */}
-        {spotify && <SpotifyEmbed track={spotify} title={`${title} - Music`} />}
+        {spotify && <SpotifyEmbed track={spotify} title={title ? `${title} - Music` : 'Music'} />}
       </article>
     </div>
   );

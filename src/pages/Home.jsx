@@ -41,9 +41,10 @@ export default function Home() {
                   <iframe
                     width="100%"
                     height="100%"
-                    src={`https://www.youtube.com/embed/${category.youtubeShorts}?autoplay=1&mute=1&loop=1&playlist=${category.youtubeShorts}&controls=0&modestbranding=1&rel=0`}
+                    src={`https://www.youtube.com/embed/${encodeURIComponent(category.youtubeShorts)}?autoplay=1&mute=1&loop=1&playlist=${encodeURIComponent(category.youtubeShorts)}&controls=0&modestbranding=1&rel=0`}
                     title={category.name}
-                    frameBorder="0"
+                    aria-label={`${category.name} promotional video`}
+                    style={{ border: 'none' }}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="w-full h-full"

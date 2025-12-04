@@ -10,15 +10,25 @@ export default function AccordionItem({ title, children, defaultOpen = false }) 
   const uniqueId = useId();
   const id = `accordion-item-${uniqueId}`;
   const contentRef = useRef(null);
+  const [height, setHeight] = useState(defaultOpen ? 'auto' : '0px');
 
   useEffect(() => {
     if (contentRef.current) {
       if (open) {
-        contentRef.current.style.maxHeight = contentRef.current.scrollHeight + 'px';
-        contentRef.current.style.opacity = '1';
+        // Set to scrollHeight to trigger animation
+        const scrollHeight = contentRef.current.scrollHeight;
+        setHeight(scrollHeight + 'px');
+        // After animation, set to auto for dynamic content
+        setTimeout(() => {
+          if (open) setHeight('auto');
+        }, 300);
       } else {
-        contentRef.current.style.maxHeight = '0px';
-        contentRef.current.style.opacity = '0';
+        // Set to exact height first
+        setHeight(contentRef.current.scrollHeight + 'px');
+        // Then animate to 0
+        setTimeout(() => {
+          setHeight('0px');
+        }, 10);
       }
     }
   }, [open]);
@@ -50,7 +60,7 @@ export default function AccordionItem({ title, children, defaultOpen = false }) 
         ref={contentRef}
         className="overflow-hidden transition-all duration-300 ease-out"
         style={{
-          maxHeight: open ? 'none' : '0px',
+          maxHeight: height,
           opacity: open ? 1 : 0,
         }}
         role="region"

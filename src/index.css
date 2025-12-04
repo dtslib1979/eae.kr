@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* PARKSY WORLD Chalkboard Global Theme */
+:root {
+  /* 1. Core Base – 네가 사랑한 원조 초록 */
+  --parksy-chalk-base: #253A2F;
+
+  /* 2. Realistic Stone Grain (은은한 돌 입자감) */
+  --parksy-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+
+  /* 3. Subtle Greenish Scratches (오래된 고급 석판에만 있는 흔적) */
+  --parksy-scratch: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25'%3E%3Cdefs%3E%3Cpattern id='s' width='800' height='800'%3E%3Cpath d='M0,400 Q300,50 600,400 T800,400' stroke='%2355B08A' stroke-width='0.8' opacity='0.018'/%3E%3Cpath d='M400,0 Q50,350 400,800' stroke='%2340A57A' stroke-width='0.6' opacity='0.012'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23s)'/%3E%3C/svg%3E");
+
+  /* 4. Chalk Dust Lighting (중앙에 닳은 분필 자국 느낌) */
+  --parksy-dust-light: radial-gradient(circle at 48% 45%, rgba(220, 245, 225, 0.11) 0%, transparent 65%);
+
+  /* 5. Deep Vignette (화면이 석판 안으로 빨려 들어가는 핵심 효과) */
+  --parksy-vignette: inset 0 0 180px 70px rgba(0,0,0,0.8);
+}
+
+/* 전체 배경 레이어 – 이 클래스만 body나 메인 컨테이너에 주면 끝 */
+.parksy-chalkboard {
+  position: fixed;
+  inset: 0;
+  background:
+    var(--parksy-noise),
+    var(--parksy-dust-light),
+    var(--parksy-scratch),
+    var(--parksy-chalk-base);
+  background-size: 180px 180px, cover, cover, cover;
+  background-blend-mode: overlay, soft-light, overlay, normal;
+  box-shadow: var(--parksy-vignette);
+  filter: contrast(112%) brightness(92%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 타이틀 텍스트 – PARKSY WORLD 메인 문구용 */
+.parksy-title {
+  font-family: "Annie Use Your Telescope", cursive;
+  font-weight: 700;
+  font-size: clamp(3rem, 9vw, 6rem);
+  line-height: 1;
+  color: transparent;
+  background: var(--parksy-noise);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 3px 4px 8px rgba(0,0,0,0.7);
+  opacity: 0.97;
+}
+
+/* 본문 텍스트 */
+.parksy-text {
+  font-family: "Courier New", monospace;
+  font-size: clamp(1.05rem, 2.8vw, 1.5rem);
+  line-height: 1.8;
+  color: #EEF8F2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+  opacity: 0.95;
+}
+
+/* 선택사항 – 마우스 따라다니는 분필 가루 효과 (JS로 좌표만 갱신) */
+.parksy-cursor-dust {
+  position: fixed;
+  pointer-events: none;
+  z-index: 5;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(220,255,230,0.09) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+body:hover .parksy-cursor-dust {
+  opacity: 1;
+}

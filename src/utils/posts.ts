@@ -1,5 +1,5 @@
 /**
- * posts.js - Single Source of Truth for MDX Content
+ * posts.ts - Single Source of Truth for MDX Content
  * 
  * This file is responsible for loading and providing access to all MDX posts in the application.
  * It automatically discovers MDX files in src/content/** and extracts their metadata.
@@ -12,6 +12,7 @@
  * Published status:
  * - Posts with published: false are hidden from all lists and counts
  * - Posts without a published field are treated as published: true by default
+ * - Posts with dates more than 24 hours in the future (KST) are hidden
  * - Direct access to unpublished posts should be handled at the page level (404)
  * 
  * To add a new category:
@@ -31,12 +32,20 @@
  * ---
  */
 
+import { isPostVisible } from '../lib/date';
+
+// Type definition for MDX module
+interface MDXModule {
+  frontmatter?: Record<string, any>;
+  default: any;
+}
+
 // Import all MDX files
 const modules = import.meta.glob('/src/content/**/*.mdx', { eager: true });
 
 // Parse frontmatter from MDX modules
 // Ensures all required fields have fallback values
-function parseFrontmatter(module) {
+function parseFrontmatter(module: MDXModule) {
   const { frontmatter, default: Component } = module;
   return {
     title: frontmatter?.title || '',
@@ -64,16 +73,18 @@ export function getAllPosts() {
   });
 
   // Sort by date descending
-  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-// Get all published posts (filters out unpublished posts)
+// Get all published posts (filters out unpublished posts and future posts beyond grace period)
 export function getPublishedPosts() {
-  return getAllPosts().filter(post => post.published !== false);
+  return getAllPosts().filter(post => 
+    post.published !== false && isPostVisible(post.date)
+  );
 }
 
 // Get posts by category (only published posts)
-export function getPostsByCategory(category) {
+export function getPostsByCategory(category: string) {
   return getPublishedPosts().filter(post => post.category === category);
 }
 
@@ -83,14 +94,14 @@ export function getLatestPosts(limit = 3) {
 }
 
 // Get post by slug and category
-export function getPost(category, slug) {
+export function getPost(category: string, slug: string) {
   return getAllPosts().find(post => post.category === category && post.slug === slug);
 }
 
 // Get category counts (dynamically calculated from published posts only)
 export function getCategoryCounts() {
   const posts = getPublishedPosts();
-  const counts = {};
+  const counts: Record<string, number> = {};
   
   // Dynamically count posts per category
   posts.forEach(post => {

@@ -19,6 +19,10 @@ export default function Post() {
 
   const { Component, title, date, category, youtube, spotify } = post;
 
+  // Extract URL from youtube/spotify if they are objects
+  const youtubeUrl = typeof youtube === 'object' ? youtube?.url : youtube;
+  const spotifyUrl = typeof spotify === 'object' ? spotify?.url : spotify;
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
@@ -29,7 +33,7 @@ export default function Post() {
       
       <article className="prose prose-invert prose-neutral lg:prose-xl mx-auto max-w-4xl">
         {/* Auto-render OpeningFrame if youtube URL exists in frontmatter */}
-        {youtube && <OpeningFrame src={youtube} title={title} />}
+        {youtubeUrl && <OpeningFrame src={youtubeUrl} title={title} />}
         
         <header className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-slate-50">{title || '(제목 없음)'}</h1>
@@ -41,7 +45,7 @@ export default function Post() {
         </div>
         
         {/* Auto-render SpotifyEmbed if spotify URL exists in frontmatter */}
-        {spotify && <SpotifyEmbed track={spotify} title={title ? `${title} - Music` : 'Music'} />}
+        {spotifyUrl && <SpotifyEmbed track={spotifyUrl} title={title ? `${title} - Music` : 'Music'} />}
       </article>
     </div>
   );

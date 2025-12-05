@@ -293,12 +293,17 @@ svg, svg * {
   }
 }
 
+/* ===========================================
+   Invisible Scroll Zones (Top / Bottom)
+   Z-index hierarchy: nav (200) > main (150) > scroll zones (100)
+   =========================================== */
+
 /* Invisible scroll zones (top / bottom) */
 .scroll-zone {
   position: fixed;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 100;  /* Below nav and main content to allow interactions */
   background: transparent;     /* Completely transparent */
   touch-action: manipulation;
   pointer-events: auto;

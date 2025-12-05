@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 import { BlindScrollHandle } from './BlindScrollHandle';
+import FloatingMenu from './FloatingMenu';
 
 export default function Layout() {
   return (
@@ -30,6 +31,7 @@ export default function Layout() {
       </main>
       
       <BlindScrollHandle />
+      <FloatingMenu />
     </div>
   );
 }

@@ -133,6 +133,7 @@ Runs ESLint to check code quality.
 
 ### Documentation
 
+- **[개발 진단 보고서 (Development Diagnostic Report)](개발-진단-보고서.md)** - Complete project history, architecture, and diagnostic information for system architects
 - **[AI Agent Instructions](AI-AGENT-INSTRUCTIONS.md)** - Complete guide for generating MDX reports
 - **[Blueprint](BLUEPRINT.md)** - Universal Report Template Engine architecture
 - **[Accordion & Hover Zoom Guide](ACCORDION-AND-HOVER-ZOOM-GUIDE.md)** - How to use Accordion components and hover zoom effects

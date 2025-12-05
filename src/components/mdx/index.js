@@ -11,5 +11,6 @@ export { default as SpotifyEmbed } from './SpotifyEmbed';
 export { default as PromptEngineLink } from './PromptEngineLink';
 export { default as Accordion } from './Accordion';
 export { default as AccordionItem } from './AccordionItem';
+export { default as HoverZoom } from './HoverZoom';
 export { default as PapyrusScroll } from './PapyrusScroll';
 export { YouTubeEmbed } from '../YouTubeEmbed';

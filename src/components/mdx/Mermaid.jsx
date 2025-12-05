@@ -14,22 +14,41 @@ export default function Mermaid({ children, chart }) {
         look: 'handDrawn',
         fontFamily: '"Annie Use Your Telescope", "Courier New", monospace',
         themeVariables: {
-          primaryColor: '#253A2F',
-          primaryTextColor: '#F7FFF5',
-          primaryBorderColor: '#E6F2E8',
-          lineColor: '#E6F2E8',
-          secondaryColor: '#253A2F',
-          tertiaryColor: '#253A2F',
-          textColor: '#F7FFF5',
+          primaryColor: '#ffffff',
+          primaryTextColor: '#eeeeee',
+          primaryBorderColor: '#cccccc',
+          lineColor: '#cccccc',
+          secondaryColor: '#ffffff',
+          tertiaryColor: '#ffffff',
+          textColor: '#eeeeee',
           mainBkg: 'transparent',
-          nodeBorder: '#E6F2E8',
+          nodeBorder: '#cccccc',
           clusterBkg: 'transparent',
-          clusterBorder: '#E6F2E8',
-          defaultLinkColor: '#E6F2E8',
-          titleColor: '#F7FFF5',
+          clusterBorder: '#cccccc',
+          defaultLinkColor: '#cccccc',
+          titleColor: '#eeeeee',
           edgeLabelBackground: '#253A2F',
-          edgeLabelColor: '#F7FFF5',
+          edgeLabelColor: '#eeeeee',
+          fontSize: '14px',
         },
+        themeCSS: `
+          .node rect, .node polygon, .node circle {
+            stroke-width: 2px !important;
+            stroke: #ccc !important;
+            fill: rgba(255,255,255,0.08) !important;
+            stroke-dasharray: 3 3 !important;
+          }
+          .edgeLabel, .label {
+            color: #eee !important;
+          }
+          .flowchart-link {
+            stroke: #ccc !important;
+            stroke-dasharray: 3 3 !important;
+          }
+          ::selection {
+            background: transparent !important;
+          }
+        `,
         securityLevel: 'strict',
       });
       hasRendered.current = true;

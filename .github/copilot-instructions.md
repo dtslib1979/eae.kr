@@ -209,7 +209,7 @@ When editing existing MDX files, Copilot MUST:
 
 Copilot MUST NOT:
 
-* Modify `src/components/mdx/Accordion*.tsx` files
+* Modify `src/components/mdx/Accordion*.jsx` files
 * Write new accordion functionality in global JS files (e.g., `ui-shell.js`)
 * Delete headings/content outside Part2
 * Convert Part1 or Part3 structures to accordion

@@ -103,11 +103,15 @@ Some intro text...
 
 ### Components Used
 
-- **`<Accordion>`** - Container component (defined in `/src/components/mdx/Accordion.jsx`)
-- **`<AccordionItem>`** - Individual collapsible section (defined in `/src/components/mdx/AccordionItem.jsx`)
+- **`<Accordion>`** - Container/wrapper component used without a title (defined in `/src/components/mdx/Accordion.jsx`)
+- **`<AccordionItem>`** - Individual collapsible section with title (defined in `/src/components/mdx/AccordionItem.jsx`)
+
+**Note:** Both components have identical implementations, but serve different semantic purposes in the pattern:
+- `<Accordion>` is used as a wrapper (no title prop in Part2 usage)
+- `<AccordionItem>` is used for individual sections with titles
 
 Both components support:
-- `title` (string, required) - Section heading
+- `title` (string, required for AccordionItem) - Section heading
 - `defaultOpen` (boolean, optional) - Whether section starts expanded
 
 ### Component Behavior
@@ -330,7 +334,7 @@ Potential automated enforcement mechanisms:
 
 ### Q: Can I use nested Accordions in Part2?
 
-**A:** Yes, you can nest `<AccordionItem>` inside an `<Accordion>`, which is the recommended pattern.
+**A:** The standard pattern uses `<Accordion>` as a wrapper containing multiple `<AccordionItem>` elements. While both components have identical implementations, the semantic pattern is: one `<Accordion>` wrapper (no title) containing multiple `<AccordionItem>` sections (with titles).
 
 ### Q: What about Part1 and Part3?
 

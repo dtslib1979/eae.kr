@@ -293,62 +293,25 @@ svg, svg * {
   }
 }
 
-/* Floating Dock Styles (left side, minimal, transparent) */
-.floating-dock {
+/* Invisible scroll zones (top / bottom) */
+.scroll-zone {
   position: fixed;
-  left: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
-  z-index: 10000;
-}
-
-.floating-dock button {
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(0, 0, 0, 0.0);
-  color: rgba(255, 255, 255, 0.85);
-  padding: 0.18rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: transparent;     /* Completely transparent */
+  touch-action: manipulation;
   cursor: pointer;
-  white-space: nowrap;
 }
 
-.floating-dock button:hover {
-  border-color: rgba(255, 255, 255, 0.6);
-  color: rgba(255, 255, 255, 1);
+/* Top touch zone (scroll to top) */
+.scroll-zone-top {
+  top: 0;
+  height: 25vh;                /* Top 25% of viewport */
 }
 
-/* Pull-to-Top Button Styles */
-#parksy-pulltop-btn {
-  position: fixed !important;
-  left: 18px !important;          /* Left side */
-  top: 50% !important;            /* Vertical center */
-  transform: translateY(-50%) !important;
-
-  z-index: 10001;                 /* Must float above everything including floating dock */
-  
-  /* Transparent background */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(4px);     /* Very subtle blur */
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-
-  padding: 10px;
-  font-size: 22px;
-  cursor: pointer;
-
-  opacity: 0.55;                  /* very faint */
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-#parksy-pulltop-btn:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.15) !important;
+/* Bottom touch zone (scroll to bottom) */
+.scroll-zone-bottom {
+  bottom: 0;
+  height: 25vh;                /* Bottom 25% of viewport */
 }

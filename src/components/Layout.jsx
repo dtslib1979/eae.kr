@@ -1,8 +1,55 @@
 import { Link, Outlet } from 'react-router-dom';
-import { BlindScrollHandle } from './BlindScrollHandle';
-import FloatingDock from './FloatingDock';
+import { useEffect } from 'react';
 
 export default function Layout() {
+  useEffect(() => {
+    const topZone = document.getElementById('scroll-up-zone');
+    const bottomZone = document.getElementById('scroll-down-zone');
+
+    if (!topZone || !bottomZone) return;
+
+    const handleTopClick = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleBottomClick = () => {
+      window.scrollTo({ 
+        top: document.body.scrollHeight, 
+        behavior: 'smooth' 
+      });
+    };
+
+    const handleTopKeyDown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleTopClick();
+      }
+    };
+
+    const handleBottomKeyDown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleBottomClick();
+      }
+    };
+
+    topZone.addEventListener('click', handleTopClick);
+    bottomZone.addEventListener('click', handleBottomClick);
+    topZone.addEventListener('keydown', handleTopKeyDown);
+    bottomZone.addEventListener('keydown', handleBottomKeyDown);
+
+    return () => {
+      if (topZone) {
+        topZone.removeEventListener('click', handleTopClick);
+        topZone.removeEventListener('keydown', handleTopKeyDown);
+      }
+      if (bottomZone) {
+        bottomZone.removeEventListener('click', handleBottomClick);
+        bottomZone.removeEventListener('keydown', handleBottomKeyDown);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen">
       <nav className="bg-white/10 backdrop-blur-sm shadow-sm">
@@ -30,16 +77,21 @@ export default function Layout() {
         <Outlet />
       </main>
       
-      <BlindScrollHandle />
-      <FloatingDock />
-      <button 
-        id="parksy-pulltop-btn" 
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      {/* Invisible Scroll Zones */}
+      <div 
+        id="scroll-up-zone" 
+        className="scroll-zone scroll-zone-top"
+        role="button"
         aria-label="Scroll to top"
-        title="Scroll to top"
-      >
-        ⬆️
-      </button>
+        tabIndex={0}
+      ></div>
+      <div 
+        id="scroll-down-zone" 
+        className="scroll-zone scroll-zone-bottom"
+        role="button"
+        aria-label="Scroll to bottom"
+        tabIndex={0}
+      ></div>
     </div>
   );
 }

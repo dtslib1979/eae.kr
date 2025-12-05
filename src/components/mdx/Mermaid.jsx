@@ -45,9 +45,6 @@ export default function Mermaid({ children, chart }) {
             stroke: #ccc !important;
             stroke-dasharray: 3 3 !important;
           }
-          ::selection {
-            background: transparent !important;
-          }
         `,
         securityLevel: 'strict',
       });

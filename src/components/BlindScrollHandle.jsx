@@ -1,5 +1,3 @@
-"use client";
-
 export function BlindScrollHandle() {
   const handleClick = () => {
     window.scrollBy({

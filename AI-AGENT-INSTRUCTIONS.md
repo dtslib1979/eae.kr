@@ -25,6 +25,44 @@ When asked to create an MDX report, follow these steps:
 
 ## Golden Rules (Never Break These)
 
+### 🔴 Rule #0: Part2 MUST Use Accordion Structure
+
+**In repo dtslib1979/eae.kr, ALL MDX files in `src/content/**/*.mdx` MUST follow this rule for Part2:**
+
+```mdx
+<Part2>
+
+<Accordion>
+
+  <AccordionItem title="1. System Overview">
+    Explain what the system does and its overall structure.
+  </AccordionItem>
+
+  <AccordionItem title="2. Components / Modules">
+    List the key modules and what they do.
+  </AccordionItem>
+
+  <AccordionItem title="3. Workflow">
+    Show the step-by-step flow (input -> process -> output).
+  </AccordionItem>
+
+</Accordion>
+
+</Part2>
+```
+
+**KEY REQUIREMENTS:**
+- Part2 MUST contain a single `<Accordion>` as its top-level container
+- Inside `<Accordion>`, content MUST be structured into multiple `<AccordionItem>` blocks
+- Each `AccordionItem` represents one logical section
+- When editing existing files with plain headings/paragraphs in Part2, convert them to this structure
+- Copilot MUST NOT write raw JavaScript for accordion behavior (components handle it)
+- Copilot MUST fix JSX/MDX syntax issues automatically
+
+**This is the PRIMARY rule for Part2. All Part2 sections MUST follow this pattern.**
+
+---
+
 ### 🔴 Rule #1: Component Order is FIXED
 
 ```mdx
@@ -144,37 +182,131 @@ Skillset6 is like that toolbox, but for your ideas and creativity.
 
 **Purpose:** Explain technical structure and flow
 
-**Style Guidelines:**
-- Include architecture diagrams (ASCII or description)
-- Show data flow
-- List tech stack
-- Use code blocks for structure
-- Still keep accessible to non-developers
+**🔴 CRITICAL RULE: Part2 MUST use Accordion Structure**
 
-**Example:**
+ALL Part2 sections MUST follow this mandatory structure:
+
 ```mdx
 <Part2>
 
-## System Architecture
+<Accordion>
 
-### Data Flow
+  <AccordionItem title="1. System Overview">
+    Explain what the system does and its overall structure.
+  </AccordionItem>
 
+  <AccordionItem title="2. Components / Modules">
+    List the key modules and what they do.
+  </AccordionItem>
+
+  <AccordionItem title="3. Workflow">
+    Show the step-by-step flow (input -> process -> output).
+  </AccordionItem>
+
+</Accordion>
+
+</Part2>
 ```
-Input → Processing → Output
-  ↓         ↓          ↓
-Feed → Digest → Expression
+
+**Style Guidelines:**
+- Part2 MUST contain a single `<Accordion>` as its top-level container
+- Inside `<Accordion>`, content MUST be structured into multiple `<AccordionItem>` blocks
+- Each `AccordionItem` represents one logical section (e.g., System Overview, Modules, Workflow, Usage)
+- Include architecture diagrams (ASCII or description) inside AccordionItems
+- Show data flow in appropriate AccordionItems
+- List tech stack in dedicated AccordionItem
+- Use code blocks for structure within AccordionItems
+- Still keep accessible to non-developers
+
+**Complete Example:**
+```mdx
+<Part2>
+
+<Accordion>
+
+  <AccordionItem title="1. System Overview">
+    
+    This system processes MDX content through a React-based pipeline, transforming 
+    structured content into beautiful, interactive web pages.
+
+  </AccordionItem>
+
+  <AccordionItem title="2. Data Flow">
+
+    ```
+    Input → Processing → Output
+      ↓         ↓          ↓
+    Feed → Digest → Expression
+    ```
+
+    The system takes MDX input, transforms it with React components, applies 
+    Tailwind styling, and outputs a complete web application.
+
+  </AccordionItem>
+
+  <AccordionItem title="3. Tech Stack">
+
+    - **React 18** - UI framework
+    - **Vite** - Build tool
+    - **Tailwind CSS** - Styling
+    - **MDX** - Content format
+
+  </AccordionItem>
+
+  <AccordionItem title="4. How It Works">
+
+    The MDX files are parsed and converted to React components, which are then 
+    rendered with custom styling and interactive features like accordions and hover effects.
+
+  </AccordionItem>
+
+</Accordion>
+
+</Part2>
 ```
 
-### Tech Stack
+**Converting Existing Part2 Sections:**
 
-- React 18
-- Vite
-- Tailwind CSS
-- MDX
+When editing existing MDX files, if Part2 contains plain headings and paragraphs:
 
-### How It Works
+1. Each heading + its following content becomes one `AccordionItem`
+2. If no headings exist, create reasonable titles and wrap content into `AccordionItem`s
+3. Ensure all content is inside the `<Accordion>` wrapper
 
-The system takes MDX input, transforms it with React components, applies Tailwind styling, and outputs a complete web application.
+**Example Conversion:**
+
+Before:
+```mdx
+<Part2>
+
+## System Overview
+The system processes data...
+
+## Modules
+- Feed
+- Digest
+- Expression
+
+</Part2>
+```
+
+After:
+```mdx
+<Part2>
+
+<Accordion>
+
+  <AccordionItem title="System Overview">
+    The system processes data...
+  </AccordionItem>
+
+  <AccordionItem title="Modules">
+    - Feed
+    - Digest
+    - Expression
+  </AccordionItem>
+
+</Accordion>
 
 </Part2>
 ```
@@ -476,18 +608,33 @@ Tell a story that makes it easy to understand...
 
 <Part2>
 
-## Technical Architecture
+<Accordion>
 
-Explain the system structure...
+  <AccordionItem title="1. System Overview">
+    Explain what the system does and its overall structure.
+  </AccordionItem>
 
-```
-Data Flow:
-Input → Process → Output
-```
+  <AccordionItem title="2. Components / Modules">
+    List the key modules and what they do.
+  </AccordionItem>
 
-### Tech Stack
-- Tool 1
-- Tool 2
+  <AccordionItem title="3. Workflow">
+    
+    ```
+    Data Flow:
+    Input → Process → Output
+    ```
+    
+    Explain the step-by-step flow.
+
+  </AccordionItem>
+
+  <AccordionItem title="4. Tech Stack">
+    - Tool 1
+    - Tool 2
+  </AccordionItem>
+
+</Accordion>
 
 </Part2>
 
@@ -531,7 +678,9 @@ Before submitting your generated MDX, verify:
 - [ ] Components in correct order
 - [ ] OpeningFrame has videoId or src
 - [ ] Part1 uses simple language and analogies
-- [ ] Part2 has technical structure and flow
+- [ ] **Part2 contains single `<Accordion>` with multiple `<AccordionItem>` blocks**
+- [ ] **Part2 has NO plain headings/paragraphs outside Accordion structure**
+- [ ] Part2 has technical structure and flow inside AccordionItems
 - [ ] Part3 has Mermaid diagram and philosophy
 - [ ] Mermaid is INSIDE Part3, not standalone
 - [ ] PromptEngineLink is at the end

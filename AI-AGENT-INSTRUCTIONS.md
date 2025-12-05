@@ -82,7 +82,7 @@ graph TD
 - Core components listed.
 
 **Mermaid Structure Summary**
-A((Input)) --> B((Process)) --> C((Output))
+Feed((Input)) --> Digest((Process)) --> Expression((Output))
 
 **PARKSY OS Mapping**
 - Connection to meta framework.
@@ -236,7 +236,7 @@ The system takes MDX input, transforms it with React components, applies Tailwin
 
 **Mermaid Structure Summary**
 Represent the structure in plain text (no rendered Mermaid):
-A((Input)) --> B((Process)) --> C((Output))
+Feed((Input)) --> Digest((Process)) --> Expression((Output))
 
 **PARKSY OS Mapping**
 - How this report connects to the meta system.
@@ -463,7 +463,7 @@ Just plain content here...
 - Core components.
 
 **Mermaid Structure Summary**
-A((Input)) --> B((Process)) --> C((Output))
+Feed((Input)) --> Digest((Process)) --> Expression((Output))
 
 **PARKSY OS Mapping**
 - Framework connection.
@@ -521,7 +521,7 @@ graph TD
 <PapyrusScroll title="Whitepaper Global Summary">
 
 **Mermaid Structure Summary**
-A((Input)) --> B((Process)) --> C((Output))
+Feed((Input)) --> Digest((Process)) --> Expression((Output))
 
 </PapyrusScroll>
 
@@ -634,7 +634,7 @@ Input → Process → Output
 
 **Mermaid Structure Summary**
 Plain text representation of the architecture:
-A((Input)) --> B((Process)) --> C((Output))
+Feed((Input)) --> Digest((Process)) --> Expression((Output))
 
 **PARKSY OS Mapping**
 - Explain how this report connects to the broader PARKSY OS framework.

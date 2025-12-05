@@ -20,7 +20,7 @@ Copilot MUST generate Part3 using this exact template:
 
 **Mermaid Structure Summary**
 Represent the structure in plain text (no rendered Mermaid):
-A((Input)) --> B((Process)) --> C((Output))
+Feed((Input)) --> Digest((Process)) --> Expression((Output))
 
 **PARKSY OS Mapping**
 - How this report connects to the meta system.

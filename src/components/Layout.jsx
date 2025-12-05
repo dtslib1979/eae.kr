@@ -8,14 +8,25 @@ export default function Layout() {
 
     if (!topZone || !bottomZone) return;
 
+    // Calculate step size: 80% of viewport height
+    const SCROLL_STEP_RATIO = 0.8;
+    const getStep = () => {
+      return window.innerHeight * SCROLL_STEP_RATIO;
+    };
+
     const handleTopClick = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const step = getStep();
+      window.scrollBy({
+        top: -step,
+        behavior: 'smooth',
+      });
     };
 
     const handleBottomClick = () => {
-      window.scrollTo({ 
-        top: document.body.scrollHeight, 
-        behavior: 'smooth' 
+      const step = getStep();
+      window.scrollBy({
+        top: step,
+        behavior: 'smooth',
       });
     };
 

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { CONTACT_EMAIL, CONTACT_EMAIL_MAILTO } from '../config/contact';
 
 export default function About() {
   return (
@@ -34,6 +35,14 @@ export default function About() {
             <li>Tailwind CSS</li>
             <li>PWA (Progressive Web App)</li>
           </ul>
+          
+          <h2 className="text-2xl font-bold mt-8 mb-4 text-slate-50">Contact</h2>
+          <p>
+            For inquiries, please contact us at{' '}
+            <a href={CONTACT_EMAIL_MAILTO} className="text-blue-400 hover:text-blue-300 underline transition-colors">
+              {CONTACT_EMAIL}
+            </a>
+          </p>
         </div>
       </article>
     </div>

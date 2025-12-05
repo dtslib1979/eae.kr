@@ -332,10 +332,10 @@ svg, svg * {
   top: 50% !important;            /* Vertical center */
   transform: translateY(-50%) !important;
 
-  z-index: 10001 !important;      /* Must float above everything including floating dock */
+  z-index: 10001;                 /* Must float above everything including floating dock */
   
   /* Transparent background */
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(4px);     /* Very subtle blur */
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 50%;

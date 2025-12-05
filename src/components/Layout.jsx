@@ -19,12 +19,34 @@ export default function Layout() {
       });
     };
 
+    const handleTopKeyDown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleTopClick();
+      }
+    };
+
+    const handleBottomKeyDown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleBottomClick();
+      }
+    };
+
     topZone.addEventListener('click', handleTopClick);
     bottomZone.addEventListener('click', handleBottomClick);
+    topZone.addEventListener('keydown', handleTopKeyDown);
+    bottomZone.addEventListener('keydown', handleBottomKeyDown);
 
     return () => {
-      topZone.removeEventListener('click', handleTopClick);
-      bottomZone.removeEventListener('click', handleBottomClick);
+      if (topZone) {
+        topZone.removeEventListener('click', handleTopClick);
+        topZone.removeEventListener('keydown', handleTopKeyDown);
+      }
+      if (bottomZone) {
+        bottomZone.removeEventListener('click', handleBottomClick);
+        bottomZone.removeEventListener('keydown', handleBottomKeyDown);
+      }
     };
   }, []);
 
@@ -56,8 +78,20 @@ export default function Layout() {
       </main>
       
       {/* Invisible Scroll Zones */}
-      <div id="scroll-up-zone" className="scroll-zone scroll-zone-top"></div>
-      <div id="scroll-down-zone" className="scroll-zone scroll-zone-bottom"></div>
+      <div 
+        id="scroll-up-zone" 
+        className="scroll-zone scroll-zone-top"
+        role="button"
+        aria-label="Scroll to top"
+        tabIndex={0}
+      ></div>
+      <div 
+        id="scroll-down-zone" 
+        className="scroll-zone scroll-zone-bottom"
+        role="button"
+        aria-label="Scroll to bottom"
+        tabIndex={0}
+      ></div>
     </div>
   );
 }

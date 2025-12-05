@@ -299,19 +299,19 @@ svg, svg * {
   left: 0;
   width: 100%;
   z-index: 9999;
-  background: transparent;     /* 완전 투명 */
+  background: transparent;     /* Completely transparent */
   touch-action: manipulation;
   cursor: pointer;
 }
 
-/* 화면 위쪽 터치 존 (위로 올리기) */
+/* Top touch zone (scroll to top) */
 .scroll-zone-top {
   top: 0;
-  height: 25vh;                /* 화면 상단 25% 영역 */
+  height: 25vh;                /* Top 25% of viewport */
 }
 
-/* 화면 아래쪽 터치 존 (아래로 내리기) */
+/* Bottom touch zone (scroll to bottom) */
 .scroll-zone-bottom {
   bottom: 0;
-  height: 25vh;                /* 화면 하단 25% 영역 */
+  height: 25vh;                /* Bottom 25% of viewport */
 }

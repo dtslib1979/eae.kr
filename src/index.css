@@ -322,3 +322,33 @@ svg, svg * {
 .floating-menu button:hover {
   opacity: 0.9;
 }
+
+/* Floating Dock Styles (left side, minimal) */
+.floating-dock {
+  position: fixed;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.35rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18); /* very light, translucent */
+  backdrop-filter: blur(6px);
+  z-index: 10000; /* Higher than BlindScrollHandle */
+}
+
+.floating-dock button {
+  border: none;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  opacity: 0.75;
+  background: rgba(240, 240, 240, 0.9);
+  cursor: pointer;
+}
+
+.floating-dock button:hover {
+  opacity: 1;
+}

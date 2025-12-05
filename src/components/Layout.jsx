@@ -32,6 +32,9 @@ export default function Layout() {
       
       <BlindScrollHandle />
       <FloatingDock />
+      <button id="parksy-pulltop-btn" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        ⬆️
+      </button>
     </div>
   );
 }

@@ -177,7 +177,7 @@ Skillset6 is like that toolbox, but for your ideas and creativity.
     Include diagrams if helpful.
   </AccordionItem>
 
-  <AccordionItem title="4. Tech Stack" defaultOpen={false}>
+  <AccordionItem title="4. Tech Stack">
     - React 18
     - Vite
     - Tailwind CSS

@@ -1,9 +1,9 @@
 export const AccordionItem = ({ title, children }: { title: string; children: React.ReactNode }) => {
   return (
     <details className="border-b border-white/10 group">
-      <summary className="cursor-pointer py-3 font-semibold flex justify-between items-center list-none">
+      <summary className="cursor-pointer py-3 font-semibold flex justify-between items-center list-none" role="button" aria-label={`Toggle ${title}`}>
         {title}
-        <span className="transition-transform group-open:rotate-180">▼</span>
+        <span className="transition-transform group-open:rotate-180" aria-hidden="true">▼</span>
       </summary>
 
       <div className="pb-4 text-gray-300">

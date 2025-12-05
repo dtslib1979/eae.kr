@@ -19,7 +19,7 @@ export const PapyrusScroll = ({ title = "Whitepaper", children }: { title?: stri
 
       <div
         className={`relative p-5 transition-all duration-700 ${
-          open ? "max-h-[4000px]" : "max-h-[160px] overflow-hidden"
+          open ? "max-h-[9999px]" : "max-h-[160px] overflow-hidden"
         }`}
       >
         <div className="prose prose-invert max-w-none">{children}</div>

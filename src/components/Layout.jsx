@@ -1,8 +1,33 @@
 import { Link, Outlet } from 'react-router-dom';
-import { BlindScrollHandle } from './BlindScrollHandle';
-import FloatingDock from './FloatingDock';
+import { useEffect } from 'react';
 
 export default function Layout() {
+  useEffect(() => {
+    const topZone = document.getElementById('scroll-up-zone');
+    const bottomZone = document.getElementById('scroll-down-zone');
+
+    if (!topZone || !bottomZone) return;
+
+    const handleTopClick = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleBottomClick = () => {
+      window.scrollTo({ 
+        top: document.body.scrollHeight, 
+        behavior: 'smooth' 
+      });
+    };
+
+    topZone.addEventListener('click', handleTopClick);
+    bottomZone.addEventListener('click', handleBottomClick);
+
+    return () => {
+      topZone.removeEventListener('click', handleTopClick);
+      bottomZone.removeEventListener('click', handleBottomClick);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen">
       <nav className="bg-white/10 backdrop-blur-sm shadow-sm">
@@ -30,16 +55,9 @@ export default function Layout() {
         <Outlet />
       </main>
       
-      <BlindScrollHandle />
-      <FloatingDock />
-      <button 
-        id="parksy-pulltop-btn" 
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        aria-label="Scroll to top"
-        title="Scroll to top"
-      >
-        ⬆️
-      </button>
+      {/* Invisible Scroll Zones */}
+      <div id="scroll-up-zone" className="scroll-zone scroll-zone-top"></div>
+      <div id="scroll-down-zone" className="scroll-zone scroll-zone-bottom"></div>
     </div>
   );
 }

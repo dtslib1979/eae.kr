@@ -8,8 +8,8 @@ export default function Layout() {
 
     if (!topZone || !bottomZone) return;
 
-    // Calculate step size: 80% of viewport height
-    const SCROLL_STEP_RATIO = 0.8;
+    // Calculate step size: 40% of viewport height
+    const SCROLL_STEP_RATIO = 0.4;
     const getStep = () => {
       return window.innerHeight * SCROLL_STEP_RATIO;
     };
@@ -63,7 +63,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen">
-      <nav className="bg-white/10 backdrop-blur-sm shadow-sm">
+      <nav className="bg-white/10 backdrop-blur-sm shadow-sm relative z-[200]">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="text-2xl font-bold text-slate-50 leading-tight">
@@ -84,7 +84,7 @@ export default function Layout() {
         </div>
       </nav>
       
-      <main className="min-h-[calc(100vh-64px)]">
+      <main className="min-h-[calc(100vh-64px)] relative z-[150]">
         <Outlet />
       </main>
       

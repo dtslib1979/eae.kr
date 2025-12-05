@@ -298,20 +298,52 @@ svg, svg * {
   position: fixed;
   left: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 100;
   background: transparent;     /* Completely transparent */
   touch-action: manipulation;
-  cursor: pointer;
+  pointer-events: auto;
 }
 
 /* Top touch zone (scroll to top) */
 .scroll-zone-top {
   top: 0;
-  height: 25vh;                /* Top 25% of viewport */
+  height: 40vh;                /* Top 40% of viewport */
 }
 
 /* Bottom touch zone (scroll to bottom) */
 .scroll-zone-bottom {
   bottom: 0;
-  height: 25vh;                /* Bottom 25% of viewport */
+  height: 40vh;                /* Bottom 40% of viewport */
+}
+
+/* ===========================================
+   Theory Diagram Styling
+   =========================================== */
+
+/* Diagram container - centering and alignment */
+.theory-diagram {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SVG and image sizing - responsive */
+.theory-diagram svg,
+.theory-diagram img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* SVG text styling - bright yellow with glow effect */
+.theory-diagram svg text {
+  fill: #ffe08a; /* Visible yellow color */
+  /* Responsive font size - large on all screens */
+  font-size: clamp(14px, 2.8vw, 20px);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.8);
+  stroke-width: 0.8px;
+
+  /* Glowing effect */
+  filter: drop-shadow(0 0 4px rgba(255, 224, 138, 0.85));
 }

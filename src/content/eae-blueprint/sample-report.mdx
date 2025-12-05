@@ -28,52 +28,61 @@ published: false
 
 <Part2>
 
-## 시스템 아키텍처: 엔진의 실제 작동 방식
+<Accordion>
 
-### Universal Structure (보편적 구조)
+  <AccordionItem title="1. System Overview">
+    EAE 리포트 엔진은 컴포넌트 기반 아키텍처를 따릅니다.
+    
+    MDX 파일을 작성하면, 이것이 React 컴포넌트로 변환되고, Tailwind CSS로 스타일이 적용되어 
+    완성된 웹 애플리케이션으로 배포됩니다.
+    
+    모든 리포트는 동일한 Universal Structure를 따르며, 이를 통해 일관성 있는 학습 경험을 제공합니다.
+  </AccordionItem>
 
-EAE 리포트 엔진은 다음과 같은 컴포넌트 기반 아키텍처를 따릅니다:
+  <AccordionItem title="2. Universal Structure (보편적 구조)">
+    ```
+    리포트 구조:
+    ┌─────────────────────────────────────┐
+    │ OpeningFrame (미디어 프레임)          │
+    ├─────────────────────────────────────┤
+    │ Part1: Grandpa Mode                 │
+    │ - 비유와 서사                         │
+    │ - 단순화된 설명                       │
+    ├─────────────────────────────────────┤
+    │ Part2: System Architect Mode        │
+    │ - 구조와 로직                         │
+    │ - 데이터 흐름                         │
+    ├─────────────────────────────────────┤
+    │ Part3: Theory Map                   │
+    │ - Mermaid 다이어그램                 │
+    │ - 개념 관계도                         │
+    ├─────────────────────────────────────┤
+    │ SketchCard (자유 그림)               │
+    ├─────────────────────────────────────┤
+    │ SpotifyEmbed (음악 연계)             │
+    ├─────────────────────────────────────┤
+    │ PromptEngineLink (재생산 포탈)       │
+    └─────────────────────────────────────┘
+    ```
+  </AccordionItem>
 
-```
-리포트 구조:
-┌─────────────────────────────────────┐
-│ OpeningFrame (미디어 프레임)          │
-├─────────────────────────────────────┤
-│ Part1: Grandpa Mode                 │
-│ - 비유와 서사                         │
-│ - 단순화된 설명                       │
-├─────────────────────────────────────┤
-│ Part2: System Architect Mode        │
-│ - 구조와 로직                         │
-│ - 데이터 흐름                         │
-├─────────────────────────────────────┤
-│ Part3: Theory Map                   │
-│ - Mermaid 다이어그램                 │
-│ - 개념 관계도                         │
-├─────────────────────────────────────┤
-│ SketchCard (자유 그림)               │
-├─────────────────────────────────────┤
-│ SpotifyEmbed (음악 연계)             │
-├─────────────────────────────────────┤
-│ PromptEngineLink (재생산 포탈)       │
-└─────────────────────────────────────┘
-```
+  <AccordionItem title="3. Tech Stack">
+    - **MDX**: Markdown + JSX = 컴포넌트 기반 콘텐츠
+    - **React**: 동적 UI 렌더링
+    - **Tailwind CSS**: 브랜드 컬러/타이포그래피 적용
+    - **Vite**: 빌드 및 번들링
+    - **GitHub Pages**: 자동 배포
+  </AccordionItem>
 
-### 기술 스택
+  <AccordionItem title="4. Data Flow / Workflow">
+    1. **입력**: MDX 파일 작성 (콘텐츠 + 컴포넌트)
+    2. **변환**: MDX → React 컴포넌트
+    3. **렌더링**: MDXProvider가 컴포넌트 주입
+    4. **스타일링**: Tailwind가 브랜드 스타일 적용
+    5. **배포**: GitHub Actions가 자동 빌드 & 배포
+  </AccordionItem>
 
-- **MDX**: Markdown + JSX = 컴포넌트 기반 콘텐츠
-- **React**: 동적 UI 렌더링
-- **Tailwind CSS**: 브랜드 컬러/타이포그래피 적용
-- **Vite**: 빌드 및 번들링
-- **GitHub Pages**: 자동 배포
-
-### 데이터 플로우
-
-1. **입력**: MDX 파일 작성 (콘텐츠 + 컴포넌트)
-2. **변환**: MDX → React 컴포넌트
-3. **렌더링**: MDXProvider가 컴포넌트 주입
-4. **스타일링**: Tailwind가 브랜드 스타일 적용
-5. **배포**: GitHub Actions가 자동 빌드 & 배포
+</Accordion>
 
 </Part2>
 

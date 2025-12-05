@@ -144,40 +144,90 @@ Skillset6 is like that toolbox, but for your ideas and creativity.
 
 **Purpose:** Explain technical structure and flow
 
+**REQUIRED STRUCTURE:** Part2 MUST use Accordion structure with AccordionItem components.
+
 **Style Guidelines:**
-- Include architecture diagrams (ASCII or description)
+- MUST contain a single `<Accordion>` as the top-level container
+- Content MUST be structured into multiple `<AccordionItem>` blocks
+- Each AccordionItem represents one logical section (e.g., System Overview, Modules, Workflow, Usage)
+- Include architecture diagrams (ASCII or description) within AccordionItems
 - Show data flow
 - List tech stack
 - Use code blocks for structure
 - Still keep accessible to non-developers
 
-**Example:**
+**REQUIRED Template Structure:**
 ```mdx
 <Part2>
 
-## System Architecture
+<Accordion>
 
-### Data Flow
+  <AccordionItem title="1. System Overview">
+    Explain what the system does and its overall structure (3-6 lines).
+    Describe the input → processing → output flow.
+  </AccordionItem>
 
-```
-Input → Processing → Output
-  ↓         ↓          ↓
-Feed → Digest → Expression
-```
+  <AccordionItem title="2. Components / Modules">
+    List the key modules and their roles.
+    Explain what each module does in 2-4 lines.
+  </AccordionItem>
 
-### Tech Stack
+  <AccordionItem title="3. Workflow">
+    Show the step-by-step flow (input → process → output).
+    Include diagrams if helpful.
+  </AccordionItem>
 
-- React 18
-- Vite
-- Tailwind CSS
-- MDX
+  <AccordionItem title="4. Tech Stack" defaultOpen={false}>
+    - React 18
+    - Vite
+    - Tailwind CSS
+    - MDX
+  </AccordionItem>
 
-### How It Works
-
-The system takes MDX input, transforms it with React components, applies Tailwind styling, and outputs a complete web application.
+</Accordion>
 
 </Part2>
 ```
+
+**Example with Content:**
+```mdx
+<Part2>
+
+<Accordion>
+
+  <AccordionItem title="System Overview">
+    The system takes MDX input, transforms it with React components, 
+    applies Tailwind styling, and outputs a complete web application.
+    
+    Data flows through three stages: Feed → Digest → Expression.
+  </AccordionItem>
+
+  <AccordionItem title="Data Flow">
+    ```
+    Input → Processing → Output
+      ↓         ↓          ↓
+    Feed → Digest → Expression
+    ```
+  </AccordionItem>
+
+  <AccordionItem title="Tech Stack">
+    - React 18
+    - Vite
+    - Tailwind CSS
+    - MDX
+  </AccordionItem>
+
+</Accordion>
+
+</Part2>
+```
+
+**RULES:**
+- Part2 MUST NOT contain plain headings and paragraphs outside of Accordion
+- The `<Accordion>` must be the only top-level element inside `<Part2>`
+- Use meaningful, descriptive titles for each AccordionItem
+- Typically 3-5 AccordionItems per Part2
+- DO NOT write raw JavaScript for accordion behavior - components handle this automatically
 
 ### Part3: Theory Map
 
@@ -400,6 +450,43 @@ graph TD
 
 ---
 
+### ❌ Wrong: Part2 without Accordion structure
+```mdx
+<Part2>
+
+## System Architecture
+
+Plain text and headings...
+
+### Tech Stack
+- Tool 1
+- Tool 2
+
+</Part2>
+```
+
+### ✅ Correct: Part2 with Accordion structure
+```mdx
+<Part2>
+
+<Accordion>
+
+  <AccordionItem title="System Architecture">
+    Explanation of the system...
+  </AccordionItem>
+
+  <AccordionItem title="Tech Stack">
+    - Tool 1
+    - Tool 2
+  </AccordionItem>
+
+</Accordion>
+
+</Part2>
+```
+
+---
+
 ### ❌ Wrong: Missing frontmatter
 ```mdx
 <OpeningFrame src="..." />
@@ -476,18 +563,33 @@ Tell a story that makes it easy to understand...
 
 <Part2>
 
-## Technical Architecture
+<Accordion>
 
-Explain the system structure...
+  <AccordionItem title="1. System Overview">
+    Explain what the system does and its overall structure.
+    Describe the input → processing → output flow.
+  </AccordionItem>
 
-```
-Data Flow:
-Input → Process → Output
-```
+  <AccordionItem title="2. Components / Modules">
+    List the key modules and their roles.
+    Explain what each component does.
+  </AccordionItem>
 
-### Tech Stack
-- Tool 1
-- Tool 2
+  <AccordionItem title="3. Workflow">
+    ```
+    Data Flow:
+    Input → Process → Output
+    ```
+    Show the step-by-step flow.
+  </AccordionItem>
+
+  <AccordionItem title="4. Tech Stack">
+    - Tool 1
+    - Tool 2
+    - Tool 3
+  </AccordionItem>
+
+</Accordion>
 
 </Part2>
 
@@ -531,7 +633,10 @@ Before submitting your generated MDX, verify:
 - [ ] Components in correct order
 - [ ] OpeningFrame has videoId or src
 - [ ] Part1 uses simple language and analogies
-- [ ] Part2 has technical structure and flow
+- [ ] **Part2 MUST contain a single `<Accordion>` as top-level container**
+- [ ] **Part2 content MUST be structured into `<AccordionItem>` blocks**
+- [ ] **Part2 has NO plain headings/paragraphs outside Accordion**
+- [ ] Part2 has technical structure and flow within AccordionItems
 - [ ] Part3 has Mermaid diagram and philosophy
 - [ ] Mermaid is INSIDE Part3, not standalone
 - [ ] PromptEngineLink is at the end
@@ -539,7 +644,7 @@ Before submitting your generated MDX, verify:
 - [ ] All JSX components properly closed
 - [ ] Mobile-friendly paragraph lengths
 - [ ] No code blocks outside Part2 (except Mermaid in Part3)
-- [ ] Accordion/AccordionItem properly nested if used
+- [ ] Accordion/AccordionItem properly nested (REQUIRED in Part2)
 - [ ] mdx-zoom-target class used sparingly (not on every element)
 
 ---

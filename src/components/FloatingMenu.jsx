@@ -1,6 +1,6 @@
 import React from "react";
 
-export function FloatingMenu() {
+function FloatingMenu() {
   return (
     <nav className="floating-menu" data-floating-menu>
       <button type="button" data-scroll-to="#top">

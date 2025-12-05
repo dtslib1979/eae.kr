@@ -196,6 +196,11 @@ body:hover .parksy-cursor-dust {
   color: #F7FFF5;
 }
 
+/* Remove tap highlight overlay (blue box on mobile) */
+svg, svg * {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
 /* 노드 스타일 - 손그림 박스 + 살짝 거친 느낌 */
 .mermaid-chalk .node rect,
 .mermaid-chalk .node path,

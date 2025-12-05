@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
+import { BlindScrollHandle } from './BlindScrollHandle';
 
 export default function Layout() {
   return (
@@ -27,6 +28,8 @@ export default function Layout() {
       <main className="min-h-[calc(100vh-64px)]">
         <Outlet />
       </main>
+      
+      <BlindScrollHandle />
     </div>
   );
 }

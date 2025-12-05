@@ -1,22 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getCategoryCounts, getLatestPosts } from '../utils/posts';
+import { CATEGORIES } from '../utils/categories';
 import { YouTubeEmbed } from '../components/YouTubeEmbed';
-
-const categories = [
-  { 
-    slug: 'eae-blueprint', 
-    name: '🏗️ EAE Blueprint', 
-    icon: '🏗️',
-    // YouTube video for EAE Blueprint category card
-    youtubeShorts: 'https://youtu.be/6T3mibse3Q4?si=bgubKNvV6LjEobqC'
-  },
-  { slug: 'qsketch', name: 'Quick Sketch' },
-  { slug: 'penon', name: 'Penon' },
-  { slug: 'mal', name: 'Mal' },
-  { slug: 'patchtech', name: 'Patchtech' },
-  { slug: 'eml', name: 'EML' },
-  { slug: 'phl', name: 'PHL' },
-];
 
 export default function Home() {
   const counts = getCategoryCounts();
@@ -28,7 +13,7 @@ export default function Home() {
       
       {/* Categories Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {categories.map(category => (
+        {CATEGORIES.map(category => (
           <Link
             key={category.slug}
             to={`/category/${category.slug}`}

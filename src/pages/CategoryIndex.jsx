@@ -1,15 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getCategoryCounts } from '../utils/posts';
-
-const categories = [
-  { slug: 'eae-blueprint', title: 'EAE Blueprint' },
-  { slug: 'eml', title: 'EML' },
-  { slug: 'mal', title: 'MAL' },
-  { slug: 'patchtech', title: 'PatchTech' },
-  { slug: 'penon', title: 'Penon' },
-  { slug: 'phl', title: 'PHL' },
-  { slug: 'qsketch', title: 'QSketch' }
-];
+import { CATEGORIES } from '../utils/categories';
 
 export default function CategoryIndex() {
   const counts = getCategoryCounts();
@@ -23,14 +14,14 @@ export default function CategoryIndex() {
       <h1 className="text-4xl font-bold mb-8 text-slate-50">Categories</h1>
       
       <ul className="space-y-4">
-        {categories.map((cat) => (
+        {CATEGORIES.map((cat) => (
           <li key={cat.slug}>
             <Link
               to={`/category/${cat.slug}`}
               className="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900">{cat.title}</h2>
+                <h2 className="text-2xl font-semibold text-slate-900">{cat.name}</h2>
                 <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">
                   {counts[cat.slug] || 0} posts
                 </span>

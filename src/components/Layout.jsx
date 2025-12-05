@@ -9,8 +9,9 @@ export default function Layout() {
     if (!topZone || !bottomZone) return;
 
     // Calculate step size: 80% of viewport height
+    const SCROLL_STEP_RATIO = 0.8;
     const getStep = () => {
-      return window.innerHeight * 0.8;
+      return window.innerHeight * SCROLL_STEP_RATIO;
     };
 
     const handleTopClick = () => {

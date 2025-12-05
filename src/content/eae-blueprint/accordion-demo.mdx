@@ -57,47 +57,55 @@ This subsection is open by default! You can control the initial state with the `
 
 <Part2>
 
-## Hover Zoom Target Demo
+<Accordion>
 
-The `mdx-zoom-target` class adds a subtle zoom effect when you hover over content blocks. This is useful for:
+  <AccordionItem title="1. Hover Zoom Feature Overview">
+    The `mdx-zoom-target` class adds a subtle zoom effect when you hover over content blocks. This is useful for:
+    
+    1. **Focus Enhancement** - Drawing attention to the section being read
+    2. **Readability on Projectors/Tablets** - Slight magnification helps with visibility
+    3. **Interactive Feedback** - Gives visual feedback that content is interactive
+  </AccordionItem>
 
-1. **Focus Enhancement** - Drawing attention to the section being read
-2. **Readability on Projectors/Tablets** - Slight magnification helps with visibility
-3. **Interactive Feedback** - Gives visual feedback that content is interactive
+  <AccordionItem title="2. Live Demo Examples">
+    <div className="mdx-zoom-target p-4 bg-slate-800 rounded-lg my-4">
+    
+    ### Example Zoom Block
+    
+    Hover over this entire block to see the zoom effect! The content will scale to 1.03x after a 0.45s delay, creating a smooth, subtle emphasis.
+    
+    This is perfect for long-form content where you want to highlight sections without being distracting.
+    
+    </div>
+    
+    <div className="mdx-zoom-target p-4 bg-slate-700 rounded-lg my-4">
+    
+    ### Another Zoom Example
+    
+    Try hovering over different sections to see how the effect works. The delay prevents accidental triggers when scrolling.
+    
+    **Recommended scale range:** 1.02 - 1.04 for subtle, professional effect
+    
+    </div>
+  </AccordionItem>
 
-<div className="mdx-zoom-target p-4 bg-slate-800 rounded-lg my-4">
+  <AccordionItem title="3. Technical Implementation">
+    ```jsx
+    // CSS Implementation
+    .mdx-zoom-target {
+      transition: transform 0.22s ease-out 0.45s;
+      cursor: default;
+    }
+    
+    .mdx-zoom-target:hover {
+      transform: scale(1.03);
+    }
+    ```
+    
+    The effect uses CSS transforms with a delayed transition to create smooth, professional emphasis without accidental triggers.
+  </AccordionItem>
 
-### Example Zoom Block
-
-Hover over this entire block to see the zoom effect! The content will scale to 1.03x after a 0.45s delay, creating a smooth, subtle emphasis.
-
-This is perfect for long-form content where you want to highlight sections without being distracting.
-
-</div>
-
-### Technical Details
-
-```jsx
-// CSS Implementation
-.mdx-zoom-target {
-  transition: transform 0.22s ease-out 0.45s;
-  cursor: default;
-}
-
-.mdx-zoom-target:hover {
-  transform: scale(1.03);
-}
-```
-
-<div className="mdx-zoom-target p-4 bg-slate-700 rounded-lg my-4">
-
-### Another Zoom Example
-
-Try hovering over different sections to see how the effect works. The delay prevents accidental triggers when scrolling.
-
-**Recommended scale range:** 1.02 - 1.04 for subtle, professional effect
-
-</div>
+</Accordion>
 
 </Part2>
 

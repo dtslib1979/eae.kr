@@ -47,22 +47,59 @@ When asked to create an MDX report, follow these steps:
 - Props must use correct syntax
 - Code blocks must use triple backticks
 
-### 🔴 Rule #3: Mermaid Only in Part3
+### 🔴 Rule #3: Part3 MUST Use PapyrusScroll
 
 **Wrong:**
 ```mdx
-<Mermaid>graph TD; A-->B</Mermaid>
-```
-
-**Correct:**
-```mdx
 <Part3>
+## Theory Map
 ```mermaid
 graph TD
   A --> B
 ```
 </Part3>
 ```
+
+**Wrong:**
+```mdx
+<Part3>
+<Accordion title="Summary">
+  Content here...
+</Accordion>
+</Part3>
+```
+
+**Correct:**
+```mdx
+<Part3>
+
+<PapyrusScroll title="Whitepaper Global Summary">
+
+**Core Summary**
+- Main message in 2-4 sentences.
+
+**Drivers / Modules**
+- Core components listed.
+
+**Mermaid Structure Summary**
+A((Input)) --> B((Process)) --> C((Output))
+
+**PARKSY OS Mapping**
+- Connection to meta framework.
+
+**Next Steps / Expansion**
+- Follow-up directions.
+
+</PapyrusScroll>
+
+</Part3>
+```
+
+**Key Points:**
+- Part3 is ALWAYS wrapped in `<PapyrusScroll>`
+- NO other UI components (Accordion, Card, etc.) in Part3
+- Mermaid diagrams are TEXT SUMMARIES, not rendered
+- Initial collapsed state is automatic (component handles it)
 
 ### 🔴 Rule #4: Mobile-First Content
 
@@ -179,47 +216,52 @@ The system takes MDX input, transforms it with React components, applies Tailwin
 </Part2>
 ```
 
-### Part3: Theory Map
+### Part3: Theory Map & PapyrusScroll
 
-**Purpose:** Connect to academic/philosophical foundations
+**Purpose:** Connect to academic/philosophical foundations and provide meta-level whitepaper summary
 
-**Required Elements:**
-1. One Mermaid diagram
-2. 3-5 concepts or scholars
-3. 3-6 lines of philosophical explanation
+**🔴 MANDATORY: Part3 MUST use PapyrusScroll wrapper**
 
-**Mermaid Types to Use:**
-- `mindmap` - for concept relationships
-- `graph TD` - for hierarchies
-- `graph LR` - for processes
-
-**Example:**
+**Required Structure:**
 ```mdx
 <Part3>
 
-## Theory Map
+<PapyrusScroll title="Whitepaper Global Summary">
 
-```mermaid
-mindmap
-  root((Central Concept))
-    Branch 1
-      Sub-concept A
-      Sub-concept B
-    Branch 2
-      Sub-concept C
-      Sub-concept D
-```
+**Core Summary**
+- Main message compressed in 2–4 sentences.
 
-### Philosophical Background
+**Drivers / Modules**
+- List core drivers, modules, variables (3–6 lines).
 
-This structure draws from **Lévi-Strauss's structuralism**, analyzing patterns like myths.
+**Mermaid Structure Summary**
+Represent the structure in plain text (no rendered Mermaid):
+A((Input)) --> B((Process)) --> C((Output))
 
-It embodies **Nietzsche's perspectivism** - viewing the same content from multiple angles.
+**PARKSY OS Mapping**
+- How this report connects to the meta system.
 
-Following **Foucault's discourse analysis**, each report reveals knowledge production mechanisms.
+**Next Steps / Expansion**
+- Follow-up documents or applications.
+
+</PapyrusScroll>
 
 </Part3>
 ```
+
+**Critical Rules:**
+- Part3 MUST be wrapped in `<PapyrusScroll>` - NO EXCEPTIONS
+- NO other UI components (Accordion, Card, etc.) inside Part3
+- Mermaid diagrams in Part3 must be TEXT SUMMARIES, not rendered
+- Content must be architect/designer perspective, not essay style
+- Initial state is collapsed by default (handled by component)
+
+**Five Required Elements in PapyrusScroll:**
+1. **Core Summary** - System-level message (2-4 sentences)
+2. **Drivers / Modules** - Core technical components (3-6 lines)
+3. **Mermaid Structure Summary** - Plain text diagram representation
+4. **PARKSY OS Mapping** - Connection to meta framework (2-3 lines)
+5. **Expansion Path** - Future directions (1-3 lines)
 
 ### SketchCard (Optional)
 
@@ -400,6 +442,94 @@ graph TD
 
 ---
 
+### ❌ Wrong: Part3 without PapyrusScroll
+```mdx
+<Part3>
+## Summary
+Just plain content here...
+</Part3>
+```
+
+### ✅ Correct: Part3 WITH PapyrusScroll
+```mdx
+<Part3>
+
+<PapyrusScroll title="Whitepaper Global Summary">
+
+**Core Summary**
+- Compressed system message.
+
+**Drivers / Modules**
+- Core components.
+
+**Mermaid Structure Summary**
+A((Input)) --> B((Process)) --> C((Output))
+
+**PARKSY OS Mapping**
+- Framework connection.
+
+**Next Steps / Expansion**
+- Future directions.
+
+</PapyrusScroll>
+
+</Part3>
+```
+
+---
+
+### ❌ Wrong: Other components in Part3
+```mdx
+<Part3>
+<Accordion title="Summary">
+  Content...
+</Accordion>
+</Part3>
+```
+
+### ✅ Correct: Only PapyrusScroll in Part3
+```mdx
+<Part3>
+
+<PapyrusScroll title="Whitepaper Global Summary">
+  <!-- Content here -->
+</PapyrusScroll>
+
+</Part3>
+```
+
+---
+
+### ❌ Wrong: Rendered Mermaid in Part3
+```mdx
+<Part3>
+
+<PapyrusScroll>
+```mermaid
+graph TD
+  A --> B
+```
+</PapyrusScroll>
+
+</Part3>
+```
+
+### ✅ Correct: Text summary in Part3
+```mdx
+<Part3>
+
+<PapyrusScroll title="Whitepaper Global Summary">
+
+**Mermaid Structure Summary**
+A((Input)) --> B((Process)) --> C((Output))
+
+</PapyrusScroll>
+
+</Part3>
+```
+
+---
+
 ### ❌ Wrong: Missing frontmatter
 ```mdx
 <OpeningFrame src="..." />
@@ -493,20 +623,27 @@ Input → Process → Output
 
 <Part3>
 
-## Theory Map
+<PapyrusScroll title="Whitepaper Global Summary">
 
-```mermaid
-mindmap
-  root((Concept))
-    Branch 1
-    Branch 2
-```
+**Core Summary**
+- Main message compressed in 2–4 sentences about this report's purpose and value.
 
-### Philosophical Context
+**Drivers / Modules**
+- List the core components, modules, or variables covered.
+- Include 3-6 key technical or conceptual elements.
 
-Connect to academic theories...
+**Mermaid Structure Summary**
+Plain text representation of the architecture:
+A((Input)) --> B((Process)) --> C((Output))
 
-Reference 3-5 scholars or concepts...
+**PARKSY OS Mapping**
+- Explain how this report connects to the broader PARKSY OS framework.
+- Identify which layer or domain it belongs to.
+
+**Next Steps / Expansion**
+- Outline follow-up documents or implementation paths.
+
+</PapyrusScroll>
 
 </Part3>
 
@@ -532,14 +669,17 @@ Before submitting your generated MDX, verify:
 - [ ] OpeningFrame has videoId or src
 - [ ] Part1 uses simple language and analogies
 - [ ] Part2 has technical structure and flow
-- [ ] Part3 has Mermaid diagram and philosophy
-- [ ] Mermaid is INSIDE Part3, not standalone
+- [ ] **Part3 is wrapped in `<PapyrusScroll>` component**
+- [ ] **Part3 contains all 5 required elements (Core Summary, Drivers/Modules, Mermaid Summary, OS Mapping, Expansion)**
+- [ ] **NO Accordion, Card, or other UI components inside Part3**
+- [ ] **Mermaid in Part3 is TEXT SUMMARY only (not rendered diagram)**
+- [ ] **Part3 uses architect/designer perspective (not essay style)**
 - [ ] PromptEngineLink is at the end
 - [ ] No HTML tags mixed with MDX
 - [ ] All JSX components properly closed
 - [ ] Mobile-friendly paragraph lengths
-- [ ] No code blocks outside Part2 (except Mermaid in Part3)
-- [ ] Accordion/AccordionItem properly nested if used
+- [ ] No code blocks outside Part2
+- [ ] Accordion/AccordionItem properly nested if used (but NOT in Part3)
 - [ ] mdx-zoom-target class used sparingly (not on every element)
 
 ---

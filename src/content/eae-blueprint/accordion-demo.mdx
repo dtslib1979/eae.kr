@@ -57,47 +57,59 @@ This subsection is open by default! You can control the initial state with the `
 
 <Part2>
 
-## Hover Zoom Target Demo
+<Accordion>
 
-The `mdx-zoom-target` class adds a subtle zoom effect when you hover over content blocks. This is useful for:
+  <AccordionItem title="1. Hover Zoom Feature Overview">
 
-1. **Focus Enhancement** - Drawing attention to the section being read
-2. **Readability on Projectors/Tablets** - Slight magnification helps with visibility
-3. **Interactive Feedback** - Gives visual feedback that content is interactive
+    The `mdx-zoom-target` class adds a subtle zoom effect when you hover over content blocks. This is useful for:
 
-<div className="mdx-zoom-target p-4 bg-slate-800 rounded-lg my-4">
+    1. **Focus Enhancement** - Drawing attention to the section being read
+    2. **Readability on Projectors/Tablets** - Slight magnification helps with visibility
+    3. **Interactive Feedback** - Gives visual feedback that content is interactive
 
-### Example Zoom Block
+  </AccordionItem>
 
-Hover over this entire block to see the zoom effect! The content will scale to 1.03x after a 0.45s delay, creating a smooth, subtle emphasis.
+  <AccordionItem title="2. Example Implementation">
 
-This is perfect for long-form content where you want to highlight sections without being distracting.
+    <div className="mdx-zoom-target p-4 bg-slate-800 rounded-lg my-4">
 
-</div>
+    ### Example Zoom Block
 
-### Technical Details
+    Hover over this entire block to see the zoom effect! The content will scale to 1.03x after a 0.45s delay, creating a smooth, subtle emphasis.
 
-```jsx
-// CSS Implementation
-.mdx-zoom-target {
-  transition: transform 0.22s ease-out 0.45s;
-  cursor: default;
-}
+    This is perfect for long-form content where you want to highlight sections without being distracting.
 
-.mdx-zoom-target:hover {
-  transform: scale(1.03);
-}
-```
+    </div>
 
-<div className="mdx-zoom-target p-4 bg-slate-700 rounded-lg my-4">
+    <div className="mdx-zoom-target p-4 bg-slate-700 rounded-lg my-4">
 
-### Another Zoom Example
+    ### Another Zoom Example
 
-Try hovering over different sections to see how the effect works. The delay prevents accidental triggers when scrolling.
+    Try hovering over different sections to see how the effect works. The delay prevents accidental triggers when scrolling.
 
-**Recommended scale range:** 1.02 - 1.04 for subtle, professional effect
+    **Recommended scale range:** 1.02 - 1.04 for subtle, professional effect
 
-</div>
+    </div>
+
+  </AccordionItem>
+
+  <AccordionItem title="3. Technical Details">
+
+    ```jsx
+    // CSS Implementation
+    .mdx-zoom-target {
+      transition: transform 0.22s ease-out 0.45s;
+      cursor: default;
+    }
+
+    .mdx-zoom-target:hover {
+      transform: scale(1.03);
+    }
+    ```
+
+  </AccordionItem>
+
+</Accordion>
 
 </Part2>
 

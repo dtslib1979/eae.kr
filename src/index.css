@@ -324,3 +324,31 @@ svg, svg * {
   border-color: rgba(255, 255, 255, 0.6);
   color: rgba(255, 255, 255, 1);
 }
+
+/* Pull-to-Top Button Styles */
+#parksy-pulltop-btn {
+  position: fixed !important;
+  left: 18px !important;          /* Left side */
+  top: 50% !important;            /* Vertical center */
+  transform: translateY(-50%) !important;
+
+  z-index: 10001;                 /* Must float above everything including floating dock */
+  
+  /* Transparent background */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);     /* Very subtle blur */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+
+  padding: 10px;
+  font-size: 22px;
+  cursor: pointer;
+
+  opacity: 0.55;                  /* very faint */
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+#parksy-pulltop-btn:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.15) !important;
+}

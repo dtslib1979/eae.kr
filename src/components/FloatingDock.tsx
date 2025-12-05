@@ -1,36 +1,27 @@
-// src/components/FloatingDock.tsx
-import React, { useEffect } from "react";
+import React from "react";
 
 export function FloatingDock() {
-  useEffect(() => {
-    const handleTopClick = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    const handleHomeClick = () => {
+  const handleHome = () => {
+    if (typeof window !== "undefined") {
       window.location.href = "/";
-    };
+    }
+  };
 
-    const topBtn = document.querySelector('[data-floating-dock] button[data-action="top"]');
-    const homeBtn = document.querySelector('[data-floating-dock] button[data-action="home"]');
-
-    if (topBtn) topBtn.addEventListener("click", handleTopClick);
-    if (homeBtn) homeBtn.addEventListener("click", handleHomeClick);
-
-    return () => {
-      if (topBtn) topBtn.removeEventListener("click", handleTopClick);
-      if (homeBtn) homeBtn.removeEventListener("click", handleHomeClick);
-    };
-  }, []);
+  const handlePull = () => {
+    if (typeof window !== "undefined") {
+      const current = window.scrollY || 0;
+      const step = window.innerHeight * 0.9;
+      window.scrollTo({
+        top: current + step,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
-    <nav className="floating-dock" data-floating-dock>
-      <button type="button" data-action="top">
-        TOP
-      </button>
-      <button type="button" data-action="home">
-        HOME
-      </button>
+    <nav className="floating-dock">
+      <button type="button" onClick={handleHome}>HOME</button>
+      <button type="button" onClick={handlePull}>PULL</button>
     </nav>
   );
 }

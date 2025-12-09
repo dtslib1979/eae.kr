@@ -1,0 +1,68 @@
+---
+title: "Patchtech Protocol: AI-Native Personal DevOps Pipeline"
+slug: "patchtech-protocol-ai-native-pipeline"
+date: "2025-12-09"
+category: "eae-blueprint"
+
+youtube:
+  url: "https://www.youtube.com/embed/019Jwvd93dI"
+  autoplay: true
+
+spotify:
+  url: "https://open.spotify.com/track/5vk9PL1tTyWrQY3TqRq2Rg"
+  mode: "button"
+
+tags:
+  - "patchtech"
+summary: "Patchtech은 모바일-클라우드-데스크탑을 하나의 생산 공정으로 통합하는 초개인 DevOps 프로토콜이다."
+---
+
+<OpeningFrame
+  videoId="019Jwvd93dI"
+  title="Patchtech Protocol: AI-Native Personal DevOps Pipeline"
+/>
+
+# Part 1 — Grandpa Mode
+
+오늘 이야기는 ‘나만의 소프트웨어 공장’을 만드는 법이다.  
+핸드폰은 지시하고, 데스크탑은 만들고, AI들은 각자 역할을 맡는다.  
+앱스토어를 통하지 않고도 나만의 APK·PWA를 즉시 생산할 수 있다.  
+비용은 거의 0에 가깝고, 속도는 기존 개발의 수십 배다.  
+개개인이 직접 소프트웨어를 제조하는 시대가 왔다는 선언이다.
+
+# Part 2 — System Architect Mode
+
+Patchtech의 핵심은 **역할 분리와 장치 분업**이다.
+
+## 1. R&R Layering
+- **Mobile (User/CEO):** 아이디어·지시·기획  
+- **ChatGPT:** 요구사항 정의서·백서 구조화  
+- **Gemini:** 기술 검증 및 인스트럭션 최적화  
+- **Claude MCP:** 로컬 PC에서 파일 조작·코드 생성  
+- **Local PC:** 빌드 머신(APK 컴파일·PWA 번들링)  
+- **GitHub:** 버전관리 및 배포 허브  
+
+## 2. Dual Track: PWA & APK
+### PWA
+- HTML/JS 또는 Flutter Web  
+- Vercel 무료 배포  
+- 설치 필요 없음, 즉시 업데이트  
+- 데이터·대시보드형 유틸리티에 최적  
+
+### APK
+- Flutter Native  
+- 로컬 PC에서 컴파일  
+- 카메라·S Pen 등 하드웨어 접근 가능  
+- USB 사이드로딩으로 즉시 설치  
+
+## 3. Zero-Cost Build System
+
+```tsx
+// Local Build Pipeline
+const pipeline = {
+  instruction: "User → Mobile",
+  refinement: "ChatGPT & Gemini",
+  codegen: "Claude MCP",
+  build: "Local PC (Flutter build apk)",
+  deploy: "GitHub / Drive / Vercel",
+};

@@ -1,0 +1,101 @@
+---
+title: "Patchtech Protocol Whitepaper"
+slug: "patchtech-protocol-whitepaper"
+date: "2025-12-09"
+category: "eae-blueprint"
+youtube:
+  url: "https://youtu.be/019Jwvd93dI?si=2XuwUEpvzfgYu1pH"
+  autoplay: true
+spotify:
+  url: "https://open.spotify.com/track/5vk9PL1tTyWrQY3TqRq2Rg"
+  mode: "button"
+tags:
+  - "patchtech"
+summary: "Patchtech은 AI-Native DevOps 구조로서 모바일 지시 → PC 빌드 → 클라우드 확장을 하나의 개인 생산 공정으로 통합하는 1인 소프트웨어 제조 전략이다."
+---
+
+<OpeningFrame 
+  videoId="019Jwvd93dI"
+  title="Patchtech Protocol Whitepaper"
+/>
+
+# Part 1 – Grandpa Mode
+
+- Patchtech은 “코딩하는 사람 → AI를 지휘하는 사람”으로 역할을 바꾸는 전략이다.  
+- 모바일로 명령하고, PC가 생산하고, 클라우드가 확장하는 구조다.  
+- 앱스토어, 클라우드 비용, 디바이스 한계를 우회하는 새로운 DevOps 방식이다.  
+- 즉흥 발상도 즉시 PWA·APK로 만들어버리는 개인 공장 모델이다.  
+- 한마디로 말하면: **“AI와 PC를 기계 팔처럼 쓰는 초개인 DevOps.”**
+
+# Part 2 – System Architect Mode
+
+## 1. Problem Statement  
+모바일은 입력의 최강자이지만 컴파일 능력이 약하고,  
+클라우드는 비용이 비싸고,  
+앱 마켓은 개인화 도구 배포에 비효율적이다.
+
+이 세 가지 문제를 Patchtech은 구조적으로 재배치한다.
+
+## 2. Patchtech Architecture (R&R Layer Map)
+
+| Layer | Component | Device | Function |
+|------|-----------|---------|----------|
+| Command | User (CEO) | Mobile | 발상·지시·소비 |
+| Strategy | ChatGPT | Cloud | 맥락분석·요구사항 백서화 |
+| Architecture | Gemini | Cloud | 기술 검증·작업지시서 최적화 |
+| Development | Claude MCP | Local PC | 코드 작성·파일 제어 |
+| Build & CI | Local PC | Local | 컴파일 · APK 패키징 · PWA 배포 |
+| Repository | GitHub | Cloud | 버전관리 · 중앙허브 |
+
+핵심 요약:  
+**“모바일이 명령, AI가 설계, PC가 생산, GitHub가 기억한다.”**
+
+## 3. Dual Track Output
+
+### Track A — PWA
+- Vercel 기반 무료 배포  
+- 설치 없이 즉시 사용  
+- 대시보드/유틸/텍스트도구 최적  
+
+### Track B — APK
+- Flutter + 로컬 빌드  
+- 카메라·S Pen·FFmpeg 같은 고성능 작업 가능  
+- USB·Drive로 직접 배포  
+- 오프라인 완전 동작
+
+## 4. Zero-Cost Build System
+
+- AWS CodeBuild 같은 클라우드 CI를 쓰지 않고  
+- **집 PC를 Build Node로 활용**  
+- Claude MCP가 로컬 파일을 직접 조작  
+- 사용자는 모바일에서 지시만 하면 PC가 공장처럼 빌드 수행  
+- 비용: **$0 (전기세 제외)**
+
+## 5. Value Proposition
+
+- **소프트웨어 주권**: 필요한 도구를 직접 제조  
+- **자산화**: APK 자체가 디지털 자산  
+- **속도**: 기획 → 빌드 → 설치가 병목 없이 연결  
+- **개인 DevOps 공장**: AI 3스택(ChatGPT/Gemini/Claude MCP)의 자동화 역량 극대화
+
+# Part 3 – Theory Map
+
+<div className="my-6 p-4 rounded-2xl border border-soft bg-card">
+<Mermaid chart={`
+  graph TD
+    A[Mobile Idea Input] --> B[ChatGPT Strategy Layer]
+    B --> C[Gemini Architecture Layer]
+    C --> D[Claude MCP Development Layer]
+    D --> E[Local PC Build Node]
+    E --> F[PWA / APK Output]
+    F --> G[GitHub Repository Memory]
+`} />
+</div>
+
+<SpotifyEmbed 
+  url="https://open.spotify.com/track/5vk9PL1tTyWrQY3TqRq2Rg" 
+  caption="Patchtech 작업 흐름과 어울리는 사운드"
+/>
+
+## Prompt Engine
+<PromptEngineLink href="https://eae.kr/prompt-engine/patchtech-protocol-whitepaper" />

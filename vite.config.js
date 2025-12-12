@@ -22,24 +22,25 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['favicon.svg', 'eae.kr-logo.png'],
       manifest: {
-        name: 'EAE PWA',
-        short_name: 'EAE',
+        name: 'eae.kr',
+        short_name: 'eae',
         start_url: '/',
         display: 'standalone',
-        background_color: '#0b0b10',
-        theme_color: '#22d3ee',
+        background_color: '#000000',
+        theme_color: '#000000',
         icons: [
           {
-            src: '/icons/icon-192.png',
+            src: '/eae.kr-logo.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/icons/icon-512.png',
+            src: '/eae.kr-logo.png',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       }

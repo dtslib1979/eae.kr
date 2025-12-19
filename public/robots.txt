@@ -1,0 +1,6 @@
+# robots.txt for eae.kr
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.eae.kr/sitemap.xml

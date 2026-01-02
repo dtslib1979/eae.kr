@@ -29,7 +29,7 @@ export default function Mermaid({ children, chart }) {
           titleColor: '#eeeeee',
           edgeLabelBackground: '#253A2F',
           edgeLabelColor: '#eeeeee',
-          fontSize: '14px',
+          fontSize: '16px',
         },
         themeCSS: `
           .node rect, .node polygon, .node circle {

@@ -23,13 +23,22 @@ eae.kr 출판 모드.
 
 | 카테고리 | 용도 |
 |---------|------|
-| eae-blueprint | 핵심 설계/철학 |
+| **eae-blueprint** | ⚠️ EduArt Engineer YouTube 설계 백엔드 |
 | patchtech | 기술 해결책 |
 | qsketch | 빠른 스케치 |
 | penon | Penon |
 | mal | Mal |
 | eml | EML |
 | phl | PHL |
+
+### ⚠️ eae-blueprint 특수 규칙
+
+이 카테고리 = **EduArt Engineer YouTube 채널** 종속
+- YouTube 링크 필수
+- 단독 발행 금지
+- 영상의 설계/구조 문서만
+
+**채널:** https://youtube.com/@eduart-engineer
 
 ---
 

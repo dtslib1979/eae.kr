@@ -65,15 +65,32 @@ eae.kr/
 
 ## 4. 카테고리 목록
 
-| slug | 이름 |
+| slug | 이름 | 비고 |
+|------|------|------|
+| **eae-blueprint** | EduArt Engineer Blueprint | ⚠️ 특수 규칙 있음 (아래 참조) |
+| patchtech | Patchtech (기술 패치) | |
+| qsketch | Quick Sketch | |
+| penon | Penon | |
+| mal | Mal | |
+| eml | EML | |
+| phl | PHL | |
+
+### ⚠️ eae-blueprint 카테고리 전용 규칙
+
+이 카테고리는 **EduArt Engineer YouTube 채널의 설계 백엔드**다.
+
+**YouTube 채널:** https://youtube.com/@eduart-engineer
+
+| 규칙 | 설명 |
 |------|------|
-| eae-blueprint | EAE Blueprint (핵심 설계) |
-| patchtech | Patchtech (기술 패치) |
-| qsketch | Quick Sketch |
-| penon | Penon |
-| mal | Mal |
-| eml | EML |
-| phl | PHL |
+| YouTube 링크 필수 | 반드시 관련 영상 링크 포함 |
+| Part1/2/3 구조 필수 | 표준 템플릿 준수 |
+| 단독 발행 금지 | 영상 없이 문서만 발행 ❌ |
+
+```
+이 카테고리의 문서 = YouTube 영상의 설계/구조 레이어
+단독 소비 ❌ → 항상 "영상과 함께" 존재
+```
 
 ---
 

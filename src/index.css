@@ -286,20 +286,20 @@ body:hover .parksy-cursor-dust {
    Mermaid Chalkboard × Excalidraw Styling
    =========================================== */
 
-/* Mermaid 공통 래퍼 – 칠판 위 초크 느낌 */
+/* Mermaid 공통 래퍼 – 굵고 선명하게 */
 .mermaid-chalk svg {
-  width: auto;
-  height: auto;
+  width: 100% !important;
+  height: auto !important;
   max-width: 100%;
-  min-width: 300px;
+  min-height: 400px;
   margin: 0 auto;
-  font-family: "Annie Use Your Telescope", "Courier New", monospace;
+  font-family: system-ui, -apple-system, sans-serif;
   color: #F7FFF5;
 }
 
 .mermaid-wrapper {
-  overflow-x: auto;
-  padding: 1rem 0;
+  width: 100%;
+  padding: 2rem 0;
 }
 
 /* Remove tap highlight overlay (blue box on mobile) */
@@ -307,35 +307,43 @@ svg, svg * {
   -webkit-tap-highlight-color: transparent !important;
 }
 
-/* 노드 스타일 - 손그림 박스 + 살짝 거친 느낌 */
+/* 노드 스타일 - 굵고 선명하게 */
 .mermaid-chalk .node rect,
 .mermaid-chalk .node path,
 .mermaid-chalk .label-container {
-  fill: rgba(10, 30, 22, 0.9);         /* 거의 검정에 가까운 녹색 */
-  stroke: #E6F2E8;
-  stroke-width: 2.2px;
+  fill: rgba(10, 30, 22, 0.95);
+  stroke: #F7FFF5;
+  stroke-width: 3px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  /* 손그림 느낌 */
-  stroke-dasharray: 3 2;
 }
 
-/* 텍스트 – 항상 잘 보이게 */
+/* 텍스트 – 크고 굵게 */
 .mermaid-chalk .label,
 .mermaid-chalk .node text,
 .mermaid-chalk text {
-  fill: #F7FFF5 !important;
-  font-size: max(0.9rem, 14px) !important;
-  font-weight: 500;
+  fill: #FFFFFF !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
 }
 
-/* 엣지(화살표) - 초크로 긋는 선 느낌 */
+.mermaid-chalk .nodeLabel {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.mermaid-chalk .cluster-label .nodeLabel {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
+
+/* 엣지(화살표) - 굵고 선명하게 */
 .mermaid-chalk .edgePath path {
-  stroke: #E6F2E8;
-  stroke-width: 1.8px;
+  stroke: #F7FFF5;
+  stroke-width: 2.5px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 3 3;
 }
 
 /* 화살표 마커 */
@@ -378,25 +386,33 @@ svg, svg * {
 
 /* 클러스터/서브그래프 스타일링 */
 .mermaid-chalk .cluster rect {
-  fill: rgba(10, 30, 22, 0.5);
-  stroke: #E6F2E8;
-  stroke-width: 1.8px;
-  stroke-dasharray: 5 3;
+  fill: rgba(10, 30, 22, 0.6);
+  stroke: #F7FFF5;
+  stroke-width: 2.5px;
 }
 
 .mermaid-chalk .cluster text {
-  fill: #F7FFF5 !important;
+  fill: #FFFFFF !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
 }
 
-/* 모바일에서도 글씨가 안 뭉개지도록 */
+/* 모바일 반응형 */
 @media (max-width: 640px) {
   .mermaid-chalk .label,
-  .mermaid-chalk .node text {
-    font-size: 0.75rem;
+  .mermaid-chalk .node text,
+  .mermaid-chalk .nodeLabel {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+  }
+
+  .mermaid-chalk .cluster text,
+  .mermaid-chalk .cluster-label .nodeLabel {
+    font-size: 16px !important;
   }
 
   .mermaid-chalk svg {
-    min-width: 280px;
+    min-height: 300px;
   }
 }
 

@@ -103,6 +103,7 @@ title_en: "English Title"
 date: "YYYY-MM-DD"
 category: "카테고리-slug"
 published: true
+youtube: "https://youtu.be/VIDEO_ID"  # 선택 - 비디오 URL만! 채널 URL 금지!
 ---
 
 <Part1>
@@ -210,6 +211,18 @@ https://eae.kr 라이브
 - 사용자에게 복붙 요청 금지 (직접 Write/Edit)
 - 불필요한 확인 질문 금지 (판단 후 실행)
 
+### ⚠️ YouTube frontmatter 규칙 (repo-guard 강제)
+
+```
+youtube 필드 사용 시:
+✅ 허용: https://youtu.be/VIDEO_ID
+✅ 허용: https://youtube.com/watch?v=VIDEO_ID
+❌ 금지: https://youtube.com/@채널명 (채널 URL)
+❌ 금지: 비디오 없으면 youtube 필드 자체 생략
+
+비디오 URL 없이 채널 URL 넣으면 빌드 실패함
+```
+
 ---
 
 ## 11. 세션 시작 시 자동 로딩
@@ -233,5 +246,6 @@ AI가 기억하는 게 아니다.
 
 ---
 
-*버전: 2.0*
+*버전: 2.1*
 *마지막 업데이트: 2026-01-02*
+*변경: YouTube URL 검증 규칙 추가 (repo-guard 강제)*

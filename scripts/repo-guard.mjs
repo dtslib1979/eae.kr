@@ -119,4 +119,37 @@ function validateYouTubeUrls() {
 }
 validateYouTubeUrls();
 
+// 8) Part 컴포넌트 다크 테마 강제 - 밝은 배경 사용 금지
+function validateDarkTheme() {
+  const partFiles = [
+    "src/components/mdx/Part1.jsx",
+    "src/components/mdx/Part2.jsx",
+    "src/components/mdx/Part3.jsx",
+  ];
+
+  // 밝은 색상 패턴 (금지)
+  const lightColorPattern = /\b(white|gray-50|gray-100|slate-50|slate-100|amber-50|amber-100|blue-50|blue-100|purple-50|purple-100|pink-50|pink-100|orange-50|orange-100|indigo-50|indigo-100)\b/;
+
+  // prose-invert 필수
+  const proseInvertRequired = /prose-invert/;
+
+  for (const p of partFiles) {
+    if (!exists(p)) continue;
+    const content = read(p);
+    const filename = path.basename(p);
+
+    // 밝은 배경 체크
+    if (lightColorPattern.test(content)) {
+      const match = content.match(lightColorPattern);
+      fail(`${filename}: 밝은 배경 색상 사용 금지!\n  발견: ${match[0]}\n  다크 테마(950/40 등) 사용 필수`);
+    }
+
+    // prose-invert 체크
+    if (!proseInvertRequired.test(content)) {
+      fail(`${filename}: prose-invert 클래스 필수!\n  다크 테마에서 텍스트 가시성 보장을 위해 필수`);
+    }
+  }
+}
+validateDarkTheme();
+
 console.log("\n[REPO-GUARD] ✅ OK (rules satisfied)\n");

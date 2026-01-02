@@ -49,7 +49,7 @@ export default function Part3({ children }) {
       <div className="flex items-center gap-3 mb-6">
         <span className="text-4xl">🗺️</span>
         <h2 className="part-title text-3xl font-bold">
-          Theory Map (Mermaid) – 개념·세계관 도식
+          Theory Map – Concepts & Diagrams
         </h2>
       </div>
       <div ref={mermaidRef} className="prose prose-invert prose-lg max-w-none mermaid-container">

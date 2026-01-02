@@ -19,8 +19,6 @@ tags:
   - EduArtEngineer
 ---
 
-<OpeningFrame videoId="ArreO-I40ns" />
-
 <Part1>
 
 ## In Simple Terms
@@ -119,7 +117,7 @@ The archive grows. Manual work stays flat.
 
 ## Concept Map
 
-```mermaid
+<Mermaid chart={`
 flowchart TD
     subgraph INPUT["Asset Inputs"]
         A[Images] --> N[Normalization]
@@ -141,7 +139,7 @@ flowchart TD
 
     PYTHON[Python Scripts] -.-> PROCESS
     RULES[Fixed Rules] -.-> PROCESS
-```
+`} />
 
 ## Theoretical Background
 

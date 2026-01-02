@@ -4,7 +4,7 @@ export default function Part1({ children }) {
       <div className="flex items-center gap-3 mb-6">
         <span className="text-4xl">👴</span>
         <h2 className="part-title text-3xl font-bold">
-          Grandpa Mode – 비유·서사·쉬운 설명
+          Grandpa Mode – Simple Analogies
         </h2>
       </div>
       <div className="prose prose-invert prose-lg max-w-none">

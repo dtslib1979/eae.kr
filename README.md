@@ -1,27 +1,74 @@
-# eae.kr — START HERE
+# eae.kr — 출판사 운영 매뉴얼
 
-## 이 레포는 뭐냐
+## 📖 발행인 전용 (박씨)
+
+### 새 글 쓸 때
+```
+eae.kr 출판 모드.
+카테고리: [7개 중 선택]
+제목: "제목"
+[내용 던지기]
+```
+끝. 나머지는 Claude가 한다.
+
+### 카테고리 목록
+| 카테고리 | 용도 |
+|---------|------|
+| eae-blueprint | 핵심 설계/철학 |
+| patchtech | 기술 해결책 |
+| qsketch | 빠른 스케치 |
+| penon | Penon |
+| mal | Mal |
+| eml | EML |
+| phl | PHL |
+
+### 미디어 붙일 때
+```
+YouTube: https://youtu.be/xxxxx
+음원: spotify:track:xxxxx
+```
+URL만 던지면 Claude가 알아서 끼워넣음.
+
+### 세션 새로 열렸을 때
+```
+eae.kr 출판 모드.
+```
+이 한 줄이면 Claude가 CLAUDE.md 읽고 즉시 작업 모드.
+
+### ✅ 너만 할 수 있는 것
+- 카테고리 결정
+- 발행 여부 결정
+- URL 제공 (YouTube, 음원)
+- 방향 결정
+
+### 🚫 안 해도 되는 것
+- MDX 문법
+- Git 명령어
+- 파일 경로
+- 배포 버튼
+- 복사 붙여넣기
+
+---
+
+## 🛠️ 시스템 정보
+
+### 이 레포는 뭐냐
 - MDX 문서 생산용 (앱 아님)
 - PWA/SW/manifest 없음 (의도적으로 제거)
 - 브라우저 번역 사용
 
 **Live:** https://eae.kr
 
----
+### 배포 파이프라인
+```
+MDX 파일 생성 → git push main → GitHub Actions → eae.kr 라이브
+```
 
-## 오늘 할 일 (3줄)
-
-1. `src/content/{category}/{slug}.mdx` 추가
-2. `git push origin main`
-3. 배포 확인
-
----
-
-## 금지 (자동 차단됨)
+### 금지 (자동 차단됨)
 
 | ❌ 금지 | 이유 |
 |--------|------|
-| 루트에 .md 추가 | README.md만 허용 |
+| 루트에 .md 추가 | README.md, CLAUDE.md만 허용 |
 | vite-plugin-pwa 설치 | 캐시 문제 |
 | workbox 설치 | PWA 금지 |
 | manifest 파일 추가 | PWA 금지 |
@@ -31,21 +78,18 @@
 
 ---
 
-## MDX 템플릿
+## 📁 파일 구조
 
-```mdx
----
-title: "제목"
-date: "2025-12-18"
-category: "카테고리명"
----
-
-본문
-```
+| 파일 | 용도 |
+|------|------|
+| `README.md` | 이 파일 (발행인 매뉴얼) |
+| `CLAUDE.md` | Claude 에이전트 임무 수첩 |
+| `src/content/` | MDX 콘텐츠 |
+| `src/components/mdx/` | Part1/2/3 등 컴포넌트 |
 
 ---
 
-## 로컬 개발
+## 🔧 로컬 개발 (참고용)
 
 ```bash
 npm install
@@ -53,8 +97,4 @@ npm run dev     # localhost:5173
 npm run build   # guard + vite build
 ```
 
----
-
-## 기술 스택
-
-React 18 + Vite 5 + MDX + TailwindCSS 3 + GitHub Pages
+**기술 스택:** React 18 + Vite 5 + MDX + TailwindCSS 3 + GitHub Pages

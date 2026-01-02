@@ -145,91 +145,35 @@ body:hover .parksy-cursor-dust {
   color: var(--accent-hover);
 }
 
-/* ===========================================
-   Part Components (Light Background Mode)
-   Part1/2/3 use light backgrounds - override dark text
-   =========================================== */
-
-.part-content,
-.part-content.prose {
-  color: #374151 !important; /* gray-700 */
-}
-
-.part-content h1,
-.part-content h2,
-.part-content h3,
-.part-content h4,
-.part-content h5,
-.part-content h6 {
-  color: #111827 !important; /* gray-900 */
-}
-
-.part-content p,
-.part-content li,
-.part-content blockquote,
-.part-content td,
-.part-content th {
-  color: #374151 !important; /* gray-700 */
-}
-
-.part-content strong {
-  color: #111827 !important; /* gray-900 */
-}
-
-.part-content a {
-  color: #2563eb !important; /* blue-600 */
-}
-
-.part-content a:hover {
-  color: #1d4ed8 !important; /* blue-700 */
-}
-
-.part-content code {
-  color: #111827 !important;
-  background-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-.part-content pre {
-  background-color: rgba(0, 0, 0, 0.05) !important;
-}
-
-.part-content pre code {
-  background-color: transparent !important;
-}
-
-/* Accordion inside Part - ensure visibility */
-.part-content details summary {
-  color: #1f2937 !important; /* gray-800 */
-  font-weight: 600;
-}
-
-.part-content details > div {
-  color: #374151 !important; /* gray-700 */
-}
-
-/* Table styling inside Parts */
-.part-content table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.part-content th,
-.part-content td {
-  border: 1px solid #d1d5db !important; /* gray-300 */
-  padding: 0.5rem 1rem;
-}
-
-.part-content th {
-  background-color: rgba(0, 0, 0, 0.05);
-  font-weight: 600;
-}
-
-/* Ensure prose and typography utilities match (outside Parts) */
-.prose:not(.part-content),
+/* Ensure prose and typography utilities match */
+.prose,
 .markdown-body,
 .text-muted,
 .text-soft {
   color: rgba(255,255,255,0.25) !important;
+}
+
+/* Part components use prose-invert - override base prose color */
+.prose-invert {
+  color: #e2e8f0 !important; /* slate-200 */
+}
+
+/* Table styling inside Parts (dark theme) */
+.prose-invert table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.prose-invert th,
+.prose-invert td {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 0.5rem 1rem;
+  color: #e2e8f0 !important;
+}
+
+.prose-invert th {
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
 }
 
 /* 코드나 인라인 강조는 살짝 강하게 */

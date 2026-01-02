@@ -7,7 +7,7 @@ export default function Part1({ children }) {
           Grandpa Mode – 비유·서사·쉬운 설명
         </h2>
       </div>
-      <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+      <div className="part-content prose prose-lg max-w-none">
         {children}
       </div>
     </section>

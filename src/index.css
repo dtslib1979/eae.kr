@@ -145,8 +145,87 @@ body:hover .parksy-cursor-dust {
   color: var(--accent-hover);
 }
 
-/* Ensure prose and typography utilities match */
-.prose,
+/* ===========================================
+   Part Components (Light Background Mode)
+   Part1/2/3 use light backgrounds - override dark text
+   =========================================== */
+
+.part-content,
+.part-content.prose {
+  color: #374151 !important; /* gray-700 */
+}
+
+.part-content h1,
+.part-content h2,
+.part-content h3,
+.part-content h4,
+.part-content h5,
+.part-content h6 {
+  color: #111827 !important; /* gray-900 */
+}
+
+.part-content p,
+.part-content li,
+.part-content blockquote,
+.part-content td,
+.part-content th {
+  color: #374151 !important; /* gray-700 */
+}
+
+.part-content strong {
+  color: #111827 !important; /* gray-900 */
+}
+
+.part-content a {
+  color: #2563eb !important; /* blue-600 */
+}
+
+.part-content a:hover {
+  color: #1d4ed8 !important; /* blue-700 */
+}
+
+.part-content code {
+  color: #111827 !important;
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.part-content pre {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.part-content pre code {
+  background-color: transparent !important;
+}
+
+/* Accordion inside Part - ensure visibility */
+.part-content details summary {
+  color: #1f2937 !important; /* gray-800 */
+  font-weight: 600;
+}
+
+.part-content details > div {
+  color: #374151 !important; /* gray-700 */
+}
+
+/* Table styling inside Parts */
+.part-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.part-content th,
+.part-content td {
+  border: 1px solid #d1d5db !important; /* gray-300 */
+  padding: 0.5rem 1rem;
+}
+
+.part-content th {
+  background-color: rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+/* Ensure prose and typography utilities match (outside Parts) */
+.prose:not(.part-content),
 .markdown-body,
 .text-muted,
 .text-soft {

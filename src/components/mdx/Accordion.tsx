@@ -1,12 +1,12 @@
 export const AccordionItem = ({ title, children }: { title: string; children: React.ReactNode }) => {
   return (
-    <details className="border-b border-white/10 group">
-      <summary className="cursor-pointer py-3 font-semibold flex justify-between items-center list-none" role="button" aria-label={`Toggle ${title}`}>
+    <details className="accordion-item border-b border-gray-300 group">
+      <summary className="cursor-pointer py-3 font-semibold flex justify-between items-center list-none text-gray-800" role="button" aria-label={`Toggle ${title}`}>
         {title}
-        <span className="transition-transform group-open:rotate-180" aria-hidden="true">▼</span>
+        <span className="transition-transform group-open:rotate-180 text-gray-600" aria-hidden="true">▼</span>
       </summary>
 
-      <div className="pb-4 text-gray-300">
+      <div className="pb-4 text-gray-700">
         {children}
       </div>
     </details>
@@ -14,7 +14,7 @@ export const AccordionItem = ({ title, children }: { title: string; children: Re
 };
 
 export const Accordion = ({ children }: { children: React.ReactNode }) => (
-  <div className="w-full flex flex-col gap-2">
+  <div className="accordion w-full flex flex-col gap-2 my-4">
     {children}
   </div>
 );

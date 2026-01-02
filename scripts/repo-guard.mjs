@@ -19,7 +19,7 @@ function read(p) {
 // 1) 루트에 README.md 외 md 파일 금지
 const rootFiles = fs.readdirSync(root);
 const rootMd = rootFiles.filter(f => f.toLowerCase().endsWith(".md"));
-const allowed = new Set(["README.md"]);
+const allowed = new Set(["README.md", "CLAUDE.md"]);
 for (const f of rootMd) {
   if (!allowed.has(f)) fail(`Root .md 금지 위반: ${f} (README.md만 허용)`);
 }

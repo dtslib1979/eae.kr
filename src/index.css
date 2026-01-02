@@ -21,32 +21,32 @@
    =========================================== */
 
 :root {
-  /* Part1 - Grandpa Mode (Amber) */
-  --part1-bg-from: rgba(69, 26, 3, 0.4);
-  --part1-bg-to: rgba(67, 20, 7, 0.3);
-  --part1-border: #f59e0b;
-  --part1-title: #fbbf24;
-  --part1-heading: #fcd34d;
-  --part1-strong: #fde68a;
-  --part1-link: #fbbf24;
+  /* Part1 - Grandpa Mode (Chalk) */
+  --part1-bg-from: rgba(37, 58, 47, 0.6);
+  --part1-bg-to: rgba(30, 45, 38, 0.4);
+  --part1-border: #E6F2E8;
+  --part1-title: #F7FFF5;
+  --part1-heading: #E6F2E8;
+  --part1-strong: #F7FFF5;
+  --part1-link: #E6F2E8;
 
-  /* Part2 - System Architect (Blue) */
-  --part2-bg-from: rgba(23, 37, 84, 0.4);
-  --part2-bg-to: rgba(30, 27, 75, 0.3);
-  --part2-border: #3b82f6;
-  --part2-title: #60a5fa;
-  --part2-heading: #93c5fd;
-  --part2-strong: #bfdbfe;
-  --part2-link: #60a5fa;
+  /* Part2 - System Architect (Chalk) */
+  --part2-bg-from: rgba(37, 58, 47, 0.6);
+  --part2-bg-to: rgba(30, 45, 38, 0.4);
+  --part2-border: #E6F2E8;
+  --part2-title: #F7FFF5;
+  --part2-heading: #E6F2E8;
+  --part2-strong: #F7FFF5;
+  --part2-link: #E6F2E8;
 
-  /* Part3 - Theory Map (Purple) */
-  --part3-bg-from: rgba(59, 7, 100, 0.4);
-  --part3-bg-to: rgba(80, 7, 74, 0.3);
-  --part3-border: #a855f7;
-  --part3-title: #c084fc;
-  --part3-heading: #d8b4fe;
-  --part3-strong: #e9d5ff;
-  --part3-link: #c084fc;
+  /* Part3 - Theory Map (Chalk) */
+  --part3-bg-from: rgba(37, 58, 47, 0.6);
+  --part3-bg-to: rgba(30, 45, 38, 0.4);
+  --part3-border: #E6F2E8;
+  --part3-title: #F7FFF5;
+  --part3-heading: #E6F2E8;
+  --part3-strong: #F7FFF5;
+  --part3-link: #E6F2E8;
 
   /* Common Part styles */
   --part-text: #e2e8f0;
@@ -288,12 +288,18 @@ body:hover .parksy-cursor-dust {
 
 /* Mermaid 공통 래퍼 – 칠판 위 초크 느낌 */
 .mermaid-chalk svg {
-  width: 100%;
-  height: auto;
-  max-width: 640px;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  min-height: 400px;
   margin: 0 auto;
   font-family: "Annie Use Your Telescope", "Courier New", monospace;
   color: #F7FFF5;
+}
+
+.mermaid-wrapper {
+  width: 100%;
+  padding: 2rem 0;
 }
 
 /* Remove tap highlight overlay (blue box on mobile) */
@@ -301,34 +307,43 @@ svg, svg * {
   -webkit-tap-highlight-color: transparent !important;
 }
 
-/* 노드 스타일 - 손그림 박스 + 살짝 거친 느낌 */
+/* 노드 스타일 - 굵고 선명하게 */
 .mermaid-chalk .node rect,
 .mermaid-chalk .node path,
 .mermaid-chalk .label-container {
-  fill: rgba(10, 30, 22, 0.9);         /* 거의 검정에 가까운 녹색 */
-  stroke: #E6F2E8;
-  stroke-width: 2.2px;
+  fill: rgba(10, 30, 22, 0.95);
+  stroke: #F7FFF5;
+  stroke-width: 3px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  /* 손그림 느낌 */
-  stroke-dasharray: 3 2;
 }
 
-/* 텍스트 – 항상 잘 보이게 */
+/* 텍스트 – 크고 굵게 */
 .mermaid-chalk .label,
 .mermaid-chalk .node text,
 .mermaid-chalk text {
-  fill: #F7FFF5 !important;
-  font-size: 0.8rem;
+  fill: #FFFFFF !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
 }
 
-/* 엣지(화살표) - 초크로 긋는 선 느낌 */
+.mermaid-chalk .nodeLabel {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.mermaid-chalk .cluster-label .nodeLabel {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
+
+/* 엣지(화살표) - 굵고 선명하게 */
 .mermaid-chalk .edgePath path {
-  stroke: #E6F2E8;
-  stroke-width: 1.8px;
+  stroke: #F7FFF5;
+  stroke-width: 2.5px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 3 3;
 }
 
 /* 화살표 마커 */
@@ -371,25 +386,33 @@ svg, svg * {
 
 /* 클러스터/서브그래프 스타일링 */
 .mermaid-chalk .cluster rect {
-  fill: rgba(10, 30, 22, 0.5);
-  stroke: #E6F2E8;
-  stroke-width: 1.8px;
-  stroke-dasharray: 5 3;
+  fill: rgba(10, 30, 22, 0.6);
+  stroke: #F7FFF5;
+  stroke-width: 2.5px;
 }
 
 .mermaid-chalk .cluster text {
-  fill: #F7FFF5 !important;
+  fill: #FFFFFF !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
 }
 
-/* 모바일에서도 글씨가 안 뭉개지도록 */
+/* 모바일 반응형 */
 @media (max-width: 640px) {
   .mermaid-chalk .label,
-  .mermaid-chalk .node text {
-    font-size: 0.75rem;
+  .mermaid-chalk .node text,
+  .mermaid-chalk .nodeLabel {
+    font-size: 14px !important;
+    font-weight: 700 !important;
   }
-  
+
+  .mermaid-chalk .cluster text,
+  .mermaid-chalk .cluster-label .nodeLabel {
+    font-size: 16px !important;
+  }
+
   .mermaid-chalk svg {
-    max-width: 100%;
+    min-height: 300px;
   }
 }
 

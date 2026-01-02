@@ -8,42 +8,52 @@ export default function Mermaid({ children, chart }) {
   useEffect(() => {
     // Initialize mermaid only once
     if (!hasRendered.current) {
-      mermaid.initialize({ 
+      mermaid.initialize({
         startOnLoad: false,
         theme: 'base',
-        look: 'handDrawn',
-        fontFamily: '"Annie Use Your Telescope", "Courier New", monospace',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
         themeVariables: {
-          primaryColor: '#ffffff',
-          primaryTextColor: '#eeeeee',
-          primaryBorderColor: '#cccccc',
-          lineColor: '#cccccc',
-          secondaryColor: '#ffffff',
-          tertiaryColor: '#ffffff',
-          textColor: '#eeeeee',
-          mainBkg: 'transparent',
-          nodeBorder: '#cccccc',
-          clusterBkg: 'transparent',
-          clusterBorder: '#cccccc',
-          defaultLinkColor: '#cccccc',
-          titleColor: '#eeeeee',
+          primaryColor: '#0a1e16',
+          primaryTextColor: '#ffffff',
+          primaryBorderColor: '#F7FFF5',
+          lineColor: '#F7FFF5',
+          secondaryColor: '#0a1e16',
+          tertiaryColor: '#0a1e16',
+          textColor: '#ffffff',
+          mainBkg: '#0a1e16',
+          nodeBorder: '#F7FFF5',
+          clusterBkg: 'rgba(10, 30, 22, 0.6)',
+          clusterBorder: '#F7FFF5',
+          defaultLinkColor: '#F7FFF5',
+          titleColor: '#ffffff',
           edgeLabelBackground: '#253A2F',
-          edgeLabelColor: '#eeeeee',
-          fontSize: '14px',
+          edgeLabelColor: '#ffffff',
+          fontSize: '18px',
         },
         themeCSS: `
           .node rect, .node polygon, .node circle {
-            stroke-width: 2px !important;
-            stroke: #ccc !important;
-            fill: rgba(255,255,255,0.08) !important;
-            stroke-dasharray: 3 3 !important;
+            stroke-width: 3px !important;
+            stroke: #F7FFF5 !important;
+            fill: rgba(10, 30, 22, 0.95) !important;
+          }
+          .nodeLabel, .label, text {
+            font-size: 18px !important;
+            font-weight: 700 !important;
+            fill: #ffffff !important;
+          }
+          .cluster-label .nodeLabel {
+            font-size: 20px !important;
+            font-weight: 800 !important;
           }
           .edgeLabel, .label {
-            color: #eee !important;
+            color: #fff !important;
           }
-          .flowchart-link {
-            stroke: #ccc !important;
-            stroke-dasharray: 3 3 !important;
+          .flowchart-link, .edgePath path {
+            stroke: #F7FFF5 !important;
+            stroke-width: 2.5px !important;
+          }
+          .cluster rect {
+            stroke-width: 2.5px !important;
           }
         `,
         securityLevel: 'strict',

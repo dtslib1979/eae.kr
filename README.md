@@ -1,47 +1,40 @@
-# eae.kr — START HERE
+# eae.kr
 
-## 이 레포는 뭐냐
-- MDX 문서 생산용 (앱 아님)
-- PWA/SW/manifest 없음 (의도적으로 제거)
-- 브라우저 번역 사용
+AI 협업 기반 MDX 출판 시스템
 
 **Live:** https://eae.kr
 
 ---
 
-## 오늘 할 일 (3줄)
+## 이 레포는 뭐냐
 
-1. `src/content/{category}/{slug}.mdx` 추가
-2. `git push origin main`
-3. 배포 확인
-
----
-
-## 금지 (자동 차단됨)
-
-| ❌ 금지 | 이유 |
-|--------|------|
-| 루트에 .md 추가 | README.md만 허용 |
-| vite-plugin-pwa 설치 | 캐시 문제 |
-| workbox 설치 | PWA 금지 |
-| manifest 파일 추가 | PWA 금지 |
-| service worker 코드 | PWA 금지 |
-
-> `npm run build` 시 `repo-guard.mjs`가 자동 검사 → 위반 시 빌드 실패
+- MDX 기반 콘텐츠 출판 플랫폼
+- AI 에이전트 협업 구조 (Claude, ChatGPT, Grok)
+- 자동 배포 파이프라인 (GitHub Actions → GitHub Pages)
 
 ---
 
-## MDX 템플릿
+## 구조
 
-```mdx
----
-title: "제목"
-date: "2025-12-18"
-category: "카테고리명"
----
-
-본문
 ```
+src/content/     → MDX 콘텐츠
+src/components/  → Part1/2/3 등 컴포넌트
+CLAUDE.md        → AI 에이전트 엔트리 포인트
+```
+
+---
+
+## 배포
+
+```
+MDX 작성 → git push main → 자동 빌드 → eae.kr 라이브
+```
+
+---
+
+## 기술 스택
+
+React 18 · Vite 5 · MDX · TailwindCSS 3 · GitHub Pages
 
 ---
 
@@ -52,9 +45,3 @@ npm install
 npm run dev     # localhost:5173
 npm run build   # guard + vite build
 ```
-
----
-
-## 기술 스택
-
-React 18 + Vite 5 + MDX + TailwindCSS 3 + GitHub Pages

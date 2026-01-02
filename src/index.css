@@ -288,12 +288,18 @@ body:hover .parksy-cursor-dust {
 
 /* Mermaid 공통 래퍼 – 칠판 위 초크 느낌 */
 .mermaid-chalk svg {
-  width: 100%;
+  width: auto;
   height: auto;
-  max-width: 640px;
+  max-width: 100%;
+  min-width: 300px;
   margin: 0 auto;
   font-family: "Annie Use Your Telescope", "Courier New", monospace;
   color: #F7FFF5;
+}
+
+.mermaid-wrapper {
+  overflow-x: auto;
+  padding: 1rem 0;
 }
 
 /* Remove tap highlight overlay (blue box on mobile) */
@@ -387,9 +393,9 @@ svg, svg * {
   .mermaid-chalk .node text {
     font-size: 0.75rem;
   }
-  
+
   .mermaid-chalk svg {
-    max-width: 100%;
+    min-width: 280px;
   }
 }
 

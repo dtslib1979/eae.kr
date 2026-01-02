@@ -15,45 +15,52 @@ export default function Mermaid({ children, chart }) {
         themeVariables: {
           primaryColor: '#0a1e16',
           primaryTextColor: '#ffffff',
-          primaryBorderColor: '#F7FFF5',
-          lineColor: '#F7FFF5',
+          primaryBorderColor: '#ffffff',
+          lineColor: '#ffffff',
           secondaryColor: '#0a1e16',
           tertiaryColor: '#0a1e16',
           textColor: '#ffffff',
           mainBkg: '#0a1e16',
-          nodeBorder: '#F7FFF5',
-          clusterBkg: 'rgba(10, 30, 22, 0.6)',
-          clusterBorder: '#F7FFF5',
-          defaultLinkColor: '#F7FFF5',
+          nodeBorder: '#ffffff',
+          clusterBkg: 'rgba(10, 30, 22, 0.7)',
+          clusterBorder: '#ffffff',
+          defaultLinkColor: '#ffffff',
           titleColor: '#ffffff',
           edgeLabelBackground: '#253A2F',
           edgeLabelColor: '#ffffff',
-          fontSize: '18px',
+          fontSize: '24px',
         },
         themeCSS: `
           .node rect, .node polygon, .node circle {
-            stroke-width: 3px !important;
-            stroke: #F7FFF5 !important;
+            stroke-width: 4px !important;
+            stroke: #ffffff !important;
             fill: rgba(10, 30, 22, 0.95) !important;
           }
-          .nodeLabel, .label, text {
-            font-size: 18px !important;
-            font-weight: 700 !important;
+          .nodeLabel, .label, text, tspan {
+            font-size: 22px !important;
+            font-weight: 900 !important;
             fill: #ffffff !important;
           }
-          .cluster-label .nodeLabel {
-            font-size: 20px !important;
-            font-weight: 800 !important;
+          .cluster-label .nodeLabel, .cluster-label text {
+            font-size: 26px !important;
+            font-weight: 900 !important;
+            fill: #ffffff !important;
           }
           .edgeLabel, .label {
-            color: #fff !important;
+            color: #ffffff !important;
+            font-weight: 900 !important;
           }
           .flowchart-link, .edgePath path {
-            stroke: #F7FFF5 !important;
-            stroke-width: 2.5px !important;
+            stroke: #ffffff !important;
+            stroke-width: 3px !important;
           }
           .cluster rect {
-            stroke-width: 2.5px !important;
+            stroke: #ffffff !important;
+            stroke-width: 3px !important;
+          }
+          .marker {
+            fill: #ffffff !important;
+            stroke: #ffffff !important;
           }
         `,
         securityLevel: 'strict',

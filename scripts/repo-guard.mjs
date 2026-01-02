@@ -119,19 +119,17 @@ function validateYouTubeUrls() {
 }
 validateYouTubeUrls();
 
-// 8) Part 컴포넌트 디자인 토큰 강제 - 색상 하드코딩 금지
-function validateDesignTokens() {
+// 8) Part 컴포넌트 디자인 잠금 - 색상 하드코딩 금지
+// 핵심: Part1/2/3만 엄격 체크 (다른 컴포넌트는 디자인 시스템의 일부로 허용)
+function validatePartComponents() {
   const partFiles = [
     "src/components/mdx/Part1.jsx",
     "src/components/mdx/Part2.jsx",
     "src/components/mdx/Part3.jsx",
   ];
 
-  // Tailwind 색상 클래스 패턴 (금지) - 색상은 CSS 토큰으로만!
-  const colorClassPattern = /\b(text|bg|border|from|to)-(amber|blue|purple|pink|orange|indigo|gray|slate|white|black)-\d+/;
-
-  // prose-invert 필수
-  const proseInvertRequired = /prose-invert/;
+  // Tailwind 색상 클래스 패턴 (Part에서 금지) - 색상은 CSS 토큰으로만!
+  const colorClassPattern = /\b(text|bg|border|from|to|via)-(amber|blue|purple|pink|orange|indigo|gray|slate|white|black|red|green|yellow|cyan|rose|emerald|violet|fuchsia|lime|sky|teal)-\d+/;
 
   for (const p of partFiles) {
     if (!exists(p)) continue;
@@ -141,15 +139,15 @@ function validateDesignTokens() {
     // 색상 하드코딩 체크
     if (colorClassPattern.test(content)) {
       const match = content.match(colorClassPattern);
-      fail(`${filename}: 색상 하드코딩 금지!\n  발견: ${match[0]}\n  색상은 index.css 토큰으로만 관리 (--part1-*, --part2-*, --part3-*)`);
+      fail(`${filename}: 색상 하드코딩 금지!\n  발견: ${match[0]}\n  Part 컴포넌트는 클래스명(part1-grandpa-mode 등)만 사용\n  색상은 index.css 토큰에서 관리`);
     }
 
-    // prose-invert 체크
-    if (!proseInvertRequired.test(content)) {
-      fail(`${filename}: prose-invert 클래스 필수!\n  다크 테마에서 텍스트 가시성 보장을 위해 필수`);
+    // prose-invert 필수 체크
+    if (!content.includes("prose-invert")) {
+      fail(`${filename}: prose-invert 클래스 필수!\n  다크 테마 텍스트 가시성 보장을 위해 필수`);
     }
   }
 }
-validateDesignTokens();
+validatePartComponents();
 
 console.log("\n[REPO-GUARD] ✅ OK (rules satisfied)\n");

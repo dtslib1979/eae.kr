@@ -199,4 +199,46 @@ function validateDesignTokens() {
 }
 validateDesignTokens();
 
+// 10) MDX 콘텐츠 영문 전용 - 한글 감지 시 빌드 실패
+function validateEnglishOnly() {
+  const contentDir = path.join(root, "src/content");
+  const categories = fs.readdirSync(contentDir).filter(f =>
+    fs.statSync(path.join(contentDir, f)).isDirectory()
+  );
+
+  // 한글 패턴 (가-힣)
+  const koreanPattern = /[\uAC00-\uD7AF]/;
+
+  for (const cat of categories) {
+    const catDir = path.join(contentDir, cat);
+    const files = fs.readdirSync(catDir).filter(f => f.endsWith(".mdx"));
+
+    for (const file of files) {
+      const filePath = path.join(catDir, file);
+      const content = fs.readFileSync(filePath, "utf8");
+
+      // frontmatter 추출
+      const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+      if (!fmMatch) continue;
+
+      // published: true인 파일만 체크
+      if (!fmMatch[1].includes("published: true")) continue;
+
+      // frontmatter 제외하고 본문만 추출
+      const bodyMatch = content.match(/^---[\s\S]*?---\n([\s\S]*)$/);
+      if (!bodyMatch) continue;
+
+      const body = bodyMatch[1];
+
+      // 한글 감지
+      if (koreanPattern.test(body)) {
+        const match = body.match(koreanPattern);
+        const lineNum = body.substring(0, body.indexOf(match[0])).split('\n').length;
+        fail(`${cat}/${file}: Korean detected (line ~${lineNum})\n  Content must be English only\n  한글 금지 - 영문만 허용`);
+      }
+    }
+  }
+}
+validateEnglishOnly();
+
 console.log("\n[REPO-GUARD] ✅ OK (rules satisfied)\n");

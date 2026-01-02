@@ -6,9 +6,9 @@
 export const CATEGORIES = [
   {
     slug: 'eae-blueprint',
-    name: '🏗️ EduArt Engineer Blueprint',
-    icon: '🏗️',
-    // 이 카테고리는 EduArt Engineer YouTube 채널의 설계 백엔드
+    name: '🎨 ArtRemix w/AI',
+    icon: '🎨',
+    // 이 카테고리는 ArtRemix w/AI YouTube 채널의 설계 백엔드
     // 단독 콘텐츠 ❌ → YouTube 영상에 종속된 설계/구조 문서
     youtubeChannel: 'https://youtube.com/@eduart-engineer',
     youtubeShorts: 'https://youtu.be/6T3mibse3Q4?si=bgubKNvV6LjEobqC',

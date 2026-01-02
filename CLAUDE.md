@@ -67,7 +67,7 @@ eae.kr/
 
 | slug | 이름 | 비고 |
 |------|------|------|
-| **eae-blueprint** | EduArt Engineer Blueprint | ⚠️ 특수 규칙 있음 (아래 참조) |
+| **eae-blueprint** | ArtRemix w/AI | ⚠️ 특수 규칙 있음 (아래 참조) |
 | patchtech | Patchtech (기술 패치) | |
 | qsketch | Quick Sketch | |
 | penon | Penon | |
@@ -77,7 +77,7 @@ eae.kr/
 
 ### ⚠️ eae-blueprint 카테고리 전용 규칙
 
-이 카테고리는 **EduArt Engineer YouTube 채널의 설계 백엔드**다.
+이 카테고리는 **ArtRemix w/AI YouTube 채널의 설계 백엔드**다.
 
 **YouTube 채널:** https://youtube.com/@eduart-engineer
 

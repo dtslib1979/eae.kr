@@ -150,4 +150,53 @@ function validatePartComponents() {
 }
 validatePartComponents();
 
+// 9) index.css 디자인 토큰 무결성 검증 - 필수 토큰 존재 확인
+function validateDesignTokens() {
+  const cssPath = "src/index.css";
+  if (!exists(cssPath)) {
+    fail("src/index.css 없음 - 디자인 토큰 파일 필수");
+  }
+
+  const css = read(cssPath);
+
+  // 필수 Part 토큰 확인
+  const requiredTokens = [
+    "--part1-bg-from",
+    "--part1-border",
+    "--part1-title",
+    "--part2-bg-from",
+    "--part2-border",
+    "--part2-title",
+    "--part3-bg-from",
+    "--part3-border",
+    "--part3-title",
+  ];
+
+  for (const token of requiredTokens) {
+    if (!css.includes(token)) {
+      fail(`index.css: 필수 디자인 토큰 누락 - ${token}\n  디자인 토큰은 삭제/수정 금지`);
+    }
+  }
+
+  // 필수 Part 클래스 확인
+  const requiredClasses = [
+    ".part1-grandpa-mode",
+    ".part2-system-architect",
+    ".part3-theory-map",
+  ];
+
+  for (const cls of requiredClasses) {
+    if (!css.includes(cls)) {
+      fail(`index.css: 필수 Part 클래스 누락 - ${cls}\n  Part 스타일 클래스는 삭제 금지`);
+    }
+  }
+
+  // 다크 테마 검증 - 밝은 배경색 토큰 사용 금지
+  const lightBgPattern = /--part\d-bg-from:\s*rgba?\([^)]*(?:255|250|245|240|235|230|225|220)/;
+  if (lightBgPattern.test(css)) {
+    fail(`index.css: Part 배경에 밝은 색상 금지\n  다크 테마 유지 필수 (amber-950, blue-950, purple-950 계열)`);
+  }
+}
+validateDesignTokens();
+
 console.log("\n[REPO-GUARD] ✅ OK (rules satisfied)\n");

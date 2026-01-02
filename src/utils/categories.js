@@ -4,12 +4,19 @@
  */
 
 export const CATEGORIES = [
-  { 
-    slug: 'eae-blueprint', 
-    name: '🏗️ EAE Blueprint', 
+  {
+    slug: 'eae-blueprint',
+    name: '🏗️ EduArt Engineer Blueprint',
     icon: '🏗️',
-    // YouTube video for EAE Blueprint category card
-    youtubeShorts: 'https://youtu.be/6T3mibse3Q4?si=bgubKNvV6LjEobqC'
+    // 이 카테고리는 EduArt Engineer YouTube 채널의 설계 백엔드
+    // 단독 콘텐츠 ❌ → YouTube 영상에 종속된 설계/구조 문서
+    youtubeChannel: 'https://youtube.com/@eduart-engineer',
+    youtubeShorts: 'https://youtu.be/6T3mibse3Q4?si=bgubKNvV6LjEobqC',
+    rules: {
+      requiresYouTubeLink: true,  // 반드시 YouTube 영상 링크 포함
+      requiresPart123: true,       // Part1/2/3 구조 필수
+      standalonePublish: false     // 단독 발행 금지
+    }
   },
   { slug: 'qsketch', name: 'Quick Sketch' },
   { slug: 'penon', name: 'Penon' },

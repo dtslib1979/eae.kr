@@ -210,6 +210,7 @@ https://eae.kr 라이브
 - 루트에 README.md, CLAUDE.md 외 .md 금지
 - 사용자에게 복붙 요청 금지 (직접 Write/Edit)
 - 불필요한 확인 질문 금지 (판단 후 실행)
+- **컴포넌트 스타일 임의 변경 절대 금지**
 
 ### ⚠️ YouTube frontmatter 규칙 (repo-guard 강제)
 
@@ -221,6 +222,150 @@ youtube 필드 사용 시:
 ❌ 금지: 비디오 없으면 youtube 필드 자체 생략
 
 비디오 URL 없이 채널 URL 넣으면 빌드 실패함
+```
+
+### 🎨 디자인 시스템 (절대 불변)
+
+```
+핵심 원칙: 콘텐츠 변경 가능 / 디자인 변경 금지
+Content Allowed / Design Locked
+```
+
+---
+
+#### 디자인 아키텍처
+
+| 레이어 | 파일 | 역할 | Claude 수정 |
+|--------|------|------|-------------|
+| **토큰 (Source of Truth)** | `src/index.css` | 색상, 간격, 폰트 정의 | ❌ 금지 |
+| **구조 컴포넌트** | `Part1/2/3.jsx` | 레이아웃 + 클래스명 | ❌ 금지 |
+| **콘텐츠** | `src/content/**/*.mdx` | 실제 콘텐츠 | ✅ 허용 |
+
+---
+
+#### 전역 테마: PARKSY CHALKBOARD
+
+```css
+배경: #253A2F (parksy-chalk-base) - 다크 그린 칠판
+텍스트: 밝은 색 (slate-50 ~ slate-300)
+악센트: Part별 고유 색상 (amber, blue, purple)
+
+⚠️ 모든 컴포넌트는 다크 테마 기준!
+   밝은 배경(white, gray-50, amber-50 등) 사용 절대 금지
+```
+
+---
+
+#### Part 컴포넌트 계약 (Component Contract)
+
+**Part1 (Grandpa Mode)**
+```
+클래스: part1-grandpa-mode
+배경: amber-950/40 (다크)
+악센트: amber-400/500
+아이콘: 👴
+```
+
+**Part2 (System Architect)**
+```
+클래스: part2-system-architect
+배경: blue-950/40 (다크)
+악센트: blue-400/500
+아이콘: 🏗️
+```
+
+**Part3 (Theory Map)**
+```
+클래스: part3-theory-map
+배경: purple-950/40 (다크)
+악센트: purple-400/500
+아이콘: 🗺️
+```
+
+---
+
+#### Claude 행동 규칙
+
+| ✅ 허용 | ❌ 금지 |
+|---------|---------|
+| MDX 파일 생성/수정 | index.css 수정 |
+| 콘텐츠 텍스트 변경 | Part 컴포넌트 수정 |
+| frontmatter 설정 | Tailwind 색상 클래스 추가 |
+| `<Part1>` 사용 | `className="bg-amber-50"` 추가 |
+| 컴포넌트 조립 | 컴포넌트 스타일 변경 |
+| 디자인 문제 보고 | 디자인 문제 해결 시도 |
+
+---
+
+#### ⛔ 디자인 문제 발생 시 행동 (절대 규칙)
+
+```
+디자인은 고치는 것이 아니라 고정하는 것이다.
+디자인 문제 = 해결 대상 ❌ → 중단 조건 ⭕
+```
+
+**디자인 문제 감지 시 절차:**
+
+1. 작업 즉시 중단
+2. 아래 형식으로 보고만 수행:
+
+```
+[DESIGN ERROR]
+파일: (파일명)
+문제: (요약)
+조치: 수정 불가 — 발행인(Parksy) 지시 대기
+```
+
+3. 추가 행동 금지
+4. 질문 금지
+5. 대안 제시 금지
+6. "텍스트가 안 보여서 고쳤다" 식의 임시 수정 절대 금지
+
+---
+
+#### 색상 변경 요청 시 대응
+
+```
+사용자: "Part1 색상 바꿔줘"
+
+Claude 대응:
+1. "index.css의 --part1-* 토큰을 수정해야 합니다"
+2. "직접 수정하시겠습니까, 아니면 제가 토큰만 수정할까요?"
+3. 컴포넌트 파일은 절대 건드리지 않음
+
+⚠️ 토큰 수정도 발행인(Parksy) 승인 필요
+```
+
+---
+
+#### Quality Gate (repo-guard 자동 검증)
+
+| 검사 항목 | 위반 시 |
+|----------|---------|
+| Part*.jsx에 색상 클래스 | 빌드 실패 |
+| Part*.jsx에 prose-invert 없음 | 빌드 실패 |
+| youtube 필드에 채널 URL | 빌드 실패 |
+| PWA 관련 파일/의존성 | 빌드 실패 |
+
+```
+npm run guard → 통과해야 빌드 진행
+위반 시 자동 차단, 수동 배포 불가
+```
+
+---
+
+#### Single Source of Truth
+
+```
+디자인 토큰 위치: src/index.css
+├── --part1-bg-from, --part1-bg-to, --part1-border, --part1-title
+├── --part2-bg-from, --part2-bg-to, --part2-border, --part2-title
+├── --part3-bg-from, --part3-bg-to, --part3-border, --part3-title
+├── --part-text, --part-radius, --part-padding
+└── .part1-grandpa-mode, .part2-system-architect, .part3-theory-map
+
+색상 바꾸려면 여기만 수정 → 전체 반영
+컴포넌트는 클래스명만 참조 → 색상 로직 없음
 ```
 
 ---
@@ -246,6 +391,6 @@ AI가 기억하는 게 아니다.
 
 ---
 
-*버전: 2.1*
+*버전: 3.1*
 *마지막 업데이트: 2026-01-02*
-*변경: YouTube URL 검증 규칙 추가 (repo-guard 강제)*
+*변경: 디자인 에러 대응 규칙 추가 - "중단 후 보고" 프로토콜, [DESIGN ERROR] 포맷*

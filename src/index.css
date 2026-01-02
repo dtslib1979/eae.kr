@@ -307,49 +307,53 @@ svg, svg * {
   -webkit-tap-highlight-color: transparent !important;
 }
 
-/* 노드 스타일 - 굵고 선명하게 */
+/* 노드 스타일 - 최대 굵기, 순백 */
 .mermaid-chalk .node rect,
 .mermaid-chalk .node path,
 .mermaid-chalk .label-container {
   fill: rgba(10, 30, 22, 0.95);
-  stroke: #F7FFF5;
-  stroke-width: 3px;
+  stroke: #ffffff;
+  stroke-width: 4px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* 텍스트 – 크고 굵게 */
+/* 텍스트 – 최대 크기, 최대 굵기, 순백 */
 .mermaid-chalk .label,
 .mermaid-chalk .node text,
-.mermaid-chalk text {
-  fill: #FFFFFF !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
+.mermaid-chalk text,
+.mermaid-chalk tspan {
+  fill: #ffffff !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
   letter-spacing: 0.5px;
 }
 
 .mermaid-chalk .nodeLabel {
-  font-size: 18px !important;
-  font-weight: 700 !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  fill: #ffffff !important;
 }
 
-.mermaid-chalk .cluster-label .nodeLabel {
-  font-size: 20px !important;
-  font-weight: 800 !important;
+.mermaid-chalk .cluster-label .nodeLabel,
+.mermaid-chalk .cluster-label text {
+  font-size: 26px !important;
+  font-weight: 900 !important;
+  fill: #ffffff !important;
 }
 
-/* 엣지(화살표) - 굵고 선명하게 */
+/* 엣지(화살표) - 굵고 흰색 */
 .mermaid-chalk .edgePath path {
-  stroke: #F7FFF5;
-  stroke-width: 2.5px;
+  stroke: #ffffff;
+  stroke-width: 3px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 /* 화살표 마커 */
 .mermaid-chalk .marker {
-  fill: #E6F2E8;
-  stroke: #E6F2E8;
+  fill: #ffffff;
+  stroke: #ffffff;
 }
 
 /* 엣지 레이블 배경 */
@@ -386,33 +390,35 @@ svg, svg * {
 
 /* 클러스터/서브그래프 스타일링 */
 .mermaid-chalk .cluster rect {
-  fill: rgba(10, 30, 22, 0.6);
-  stroke: #F7FFF5;
-  stroke-width: 2.5px;
+  fill: rgba(10, 30, 22, 0.7);
+  stroke: #ffffff;
+  stroke-width: 3px;
 }
 
 .mermaid-chalk .cluster text {
-  fill: #FFFFFF !important;
-  font-size: 20px !important;
-  font-weight: 800 !important;
+  fill: #ffffff !important;
+  font-size: 26px !important;
+  font-weight: 900 !important;
 }
 
 /* 모바일 반응형 */
 @media (max-width: 640px) {
   .mermaid-chalk .label,
   .mermaid-chalk .node text,
-  .mermaid-chalk .nodeLabel {
-    font-size: 14px !important;
-    font-weight: 700 !important;
+  .mermaid-chalk .nodeLabel,
+  .mermaid-chalk tspan {
+    font-size: 16px !important;
+    font-weight: 900 !important;
   }
 
   .mermaid-chalk .cluster text,
   .mermaid-chalk .cluster-label .nodeLabel {
-    font-size: 16px !important;
+    font-size: 18px !important;
+    font-weight: 900 !important;
   }
 
   .mermaid-chalk svg {
-    min-height: 300px;
+    min-height: 350px;
   }
 }
 

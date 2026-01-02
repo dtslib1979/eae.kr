@@ -119,16 +119,16 @@ function validateYouTubeUrls() {
 }
 validateYouTubeUrls();
 
-// 8) Part 컴포넌트 다크 테마 강제 - 밝은 배경 사용 금지
-function validateDarkTheme() {
+// 8) Part 컴포넌트 디자인 토큰 강제 - 색상 하드코딩 금지
+function validateDesignTokens() {
   const partFiles = [
     "src/components/mdx/Part1.jsx",
     "src/components/mdx/Part2.jsx",
     "src/components/mdx/Part3.jsx",
   ];
 
-  // 밝은 색상 패턴 (금지)
-  const lightColorPattern = /\b(white|gray-50|gray-100|slate-50|slate-100|amber-50|amber-100|blue-50|blue-100|purple-50|purple-100|pink-50|pink-100|orange-50|orange-100|indigo-50|indigo-100)\b/;
+  // Tailwind 색상 클래스 패턴 (금지) - 색상은 CSS 토큰으로만!
+  const colorClassPattern = /\b(text|bg|border|from|to)-(amber|blue|purple|pink|orange|indigo|gray|slate|white|black)-\d+/;
 
   // prose-invert 필수
   const proseInvertRequired = /prose-invert/;
@@ -138,10 +138,10 @@ function validateDarkTheme() {
     const content = read(p);
     const filename = path.basename(p);
 
-    // 밝은 배경 체크
-    if (lightColorPattern.test(content)) {
-      const match = content.match(lightColorPattern);
-      fail(`${filename}: 밝은 배경 색상 사용 금지!\n  발견: ${match[0]}\n  다크 테마(950/40 등) 사용 필수`);
+    // 색상 하드코딩 체크
+    if (colorClassPattern.test(content)) {
+      const match = content.match(colorClassPattern);
+      fail(`${filename}: 색상 하드코딩 금지!\n  발견: ${match[0]}\n  색상은 index.css 토큰으로만 관리 (--part1-*, --part2-*, --part3-*)`);
     }
 
     // prose-invert 체크
@@ -150,6 +150,6 @@ function validateDarkTheme() {
     }
   }
 }
-validateDarkTheme();
+validateDesignTokens();
 
 console.log("\n[REPO-GUARD] ✅ OK (rules satisfied)\n");

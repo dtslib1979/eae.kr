@@ -14,7 +14,84 @@
   }
 }
 
-/* PARKSY WORLD Chalkboard Global Theme */
+/* ===========================================
+   PARKSY DESIGN TOKENS (절대 불변)
+   Part 컴포넌트는 이 토큰만 참조
+   컴포넌트에서 색상 직접 지정 금지!
+   =========================================== */
+
+:root {
+  /* Part1 - Grandpa Mode (Amber) */
+  --part1-bg-from: rgba(69, 26, 3, 0.4);
+  --part1-bg-to: rgba(67, 20, 7, 0.3);
+  --part1-border: #f59e0b;
+  --part1-title: #fbbf24;
+  --part1-heading: #fcd34d;
+  --part1-strong: #fde68a;
+  --part1-link: #fbbf24;
+
+  /* Part2 - System Architect (Blue) */
+  --part2-bg-from: rgba(23, 37, 84, 0.4);
+  --part2-bg-to: rgba(30, 27, 75, 0.3);
+  --part2-border: #3b82f6;
+  --part2-title: #60a5fa;
+  --part2-heading: #93c5fd;
+  --part2-strong: #bfdbfe;
+  --part2-link: #60a5fa;
+
+  /* Part3 - Theory Map (Purple) */
+  --part3-bg-from: rgba(59, 7, 100, 0.4);
+  --part3-bg-to: rgba(80, 7, 74, 0.3);
+  --part3-border: #a855f7;
+  --part3-title: #c084fc;
+  --part3-heading: #d8b4fe;
+  --part3-strong: #e9d5ff;
+  --part3-link: #c084fc;
+
+  /* Common Part styles */
+  --part-text: #e2e8f0;
+  --part-text-muted: #cbd5e1;
+  --part-radius: 1rem;
+  --part-padding: 2rem;
+}
+
+/* Part1 styling from tokens */
+.part1-grandpa-mode {
+  background: linear-gradient(to bottom right, var(--part1-bg-from), var(--part1-bg-to));
+  border-left: 4px solid var(--part1-border);
+  border-radius: var(--part-radius);
+  padding: var(--part-padding);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+.part1-grandpa-mode .part-title { color: var(--part1-title); }
+
+/* Part2 styling from tokens */
+.part2-system-architect {
+  background: linear-gradient(to bottom right, var(--part2-bg-from), var(--part2-bg-to));
+  border-left: 4px solid var(--part2-border);
+  border-radius: var(--part-radius);
+  padding: var(--part-padding);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+.part2-system-architect .part-title { color: var(--part2-title); }
+
+/* Part3 styling from tokens */
+.part3-theory-map {
+  background: linear-gradient(to bottom right, var(--part3-bg-from), var(--part3-bg-to));
+  border-left: 4px solid var(--part3-border);
+  border-radius: var(--part-radius);
+  padding: var(--part-padding);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+.part3-theory-map .part-title { color: var(--part3-title); }
+
+/* ===========================================
+   PARKSY WORLD Chalkboard Global Theme
+   =========================================== */
+
 :root {
   /* 1. Core Base – 네가 사랑한 원조 초록 */
   --parksy-chalk-base: #253A2F;

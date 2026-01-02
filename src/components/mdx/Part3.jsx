@@ -45,14 +45,14 @@ export default function Part3({ children }) {
   }, [children]);
 
   return (
-    <section className="part3-theory-map my-12 p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border-l-4 border-purple-600 shadow-md">
+    <section className="part3-theory-map my-12 p-8 bg-gradient-to-br from-purple-950/40 to-pink-950/30 rounded-2xl border-l-4 border-purple-500 shadow-lg backdrop-blur-sm">
       <div className="flex items-center gap-3 mb-6">
         <span className="text-4xl">🗺️</span>
-        <h2 className="text-3xl font-bold text-purple-900">
+        <h2 className="text-3xl font-bold text-purple-400">
           Theory Map (Mermaid) – 개념·세계관 도식
         </h2>
       </div>
-      <div ref={mermaidRef} className="part-content prose prose-lg max-w-none mermaid-container">
+      <div ref={mermaidRef} className="prose prose-invert prose-lg max-w-none mermaid-container prose-headings:text-purple-300 prose-p:text-slate-200 prose-strong:text-purple-200 prose-a:text-purple-400">
         {children}
       </div>
     </section>

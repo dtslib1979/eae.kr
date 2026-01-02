@@ -1,58 +1,13 @@
-import { useEffect, useRef } from 'react';
-import mermaid from 'mermaid';
-
 export default function Part3({ children }) {
-  const mermaidRef = useRef(null);
-  const hasRendered = useRef(false);
-
-  useEffect(() => {
-    // Initialize mermaid only once
-    if (!hasRendered.current) {
-      mermaid.initialize({
-        startOnLoad: true,
-        theme: 'neutral',
-        look: 'handDrawn',
-        fontFamily: 'Marker Felt, Cabin Sketch, Comic Sans MS',
-        securityLevel: 'strict',
-      });
-      hasRendered.current = true;
-    }
-
-    // Render mermaid diagrams
-    if (mermaidRef.current) {
-      const mermaidElements = mermaidRef.current.querySelectorAll('.language-mermaid, pre code.language-mermaid');
-      mermaidElements.forEach((element, index) => {
-        const code = element.textContent;
-        const id = `mermaid-${Date.now()}-${index}`;
-        const container = document.createElement('div');
-        container.className = 'mermaid';
-        container.id = id;
-        container.textContent = code;
-
-        // Check if parentElement exists before replacing
-        if (element.parentElement) {
-          element.parentElement.replaceWith(container);
-        }
-      });
-
-      // Use timeout to prevent rapid re-renders
-      const timer = setTimeout(() => {
-        mermaid.run();
-      }, 100);
-
-      return () => clearTimeout(timer);
-    }
-  }, [children]);
-
   return (
     <section className="part3-theory-map my-12">
       <div className="flex items-center gap-3 mb-6">
         <span className="text-4xl">🗺️</span>
         <h2 className="part-title text-3xl font-bold">
-          Theory Map (Mermaid) – 개념·세계관 도식
+          Theory Map – Concepts & Diagrams
         </h2>
       </div>
-      <div ref={mermaidRef} className="prose prose-invert prose-lg max-w-none mermaid-container">
+      <div className="prose prose-invert prose-lg max-w-none">
         {children}
       </div>
     </section>

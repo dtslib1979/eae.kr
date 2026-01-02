@@ -98,36 +98,69 @@ eae.kr/
 
 ```mdx
 ---
-title: "제목"
+title: "English Title"
 title_en: "English Title"
 date: "YYYY-MM-DD"
-category: "카테고리-slug"
+category: "category-slug"
 published: true
-youtube: "https://youtu.be/VIDEO_ID"  # 선택 - 비디오 URL만! 채널 URL 금지!
+youtube: "https://youtu.be/VIDEO_ID"  # Optional - Video URL only!
+description: "SEO description for the post"
+tags:
+  - Tag1
+  - Tag2
 ---
 
 <Part1>
-## 쉽게 설명하면? / In Simple Terms
-[비유적 설명 - 한글]
-[Analogy - English]
+## In Simple Terms
+[Simple analogy explanation in English]
 </Part1>
 
 <Part2>
-## 시스템 구조 / System Architecture
+## System Architecture
 <Accordion>
-  <AccordionItem title="1. 개요">...</AccordionItem>
+  <AccordionItem title="1. Overview">...</AccordionItem>
 </Accordion>
 </Part2>
 
 <Part3>
-## 개념 지도 / Concept Map
-```mermaid
-[다이어그램]
-```
-## 이론적 배경 / Theoretical Background
-[한글]
-[English]
+## Concept Map
+
+<Mermaid chart={`
+flowchart TD
+    A[Start] --> B[Process]
+    B --> C[End]
+`} />
+
+## Theoretical Background
+[Theory explanation in English]
 </Part3>
+```
+
+### ⚠️ 중요 규칙
+
+**YouTube 임베드:**
+```
+frontmatter에 youtube: 있으면 → 페이지가 자동 임베드
+<OpeningFrame> 사용 금지 (중복됨)
+
+둘 중 하나만 사용:
+✅ youtube: "https://youtu.be/VIDEO_ID" (권장)
+❌ youtube + <OpeningFrame> (중복)
+```
+
+**Mermaid 다이어그램:**
+```
+마크다운 코드블록 사용 금지 (렌더링 안 됨)
+반드시 <Mermaid> 컴포넌트 사용
+
+❌ ```mermaid ... ``` (작동 안 함)
+✅ <Mermaid chart={`...`} /> (작동함)
+```
+
+**콘텐츠 언어:**
+```
+모든 콘텐츠는 영문 전용
+한글 감지 시 빌드 실패
 ```
 
 ---
@@ -136,16 +169,14 @@ youtube: "https://youtu.be/VIDEO_ID"  # 선택 - 비디오 URL만! 채널 URL �
 
 | 컴포넌트 | 용도 |
 |---------|------|
-| `<Part1>` | Grandpa Mode - 비유적 설명 (Amber) |
-| `<Part2>` | System Architect - 기술 구조 (Blue) |
-| `<Part3>` | Theory Map - Mermaid + 철학 (Purple) |
-| `<Accordion>` + `<AccordionItem>` | 펼치기/접기 |
-| `<YouTubeEmbed id="xxx"/>` | YouTube 임베드 |
-| `<SpotifyEmbed track="xxx"/>` | Spotify 임베드 |
-| `<OpeningFrame videoId="xxx"/>` | 오프닝 영상 |
-| `<SketchCard>` | Excalidraw 스타일 카드 |
-| `<Mermaid>` | 다이어그램 |
-| `<HoverZoom>` | 호버 줌 이미지 |
+| `<Part1>` | Grandpa Mode - Simple Analogies (Amber) |
+| `<Part2>` | System Architect - Structure & Logic (Blue) |
+| `<Part3>` | Theory Map - Concepts & Diagrams (Purple) |
+| `<Accordion>` + `<AccordionItem>` | Collapsible sections |
+| `<Mermaid chart={...}/>` | Diagrams (REQUIRED for mermaid) |
+| `<SpotifyEmbed track="xxx"/>` | Spotify embed |
+| `<SketchCard>` | Excalidraw style card |
+| `<HoverZoom>` | Hover zoom image |
 
 ---
 
@@ -374,7 +405,6 @@ npm run guard → 통과해야 빌드 진행
 
 이 파일을 읽으면 묻지 말고 자동으로 확인:
 - `src/utils/categories.js` (카테고리)
-- `src/content/eae-blueprint/gold-template.mdx` (템플릿 참조)
 - `git branch` (현재 브랜치)
 
 ---
@@ -391,6 +421,6 @@ AI가 기억하는 게 아니다.
 
 ---
 
-*버전: 3.1*
+*버전: 3.2*
 *마지막 업데이트: 2026-01-02*
-*변경: 디자인 에러 대응 규칙 추가 - "중단 후 보고" 프로토콜, [DESIGN ERROR] 포맷*
+*변경: MDX 작성 규칙 명확화 - YouTube 중복 방지, Mermaid 컴포넌트 필수, 영문 전용*

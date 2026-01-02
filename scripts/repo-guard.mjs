@@ -217,13 +217,6 @@ function validateEnglishOnly() {
       const filePath = path.join(catDir, file);
       const content = fs.readFileSync(filePath, "utf8");
 
-      // frontmatter 추출
-      const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
-      if (!fmMatch) continue;
-
-      // published: true인 파일만 체크
-      if (!fmMatch[1].includes("published: true")) continue;
-
       // frontmatter 제외하고 본문만 추출
       const bodyMatch = content.match(/^---[\s\S]*?---\n([\s\S]*)$/);
       if (!bodyMatch) continue;

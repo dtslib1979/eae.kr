@@ -7,7 +7,7 @@ export default function Part2({ children }) {
           System Architect Mode – 구조·로직·데이터 흐름
         </h2>
       </div>
-      <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+      <div className="part-content prose prose-lg max-w-none">
         {children}
       </div>
     </section>

@@ -52,7 +52,7 @@ export default function Part3({ children }) {
           Theory Map (Mermaid) – 개념·세계관 도식
         </h2>
       </div>
-      <div ref={mermaidRef} className="prose prose-lg max-w-none text-gray-800 leading-relaxed mermaid-container">
+      <div ref={mermaidRef} className="part-content prose prose-lg max-w-none mermaid-container">
         {children}
       </div>
     </section>

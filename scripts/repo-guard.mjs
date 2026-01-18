@@ -34,10 +34,8 @@ if (exists("package.json")) {
   if (banned.length) fail(`PWA 의존성 금지 위반: ${banned.join(", ")}`);
 }
 
-// 3) manifest / sw 파일 금지
+// 3) 서비스워커 파일 금지 (manifest는 홈화면 추가용으로 허용)
 const bannedPaths = [
-  "public/manifest.webmanifest",
-  "public/manifest.json",
   "public/sw.js",
   "src/sw.js",
   "src/sw.ts",
@@ -46,14 +44,10 @@ const bannedPaths = [
   "sw.js",
 ];
 for (const p of bannedPaths) {
-  if (exists(p)) fail(`PWA 파일 금지 위반: ${p}`);
+  if (exists(p)) fail(`서비스워커 파일 금지 위반: ${p}`);
 }
 
-// 4) index.html 에 manifest 링크 금지
-if (exists("index.html")) {
-  const html = read("index.html");
-  if (html.includes('rel="manifest"')) fail(`index.html에 manifest link 금지 위반`);
-}
+// 4) (제거됨 - manifest는 홈화면 추가용으로 허용)
 
 // 5) SW 등록 코드 패턴 금지(간단 탐지)
 const scanTargets = ["src/main.jsx", "src/main.tsx", "src/main.js", "src/main.ts"];

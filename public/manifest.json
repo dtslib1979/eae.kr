@@ -1,0 +1,21 @@
+{
+  "name": "EAE.kr",
+  "short_name": "EAE",
+  "description": "EduArt Engineer",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#253A2F",
+  "theme_color": "#253A2F",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

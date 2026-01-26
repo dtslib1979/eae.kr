@@ -1,0 +1,12 @@
+{
+  "repo": "eae.kr",
+  "level": 2,
+  "parent": "eae-univ",
+  "type": "Education Branch",
+  "inherit": {
+    "immutable": "strict",
+    "defaults": "override-allowed"
+  },
+  "created": "2026-01-26",
+  "overrides": []
+}

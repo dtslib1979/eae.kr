@@ -1,120 +1,440 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/icons/icon-192.png" />
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#253A2F" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>eae.kr - EduArt Engineer</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>EAE Broadcasting — Education Station</title>
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="eae.kr - EduArt Engineer 포트폴리오 및 블로그. 기술, 아트, 교육 콘텐츠를 제공합니다." />
-    <meta name="keywords" content="eae, eduart, engineer, portfolio, blog, 기술, 아트, 교육" />
-    <meta name="author" content="EduArt Engineer" />
-    <link rel="canonical" href="https://www.eae.kr/" />
+  <!-- SEO -->
+  <meta name="description" content="EAE Broadcasting - Beyond AI Education. Learn with structure: Grandpa Mode, System Architect, Theory Map. EduArt Engineer content platform.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://eae.kr/">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.eae.kr/" />
-    <meta property="og:title" content="eae.kr - EduArt Engineer" />
-    <meta property="og:description" content="eae.kr - EduArt Engineer 포트폴리오 및 블로그. 기술, 아트, 교육 콘텐츠를 제공합니다." />
-    <meta property="og:site_name" content="eae.kr" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EAE Broadcasting — Education Station">
+  <meta property="og:description" content="Beyond AI Education. Learn with structure.">
+  <meta property="og:url" content="https://eae.kr/">
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.eae.kr/" />
-    <meta name="twitter:title" content="eae.kr - EduArt Engineer" />
-    <meta name="twitter:description" content="eae.kr - EduArt Engineer 포트폴리오 및 블로그. 기술, 아트, 교육 콘텐츠를 제공합니다." />
+  <!-- Favicon -->
+  <link rel="icon" href="/icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#253A2F">
 
-    <!-- Search Engine Verification (Google Search Console에서 받은 코드로 교체 필요) -->
-    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> -->
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Robots -->
-    <meta name="robots" content="index, follow" />
-  </head>
-  <body>
-    <div class="parksy-chalkboard"></div>
-    <div class="parksy-cursor-dust"></div>
-    <div class="parksy-main">
-      <div id="root"></div>
-      <script type="module" src="/src/main.jsx"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="/design/cave-ui.css">
+  <link rel="stylesheet" href="/design/broadcast-ui.css">
+  <link rel="stylesheet" href="/design/elevator-ui.css">
+  <link rel="stylesheet" href="/design/eae-broadcast.css">
+</head>
+<body>
+
+  <!-- ELEVATOR PANEL -->
+  <nav class="elevator-panel" id="elevator">
+    <div class="elevator-shaft">
+      <div class="elevator-indicator">
+        <span class="current-floor">1F</span>
+      </div>
+
+      <div class="elevator-buttons">
+        <button class="elevator-btn active" data-floor="lobby" data-level="1F">
+          <span class="btn-level">1F</span>
+          <span class="btn-icon">🏛️</span>
+          <span class="btn-label">Lobby</span>
+        </button>
+
+        <button class="elevator-btn" data-floor="channels" data-level="B1">
+          <span class="btn-level">B1</span>
+          <span class="btn-icon">📺</span>
+          <span class="btn-label">Channels</span>
+        </button>
+
+        <button class="elevator-btn" data-floor="programs" data-level="B2">
+          <span class="btn-level">B2</span>
+          <span class="btn-icon">📚</span>
+          <span class="btn-label">Programs</span>
+        </button>
+
+        <button class="elevator-btn" data-floor="university" data-level="B3">
+          <span class="btn-level">B3</span>
+          <span class="btn-icon">🎓</span>
+          <span class="btn-label">University</span>
+        </button>
+
+        <button class="elevator-btn locked" data-floor="hq" data-level="B4" data-code="1126">
+          <span class="btn-level">B4</span>
+          <span class="btn-icon">🔒</span>
+          <span class="btn-label">HQ</span>
+        </button>
+      </div>
+
+      <div class="elevator-brand">
+        <span class="brand-logo">E</span>
+        <span class="brand-name">EAE</span>
+      </div>
     </div>
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Configuration constants
-  const ANIMATION_CONSTANTS = {
-    TRANSITION_DURATION: '0.2s',
-    GLOW_COLOR: 'rgba(255,165,0,0.8)',
-    GLOW_BLUR: '6px',
-    SCALE_FACTOR: '1.03',
-    STROKE_TRANSITION: 'stroke-dashoffset 1.2s ease-in-out',
-    STROKE_DASHARRAY: '5',
-    DASH_OFFSET_ON: '10',
-    DASH_OFFSET_OFF: '0',
-    PULSE_INTERVAL: 1200
-  };
+  </nav>
 
-  // Store interval IDs for cleanup
-  const activeIntervals = new Set();
+  <!-- 1F LOBBY -->
+  <main class="floor-section active" id="floor-lobby">
+    <header class="lobby-header">
+      <div class="station-masthead">
+        <div class="on-air-badge">
+          <span class="on-air-dot"></span>
+          ON AIR
+        </div>
+        <h1 class="station-title">EAE<br>Broadcasting</h1>
+        <p class="station-tagline">Education Station</p>
+        <p class="station-sub">"Beyond AI — Learn with Structure"</p>
 
-  function addNodeAnimation(node) {
-    node.addEventListener("mouseenter", () => {
-      node.style.filter = `drop-shadow(0 0 ${ANIMATION_CONSTANTS.GLOW_BLUR} ${ANIMATION_CONSTANTS.GLOW_COLOR})`;
-      node.style.transform = `scale(${ANIMATION_CONSTANTS.SCALE_FACTOR})`;
-      node.style.transition = ANIMATION_CONSTANTS.TRANSITION_DURATION;
+        <a href="https://youtube.com/@eduart-engineer" class="youtube-badge" target="_blank">
+          <span>▶</span> @eduart-engineer
+        </a>
+      </div>
+    </header>
+
+    <!-- Part Preview -->
+    <section class="part-preview">
+      <h2 class="section-title">Learning Programs</h2>
+
+      <div class="part-card part1" data-goto="programs">
+        <span class="part-icon">👴</span>
+        <div class="part-info">
+          <h3>Part 1: Grandpa Mode</h3>
+          <p>Simple Analogies — Explain like I'm 5</p>
+        </div>
+      </div>
+
+      <div class="part-card part2" data-goto="programs">
+        <span class="part-icon">🏗️</span>
+        <div class="part-info">
+          <h3>Part 2: System Architect</h3>
+          <p>Structure & Logic — How it works</p>
+        </div>
+      </div>
+
+      <div class="part-card part3" data-goto="programs">
+        <span class="part-icon">🗺️</span>
+        <div class="part-info">
+          <h3>Part 3: Theory Map</h3>
+          <p>Concepts & Diagrams — The big picture</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trilogy Link -->
+    <section>
+      <h2 class="section-title">Trilogy Network</h2>
+      <div class="trilogy-grid">
+        <a href="https://parksy.kr" class="trilogy-card" target="_blank">
+          <span class="trilogy-icon">🔥</span>
+          <span class="trilogy-name">PARKSY.KR</span>
+          <span class="trilogy-desc">Entity / Raw</span>
+        </a>
+        <div class="trilogy-card current">
+          <span class="trilogy-icon">💧</span>
+          <span class="trilogy-name">EAE.KR</span>
+          <span class="trilogy-desc">Identity / Structure</span>
+        </div>
+        <a href="https://dtslib.kr" class="trilogy-card" target="_blank">
+          <span class="trilogy-icon">📦</span>
+          <span class="trilogy-name">DTSLIB.KR</span>
+          <span class="trilogy-desc">Company / Product</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- B1 CHANNELS -->
+  <section class="floor-section" id="floor-channels">
+    <header class="floor-header">
+      <h2 class="floor-title">B1 — Content Channels</h2>
+      <p class="floor-desc">7 categories of structured knowledge</p>
+    </header>
+
+    <div class="channel-grid">
+      <!-- EAE-BLUEPRINT (Featured) -->
+      <a href="/legacy/#/eae-blueprint" class="channel-card featured">
+        <div class="channel-thumb" style="background: linear-gradient(135deg, #ff0000, #cc0000);">
+          <span class="channel-emoji">🎬</span>
+        </div>
+        <div class="channel-info">
+          <h3 class="channel-name">CH.BLUEPRINT</h3>
+          <p class="channel-tagline">ArtRemix w/AI — YouTube Backend</p>
+        </div>
+        <span class="channel-status yt">YT</span>
+      </a>
+
+      <!-- PATCHTECH -->
+      <a href="/legacy/#/patchtech" class="channel-card">
+        <div class="channel-thumb">
+          <span class="channel-emoji">🔧</span>
+        </div>
+        <div class="channel-info">
+          <h3 class="channel-name">CH.PATCHTECH</h3>
+          <p class="channel-tagline">Technical patches & fixes</p>
+        </div>
+        <span class="channel-status">ON</span>
+      </a>
+
+      <!-- QSKETCH -->
+      <a href="/legacy/#/qsketch" class="channel-card">
+        <div class="channel-thumb">
+          <span class="channel-emoji">✏️</span>
+        </div>
+        <div class="channel-info">
+          <h3 class="channel-name">CH.QSKETCH</h3>
+          <p class="channel-tagline">Quick Sketch — Fast prototypes</p>
+        </div>
+        <span class="channel-status">ON</span>
+      </a>
+
+      <!-- PENON -->
+      <a href="/legacy/#/penon" class="channel-card">
+        <div class="channel-thumb">
+          <span class="channel-emoji">🖊️</span>
+        </div>
+        <div class="channel-info">
+          <h3 class="channel-name">CH.PENON</h3>
+          <p class="channel-tagline">Writing & documentation</p>
+        </div>
+        <span class="channel-status">ON</span>
+      </a>
+
+      <!-- MAL -->
+      <a href="/legacy/#/mal" class="channel-card">
+        <div class="channel-thumb">
+          <span class="channel-emoji">🎭</span>
+        </div>
+        <div class="channel-info">
+          <h3 class="channel-name">CH.MAL</h3>
+          <p class="channel-tagline">Creative expressions</p>
+        </div>
+        <span class="channel-status">ON</span>
+      </a>
+
+      <!-- EML -->
+      <a href="/legacy/#/eml" class="channel-card">
+        <div class="channel-thumb">
+          <span class="channel-emoji">📧</span>
+        </div>
+        <div class="channel-info">
+          <h3 class="channel-name">CH.EML</h3>
+          <p class="channel-tagline">Communication templates</p>
+        </div>
+        <span class="channel-status">ON</span>
+      </a>
+
+      <!-- PHL -->
+      <a href="/legacy/#/phl" class="channel-card">
+        <div class="channel-thumb">
+          <span class="channel-emoji">🧠</span>
+        </div>
+        <div class="channel-info">
+          <h3 class="channel-name">CH.PHL</h3>
+          <p class="channel-tagline">Philosophy & principles</p>
+        </div>
+        <span class="channel-status">ON</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- B2 PROGRAMS -->
+  <section class="floor-section" id="floor-programs">
+    <header class="floor-header">
+      <h2 class="floor-title">B2 — Learning Programs</h2>
+      <p class="floor-desc">3-Layer teaching methodology</p>
+    </header>
+
+    <div class="program-section">
+      <!-- Part 1 -->
+      <div class="program-detail part1">
+        <div class="program-header">
+          <span class="program-icon">👴</span>
+          <div>
+            <h3 class="program-title">Part 1: Grandpa Mode</h3>
+            <p class="program-subtitle">Simple Analogies</p>
+          </div>
+        </div>
+        <p class="program-desc">
+          "Explain it so grandpa can understand."<br><br>
+          Complex concepts broken down into everyday analogies.
+          No jargon, no prerequisites. Just pure understanding.
+        </p>
+      </div>
+
+      <!-- Part 2 -->
+      <div class="program-detail part2">
+        <div class="program-header">
+          <span class="program-icon">🏗️</span>
+          <div>
+            <h3 class="program-title">Part 2: System Architect</h3>
+            <p class="program-subtitle">Structure & Logic</p>
+          </div>
+        </div>
+        <p class="program-desc">
+          "How does it actually work?"<br><br>
+          Detailed breakdowns of system architecture.
+          Accordion-style sections for deep dives into each component.
+        </p>
+      </div>
+
+      <!-- Part 3 -->
+      <div class="program-detail part3">
+        <div class="program-header">
+          <span class="program-icon">🗺️</span>
+          <div>
+            <h3 class="program-title">Part 3: Theory Map</h3>
+            <p class="program-subtitle">Concepts & Diagrams</p>
+          </div>
+        </div>
+        <p class="program-desc">
+          "Where does this fit in the big picture?"<br><br>
+          Mermaid diagrams, concept maps, and theoretical foundations.
+          Connect the dots between ideas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Teaching Philosophy -->
+    <div style="text-align: center; padding: 20px; opacity: 0.7;">
+      <p style="font-size: 14px; font-style: italic; color: var(--eae-text-dim);">
+        "Every concept deserves three explanations:<br>
+        one for intuition, one for implementation, one for integration."
+      </p>
+    </div>
+  </section>
+
+  <!-- B3 UNIVERSITY -->
+  <section class="floor-section" id="floor-university">
+    <header class="floor-header">
+      <h2 class="floor-title">B3 — EAE University</h2>
+      <p class="floor-desc">Private learning platform for DTSLIB ecosystem</p>
+    </header>
+
+    <div class="univ-section">
+      <span class="univ-badge">PRIVATE</span>
+      <h3 class="univ-title">EAE UNIVERSITY</h3>
+      <p class="univ-desc">
+        Internal academy for Branch members and selected friends.<br>
+        "Built and left alone. Only for those who find it."
+      </p>
+
+      <!-- Pentagon Structure -->
+      <div class="pentagon-wrap">
+        <p class="pentagon-title">Pentagon Structure</p>
+        <div class="pentagon-grid">
+          <div class="pentagon-node">
+            <span class="node-icon">🎨</span>
+            <span class="node-label">Art</span>
+          </div>
+          <div class="pentagon-node center">
+            <span class="node-icon">🎯</span>
+            <span class="node-label">PARKSY</span>
+          </div>
+          <div class="pentagon-node">
+            <span class="node-icon">⚖️</span>
+            <span class="node-label">Ethics</span>
+          </div>
+          <div class="pentagon-node">
+            <span class="node-icon">🔬</span>
+            <span class="node-label">Science</span>
+          </div>
+          <div class="pentagon-node">
+            <span class="node-icon">🌿</span>
+            <span class="node-label">Branch</span>
+          </div>
+          <div class="pentagon-node">
+            <span class="node-icon">🔓</span>
+            <span class="node-label">Open</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://dtslib1979.github.io/eae-univ/" class="univ-link" target="_blank">
+        Visit University Portal
+      </a>
+    </div>
+
+    <!-- Connection to Branches -->
+    <div style="margin-top: 30px; text-align: center;">
+      <p style="font-size: 12px; color: var(--eae-text-dim);">
+        Connected Branches: KOOSY / ARTREW / GOHSY / NAMONEYGOAL / PAPAFLY
+      </p>
+    </div>
+  </section>
+
+  <!-- B4 HQ (Locked) -->
+  <section class="floor-section locked-floor" id="floor-hq">
+    <div class="lock-overlay">
+      <div class="lock-box">
+        <span class="lock-icon">🔐</span>
+        <h3>HQ Access Required</h3>
+        <input type="password" class="lock-input" id="hqCode" maxlength="4" placeholder="CODE">
+        <button class="lock-btn" id="hqUnlock">ENTER</button>
+      </div>
+    </div>
+
+    <div class="hq-content" style="display:none;">
+      <header class="floor-header">
+        <h2 class="floor-title">B4 — HQ Console</h2>
+        <p class="floor-desc">EAE Broadcasting Control</p>
+      </header>
+
+      <div class="hq-dashboard">
+        <div class="hq-card">
+          <h4>Categories</h4>
+          <span class="hq-stat">7</span>
+        </div>
+        <div class="hq-card">
+          <h4>Parts</h4>
+          <span class="hq-stat">3</span>
+        </div>
+        <div class="hq-card">
+          <h4>YouTube</h4>
+          <span class="hq-stat">1</span>
+        </div>
+      </div>
+
+      <div class="hq-links">
+        <a href="https://youtube.com/@eduart-engineer" class="hq-link" target="_blank">YouTube</a>
+        <a href="/index-legacy.html" class="hq-link">Legacy App</a>
+        <a href="https://github.com/dtslib1979/eae.kr" class="hq-link" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="/design/elevator-system.js"></script>
+  <script src="/design/floor-system.js"></script>
+  <script>
+    // HQ Unlock
+    document.getElementById('hqUnlock')?.addEventListener('click', () => {
+      const code = document.getElementById('hqCode').value;
+      if (code === '1126') {
+        document.querySelector('.lock-overlay').style.display = 'none';
+        document.querySelector('.hq-content').style.display = 'block';
+      } else {
+        document.getElementById('hqCode').style.borderColor = '#ef4444';
+        setTimeout(() => {
+          document.getElementById('hqCode').style.borderColor = '';
+          document.getElementById('hqCode').value = '';
+        }, 500);
+      }
     });
-    node.addEventListener("mouseleave", () => {
-      node.style.filter = "none";
-      node.style.transform = "scale(1)";
-    });
-  }
 
-  function addEdgeAnimation(edge) {
-    edge.style.transition = ANIMATION_CONSTANTS.STROKE_TRANSITION;
-    edge.style.strokeDasharray = ANIMATION_CONSTANTS.STROKE_DASHARRAY;
-    let toggle = false;
-    const intervalId = setInterval(() => {
-      toggle = !toggle;
-      edge.style.strokeDashoffset = toggle ? ANIMATION_CONSTANTS.DASH_OFFSET_ON : ANIMATION_CONSTANTS.DASH_OFFSET_OFF;
-    }, ANIMATION_CONSTANTS.PULSE_INTERVAL);
-    activeIntervals.add(intervalId);
-  }
-
-  function applyAnimations() {
-    // Apply animations to all nodes and edges
-    document.querySelectorAll("svg g.node").forEach(addNodeAnimation);
-    document.querySelectorAll("svg path").forEach(addEdgeAnimation);
-  }
-
-  // Apply animations to existing elements
-  applyAnimations();
-
-  // Watch for dynamically added Mermaid diagrams
-  const observer = new MutationObserver((mutations) => {
-    let shouldReapply = false;
-    mutations.forEach((mutation) => {
-      mutation.addedNodes.forEach((node) => {
-        if (node.nodeType === 1 && (node.tagName === 'SVG' || node.querySelector('svg'))) {
-          shouldReapply = true;
-        }
+    // Part card navigation
+    document.querySelectorAll('[data-goto]').forEach(card => {
+      card.addEventListener('click', () => {
+        const target = card.dataset.goto;
+        document.querySelector(`[data-floor="${target}"]`)?.click();
       });
     });
-    if (shouldReapply) {
-      applyAnimations();
-    }
-  });
-
-  // Observe the entire document for SVG additions
-  observer.observe(document.body, { childList: true, subtree: true });
-
-  // Cleanup intervals when page is unloaded
-  window.addEventListener('beforeunload', () => {
-    activeIntervals.forEach(clearInterval);
-    activeIntervals.clear();
-  });
-});
-    </script>
-  </body>
+  </script>
+</body>
 </html>

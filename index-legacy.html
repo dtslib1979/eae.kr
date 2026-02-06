@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#253A2F" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eae.kr - EduArt Engineer</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="eae.kr - EduArt Engineer 포트폴리오 및 블로그. 기술, 아트, 교육 콘텐츠를 제공합니다." />
+    <meta name="keywords" content="eae, eduart, engineer, portfolio, blog, 기술, 아트, 교육" />
+    <meta name="author" content="EduArt Engineer" />
+    <link rel="canonical" href="https://www.eae.kr/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.eae.kr/" />
+    <meta property="og:title" content="eae.kr - EduArt Engineer" />
+    <meta property="og:description" content="eae.kr - EduArt Engineer 포트폴리오 및 블로그. 기술, 아트, 교육 콘텐츠를 제공합니다." />
+    <meta property="og:site_name" content="eae.kr" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.eae.kr/" />
+    <meta name="twitter:title" content="eae.kr - EduArt Engineer" />
+    <meta name="twitter:description" content="eae.kr - EduArt Engineer 포트폴리오 및 블로그. 기술, 아트, 교육 콘텐츠를 제공합니다." />
+
+    <!-- Search Engine Verification (Google Search Console에서 받은 코드로 교체 필요) -->
+    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> -->
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body>
+    <div class="parksy-chalkboard"></div>
+    <div class="parksy-cursor-dust"></div>
+    <div class="parksy-main">
+      <div id="root"></div>
+      <script type="module" src="/src/main.jsx"></script>
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Configuration constants
+  const ANIMATION_CONSTANTS = {
+    TRANSITION_DURATION: '0.2s',
+    GLOW_COLOR: 'rgba(255,165,0,0.8)',
+    GLOW_BLUR: '6px',
+    SCALE_FACTOR: '1.03',
+    STROKE_TRANSITION: 'stroke-dashoffset 1.2s ease-in-out',
+    STROKE_DASHARRAY: '5',
+    DASH_OFFSET_ON: '10',
+    DASH_OFFSET_OFF: '0',
+    PULSE_INTERVAL: 1200
+  };
+
+  // Store interval IDs for cleanup
+  const activeIntervals = new Set();
+
+  function addNodeAnimation(node) {
+    node.addEventListener("mouseenter", () => {
+      node.style.filter = `drop-shadow(0 0 ${ANIMATION_CONSTANTS.GLOW_BLUR} ${ANIMATION_CONSTANTS.GLOW_COLOR})`;
+      node.style.transform = `scale(${ANIMATION_CONSTANTS.SCALE_FACTOR})`;
+      node.style.transition = ANIMATION_CONSTANTS.TRANSITION_DURATION;
+    });
+    node.addEventListener("mouseleave", () => {
+      node.style.filter = "none";
+      node.style.transform = "scale(1)";
+    });
+  }
+
+  function addEdgeAnimation(edge) {
+    edge.style.transition = ANIMATION_CONSTANTS.STROKE_TRANSITION;
+    edge.style.strokeDasharray = ANIMATION_CONSTANTS.STROKE_DASHARRAY;
+    let toggle = false;
+    const intervalId = setInterval(() => {
+      toggle = !toggle;
+      edge.style.strokeDashoffset = toggle ? ANIMATION_CONSTANTS.DASH_OFFSET_ON : ANIMATION_CONSTANTS.DASH_OFFSET_OFF;
+    }, ANIMATION_CONSTANTS.PULSE_INTERVAL);
+    activeIntervals.add(intervalId);
+  }
+
+  function applyAnimations() {
+    // Apply animations to all nodes and edges
+    document.querySelectorAll("svg g.node").forEach(addNodeAnimation);
+    document.querySelectorAll("svg path").forEach(addEdgeAnimation);
+  }
+
+  // Apply animations to existing elements
+  applyAnimations();
+
+  // Watch for dynamically added Mermaid diagrams
+  const observer = new MutationObserver((mutations) => {
+    let shouldReapply = false;
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1 && (node.tagName === 'SVG' || node.querySelector('svg'))) {
+          shouldReapply = true;
+        }
+      });
+    });
+    if (shouldReapply) {
+      applyAnimations();
+    }
+  });
+
+  // Observe the entire document for SVG additions
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Cleanup intervals when page is unloaded
+  window.addEventListener('beforeunload', () => {
+    activeIntervals.forEach(clearInterval);
+    activeIntervals.clear();
+  });
+});
+    </script>
+  </body>
+</html>

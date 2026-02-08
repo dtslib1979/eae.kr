@@ -6,11 +6,11 @@
 export const CATEGORIES = [
   {
     slug: 'eae-blueprint',
-    name: '🎨 ArtRemix w/AI',
+    name: '🎨 EAE Univ.',
     icon: '🎨',
-    // 이 카테고리는 ArtRemix w/AI YouTube 채널의 설계 백엔드
+    // 이 카테고리는 EAE Univ. YouTube 채널의 설계 백엔드
     // 단독 콘텐츠 ❌ → YouTube 영상에 종속된 설계/구조 문서
-    youtubeChannel: 'https://youtube.com/@eduart-engineer',
+    youtubeChannel: 'https://youtube.com/@EAE-University',
     youtubeShorts: 'https://youtu.be/6T3mibse3Q4?si=bgubKNvV6LjEobqC',
     rules: {
       requiresYouTubeLink: true,  // 반드시 YouTube 영상 링크 포함

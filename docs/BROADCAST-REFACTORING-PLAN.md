@@ -172,82 +172,78 @@ EP06: "10-20년 호흡" — 구조적 생존
 
 ---
 
-## 4. 구현 계획
+## 4. 구현 결과 (2026-03-07 완료)
 
-### Phase 1: 코드 변경
-
-```
-[ ] src/utils/categories.js — 4개 카테고리 추가
-    editorial (편집술 인덱스), operational, channeling, survival
-[ ] scripts/repo-guard.mjs — 새 카테고리 규칙 추가
-[ ] src/content/ — 새 카테고리 디렉토리 생성
-    editorial/, operational/, channeling/, survival/
-[ ] 기존 placeholder MDX 삭제 (post1/post2 × 6 = 12개)
-[ ] Home.jsx 다크 테마 위반 수정 (bg-white → 제거)
-```
-
-### Phase 2: 첫 MDX 투입
+### Phase 1: 코드 변경 — 완료
 
 ```
-[ ] editorial/editorial-manifesto.mdx — 편집술 선언
-[ ] operational/phonepress-erp-intro.mdx — 폰프레스 ERP 개념
-[ ] channeling/channeling-vs-empathy.mdx — 접신 vs 공감
-[ ] survival/quantum-jump-concept.mdx — Quantum Jump 개념
-각 MDX: 영문, Part1/2/3, Mermaid, repo-guard 통과
+[x] src/utils/categories.js — 5개 카테고리 확정
+    eae-blueprint, editorial, operational, channeling, survival
+[x] 6 스킬셋 카테고리(eml,qsketch,mal,penon,phl,patchtech) 삭제
+    → editorial로 흡수 (하이어라키 수정)
+[x] Home.jsx 다크 테마 수정 (bg-white → bg-slate-800/60)
+[x] CategoryIndex.jsx 다크 테마 + 카테고리 설명 추가
+[x] About.jsx 4대 카테고리 + 철학 반영
+[x] placeholder 20개 삭제 (13 스킬셋 + 7 테스트/빈 파일)
+[x] CLAUDE.md 카테고리 섹션 업데이트
 ```
 
-### Phase 3: 콘텐츠 확장
+### Phase 2: MDX 투입 — 완료
 
 ```
-[ ] 카테고리별 에피소드 3~5개씩
-[ ] YouTube 재생목록 연동
-[ ] eae-univ sync 스크립트 연결
+editorial/ (8개):
+  [x] editorial-manifesto.mdx — 편집술 선언
+  [x] emotion-music-editorial.mdx — EML
+  [x] speed-draw-units.mdx — QSketch
+  [x] authentic-language.mdx — MAL
+  [x] pen-on-structure.mdx — PENON
+  [x] concept-token-compression.mdx — PHL
+  [x] tech-material-editorial.mdx — Patchtech
+  [x] loop-author.mdx — 루프 오서
+
+operational/ (3개):
+  [x] phonepress-erp.mdx — 폰프레스 ERP
+  [x] commit-is-voucher.mdx — 매트릭스 ERP축
+  [x] browser-is-studio.mdx — 브라우저 스튜디오
+
+channeling/ (2개):
+  [x] channeling-vs-empathy.mdx — 접신 vs 공감
+  [x] multi-persona-operation.mdx — 3계정 운영
+
+survival/ (2개):
+  [x] quantum-jump.mdx — Quantum Jump
+  [x] franchise-manual.mdx — CLAUDE.md 프랜차이즈
 ```
 
-### 구현 방식
+### Phase 3: 크로스레포 연결 — 완료
 
 ```
-옵션 A: 플랫 구조 — 11개 카테고리 병렬. 코드 변경 최소. 권장.
-옵션 B: 계층 구조 — 4대 → 하위. 라우터 수정 필요.
-
-권장: A로 시작 → 콘텐츠 채운 후 → 필요 시 B로 전환
+[x] eae-univ/broadcast/scripts/publish-eae-kr.sh — 4대 카테고리 전기 파이프라인
+[x] eae-univ/broadcast/21C-BROADCAST-ARCHITECTURE.md — 연결 설정 문서
+[x] eae.kr/docs/BROADCAST-REFACTORING-PLAN.md — 이 문서 (쌍)
 ```
 
 ---
 
-## 5. BOM
-
-### 수정 파일
+## 5. 최종 구조
 
 ```
-src/utils/categories.js          수정 (4개 추가)
-scripts/repo-guard.mjs           수정 (새 카테고리 허용)
-src/pages/Home.jsx               수정 (다크 테마 위반)
-```
-
-### 신규 파일
-
-```
-docs/BROADCAST-REFACTORING-PLAN.md   이 문서
-src/content/editorial/*.mdx          1~5개
-src/content/operational/*.mdx        1~5개
-src/content/channeling/*.mdx         1~5개
-src/content/survival/*.mdx           1~5개
-```
-
-### 삭제 파일
-
-```
-src/content/*/post1.mdx, post2.mdx   placeholder 12개
+eae.kr 방송국 (5개 카테고리, 20개 MDX)
+├── eae-blueprint (5)    메타/설계
+├── editorial (8)        편집술 (6 스킬셋 흡수)
+├── operational (3)      운영술
+├── channeling (2)       접신술
+└── survival (2)         생존술
 ```
 
 ### 신규 발명: 0건
 
 ```
 모든 콘텐츠 = 28개 레포 기존 자산의 영문 MDX 변환
+모든 스크립트 = deploy-musician.sh 패턴 복제
 ```
 
 ---
 
-*eae.kr은 방송국이다. 이 문서는 방송국 리팩토링 계획이다.*
+*eae.kr은 방송국이다. 이 문서는 방송국 리팩토링 완료 기록이다.*
 *2026-03-07*

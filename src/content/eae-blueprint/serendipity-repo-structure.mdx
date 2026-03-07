@@ -1,0 +1,105 @@
+---
+title: "Serendipity — How a Wrong Repo Assignment Created the Right Architecture"
+title_en: "Serendipity — How a Wrong Repo Assignment Created the Right Architecture"
+date: "2026-03-07"
+category: "eae-blueprint"
+published: true
+description: "A misassigned repository accidentally produced the optimal backend-frontend separation between eae-univ (private OS) and eae.kr (public publishing front)."
+tags:
+  - Architecture
+  - Serendipity
+  - Editorial
+  - Backend-Frontend
+---
+
+<Part1>
+## In Simple Terms
+
+Sometimes mistakes create better results than plans.
+
+We were supposed to build the broadcast system in eae.kr (the public site). Instead, the session was pointed at eae-univ (the private university repo). The entire broadcast engine, game system, and editorial tools got built in the wrong place.
+
+Turns out — that was the right place all along.
+
+The private repo became the **operating system** (source of truth, game engines, editorial tools). The public site became the **publishing front** (where content gets delivered). A natural backend-frontend separation that no one designed on purpose.
+
+Editorial principle confirmed: **deconstruct and recombine — sometimes a better structure emerges.**
+</Part1>
+
+<Part2>
+## System Architecture
+
+<Accordion>
+  <AccordionItem title="1. The Accidental Split">
+  What was supposed to happen: broadcast system built in eae.kr.
+  What actually happened: broadcast system built in eae-univ.
+
+  Result: eae-univ became the private backend, eae.kr remained the public frontend.
+  </AccordionItem>
+
+  <AccordionItem title="2. Why This Works">
+  **Backend / Frontend natural separation:**
+
+  eae-univ (Private Backend):
+  - broadcast/engine/ — game engine source
+  - broadcast/games/ — 6 skillset games
+  - university/atoms/ — PWA material atoms (katom JSON)
+  - Philosophy originals, editorial tools
+
+  eae.kr (Public Frontend):
+  - References eae-univ content via URLs
+  - Adds its own categories independently
+  - Publishing pipeline: MDX → GitHub Actions → GitHub Pages
+  </AccordionItem>
+
+  <AccordionItem title="3. Supply Chain, Not Dependency">
+  eae-univ supplies the editorial skillset category to eae.kr.
+  eae.kr publishes editorial content alongside its own independent categories.
+
+  This is a supply relationship, not subordination. eae.kr is wider — eae-univ is one of its content sources.
+  </AccordionItem>
+
+  <AccordionItem title="4. Private/Public × Local/Global Matrix">
+  |           | Private | Public |
+  |-----------|---------|--------|
+  | **Local** | eae-univ (editorial source) | (none — intentional) |
+  | **Global**| (none) | eae.kr (education broadcast) |
+
+  Exclusive private = eae-univ. Editorial originals. No recruitment.
+  Public global = eae.kr. Education broadcast. Open to anyone who finds it.
+  </AccordionItem>
+</Accordion>
+</Part2>
+
+<Part3>
+## Concept Map
+
+<Mermaid chart={`
+flowchart LR
+    subgraph Private["eae-univ (Private OS)"]
+        E1[broadcast/engine]
+        E2[broadcast/games]
+        E3[university/atoms]
+    end
+
+    subgraph Public["eae.kr (Public Front)"]
+        P1[eae-blueprint]
+        P2[6 Skillset Categories]
+        P3[Other Categories]
+    end
+
+    E1 -->|engine source| P2
+    E2 -->|game content| P2
+    E3 -->|katom JSON| P1
+    Private -->|supplies| Public
+    Public -->|feedback commits| Private
+`} />
+
+## Theoretical Background
+
+This accidental architecture mirrors a well-known pattern in systems design: **emergent structure**. The best architectures are often not designed top-down but discovered through iterative work.
+
+The editorial principle at work: originals get deconstructed and recombined. In this case, the "original" was a plan, the "deconstruction" was a mistake, and the "recombination" produced a cleaner separation than the original design intended.
+
+Key insight: **the mistake forced a constraint** (private repo cannot be public). That constraint naturally produced the backend-frontend split that would have required deliberate design otherwise.
+</Part3>

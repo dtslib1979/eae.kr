@@ -1,0 +1,104 @@
+---
+title: "EML — Emotion Music Lab: Editing Feelings into Sound"
+title_en: "EML — Emotion Music Lab: Editing Feelings into Sound"
+date: "2026-03-07"
+category: "editorial"
+published: true
+description: "EML treats emotions as parameters. Plutchik wheel coordinates become key signatures, BPM, and harmonic structures — editorial technique applied to music."
+tags:
+  - EML
+  - Music
+  - Emotion
+  - Editorial
+---
+
+<Part1>
+## In Simple Terms
+
+You feel joy. Can you turn that feeling into a musical parameter?
+
+Joy is not vague. It has coordinates: C major or G major key, 120-160 BPM, consonant triads, upward melodic motion. Sadness has coordinates too: A minor, 50-80 BPM, diminished chords, descending phrases.
+
+EML (Emotion Music Lab) is editorial technique applied to music. The original material is the Plutchik emotion wheel. You deconstruct emotions into parameters, then recombine those parameters into music. AI renders the sound — but you chose the emotional coordinates. The music is yours because the feeling is yours.
+
+The physical skill: a cappella singing. No accompaniment, no hiding behind instruments. Pure internalization of pitch, rhythm, and emotion.
+</Part1>
+
+<Part2>
+## System Architecture
+
+<Accordion>
+  <AccordionItem title="1. Plutchik-to-Music Parameter Matrix">
+  | Emotion | Key | BPM | Harmonic Character |
+  |---------|-----|-----|--------------------|
+  | Joy | C major / G major | 120-160 | Perfect consonance, major triads |
+  | Sadness | A minor / D minor | 50-80 | Minor triads, diminished |
+  | Fear | E minor / B minor | Irregular | Diminished 7th, augmented |
+  | Anger | D major / F major | 140-180 | Dissonance |
+  | Trust | F major / Bb major | 80-100 | Perfect 5ths, stable |
+  </AccordionItem>
+
+  <AccordionItem title="2. COMPOSER LAB — 24 Parameters from piano_expression.py">
+  The COMPOSER LAB game ports 24 real parameters from parksy-audio production:
+
+  **6 Parameter Groups:**
+  - Phrase Detection (gap, sensitivity, merge)
+  - Voicing (voices, spread, bass drop, top emphasis, balance)
+  - Dynamics (base velocity, range, accent strength, decay, crescendo)
+  - Rubato (tempo flex, phrase breath, downbeat weight, pickup timing)
+  - Articulation (staccato ratio, legato overlap, grace note offset)
+  - Pedal (sustain depth, half-pedal threshold, release timing)
+
+  Each emotion preset has 24 ideal values. Your job: match the preset by ear.
+  </AccordionItem>
+
+  <AccordionItem title="3. Real Work Anchors — Actual Failure Records">
+  Every episode comes from real production failures:
+
+  - **Phase 6 A-grade Batch Failure**: Piano expression script processed all tracks identically. Result: mechanical uniformity. Lesson: expression is naturalness, not variation amount.
+  - **FluidSynth Migration**: WAV concatenation replaced by real-time synthesis. Quality improved but parameter tuning difficulty increased dramatically.
+  - **3-Genre Mahler Renders**: Same MIDI rendered as classic, cinematic, and new age. Genre = parameter preset. Emotion emerges from parameter combinations.
+  </AccordionItem>
+
+  <AccordionItem title="4. Five Games + BOSS">
+  1. EMOTION DECODER — hear 30 seconds, select Plutchik coordinates
+  2. COMPOSER LAB — adjust 24 sliders to match emotion presets
+  3. ARC BUILDER — draw a 3-minute emotion graph, auto-generate overture structure
+  4. VOCAL PITCH TRAINER — microphone pitch accuracy in real-time
+  5. BGM MATCH — match background music to video scene emotion
+
+  **BOSS**: Map a full piece across 6 segments with emotion labels, BPM curves, and climax positioning. A-grade produces a broadcast-ready emotional arc.
+  </AccordionItem>
+</Accordion>
+</Part2>
+
+<Part3>
+## Concept Map
+
+<Mermaid chart={`
+flowchart TD
+    PLU[Plutchik Emotion Wheel] --> PARAMS[Musical Parameters]
+    PARAMS --> KEY[Key Signature]
+    PARAMS --> BPM[Tempo]
+    PARAMS --> HARM[Harmony]
+    PARAMS --> DYN[Dynamics 24p]
+
+    KEY --> RENDER[AI Rendering Engine]
+    BPM --> RENDER
+    HARM --> RENDER
+    DYN --> RENDER
+
+    RENDER --> MUSIC[Output Music]
+    MUSIC --> VOCAL[A Cappella Verification]
+    VOCAL --> JUDGE[Human Judgment]
+    JUDGE -->|feedback commit| PLU
+`} />
+
+## Why A Cappella?
+
+The physical skill attached to EML is a cappella singing — performing without any instrumental accompaniment. This is not a musical preference. It is an editorial verification method.
+
+When you sing without accompaniment, there is nowhere to hide. You must internalize pitch, rhythm, and emotional expression completely. If you can sing it a cappella, you truly understand the emotional parameters you selected. If you cannot, your parameter selection was intellectual, not embodied.
+
+AI renders the music. A cappella proves you understood what you asked it to render. The editor must be able to verify the output — that is the beyond-AI principle in action.
+</Part3>

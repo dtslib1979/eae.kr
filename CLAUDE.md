@@ -161,17 +161,25 @@ eae.kr/
 
 ---
 
-## 4. 카테고리 목록
+## 4. 카테고리 목록 (4대 카테고리 + 메타)
 
-| slug | 이름 | 비고 |
+| slug | 이름 | 설명 |
 |------|------|------|
-| **eae-blueprint** | EAE Univ. | ⚠️ 특수 규칙 있음 (아래 참조) |
-| patchtech | Patchtech (기술 패치) | |
-| qsketch | Quick Sketch | |
-| penon | Penon | |
-| mal | Mal | |
-| eml | EML | |
-| phl | PHL | |
+| **eae-blueprint** | EAE Univ. | ⚠️ 메타/설계 (YouTube 종속, 특수 규칙) |
+| **editorial** | Editorial Technique | 편집술 — 6 스킬셋 포함 (EML, QSketch, MAL, PENON, PHL, Patchtech) |
+| **operational** | Operational Technique | 운영술 — PhonePress ERP, 매트릭스 아키텍처 |
+| **channeling** | Channeling Technique | 접신술 — 캐릭터 IP, 관점 추출 |
+| **survival** | Survival Technique | 생존술 — Quantum Jump, 프랜차이즈 |
+
+**YouTube 채널:** https://www.youtube.com/@BeingEduartEngineer-4 (4대 카테고리 공통)
+
+### 두 레포지토리 관계
+
+```
+eae-univ (로컬 렛저, 비공개)  →  eae.kr (액추얼 렛저, 공개)
+publish-eae-kr.sh가 전기(轉記)한다.
+eae.kr에 직접 콘텐츠를 만들지 않는다 — 전기만 한다.
+```
 
 ### ⚠️ eae-blueprint 카테고리 전용 규칙
 

@@ -1,0 +1,122 @@
+---
+title: "Browser is Studio — 13 Free Engines for Broadcast Production"
+title_en: "Browser is Studio — 13 Free Engines for Broadcast Production"
+date: "2026-03-07"
+category: "operational"
+published: true
+description: "Chrome has 14 built-in engines that replace paid production software. STT, TTS, Canvas, WebGL, Web Audio, WASM, MIDI — all free, all in the browser."
+tags:
+  - Browser
+  - Studio
+  - Cloud-Appstore
+  - Operations
+---
+
+<Part1>
+## In Simple Terms
+
+You pay for video editing software. You pay for audio processing. You pay for image manipulation. You pay for transcription services.
+
+Or you open Chrome.
+
+Chrome has 14 built-in engines: Speech-to-Text, Text-to-Speech, Canvas, WebGL, Camera, Picture-in-Picture, Web Audio, Bluetooth, WebAssembly, WebCodecs, MIDI, Gemini Nano, MediaRecorder, and File System Access.
+
+Each one replaces a paid tool. Combined, they form a complete broadcast production studio — for free. The browser is not a viewer. The browser is a studio. You just need to know which engines to combine.
+</Part1>
+
+<Part2>
+## System Architecture
+
+<Accordion>
+  <AccordionItem title="1. 13 Tools Built from Browser Engines">
+  | Tool | Category | Browser Engine |
+  |------|----------|---------------|
+  | lecture-shorts | Video | FFmpeg WASM + Canvas |
+  | lecture-long | Video | FFmpeg WASM + Canvas |
+  | auto-shorts | Video | FFmpeg WASM + WebCodecs |
+  | clip-shorts | Video | FFmpeg WASM |
+  | audio-studio | Audio | Web Audio API |
+  | slim-lens | Image | Canvas + Camera |
+  | image-pack | Image | Canvas + File System |
+  | bilingual-aligner | Utility | STT + TTS |
+  | project-manager | Utility | IndexedDB |
+  | math-tutor | Utility | Canvas + MathML |
+  | music-curation | Game | Web Audio |
+  | memorial-tribute | Game | Canvas + Web Audio |
+  | luxury-editorial | Utility | Canvas + Fonts |
+  </AccordionItem>
+
+  <AccordionItem title="2. Technical Constraints (By Design)">
+  The constraint list is a feature, not a limitation:
+
+  - Zero webpack, vite, or npm
+  - Zero TypeScript
+  - Zero SPA frameworks
+  - Zero login or accounts
+  - FFmpeg WASM locked to 0.11.0 (no 0.12.x)
+  - Pure HTML/JS/CSS + CDN only
+  - Each tool is independent (no shared state)
+
+  Why? Because these constraints ensure every tool works on any device, loads instantly, and requires zero setup. A broadcast production tool that needs npm install is not a production tool — it is a development project.
+  </AccordionItem>
+
+  <AccordionItem title="3. Termux = CLI Factory, Browser = Real-time Studio">
+  The role division between Termux and browser is deliberate:
+
+  - **Termux (CLI)**: Batch processing, automation, deployment, git operations
+  - **Browser (Studio)**: Real-time editing, preview, interactive production
+
+  They complement, not compete. Termux handles the factory floor (mass production). Browser handles the studio (creative decisions in real-time).
+  </AccordionItem>
+
+  <AccordionItem title="4. Design Filter">
+  Every tool proposal passes one filter:
+
+  "Does this produce broadcast material?"
+
+  If yes: build it.
+  If no: reject it.
+
+  This filter has rejected dozens of ideas that were technically interesting but produced nothing usable for broadcast. The browser is a studio, not a playground.
+  </AccordionItem>
+</Accordion>
+</Part2>
+
+<Part3>
+## Concept Map
+
+<Mermaid chart={`
+flowchart LR
+    BROWSER[Chrome Browser] --> E1[STT]
+    BROWSER --> E2[TTS]
+    BROWSER --> E3[Canvas/WebGL]
+    BROWSER --> E4[Web Audio]
+    BROWSER --> E5[WASM/FFmpeg]
+    BROWSER --> E6[Camera]
+    BROWSER --> E7[MIDI]
+
+    E1 --> TOOLS[13 Production Tools]
+    E2 --> TOOLS
+    E3 --> TOOLS
+    E4 --> TOOLS
+    E5 --> TOOLS
+
+    TOOLS --> VIDEO[4 Video Tools]
+    TOOLS --> AUDIO[1 Audio Tool]
+    TOOLS --> IMAGE[2 Image Tools]
+    TOOLS --> UTIL[4 Utilities]
+    TOOLS --> GAME[2 Games]
+
+    subgraph COST["Cost"]
+        ZERO["Total: 0 currency"]
+    end
+`} />
+
+## The Economics of Free
+
+14 browser engines cost nothing. CDN hosting costs nothing. GitHub Pages costs nothing. The entire broadcast production infrastructure runs on free tiers.
+
+This is not frugality — it is architectural philosophy. Paid tools create vendor lock-in. Free browser APIs are standardized, portable, and permanent. A tool built on Web Audio API will work in any browser, on any device, for as long as browsers exist.
+
+Operational technique means choosing infrastructure that does not depend on anyone's pricing decisions. The browser is the most stable, most portable, most cost-effective studio ever built. You just have to learn to use the engines it already contains.
+</Part3>

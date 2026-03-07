@@ -1,0 +1,108 @@
+---
+title: "A Commit is a Voucher — Matrix Architecture ERP Axis"
+title_en: "A Commit is a Voucher — Matrix Architecture ERP Axis"
+date: "2026-03-07"
+category: "operational"
+published: true
+description: "Every commit is an accounting voucher. git log is the general ledger. Revert is the reverse entry. This is how 28 repositories operate as a financial system."
+tags:
+  - Matrix
+  - ERP
+  - Git
+  - Operations
+---
+
+<Part1>
+## In Simple Terms
+
+In accounting, every transaction gets a voucher. You cannot move money without a paper trail. If you made an error, you do not erase the voucher — you write a new voucher that reverses the first one.
+
+Now replace "money" with "code." Every commit is a voucher. git log is the general ledger. If you made an error, you do not delete the commit (reset --hard) — you write a reverse entry (git revert).
+
+This is the ERP axis of the Matrix Architecture. It treats every repository as an accounting system where nothing gets deleted, everything has evidence, and the audit trail is permanent.
+</Part1>
+
+<Part2>
+## System Architecture
+
+<Accordion>
+  <AccordionItem title="1. Accounting to Git Mapping">
+  | Accounting | Git | Example |
+  |-----------|-----|---------|
+  | Journal Entry | Commit | feat: new feature |
+  | General Ledger | git log --reverse | Full transaction history |
+  | Account | Directory | tools/, scripts/, assets/ |
+  | Reverse Entry | git revert | Correct without deleting |
+  | Audit Trail | Co-Authored-By | AI/Human collaboration record |
+  | Inter-company Interface | Cross-repo sync scripts | Explicit, scripted transfers |
+  </AccordionItem>
+
+  <AccordionItem title="2. The Four Principles">
+  These are enforced across 23 repositories via CLAUDE.md:
+
+  1. **No deletion, only reverse entries** — git revert to correct. reset --hard is forbidden. This is not a preference — it is constitutional law.
+
+  2. **No transaction without evidence** — every commit message must contain reason and context. A commit without explanation is like a voucher without a description.
+
+  3. **Check BOM before production** — list your dependencies and process order before writing code. You do not start manufacturing without a bill of materials.
+
+  4. **No abandoned WIP** — branches and queues are consumed regularly. Work-in-progress inventory must not pile up.
+  </AccordionItem>
+
+  <AccordionItem title="3. Cross-Repo as Inter-Company Transfer">
+  When content moves between repositories, it must go through explicit interfaces:
+
+  - deploy-musician.sh: parksy-audio to YouTube + parksy.kr + Drive
+  - publish-eae-kr.sh: eae-univ episodes to eae.kr MDX
+  - sync-dtslib-kr.sh: skillset manifests to dtslib.kr
+
+  Direct file copying between repos without a script is "interface bypass" — the equivalent of moving money between companies without proper documentation.
+  </AccordionItem>
+
+  <AccordionItem title="4. Commit Message as Narrative">
+  Article 1 of the constitution says: a repository is a novel.
+
+  | Commit Type | Narrative | Meaning |
+  |------------|-----------|---------|
+  | feat: | Attempt | Protagonist builds something |
+  | fix: | Struggle | It did not work as expected |
+  | migration | Pivot | Abandon one path, take another |
+  | rewrite | Awakening | Start over properly |
+  | refactor: | Growth | Same task, done better |
+  | docs: | Reflection | Look back at the journey |
+  </AccordionItem>
+</Accordion>
+</Part2>
+
+<Part3>
+## Concept Map
+
+<Mermaid chart={`
+flowchart TD
+    COMMIT[git commit] --> VOUCHER[Accounting Voucher]
+    LOG[git log] --> LEDGER[General Ledger]
+    REVERT[git revert] --> REVERSE[Reverse Entry]
+    DIR[Directories] --> ACCOUNTS[Chart of Accounts]
+
+    subgraph FORBIDDEN["Forbidden"]
+        RESET[reset --hard = Erasing Vouchers]
+        NOEVIDENCE[Empty commit msg = No Evidence]
+        BYPASS[Direct file copy = Interface Bypass]
+    end
+
+    subgraph REQUIRED["Required"]
+        EVIDENCE[Reason in commit msg]
+        BOM[Dependencies listed first]
+        SCRIPT[Cross-repo via scripts only]
+        WIP[Consume WIP regularly]
+    end
+`} />
+
+## Why This Matters for Solo Operators
+
+Large companies have accounting departments that enforce these rules. Solo operators have no one. The temptation to take shortcuts — force push, reset hard, copy files directly, skip commit messages — is constant.
+
+The Matrix Architecture ERP axis makes the rules automatic. CLAUDE.md checks are triggered at every commit. The AI agent blocks forbidden operations. The constitution enforces what discipline alone cannot sustain over 10-20 years.
+
+This is operational technique: not just knowing how to run the system, but building the system so it enforces its own rules.
+</Part3>

@@ -17,7 +17,7 @@ export default function Home() {
           <Link
             key={category.slug}
             to={`/category/${category.slug}`}
-            className="block bg-white rounded-lg shadow hover:shadow-lg transition-shadow overflow-hidden"
+            className="block bg-slate-800/60 border border-slate-700 rounded-lg hover:bg-slate-700/60 transition-colors overflow-hidden"
           >
             {/* Special rendering for EAE Blueprint with YouTube Shorts */}
             {category.youtubeShorts ? (
@@ -30,7 +30,7 @@ export default function Home() {
                 {/* Overlay with category info */}
                 <div className="p-6">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold text-slate-900">{category.name}</h2>
+                    <h2 className="text-xl font-semibold text-slate-200">{category.name}</h2>
                     <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
                       {counts[category.slug] || 0}
                     </span>
@@ -41,7 +41,7 @@ export default function Home() {
               /* Standard category card */
               <div className="p-6">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-slate-900">{category.name}</h2>
+                  <h2 className="text-xl font-semibold text-slate-200">{category.name}</h2>
                   <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
                     {counts[category.slug] || 0}
                   </span>
@@ -60,14 +60,14 @@ export default function Home() {
             <Link
               key={`${post.category}-${post.slug}`}
               to={`/category/${post.category}/${post.slug}`}
-              className="block p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
+              className="block p-4 bg-slate-800/60 border border-slate-700 rounded-lg hover:bg-slate-700/60 transition-colors"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-900">{post.title}</h3>
-                  <p className="text-sm text-gray-600">{post.category}</p>
+                  <h3 className="text-lg font-semibold text-slate-200">{post.title}</h3>
+                  <p className="text-sm text-slate-400">{post.category}</p>
                 </div>
-                <span className="text-sm text-gray-500">{post.date}</span>
+                <span className="text-sm text-slate-500">{post.date}</span>
               </div>
             </Link>
           ))}

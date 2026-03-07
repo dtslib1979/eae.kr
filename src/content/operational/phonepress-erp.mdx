@@ -1,0 +1,122 @@
+---
+title: "PhonePress ERP — Running a Content Factory from a Single Phone"
+title_en: "PhonePress ERP — Running a Content Factory from a Single Phone"
+date: "2026-03-07"
+category: "operational"
+published: true
+description: "PhonePress ERP is a content manufacturing system that uses a smartphone as the only terminal, AI as the MES agent, and GitHub as the general ledger."
+tags:
+  - PhonePress
+  - ERP
+  - Operations
+  - Termux
+---
+
+<Part1>
+## In Simple Terms
+
+Picture a factory. It has machines, a production line, an accounting ledger, and shipping docks. Now shrink that entire factory into a smartphone.
+
+- The phone is your only terminal (no office, no desktop)
+- Claude Code is your MES (Manufacturing Execution System) — it runs the production line
+- GitHub is your general ledger — every commit is a voucher, every log is an audit trail
+- Three broadcast stations are your shipping docks: parksy.kr, eae.kr, dtslib.kr
+
+This is **PhonePress ERP** — Phone + Press (publisher). A content manufacturing operating system that runs 28 repositories from Termux on a single device.
+</Part1>
+
+<Part2>
+## System Architecture
+
+<Accordion>
+  <AccordionItem title="1. Matrix Architecture — ERP x FAB">
+  Every repository operates on two axes:
+
+  **Horizontal (ERP — Ledger):**
+  | Accounting Concept | Git Equivalent |
+  |-------------------|----------------|
+  | Journal Entry | Commit |
+  | General Ledger | git log --reverse |
+  | Account | Directory (tools/, scripts/, assets/) |
+  | Audit Trail | Co-Authored-By |
+  | Inter-company Interface | Cross-repo sync scripts |
+
+  **Vertical (FAB — Manufacturing):**
+  | Manufacturing Concept | Repo Equivalent |
+  |----------------------|-----------------|
+  | BOM (Bill of Materials) | Dependencies + asset lists |
+  | Routing (Process Order) | Pipeline scripts |
+  | WIP (Work in Progress) | Branches + queues |
+  | Yield | CI pass rate |
+  | MES (Execution) | Automation scripts |
+  </AccordionItem>
+
+  <AccordionItem title="2. The Four Principles">
+  1. **No deletion, only reverse entries** — git revert to correct. reset --hard forbidden.
+  2. **No transaction without evidence** — commit messages must have reason and context.
+  3. **Check BOM before production** — dependencies first, process order explicit.
+  4. **No abandoned WIP** — branches and queues are regularly consumed.
+  </AccordionItem>
+
+  <AccordionItem title="3. Constitution System — CLAUDE.md x 23 Repos">
+  Every repository has a CLAUDE.md that serves as its operating manual.
+
+  23 repositories share the same constitutional framework:
+  - Article 0: Editorial Technique (meta philosophy)
+  - Article 1: Repository is a Novel (commits = sentences)
+  - Article 2: Matrix Architecture (ERP x FAB)
+
+  This is a franchise manual. Change the account, fork the repos — the factory runs the same way.
+  </AccordionItem>
+
+  <AccordionItem title="4. Orchestrator Pattern — deploy-musician.sh">
+  The deployment pipeline follows a single pattern across all repos:
+
+  Stage 1: Validate (BOM check)
+  Stage 2: Build (asset generation)
+  Stage 3: Ship (upload to platform)
+  Stage 4: Record (manifest update + commit)
+
+  Every sync script (sync-dtslib-kr.sh, publish-eae-kr.sh, etc.) clones this 4-stage pattern. Zero invention, pure replication.
+  </AccordionItem>
+</Accordion>
+</Part2>
+
+<Part3>
+## Concept Map
+
+<Mermaid chart={`
+flowchart LR
+    PHONE[Smartphone] --> TERMUX[Termux CLI]
+    TERMUX --> CLAUDE[Claude Code MES]
+    CLAUDE --> GH[GitHub Ledger]
+
+    GH --> R1[28 Repositories]
+    R1 --> S1[parksy.kr]
+    R1 --> S2[eae.kr]
+    R1 --> S3[dtslib.kr]
+
+    subgraph ERP["ERP Axis (Ledger)"]
+        C1[Commit = Voucher]
+        C2[Log = Ledger]
+        C3[Sync = Interface]
+    end
+
+    subgraph FAB["FAB Axis (Manufacturing)"]
+        F1[BOM = Dependencies]
+        F2[Routing = Pipeline]
+        F3[WIP = Branches]
+    end
+
+    GH --> ERP
+    GH --> FAB
+`} />
+
+## Why PhonePress Works
+
+The traditional assumption is that content production requires a studio, a team, and specialized hardware. PhonePress ERP disproves this by treating content creation as manufacturing — with the same rigor as factory operations.
+
+The key insight: **the operating system is not the phone. The operating system is the constitution (CLAUDE.md) + the ledger (GitHub) + the automation (scripts).** The phone is just the terminal that accesses this system.
+
+28 repositories, 3 broadcast stations, 23 constitutions, 4-stage deployment — all from Termux on a single device. The process itself is the content.
+</Part3>

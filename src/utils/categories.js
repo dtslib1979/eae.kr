@@ -6,18 +6,38 @@
 export const CATEGORIES = [
   {
     slug: 'eae-blueprint',
-    name: '🎨 EAE Univ.',
-    icon: '🎨',
-    // 이 카테고리는 EAE Univ. YouTube 채널의 설계 백엔드
-    // 단독 콘텐츠 ❌ → YouTube 영상에 종속된 설계/구조 문서
+    name: 'EAE Univ.',
     youtubeChannel: 'https://youtube.com/@EAE-University',
     youtubeShorts: 'https://youtu.be/6T3mibse3Q4?si=bgubKNvV6LjEobqC',
     rules: {
-      requiresYouTubeLink: true,  // 반드시 YouTube 영상 링크 포함
-      requiresPart123: true,       // Part1/2/3 구조 필수
-      standalonePublish: false     // 단독 발행 금지
+      requiresYouTubeLink: true,
+      requiresPart123: true,
+      standalonePublish: false
     }
   },
+  // 4대 카테고리
+  {
+    slug: 'editorial',
+    name: 'Editorial Technique',
+    parent: null,
+    youtubeChannel: 'https://www.youtube.com/@BeingEduartEngineer-4',
+  },
+  {
+    slug: 'operational',
+    name: 'Operational Technique',
+    youtubeChannel: 'https://www.youtube.com/@BeingEduartEngineer-4',
+  },
+  {
+    slug: 'channeling',
+    name: 'Channeling Technique',
+    youtubeChannel: 'https://www.youtube.com/@BeingEduartEngineer-4',
+  },
+  {
+    slug: 'survival',
+    name: 'Survival Technique',
+    youtubeChannel: 'https://www.youtube.com/@BeingEduartEngineer-4',
+  },
+  // 6 skillsets (editorial subtypes)
   { slug: 'qsketch', name: 'Quick Sketch' },
   { slug: 'penon', name: 'Penon' },
   { slug: 'mal', name: 'Mal' },

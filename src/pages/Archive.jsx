@@ -30,11 +30,11 @@ export default function Archive() {
                 <Link
                   key={`${post.category}-${post.slug}`}
                   to={`/category/${post.category}/${post.slug}`}
-                  className="block p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
+                  className="dark-card block"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-slate-900">{post.title}</h3>
-                    <span className="text-sm text-gray-500">{post.date}</span>
+                    <h3 className="text-lg font-semibold text-slate-50">{post.title}</h3>
+                    <span className="text-sm" style={{ color: 'var(--elevator-dim)' }}>{post.date}</span>
                   </div>
                 </Link>
               ))}

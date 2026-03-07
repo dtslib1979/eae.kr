@@ -21,10 +21,10 @@ export default function Category() {
             <Link
               key={post.slug}
               to={`/category/${slug}/${post.slug}`}
-              className="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
+              className="dark-card block"
             >
-              <h2 className="text-2xl font-semibold mb-2 text-slate-900">{post.title || '(제목 없음)'}</h2>
-              <p className="text-gray-600">{post.date}</p>
+              <h2 className="text-xl font-semibold mb-2 text-slate-50">{post.title || '(Untitled)'}</h2>
+              <p className="text-sm" style={{ color: 'var(--elevator-dim)' }}>{post.date}</p>
             </Link>
           ))
         )}

@@ -1,78 +1,35 @@
-import { Link } from 'react-router-dom';
-import { getCategoryCounts, getLatestPosts } from '../utils/posts';
-import { CATEGORIES } from '../utils/categories';
-import { YouTubeEmbed } from '../components/YouTubeEmbed';
+import useElevator from '../hooks/useElevator';
+import ElevatorPanel from '../components/ElevatorPanel';
+import FloorLobby from '../components/FloorLobby';
+import FloorCurriculum from '../components/FloorCurriculum';
+import FloorLibrary from '../components/FloorLibrary';
+import FloorConsole from '../components/FloorConsole';
 
 export default function Home() {
-  const counts = getCategoryCounts();
-  const latestPosts = getLatestPosts(3);
+  const { currentFloor, navigateTo, floors } = useElevator('lobby');
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-slate-50">EDU × ART × ENGINEER</h1>
-      
-      {/* Categories Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {CATEGORIES.map(category => (
-          <Link
-            key={category.slug}
-            to={`/category/${category.slug}`}
-            className="block bg-slate-800/60 border border-slate-700 rounded-lg hover:bg-slate-700/60 transition-colors overflow-hidden"
-          >
-            {/* Special rendering for EAE Blueprint with YouTube Shorts */}
-            {category.youtubeShorts ? (
-              <div className="relative">
-                {/* YouTube Shorts embed with autoplay */}
-                <YouTubeEmbed 
-                  url={category.youtubeShorts}
-                  title={category.name}
-                />
-                {/* Overlay with category info */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold text-slate-200">{category.name}</h2>
-                    <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-                      {counts[category.slug] || 0}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              /* Standard category card */
-              <div className="p-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-slate-200">{category.name}</h2>
-                  <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-                    {counts[category.slug] || 0}
-                  </span>
-                </div>
-              </div>
-            )}
-          </Link>
-        ))}
-      </div>
+    <>
+      <ElevatorPanel
+        floors={floors}
+        currentFloor={currentFloor}
+        onNavigate={navigateTo}
+      />
 
-      {/* Latest Posts */}
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-6 text-slate-50">Latest Posts</h2>
-        <div className="space-y-4">
-          {latestPosts.map(post => (
-            <Link
-              key={`${post.category}-${post.slug}`}
-              to={`/category/${post.category}/${post.slug}`}
-              className="block p-4 bg-slate-800/60 border border-slate-700 rounded-lg hover:bg-slate-700/60 transition-colors"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-200">{post.title}</h3>
-                  <p className="text-sm text-slate-400">{post.category}</p>
-                </div>
-                <span className="text-sm text-slate-500">{post.date}</span>
-              </div>
-            </Link>
-          ))}
+      <div className="floor-content-area">
+        <div className={currentFloor === 'lobby' ? 'floor-section active' : 'floor-section'}>
+          <FloorLobby onNavigate={navigateTo} />
+        </div>
+        <div className={currentFloor === 'curriculum' ? 'floor-section active' : 'floor-section'}>
+          <FloorCurriculum />
+        </div>
+        <div className={currentFloor === 'library' ? 'floor-section active' : 'floor-section'}>
+          <FloorLibrary />
+        </div>
+        <div className={currentFloor === 'console' ? 'floor-section active' : 'floor-section'}>
+          <FloorConsole />
         </div>
       </div>
-    </div>
+    </>
   );
 }

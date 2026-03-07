@@ -1,0 +1,117 @@
+---
+title: "PHL — Compressing 200 Words into 3 Concept Tokens"
+title_en: "PHL — Compressing 200 Words into 3 Concept Tokens"
+date: "2026-03-07"
+category: "phl"
+published: true
+description: "PHL treats philosophical concepts as compression tokens. 200 words of natural language become 3-5 tokens that inject thinking frameworks into AI."
+tags:
+  - PHL
+  - Tokens
+  - Compression
+  - Editorial
+---
+
+<Part1>
+## In Simple Terms
+
+You write a 200-word description of how you want AI to think. Or you write three words: "Meta + Modular + Pipeline."
+
+Both produce the same result. The second version is 88% compression. That is PHL — Philosophical Heuristic Language.
+
+PHL treats concepts as tokens. Each token carries a compressed thinking framework. When you inject these tokens into a system prompt, the AI receives not just instructions but a complete cognitive structure.
+
+This is editorial technique applied to concepts themselves. The original material is natural language. You deconstruct verbose descriptions into core operators, then recombine those operators into minimal system prompts that carry maximum meaning.
+</Part1>
+
+<Part2>
+## System Architecture
+
+<Accordion>
+  <AccordionItem title="1. Token Tiers">
+  100 concept tokens organized in three tiers:
+
+  **Tier 1 (1-24): Core Operators** — thinking frameworks
+  Meta, Modular, Pipeline, Spiral, Reverse, Pareto, Axiom...
+
+  **Tier 2 (25-72): System Operators** — execution structures
+
+  **Tier 3 (73-100): Expression + Interrupt**
+  Including emergency tokens that override AI behavior:
+  - Interrupt token: halt current reasoning, restart from zero
+  - Error token: detect logic fault, initiate repair
+  - Hallucination flag: reset to fact-based reasoning
+  </AccordionItem>
+
+  <AccordionItem title="2. ConceptGraph — Token Relationships">
+  Tokens are not isolated. They have governance relationships:
+
+  "Spiral governs Optimize, Validate"
+  means: execute Spiral first, then Optimize, then Validate.
+
+  The ConceptGraph maps all 100 tokens into a directed graph of dependencies and governance. When you select 3-5 tokens for a prompt, the graph determines their execution order automatically.
+  </AccordionItem>
+
+  <AccordionItem title="3. Working Code — The Only Complete Skillset">
+  PHL is the only skillset with fully working code:
+
+  - dictionary.py — 100 token definitions
+  - graph.py — ConceptGraph with governance relationships
+  - compiler.py — PHLCompiler that generates system prompts
+  - cli.py — command-line interface
+  - benchmark.py — A/B testing framework
+  - tests/ — 46 tests, 0 failures
+
+  Score: 9/10. The highest-rated skillset in the entire system.
+  </AccordionItem>
+
+  <AccordionItem title="4. Five Games + BOSS">
+  1. TOKEN MATCH — paragraph appears, select the 3 tokens that compress it best
+  2. DECOMPRESS — given 3 tokens, expand back to natural language
+  3. GRAPH BUILDER — arrange tokens in governance order
+  4. COMPRESSION RACE — who can achieve highest compression ratio
+  5. PROMPT DUEL — same task, two token sets, compare AI output quality
+
+  **BOSS**: Given a paragraph from CLAUDE.md constitution, compress to minimum tokens. Core token penalty applies — using obvious tokens scores lower. Compression ratio and meaning preservation both scored.
+  </AccordionItem>
+</Accordion>
+</Part2>
+
+<Part3>
+## Concept Map
+
+<Mermaid chart={`
+flowchart TD
+    NL[Natural Language 200 words] --> DECOMP[Deconstruct]
+    DECOMP --> T1[Tier 1: Core Operators]
+    DECOMP --> T2[Tier 2: System Operators]
+    DECOMP --> T3[Tier 3: Expression + Interrupt]
+
+    T1 --> GRAPH[ConceptGraph]
+    T2 --> GRAPH
+    T3 --> GRAPH
+
+    GRAPH --> COMPILER[PHLCompiler]
+    COMPILER --> PROMPT[System Prompt 3-5 tokens]
+    PROMPT --> AI[AI Execution]
+    AI --> OUTPUT[Structured Output]
+
+    subgraph CODE["Working Code (eae-univ/phl/)"]
+        D[dictionary.py]
+        G[graph.py]
+        C[compiler.py]
+        B[benchmark.py]
+        TE[46 tests]
+    end
+`} />
+
+## Why Compression Matters
+
+In the age of unlimited AI context windows, why compress at all?
+
+Because compression is not about saving tokens. Compression is about **understanding**. If you cannot compress a 200-word concept into 3 tokens, you do not understand which parts are essential and which are noise. The act of compression forces editorial judgment — what stays, what goes, what governs what.
+
+PHL is the purest form of editorial technique: the original material is language itself, and the recombination produces a denser, more powerful version. Every other skillset benefits from this — EML emotion parameters are compressed from verbose descriptions, QSketch unit names are compressed from full anatomical descriptions, PENON diagram labels are compressed from system documentation.
+
+PHL is the meta-skillset. It edits the way you think about editing.
+</Part3>

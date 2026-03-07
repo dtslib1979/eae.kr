@@ -37,13 +37,6 @@ export const CATEGORIES = [
     name: 'Survival Technique',
     youtubeChannel: 'https://www.youtube.com/@BeingEduartEngineer-4',
   },
-  // 6 skillsets (editorial subtypes)
-  { slug: 'qsketch', name: 'Quick Sketch' },
-  { slug: 'penon', name: 'Penon' },
-  { slug: 'mal', name: 'Mal' },
-  { slug: 'patchtech', name: 'Patchtech' },
-  { slug: 'eml', name: 'EML' },
-  { slug: 'phl', name: 'PHL' },
 ];
 
 // Get simple title for a category (without emoji/icon)

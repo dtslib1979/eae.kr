@@ -1,4 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
-  <rect width="192" height="192" fill="#3B82F6" rx="32"/>
-  <text x="96" y="120" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">EAE</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bgE" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b3a2a"/>
+      <stop offset="100%" stop-color="#253a2f"/>
+    </linearGradient>
+    <linearGradient id="goldE" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe566"/>
+      <stop offset="100%" stop-color="#d4a017"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="13" fill="url(#bgE)"/>
+  <path d="M 18 52 A 32 32 0 0 1 82 52" fill="none" stroke="url(#goldE)" stroke-width="4" stroke-linecap="round" opacity="0.3"/>
+  <path d="M 26 52 A 24 24 0 0 1 74 52" fill="none" stroke="url(#goldE)" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 34 52 A 16 16 0 0 1 66 52" fill="none" stroke="url(#goldE)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="50" cy="54" r="3" fill="url(#goldE)"/>
+  <text x="50" y="90" font-family="Arial Black, Impact, sans-serif" font-size="30" font-weight="900" fill="white" text-anchor="middle" letter-spacing="2">EAE</text>
 </svg>

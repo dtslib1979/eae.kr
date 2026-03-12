@@ -34,21 +34,25 @@ export default function FloorConsole() {
         </a>
       </div>
 
-      {/* Trilogy Section */}
+      {/* Quartet Flow */}
       <div className="trilogy-section">
-        <h3 className="trilogy-title">DTSLIB Trilogy</h3>
-        <div className="trilogy-grid">
+        <h3 className="trilogy-title">Broadcasting Quartet</h3>
+        <div className="trilogy-grid" style={{gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem'}}>
           <a href="https://parksy.kr" target="_blank" rel="noopener noreferrer" className="trilogy-card">
             <span className="trilogy-domain">parksy.kr</span>
-            <span className="trilogy-role">Broadcast</span>
-          </a>
-          <a href="https://eae.kr" className="trilogy-card active">
-            <span className="trilogy-domain">eae.kr</span>
-            <span className="trilogy-role">Education</span>
+            <span className="trilogy-role">Raw / Entity</span>
           </a>
           <a href="https://dtslib.kr" target="_blank" rel="noopener noreferrer" className="trilogy-card">
             <span className="trilogy-domain">dtslib.kr</span>
-            <span className="trilogy-role">Publishing</span>
+            <span className="trilogy-role">Biz / Economy</span>
+          </a>
+          <a href="https://eae.kr" className="trilogy-card active">
+            <span className="trilogy-domain">eae.kr</span>
+            <span className="trilogy-role">Education / MDX</span>
+          </a>
+          <a href="https://dtslib1979.github.io/eae-univ/" target="_blank" rel="noopener noreferrer" className="trilogy-card">
+            <span className="trilogy-domain">eae-univ</span>
+            <span className="trilogy-role">Academy / Hub</span>
           </a>
         </div>
       </div>

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>EAE Broadcasting — Education Station</title>
+  <title>EAE Broadcasting — 편집술 강의실</title>
 
   <!-- SEO -->
-  <meta name="description" content="EAE Broadcasting - Beyond AI Education. Learn with structure: Grandpa Mode, System Architect, Theory Map. EduArt Engineer content platform.">
+  <meta name="description" content="EAE Broadcasting — 편집술/운영술/접신술/생존술. EduArt Engineer 교육 방송국.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://eae.kr/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="EAE Broadcasting — Education Station">
-  <meta property="og:description" content="Beyond AI Education. Learn with structure.">
+  <meta property="og:title" content="EAE Broadcasting — 편집술 강의실">
+  <meta property="og:description" content="편집술·운영술·접신술·생존술. EduArt Engineer 교육 방송국.">
   <meta property="og:url" content="https://eae.kr/">
 
   <!-- Favicon -->
@@ -23,18 +23,924 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#253A2F">
 
+  <!-- CAVE UI -->
+  <link rel="stylesheet" href="/design/cave-ui.css">
+  <link rel="stylesheet" href="/design/elevator-ui.css">
+  <link rel="stylesheet" href="/design/eae-broadcast.css">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --chalk-bg:    #1a2a1a;
+      --chalk-wall:  #253A2F;
+      --chalk-panel: #1e3028;
+      --chalk-amber: #F5C542;
+      --chalk-amber2: #E8B84B;
+      --chalk-text:  rgba(245,240,220,0.90);
+      --chalk-muted: rgba(245,240,220,0.45);
+      --chalk-dim:   rgba(245,240,220,0.20);
+      --chalk-blue:  #7EC8E3;
+      --chalk-purple:#C3A6E8;
+      --chalk-green: #7EC87E;
+      --chalk-red:   #E87E7E;
+
+      /* elevator override */
+      --elev-bg:       var(--chalk-wall);
+      --elev-accent:   var(--chalk-amber);
+      --elev-text:     var(--chalk-text);
+      --elev-panel:    var(--chalk-panel);
+      --elev-border:   rgba(245,240,220,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--chalk-bg);
+      color: var(--chalk-text);
+      font-family: 'Noto Sans KR', 'JetBrains Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Signal Ticker ── */
+    .signal-ticker {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(26,42,26,0.92);
+      border-bottom: 1px solid var(--chalk-amber);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      height: 32px;
+      padding: 0 16px;
+      gap: 0;
+      overflow: hidden;
+    }
+    .ticker-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--chalk-amber);
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+    .ticker-scroll {
+      display: flex;
+      gap: 32px;
+      animation: ticker-move 30s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--chalk-muted);
+      letter-spacing: 0.08em;
+    }
+    .ticker-item strong { color: var(--chalk-amber); font-weight: 600; }
+    .ticker-sep { color: var(--chalk-dim); }
+    @keyframes ticker-move {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Main Layout ── */
+    .eae-main {
+      padding-top: 32px;
+    }
+
+    /* ── Elevator Panel (floor selector) ── */
+    .elevator-nav {
+      position: fixed;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .elev-btn {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--chalk-dim);
+      background: rgba(26,42,26,0.85);
+      backdrop-filter: blur(6px);
+      color: var(--chalk-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    .elev-btn:hover,
+    .elev-btn.active {
+      border-color: var(--chalk-amber);
+      color: var(--chalk-amber);
+      background: rgba(245,197,66,0.10);
+    }
+    .elev-btn .floor-num { font-size: 12px; font-weight: 600; }
+    .elev-btn .floor-tag { font-size: 7px; opacity: 0.7; }
+
+    /* ── Section / Floor ── */
+    .floor {
+      min-height: 100vh;
+      padding: 48px 20px 64px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── bcast-header ── */
+    .bcast-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+    }
+    .bcast-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--chalk-amber) 0%, transparent 100%);
+      opacity: 0.35;
+    }
+    .bcast-floor-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--chalk-amber);
+      letter-spacing: 0.15em;
+      opacity: 0.7;
+    }
+    .bcast-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--chalk-text);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Hero (1F Lobby) ── */
+    .eae-hero {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+    .hero-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--chalk-amber);
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+      opacity: 0.8;
+    }
+    .hero-title {
+      font-size: clamp(28px, 6vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .hero-title .accent { color: var(--chalk-amber); }
+    .hero-sub {
+      font-size: 14px;
+      color: var(--chalk-muted);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+    .hero-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+    .hero-link.primary {
+      border-color: var(--chalk-amber);
+      color: var(--chalk-amber);
+      background: rgba(245,197,66,0.08);
+    }
+    .hero-link.primary:hover { background: rgba(245,197,66,0.18); }
+    .hero-link.secondary {
+      border-color: var(--chalk-dim);
+      color: var(--chalk-muted);
+    }
+    .hero-link.secondary:hover { border-color: var(--chalk-muted); color: var(--chalk-text); }
+
+    /* ── ch-row (category row) ── */
+    .ch-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--chalk-dim);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .ch-row:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); }
+    .ch-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--chalk-dim);
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .ch-icon {
+      font-size: 22px;
+      width: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .ch-info { flex: 1; min-width: 0; }
+    .ch-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .ch-desc {
+      font-size: 11px;
+      color: var(--chalk-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ch-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .badge-amber  { background: rgba(245,197,66,0.15); color: var(--chalk-amber);  border: 1px solid rgba(245,197,66,0.3); }
+    .badge-blue   { background: rgba(126,200,227,0.12); color: var(--chalk-blue);   border: 1px solid rgba(126,200,227,0.25); }
+    .badge-purple { background: rgba(195,166,232,0.12); color: var(--chalk-purple); border: 1px solid rgba(195,166,232,0.25); }
+    .badge-green  { background: rgba(126,200,126,0.12); color: var(--chalk-green);  border: 1px solid rgba(126,200,126,0.25); }
+
+    /* ch-row accent lines */
+    .ch-row.amber  { border-left: 3px solid var(--chalk-amber); }
+    .ch-row.blue   { border-left: 3px solid var(--chalk-blue); }
+    .ch-row.purple { border-left: 3px solid var(--chalk-purple); }
+    .ch-row.green  { border-left: 3px solid var(--chalk-green); }
+
+    /* ── Skillset grid (B2) ── */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .skill-card {
+      padding: 16px 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--chalk-dim);
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .skill-card:hover { background: rgba(245,197,66,0.06); border-color: rgba(245,197,66,0.3); }
+    .skill-abbr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--chalk-amber);
+      margin-bottom: 6px;
+    }
+    .skill-name { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+    .skill-desc { font-size: 10px; color: var(--chalk-muted); line-height: 1.5; }
+
+    /* ── Studio programs (B3) ── */
+    .prog-list { display: flex; flex-direction: column; gap: 8px; }
+    .prog-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--chalk-dim);
+      border-radius: 8px;
+    }
+    .prog-icon { font-size: 20px; width: 32px; text-align: center; }
+    .prog-info { flex: 1; }
+    .prog-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .prog-meta { font-size: 10px; color: var(--chalk-muted); font-family: 'JetBrains Mono', monospace; }
+    .prog-freq {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--chalk-dim);
+      color: var(--chalk-muted);
+    }
+
+    /* ── Locked floor (B4) ── */
+    .locked-panel {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .lock-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
+    .lock-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--chalk-amber);
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+    .lock-desc { font-size: 13px; color: var(--chalk-muted); margin-bottom: 24px; }
+    .lock-input-row { display: flex; gap: 8px; justify-content: center; }
+    .lock-input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--chalk-dim);
+      border-radius: 6px;
+      color: var(--chalk-text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      letter-spacing: 0.2em;
+      padding: 8px 16px;
+      text-align: center;
+      width: 100px;
+      outline: none;
+    }
+    .lock-input:focus { border-color: var(--chalk-amber); }
+    .lock-submit {
+      padding: 8px 16px;
+      background: rgba(245,197,66,0.12);
+      border: 1px solid rgba(245,197,66,0.3);
+      border-radius: 6px;
+      color: var(--chalk-amber);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lock-submit:hover { background: rgba(245,197,66,0.22); }
+
+    /* archive content (revealed after unlock) */
+    .archive-content { display: none; }
+
+    /* MDX Archive list */
+    .archive-category {
+      margin-bottom: 28px;
+    }
+    .archive-cat-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--chalk-amber);
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(245,197,66,0.2);
+    }
+    .archive-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--chalk-dim);
+      font-size: 12px;
+      color: var(--chalk-muted);
+    }
+    .archive-item-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--chalk-dim);
+      flex-shrink: 0;
+    }
+    .archive-item-title { flex: 1; color: var(--chalk-text); }
+    .archive-item-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* ── Footer ── */
+    .eae-footer {
+      text-align: center;
+      padding: 32px 20px;
+      border-top: 1px solid var(--chalk-dim);
+      margin-top: 40px;
+    }
+    .footer-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--chalk-amber);
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+    }
+    .footer-sub {
+      font-size: 11px;
+      color: var(--chalk-dim);
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .elevator-nav { right: 8px; }
+      .floor { padding: 40px 16px 56px; }
+      .hero-title { font-size: 28px; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Chalkboard background -->
-  <div class="parksy-chalkboard"></div>
 
-  <!-- React app root -->
-  <div id="root" class="parksy-main"></div>
+<!-- Chalk Dust particles -->
+<canvas id="chalk-particles"></canvas>
 
-  <script type="module" src="/src/main.jsx"></script>
+<!-- Signal Ticker -->
+<div class="signal-ticker">
+  <span class="ticker-label">◈ EAE-FM</span>
+  <div class="ticker-scroll">
+    <span class="ticker-item ticker-sep">▸</span>
+    <span class="ticker-item"><strong>4</strong> CATEGORIES</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item"><strong>6</strong> SKILLSETS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item"><strong>3</strong> PARTS/POST</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item"><strong>EDITORIAL</strong> · <strong>OPERATIONAL</strong> · <strong>CHANNELING</strong> · <strong>SURVIVAL</strong></span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">EduArt Engineer — 편집술 강의실</span>
+    <span class="ticker-item ticker-sep">▸</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item ticker-sep">▸</span>
+    <span class="ticker-item"><strong>4</strong> CATEGORIES</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item"><strong>6</strong> SKILLSETS</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item"><strong>3</strong> PARTS/POST</span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item"><strong>EDITORIAL</strong> · <strong>OPERATIONAL</strong> · <strong>CHANNELING</strong> · <strong>SURVIVAL</strong></span>
+    <span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">EduArt Engineer — 편집술 강의실</span>
+    <span class="ticker-item ticker-sep">▸</span>
+  </div>
+</div>
+
+<!-- Elevator Nav -->
+<nav class="elevator-nav" aria-label="Floor navigation">
+  <button class="elev-btn active" onclick="scrollToFloor('f1')" title="1F Lobby">
+    <span class="floor-num">1F</span>
+    <span class="floor-tag">LOBBY</span>
+  </button>
+  <button class="elev-btn" onclick="scrollToFloor('b1')" title="B1 Posts">
+    <span class="floor-num">B1</span>
+    <span class="floor-tag">POSTS</span>
+  </button>
+  <button class="elev-btn" onclick="scrollToFloor('b2')" title="B2 Skills">
+    <span class="floor-num">B2</span>
+    <span class="floor-tag">SKILLS</span>
+  </button>
+  <button class="elev-btn" onclick="scrollToFloor('b3')" title="B3 Studio">
+    <span class="floor-num">B3</span>
+    <span class="floor-tag">STUDIO</span>
+  </button>
+  <button class="elev-btn" onclick="scrollToFloor('b4')" title="B4 Archive">
+    <span class="floor-num">B4</span>
+    <span class="floor-tag">🔒</span>
+  </button>
+</nav>
+
+<!-- Main -->
+<main class="eae-main">
+
+  <!-- ═══════════════════════════════════════════
+       1F  LOBBY
+  ══════════════════════════════════════════════ -->
+  <section id="f1" class="floor">
+
+    <!-- Hero -->
+    <div class="eae-hero">
+      <div class="hero-tag">◈ EAE BROADCASTING · 편집술 강의실</div>
+      <h1 class="hero-title">
+        EduArt <span class="accent">Engineer</span><br>
+        교육 방송국
+      </h1>
+      <p class="hero-sub">
+        편집술·운영술·접신술·생존술.<br>
+        만드는 과정이 강의다.
+      </p>
+      <div class="hero-links">
+        <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" rel="noopener" class="hero-link primary">▶ YouTube 채널</a>
+        <a href="https://www.youtube.com/@EAE-University" target="_blank" rel="noopener" class="hero-link secondary">🎓 EAE University</a>
+        <a href="https://eae-univ.github.io" target="_blank" rel="noopener" class="hero-link secondary">📐 Pentagon Hub</a>
+      </div>
+    </div>
+
+    <!-- Section divider -->
+    <div class="bcast-header">
+      <span class="bcast-floor-id">1F-OVERVIEW</span>
+      <span class="bcast-title">4대 강의 채널</span>
+    </div>
+
+    <!-- 4 categories preview ch-rows -->
+    <a href="#b1" onclick="scrollToFloor('b1'); return false;" class="ch-row amber">
+      <span class="ch-num">01</span>
+      <span class="ch-icon">✏️</span>
+      <div class="ch-info">
+        <div class="ch-name">Editorial Technique</div>
+        <div class="ch-desc">편집술 — 6 스킬셋 (EML / QSketch / MAL / PENON / PHL / Patchtech)</div>
+      </div>
+      <span class="ch-badge badge-amber">EDITORIAL</span>
+    </a>
+
+    <a href="#b1" onclick="scrollToFloor('b1'); return false;" class="ch-row blue">
+      <span class="ch-num">02</span>
+      <span class="ch-icon">⚙️</span>
+      <div class="ch-info">
+        <div class="ch-name">Operational Technique</div>
+        <div class="ch-desc">운영술 — PhonePress ERP, 매트릭스 아키텍처, 공정 설계</div>
+      </div>
+      <span class="ch-badge badge-blue">OPERATIONAL</span>
+    </a>
+
+    <a href="#b1" onclick="scrollToFloor('b1'); return false;" class="ch-row purple">
+      <span class="ch-num">03</span>
+      <span class="ch-icon">🎭</span>
+      <div class="ch-info">
+        <div class="ch-name">Channeling Technique</div>
+        <div class="ch-desc">접신술 — 캐릭터 IP, 관점 추출, 페르소나 운용</div>
+      </div>
+      <span class="ch-badge badge-purple">CHANNELING</span>
+    </a>
+
+    <a href="#b1" onclick="scrollToFloor('b1'); return false;" class="ch-row green">
+      <span class="ch-num">04</span>
+      <span class="ch-icon">🌿</span>
+      <div class="ch-info">
+        <div class="ch-name">Survival Technique</div>
+        <div class="ch-desc">생존술 — Quantum Jump, 프랜차이즈 구조, 비즈니스 생존 전략</div>
+      </div>
+      <span class="ch-badge badge-green">SURVIVAL</span>
+    </a>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       B1  POSTS
+  ══════════════════════════════════════════════ -->
+  <section id="b1" class="floor">
+    <div class="bcast-header">
+      <span class="bcast-floor-id">B1-POSTS</span>
+      <span class="bcast-title">강의 포스트</span>
+    </div>
+
+    <!-- Editorial -->
+    <div class="bcast-header" style="margin-top:16px; margin-bottom:12px;">
+      <span class="bcast-floor-id" style="color:var(--chalk-amber)">EDITORIAL</span>
+    </div>
+    <div class="ch-row amber" style="cursor:default;">
+      <span class="ch-num">01</span>
+      <span class="ch-icon">✏️</span>
+      <div class="ch-info">
+        <div class="ch-name">Editorial Technique Posts</div>
+        <div class="ch-desc">6 스킬셋 기반 편집술 강의 아카이브</div>
+      </div>
+      <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" rel="noopener"
+         class="ch-badge badge-amber" style="text-decoration:none;">▶ YOUTUBE</a>
+    </div>
+
+    <!-- Operational -->
+    <div class="bcast-header" style="margin-top:16px; margin-bottom:12px;">
+      <span class="bcast-floor-id" style="color:var(--chalk-blue)">OPERATIONAL</span>
+    </div>
+    <div class="ch-row blue" style="cursor:default;">
+      <span class="ch-num">02</span>
+      <span class="ch-icon">⚙️</span>
+      <div class="ch-info">
+        <div class="ch-name">Operational Technique Posts</div>
+        <div class="ch-desc">PhonePress ERP, 공장 설계, 매트릭스 아키텍처</div>
+      </div>
+      <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" rel="noopener"
+         class="ch-badge badge-blue" style="text-decoration:none;">▶ YOUTUBE</a>
+    </div>
+
+    <!-- Channeling -->
+    <div class="bcast-header" style="margin-top:16px; margin-bottom:12px;">
+      <span class="bcast-floor-id" style="color:var(--chalk-purple)">CHANNELING</span>
+    </div>
+    <div class="ch-row purple" style="cursor:default;">
+      <span class="ch-num">03</span>
+      <span class="ch-icon">🎭</span>
+      <div class="ch-info">
+        <div class="ch-name">Channeling Technique Posts</div>
+        <div class="ch-desc">캐릭터 IP, 관점 추출, 페르소나 전환 전략</div>
+      </div>
+      <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" rel="noopener"
+         class="ch-badge badge-purple" style="text-decoration:none;">▶ YOUTUBE</a>
+    </div>
+
+    <!-- Survival -->
+    <div class="bcast-header" style="margin-top:16px; margin-bottom:12px;">
+      <span class="bcast-floor-id" style="color:var(--chalk-green)">SURVIVAL</span>
+    </div>
+    <div class="ch-row green" style="cursor:default;">
+      <span class="ch-num">04</span>
+      <span class="ch-icon">🌿</span>
+      <div class="ch-info">
+        <div class="ch-name">Survival Technique Posts</div>
+        <div class="ch-desc">Quantum Jump, 프랜차이즈 구조, 비즈니스 생존</div>
+      </div>
+      <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" rel="noopener"
+         class="ch-badge badge-green" style="text-decoration:none;">▶ YOUTUBE</a>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       B2  SKILLS — 6 Skillsets
+  ══════════════════════════════════════════════ -->
+  <section id="b2" class="floor">
+    <div class="bcast-header">
+      <span class="bcast-floor-id">B2-SKILLS</span>
+      <span class="bcast-title">6대 스킬셋</span>
+    </div>
+    <p style="font-size:12px; color:var(--chalk-muted); margin-bottom:20px; line-height:1.6;">
+      Editorial Technique의 핵심 스킬셋 6개. 각 스킬셋은 EAE University 커리큘럼 원천 소재.
+    </p>
+
+    <div class="skill-grid">
+      <a href="https://eae-univ.github.io/eml" target="_blank" rel="noopener" class="skill-card">
+        <div class="skill-abbr">EML</div>
+        <div class="skill-name">Editorial Markup Language</div>
+        <div class="skill-desc">콘텐츠 구조화 언어. 생각을 레이아웃으로 번역.</div>
+      </a>
+      <a href="https://eae-univ.github.io/qsketch" target="_blank" rel="noopener" class="skill-card">
+        <div class="skill-abbr">QSketch</div>
+        <div class="skill-name">Quick Sketch System</div>
+        <div class="skill-desc">아이디어를 즉시 시각화. 드래프팅 → 퍼블리싱 단축.</div>
+      </a>
+      <a href="https://eae-univ.github.io/mal" target="_blank" rel="noopener" class="skill-card">
+        <div class="skill-abbr">MAL</div>
+        <div class="skill-name">Multi-Agent Layering</div>
+        <div class="skill-desc">AI 에이전트 역할 분배. ChatGPT/Grok/Claude 오케스트레이션.</div>
+      </a>
+      <a href="https://eae-univ.github.io/penon" target="_blank" rel="noopener" class="skill-card">
+        <div class="skill-abbr">PENON</div>
+        <div class="skill-name">Persona Engineering</div>
+        <div class="skill-desc">캐릭터 IP 설계. 박씨 페르소나 5종 운용 체계.</div>
+      </a>
+      <a href="https://eae-univ.github.io/phl" target="_blank" rel="noopener" class="skill-card">
+        <div class="skill-abbr">PHL</div>
+        <div class="skill-name">Philosophy Layering</div>
+        <div class="skill-desc">철학을 콘텐츠 레이어로. 원칙 → 실행 전환 구조.</div>
+      </a>
+      <a href="https://eae-univ.github.io/patchtech" target="_blank" rel="noopener" class="skill-card">
+        <div class="skill-abbr">Patchtech</div>
+        <div class="skill-name">Patch Technology</div>
+        <div class="skill-desc">기존 시스템 위에 덧대기. 빌드 없이 기능 추가.</div>
+      </a>
+    </div>
+
+    <div style="margin-top:24px; padding:16px; background:rgba(245,197,66,0.05); border:1px solid rgba(245,197,66,0.15); border-radius:8px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--chalk-amber); margin-bottom:6px;">◈ EAE UNIVERSITY PENTAGON</div>
+      <div style="font-size:12px; color:var(--chalk-muted); line-height:1.6;">
+        EML → QSketch → MAL → PENON → PHL → Patchtech<br>
+        6개 스킬셋이 Pentagon 구조로 순환 연결됨.
+        <a href="https://eae-univ.github.io" target="_blank" rel="noopener"
+           style="color:var(--chalk-amber); text-decoration:none; margin-left:8px;">→ Pentagon Hub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       B3  STUDIO
+  ══════════════════════════════════════════════ -->
+  <section id="b3" class="floor">
+    <div class="bcast-header">
+      <span class="bcast-floor-id">B3-STUDIO</span>
+      <span class="bcast-title">스튜디오 프로그램</span>
+    </div>
+
+    <div class="prog-list">
+      <div class="prog-row">
+        <span class="prog-icon">📺</span>
+        <div class="prog-info">
+          <div class="prog-name">강의 생중계</div>
+          <div class="prog-meta">LIVE LECTURE · MDX 포스트 작성 과정 공개</div>
+        </div>
+        <span class="prog-freq">수시</span>
+      </div>
+      <div class="prog-row">
+        <span class="prog-icon">🎓</span>
+        <div class="prog-info">
+          <div class="prog-name">스킬셋 해설</div>
+          <div class="prog-meta">SKILLSET BREAKDOWN · 6 스킬셋 심층 분석</div>
+        </div>
+        <span class="prog-freq">주간</span>
+      </div>
+      <div class="prog-row">
+        <span class="prog-icon">📐</span>
+        <div class="prog-info">
+          <div class="prog-name">구조 설계 쇼</div>
+          <div class="prog-meta">ARCHITECTURE SHOW · 레포 구조 + ERP 설계</div>
+        </div>
+        <span class="prog-freq">격주</span>
+      </div>
+      <div class="prog-row">
+        <span class="prog-icon">🎙️</span>
+        <div class="prog-info">
+          <div class="prog-name">EduArt 인터뷰</div>
+          <div class="prog-meta">INTERVIEW · 공정 과정 회고 + 다음 실험 선언</div>
+        </div>
+        <span class="prog-freq">월간</span>
+      </div>
+    </div>
+
+    <!-- Studio equipment -->
+    <div class="bcast-header" style="margin-top:36px;">
+      <span class="bcast-floor-id">B3-TOOLS</span>
+      <span class="bcast-title">제작 도구</span>
+    </div>
+    <div class="skill-grid" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+      <div class="skill-card" style="cursor:default;">
+        <div class="skill-abbr" style="font-size:14px;">Vite+MDX</div>
+        <div class="skill-name" style="font-size:11px;">포스트 엔진</div>
+        <div class="skill-desc">React+Vite 빌드. MDX 콘텐츠 이력 보존.</div>
+      </div>
+      <div class="skill-card" style="cursor:default;">
+        <div class="skill-abbr" style="font-size:14px;">Git</div>
+        <div class="skill-name" style="font-size:11px;">원장</div>
+        <div class="skill-desc">커밋 = 전표. log = 강의 서사.</div>
+      </div>
+      <div class="skill-card" style="cursor:default;">
+        <div class="skill-abbr" style="font-size:14px;">GH Actions</div>
+        <div class="skill-name" style="font-size:11px;">자동 배포</div>
+        <div class="skill-desc">main push → eae.kr 즉시 반영.</div>
+      </div>
+      <div class="skill-card" style="cursor:default;">
+        <div class="skill-abbr" style="font-size:14px;">Claude</div>
+        <div class="skill-name" style="font-size:11px;">편집 에이전트</div>
+        <div class="skill-desc">MDX 작성 + Git 실행 + 배포.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       B4  ARCHIVE (LOCKED)
+  ══════════════════════════════════════════════ -->
+  <section id="b4" class="floor">
+    <div class="bcast-header">
+      <span class="bcast-floor-id">B4-ARCHIVE</span>
+      <span class="bcast-title">MDX 아카이브</span>
+    </div>
+
+    <div class="locked-panel" id="lock-panel">
+      <div class="lock-icon">🔒</div>
+      <div class="lock-label">RESTRICTED ACCESS</div>
+      <div class="lock-desc">출판사 이력 보관소. React MDX 원본 아카이브.<br>발행인 코드 입력 시 열람 가능.</div>
+      <div class="lock-input-row">
+        <input type="password" class="lock-input" id="lock-code" placeholder="····" maxlength="4"
+               onkeydown="if(event.key==='Enter') tryUnlock()">
+        <button class="lock-submit" onclick="tryUnlock()">ENTER</button>
+      </div>
+      <div id="lock-error" style="margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--chalk-red); display:none;">
+        ACCESS DENIED
+      </div>
+    </div>
+
+    <div class="archive-content" id="archive-content">
+      <div style="margin-bottom:20px; padding:12px 16px; background:rgba(245,197,66,0.05); border:1px solid rgba(245,197,66,0.15); border-radius:8px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--chalk-amber); margin-bottom:6px;">◈ MDX ARCHIVE — 출판사 이력</div>
+        <div style="font-size:11px; color:var(--chalk-muted);">
+          React+Vite+MDX 스택으로 발행된 원본 콘텐츠 이력. 이 방송국의 소설 초고.
+        </div>
+      </div>
+
+      <div class="archive-category">
+        <div class="archive-cat-title">✏️ EDITORIAL TECHNIQUE</div>
+        <div class="archive-item">
+          <span class="archive-item-date">—</span>
+          <span class="archive-item-title">src/content/editorial/ (MDX 원고 아카이브)</span>
+          <span class="archive-item-tag badge-amber">MDX</span>
+        </div>
+      </div>
+      <div class="archive-category">
+        <div class="archive-cat-title">⚙️ OPERATIONAL TECHNIQUE</div>
+        <div class="archive-item">
+          <span class="archive-item-date">—</span>
+          <span class="archive-item-title">src/content/operational/ (MDX 원고 아카이브)</span>
+          <span class="archive-item-tag badge-blue">MDX</span>
+        </div>
+      </div>
+      <div class="archive-category">
+        <div class="archive-cat-title">🎭 CHANNELING TECHNIQUE</div>
+        <div class="archive-item">
+          <span class="archive-item-date">—</span>
+          <span class="archive-item-title">src/content/channeling/ (MDX 원고 아카이브)</span>
+          <span class="archive-item-tag badge-purple">MDX</span>
+        </div>
+      </div>
+      <div class="archive-category">
+        <div class="archive-cat-title">🌿 SURVIVAL TECHNIQUE</div>
+        <div class="archive-item">
+          <span class="archive-item-date">—</span>
+          <span class="archive-item-title">src/content/survival/ (MDX 원고 아카이브)</span>
+          <span class="archive-item-tag badge-green">MDX</span>
+        </div>
+      </div>
+      <div class="archive-category">
+        <div class="archive-cat-title">📐 EAE BLUEPRINT</div>
+        <div class="archive-item">
+          <span class="archive-item-date">—</span>
+          <span class="archive-item-title">src/content/eae-blueprint/ (EAE Univ. 설계 레이어)</span>
+          <span class="archive-item-tag" style="background:rgba(126,200,227,0.12);color:var(--chalk-blue);border:1px solid rgba(126,200,227,0.25)">BLUEPRINT</span>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; text-align:center;">
+        <a href="https://github.com/dtslib1979/eae.kr/tree/main/src/content"
+           target="_blank" rel="noopener"
+           style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--chalk-amber); text-decoration:none; border:1px solid rgba(245,197,66,0.3); padding:8px 16px; border-radius:6px;">
+          → GitHub 원본 보기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="eae-footer">
+    <div class="footer-logo">◈ EAE BROADCASTING</div>
+    <div class="footer-sub">편집술 강의실 · EduArt Engineer · eae.kr</div>
+  </footer>
+
+</main>
+
+<!-- Scripts -->
+<script src="/design/chalk-particles.js"></script>
+<script>
+  // ── Floor navigation ──
+  function scrollToFloor(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth' });
+    // update active btn
+    document.querySelectorAll('.elev-btn').forEach((btn, i) => {
+      const floors = ['f1','b1','b2','b3','b4'];
+      btn.classList.toggle('active', floors[i] === id);
+    });
+  }
+
+  // Update active button on scroll
+  const floorIds = ['f1','b1','b2','b3','b4'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.elev-btn').forEach((btn, i) => {
+          btn.classList.toggle('active', floorIds[i] === id);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  floorIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // ── B4 Lock ──
+  function tryUnlock() {
+    const code = document.getElementById('lock-code').value;
+    const err = document.getElementById('lock-error');
+    if (code === '1126') {
+      document.getElementById('lock-panel').style.display = 'none';
+      const arc = document.getElementById('archive-content');
+      arc.style.display = 'block';
+      arc.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      err.style.display = 'block';
+      document.getElementById('lock-code').value = '';
+      setTimeout(() => { err.style.display = 'none'; }, 2000);
+    }
+  }
+</script>
+
 </body>
 </html>

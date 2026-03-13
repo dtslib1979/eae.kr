@@ -1,0 +1,1 @@
+{"$schema":"factory.v3.0","id":"eae.kr","version":"4.0.0","identity":{"name":"EAE.KR","tagline":"교육방송","type":"broadcast","domain":"eae.kr","github":"dtslib1979/eae.kr","established":"2026-03-13"},"design":{"palette":{"bg":"#0a0a0a","accent":"#D4AF37","text":"#f5f5f5"}},"pipeline":{"stages":["ingest","transform","render","deploy"]}}

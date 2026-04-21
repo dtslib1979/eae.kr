@@ -1,0 +1,108 @@
+{
+  "_comment": "EAE 교육방송 YouTube 채널 설정",
+  "_account": "c",
+  "_channel_id_ref": "UC9aqEC7Onh7UpCEoPwhujvA",
+  "channel": {
+    "title": "EAE 교육방송",
+    "description": "📚 AI 시대 교양 교육.\n21세기 표현법 — 디지털 도구로 자기를 표현하는 방법.\n\n✅ AI 도구 실전 교육\n✅ 디지털 리터러시\n✅ 1인 미디어 제작법\n✅ 기술 × 인문학",
+    "keywords": [
+      "교육",
+      "AI교육",
+      "디지털리터러시",
+      "1인미디어",
+      "기술",
+      "인문학",
+      "EAE"
+    ],
+    "language": "ko",
+    "country": "KR",
+    "trailer_video_id": null,
+    "banner_image_path": "assets/youtube-banner.jpg",
+    "profile_image_path": "assets/youtube-profile.jpg"
+  },
+  "upload_defaults": {
+    "categoryId": "28",
+    "language": "ko",
+    "license": "youtube",
+    "privacyStatus": "public",
+    "selfDeclaredMadeForKids": false
+  },
+  "playlists": [
+    {
+      "id_key": "ai_tools",
+      "title": "AI 도구 실전",
+      "description": "AI 도구를 실제로 쓰는 방법.",
+      "privacyStatus": "public",
+      "tags": [
+        "AI도구",
+        "실전",
+        "교육"
+      ]
+    },
+    {
+      "id_key": "digital",
+      "title": "디지털 리터러시",
+      "description": "디지털 시대 필수 역량.",
+      "privacyStatus": "public",
+      "tags": [
+        "디지털",
+        "리터러시",
+        "역량"
+      ]
+    },
+    {
+      "id_key": "media",
+      "title": "1인 미디어 제작",
+      "description": "혼자 방송국 만드는 법.",
+      "privacyStatus": "public",
+      "tags": [
+        "1인미디어",
+        "방송",
+        "제작"
+      ]
+    },
+    {
+      "id_key": "humanities",
+      "title": "기술 × 인문학",
+      "description": "기술과 인문학의 교차점.",
+      "privacyStatus": "public",
+      "tags": [
+        "인문학",
+        "기술",
+        "융합"
+      ]
+    }
+  ],
+  "channelSections": [
+    {
+      "type": "singlePlaylist",
+      "title": "AI 도구 실전",
+      "playlist_key": "ai_tools",
+      "position": 0
+    },
+    {
+      "type": "singlePlaylist",
+      "title": "디지털 리터러시",
+      "playlist_key": "digital",
+      "position": 1
+    },
+    {
+      "type": "singlePlaylist",
+      "title": "1인 미디어 제작",
+      "playlist_key": "media",
+      "position": 2
+    },
+    {
+      "type": "singlePlaylist",
+      "title": "기술 × 인문학",
+      "playlist_key": "humanities",
+      "position": 3
+    }
+  ],
+  "_playlist_ids": {
+    "ai_tools": "PLp4XpLOr--JRMkkeUO17OAa3ZoCNEpBOr",
+    "digital": "PLp4XpLOr--JS3SxyQBbJOkt0T0Vm-u3eu",
+    "media": "PLp4XpLOr--JQOo3LNzKxoTGm6Q9k111L9",
+    "humanities": "PLp4XpLOr--JQhC6n0cQP9Fqej9OYRHzhI"
+  }
+}

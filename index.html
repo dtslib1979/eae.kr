@@ -942,5 +942,35 @@
   }
 </script>
 
+<section id="latest-videos" style="padding:24px 16px 0;">
+  <h2 style="font-size:18px;margin:0 0 8px;">최신 영상</h2>
+  <div id="yt-latest-container" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;"></div>
+</section>
+
+<!-- YouTube Latest Videos Loader -->
+<script>
+(async () => {
+  const el = document.getElementById('yt-latest-container');
+  if (!el) return;
+  try {
+    const res = await fetch('./data/youtube-cache.json');
+    if (!res.ok) return;
+    const data = await res.json();
+    const videos = data.videos || [];
+    if (!videos.length) { el.innerHTML = '<p style="color:#999;font-size:13px;">업로드된 영상이 없습니다.</p>'; return; }
+    el.innerHTML = videos.slice(0,6).map(v =>
+      `<a href="${v.url}" target="_blank" rel="noopener" style="flex:0 0 200px;text-decoration:none;color:inherit;">
+        <div style="border-radius:8px;overflow:hidden;background:#1a1a1a;">
+          <img src="${v.thumbnail}" alt="${v.title.replace(/"/g,'')}" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;">
+          <div style="padding:8px 10px;">
+            <p style="font-size:12px;line-height:1.3;margin:0 0 4px;font-weight:600;">${v.title}</p>
+            <p style="font-size:11px;color:#888;margin:0;">조회 ${(v.viewCount||0).toLocaleString()}회</p>
+          </div>
+        </div>
+      </a>`
+    ).join('');
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>

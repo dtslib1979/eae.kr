@@ -1,12 +1,19 @@
 {
   "repo": "eae.kr",
-  "level": 2,
-  "parent": "eae-univ",
-  "type": "Education Branch",
+  "level": 1,
+  "parent": "dtslib-papyrus",
+  "type": "global-distributor",
+  "pipeline_position": "downstream",
+  "receives_from": ["eae-univ"],
+  "feeds_into": ["global-users"],
+  "role": "글로벌 배포 플랫폼 — GitHub Pages + Edge Runtime + 국가별 라우팅",
+  "narrative": "4부 — 세계에 출판하다",
+  "fab_route": "RT-δ",
   "inherit": {
     "immutable": "strict",
     "defaults": "override-allowed"
   },
   "created": "2026-01-26",
+  "updated": "2026-05-28",
   "overrides": []
 }

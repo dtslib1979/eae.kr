@@ -1,108 +1,98 @@
 {
-  "_comment": "EAE 교육방송 YouTube 채널 설정",
-  "_account": "c",
-  "_channel_id_ref": "UC9aqEC7Onh7UpCEoPwhujvA",
-  "channel": {
-    "title": "EAE 교육방송",
-    "description": "📚 AI 시대 교양 교육.\n21세기 표현법 — 디지털 도구로 자기를 표현하는 방법.\n\n✅ AI 도구 실전 교육\n✅ 디지털 리터러시\n✅ 1인 미디어 제작법\n✅ 기술 × 인문학",
-    "keywords": [
-      "교육",
-      "AI교육",
-      "디지털리터러시",
-      "1인미디어",
-      "기술",
-      "인문학",
-      "EAE"
-    ],
-    "language": "ko",
-    "country": "KR",
-    "trailer_video_id": null,
-    "banner_image_path": "assets/youtube-banner.jpg",
-    "profile_image_path": "assets/youtube-profile.jpg"
+  "_comment": "eae.kr 글로벌 채널 매핑 마스터 테이블 (SSOT). 2026-05-28 재정의.",
+  "_version": "2.0",
+  "_ssot": "eae.kr",
+  "_note": "각 레포별 채널 운영 설정은 해당 레포의 youtube-setup.json 참조. 이 파일은 전체 채널 구조의 마스터 인덱스.",
+
+  "tracks": {
+    "A": {
+      "name": "Track A — 영미권 자동화",
+      "target": "영미권 할머니·할아버지",
+      "lang": "en",
+      "mode": "automated",
+      "revenue": "YouTube 고CPM 광고",
+      "cpm_range": "$3-8"
+    },
+    "B": {
+      "name": "Track B — 한국 로컬",
+      "target": "한국 할머니·할아버지",
+      "lang": "ko",
+      "mode": "direct",
+      "revenue": "로컬 구독/프리미엄",
+      "cpm_range": "$1-3"
+    }
   },
-  "upload_defaults": {
-    "categoryId": "28",
-    "language": "ko",
-    "license": "youtube",
-    "privacyStatus": "public",
-    "selfDeclaredMadeForKids": false
-  },
-  "playlists": [
+
+  "channels": [
     {
-      "id_key": "ai_tools",
-      "title": "AI 도구 실전",
-      "description": "AI 도구를 실제로 쓰는 방법.",
-      "privacyStatus": "public",
-      "tags": [
-        "AI도구",
-        "실전",
-        "교육"
-      ]
+      "track": "B",
+      "lang": "ko",
+      "repo": "eae-univ",
+      "channel_title": "Being Eduart Engineer",
+      "handle": "@BeingEduartEngineer-4",
+      "channel_id": "UC9aqEC7Onh7UpCEoPwhujvA",
+      "account": "c",
+      "content": "6 스킬셋 편집술 강의",
+      "status": "active",
+      "config_file": "eae-univ/youtube-setup.json"
     },
     {
-      "id_key": "digital",
-      "title": "디지털 리터러시",
-      "description": "디지털 시대 필수 역량.",
-      "privacyStatus": "public",
-      "tags": [
-        "디지털",
-        "리터러시",
-        "역량"
-      ]
+      "track": "A+B",
+      "lang": "ko+en",
+      "repo": "OrbitPrompt",
+      "channel_title": "EAE University",
+      "handle": "@EAE-University",
+      "channel_id": "UCogemhYGCnbVp13ARqFYM8A",
+      "account": "c",
+      "content": "OrbitPrompt × 14 Generator × 6 사전",
+      "status": "active",
+      "config_file": "OrbitPrompt/youtube-setup.json"
     },
     {
-      "id_key": "media",
-      "title": "1인 미디어 제작",
-      "description": "혼자 방송국 만드는 법.",
-      "privacyStatus": "public",
-      "tags": [
-        "1인미디어",
-        "방송",
-        "제작"
-      ]
+      "track": "A",
+      "lang": "en",
+      "repo": "eae.kr",
+      "channel_title": "Grandparent Wisdom (예정)",
+      "handle": "TBD",
+      "channel_id": "TBD",
+      "account": "TBD",
+      "content": "할머니·할아버지 말하는 자서전 EN 자동화",
+      "status": "planned",
+      "config_file": "eae.kr/youtube-setup.json",
+      "note": "Track A 시작 조건 충족 시 채널 개설. OrbitPrompt topics/grandparent/ → eae-univ EN 강의 → 이 채널"
     },
     {
-      "id_key": "humanities",
-      "title": "기술 × 인문학",
-      "description": "기술과 인문학의 교차점.",
-      "privacyStatus": "public",
-      "tags": [
-        "인문학",
-        "기술",
-        "융합"
-      ]
+      "track": "A",
+      "lang": "ja",
+      "repo": "eae.kr",
+      "channel_title": "(예정)",
+      "handle": "TBD",
+      "channel_id": "TBD",
+      "account": "TBD",
+      "content": "일본 할머니·할아버지 콘텐츠",
+      "status": "planned",
+      "note": "한국 → 일본 시퀀스. 2026 하반기"
     }
   ],
-  "channelSections": [
-    {
-      "type": "singlePlaylist",
-      "title": "AI 도구 실전",
-      "playlist_key": "ai_tools",
-      "position": 0
-    },
-    {
-      "type": "singlePlaylist",
-      "title": "디지털 리터러시",
-      "playlist_key": "digital",
-      "position": 1
-    },
-    {
-      "type": "singlePlaylist",
-      "title": "1인 미디어 제작",
-      "playlist_key": "media",
-      "position": 2
-    },
-    {
-      "type": "singlePlaylist",
-      "title": "기술 × 인문학",
-      "playlist_key": "humanities",
-      "position": 3
+
+  "routing": {
+    "eae.kr/ko": "Track B — eae-univ @BeingEduartEngineer-4",
+    "eae.kr/en": "Track A — Grandparent Wisdom EN (예정)",
+    "eae.kr/ja": "Track A — Japan (예정)",
+    "eae.kr/":   "자동 감지 → 해당 트랙 라우팅"
+  },
+
+  "_deprecated": {
+    "_note": "eae.kr 구버전 채널 설정 (2026-05-28 이전). 아래 플레이리스트 ID는 eae-univ/youtube-setup.json _deprecated_playlist_ids로 이전됨.",
+    "old_channel_title": "EAE 교육방송",
+    "old_playlist_ids": {
+      "ai_tools": "PLp4XpLOr--JRMkkeUO17OAa3ZoCNEpBOr",
+      "digital": "PLp4XpLOr--JS3SxyQBbJOkt0T0Vm-u3eu",
+      "media": "PLp4XpLOr--JQOo3LNzKxoTGm6Q9k111L9",
+      "humanities": "PLp4XpLOr--JQhC6n0cQP9Fqej9OYRHzhI"
     }
-  ],
-  "_playlist_ids": {
-    "ai_tools": "PLp4XpLOr--JRMkkeUO17OAa3ZoCNEpBOr",
-    "digital": "PLp4XpLOr--JS3SxyQBbJOkt0T0Vm-u3eu",
-    "media": "PLp4XpLOr--JQOo3LNzKxoTGm6Q9k111L9",
-    "humanities": "PLp4XpLOr--JQhC6n0cQP9Fqej9OYRHzhI"
-  }
+  },
+
+  "_updated": "2026-05-28",
+  "_maintainer": "eae.kr (global distributor, level 1)"
 }

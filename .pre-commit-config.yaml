@@ -1,0 +1,21 @@
+# EAE Ecosystem — 표준 pre-commit 훅 (v1.0)
+# 설치: pip install pre-commit && pre-commit install
+repos:
+  - repo: local
+    hooks:
+      - id: no-absolute-paths
+        name: Check absolute paths
+        entry: bash -c '! grep -rn "/home/dtsli/" --include="*.py" --include="*.sh" . 2>/dev/null | grep -v ".git/" | grep -v ".pre-commit"'
+        language: system
+        types: [python, shell]
+        fail_fast: false
+      - id: no-hardcoded-secrets
+        name: Check hardcoded secrets
+        entry: bash -c '! grep -rn "sk-[a-zA-Z0-9]\|TG_TOKEN.*=\|api_key.*=" --include="*.py" . 2>/dev/null | grep -v ".git/" | grep -v "_TEST\|test_\|example\|template"'
+        language: system
+        types: [python]
+      - id: lint-python
+        name: Python lint (pyflakes)
+        entry: python3 -m pyflakes
+        language: system
+        types: [python]

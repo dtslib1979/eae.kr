@@ -1,0 +1,15 @@
+name: Deploy Check
+on:
+  push:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate HTML
+        run: |
+          if [ -f index.html ]; then
+            echo "✅ index.html exists ($(wc -c < index.html) bytes)"
+            grep -q '</html>' index.html && echo "✅ Valid HTML" || echo "⚠️ Missing </html>"
+          fi

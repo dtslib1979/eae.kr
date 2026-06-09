@@ -3,38 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>말하는 자서전 — EAE</title>
-  <meta name="description" content="말하면 남습니다. 할머니·할아버지의 이야기가 책이 되고, 영상이 되고, 가족에게 전해집니다.">
-  <meta property="og:title" content="말하는 자서전 — EAE">
-  <meta property="og:description" content="말하면 남습니다. 폰 하나로 내 이야기를 가족에게.">
+  <title>EAE — Beyond AI 6대 스킬셋 방송국</title>
+  <meta name="description" content="AI가 대체 못하는 인간 고유 역량. 6대 스킬셋 방송국 — Penon · EML · QSketch · PHL · MAL · Patchtech">
+  <meta property="og:title" content="EAE — Beyond AI 6대 스킬셋">
+  <meta property="og:description" content="AI는 생성한다. 인간은 편집한다. AI 시대 사람만 할 수 있는 6가지.">
   <meta property="og:url" content="https://eae.kr/">
-  <meta name="theme-color" content="#F5EDD8">
+  <meta name="theme-color" content="#0D0F1A">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg:       #FAF6EE;
-      --paper:    #FFF9F0;
-      --ink:      #2C2416;
-      --ink-soft: #5C4F38;
-      --ink-dim:  #9C8E78;
-      --amber:    #C8851A;
-      --amber-lt: #F5C96A;
-      --green:    #3A6B45;
-      --green-lt: #EDF5EF;
-      --warm:     #E8D5B0;
-      --border:   rgba(44,36,22,0.10);
-      --shadow:   0 2px 24px rgba(44,36,22,0.08);
+      --bg:      #0D0F1A;
+      --bg1:     #111320;
+      --bg2:     #161927;
+      --bg3:     #1C2033;
+      --blue:    #3B82F6;
+      --blue2:   #60A5FA;
+      --cyan:    #22D3EE;
+      --amber:   #F59E0B;
+      --green:   #10B981;
+      --ink:     #F0F4FF;
+      --ink2:    rgba(240,244,255,.7);
+      --ink3:    rgba(240,244,255,.42);
+      --ink4:    rgba(240,244,255,.14);
+      --border:  rgba(59,130,246,.15);
+      --r:       10px;
+      --shadow:  0 4px 24px rgba(0,0,0,.4);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--ink);
-      font-family: 'Noto Sans KR', sans-serif;
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
@@ -43,143 +47,171 @@
     .lang-bar {
       position: fixed; top: 0; right: 0; z-index: 100;
       padding: 10px 20px; display: flex; gap: 8px;
-      background: rgba(250,246,238,0.92); backdrop-filter: blur(10px);
+      background: rgba(13,15,26,.92); backdrop-filter: blur(10px);
       border-bottom-left-radius: 14px;
     }
     .lang-btn {
-      background: none; border: 1.5px solid var(--border);
-      border-radius: 20px; padding: 4px 14px; font-size: 13px;
-      cursor: pointer; color: var(--ink-soft); font-family: inherit; transition: all .2s;
+      background: none; border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 14px; font-size: 12px;
+      cursor: pointer; color: var(--ink3); font-family: inherit; transition: all .2s;
     }
-    .lang-btn.active { background: var(--amber); border-color: var(--amber); color: #fff; font-weight: 500; }
+    .lang-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
     /* HERO */
     .hero {
       min-height: 100svh; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center; padding: 100px 24px 72px;
-      background: linear-gradient(160deg, #FFF9F0 0%, #F5EDD8 55%, #EDE0C4 100%);
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,.18) 0%, transparent 70%),
+                  linear-gradient(180deg, #0D0F1A 0%, #111320 100%);
     }
     .badge {
-      display: inline-block; background: var(--green-lt); color: var(--green);
-      border: 1px solid rgba(58,107,69,.2); border-radius: 24px;
-      padding: 6px 18px; font-size: 13px; font-weight: 500;
-      margin-bottom: 28px; letter-spacing: .02em;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,130,246,.12); color: var(--blue2);
+      border: 1px solid rgba(59,130,246,.25); border-radius: 24px;
+      padding: 6px 18px; font-size: 12px; font-weight: 500;
+      margin-bottom: 32px; letter-spacing: .02em;
+      font-family: 'JetBrains Mono', monospace;
     }
+    .badge::before { content: "▶"; font-size: 10px; color: var(--blue2); }
     .hero h1 {
-      font-family: 'Noto Serif KR', 'Lora', serif;
-      font-size: clamp(2.8rem, 9vw, 5.2rem); font-weight: 700;
-      line-height: 1.2; color: var(--ink); margin-bottom: 20px; word-break: keep-all;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      font-size: clamp(2.6rem, 9vw, 5rem); font-weight: 800;
+      line-height: 1.15; color: var(--ink); margin-bottom: 20px;
+      letter-spacing: -.03em; word-break: keep-all;
     }
-    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero h1 em { font-style: normal; color: var(--blue2); }
+    .hero h1 strong { color: var(--cyan); }
     .hero-sub {
-      font-size: clamp(1rem, 3vw, 1.25rem); color: var(--ink-soft);
-      max-width: 500px; margin: 0 auto 44px; word-break: keep-all; font-weight: 300;
+      font-size: clamp(.95rem, 2.5vw, 1.15rem); color: var(--ink2);
+      max-width: 520px; margin: 0 auto 44px; word-break: keep-all;
     }
     .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
     .btn-pri {
-      background: var(--amber); color: #fff; border: none; border-radius: 50px;
-      padding: 16px 36px; font-size: 1.05rem; font-weight: 500; font-family: inherit;
-      cursor: pointer; text-decoration: none; display: inline-block;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 18px rgba(200,133,26,.32);
+      background: var(--blue); color: #fff; border: none; border-radius: 8px;
+      padding: 14px 32px; font-size: 1rem; font-weight: 600; font-family: inherit;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: opacity .2s, transform .2s;
     }
-    .btn-pri:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,133,26,.42); }
+    .btn-pri:hover { opacity: .85; transform: translateY(-2px); }
     .btn-ghost {
-      background: transparent; color: var(--ink-soft);
-      border: 1.5px solid var(--border); border-radius: 50px;
-      padding: 15px 32px; font-size: 1.05rem; font-family: inherit;
+      background: transparent; color: var(--ink3);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 13px 28px; font-size: 1rem; font-family: inherit;
       cursor: pointer; text-decoration: none; display: inline-block; transition: all .2s;
     }
-    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue2); }
     .scroll-hint {
-      margin-top: 60px; color: var(--ink-dim); font-size: 13px;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      margin-top: 64px; color: var(--ink3); font-size: 12px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
-    .scroll-line { width: 1px; height: 48px; background: linear-gradient(var(--amber), transparent); }
+    .scroll-line { width: 1px; height: 44px; background: linear-gradient(var(--blue), transparent); }
 
     /* SECTIONS */
-    .sec { padding: 88px 24px; }
-    .sec-paper { background: var(--paper); }
-    .inner { max-width: 880px; margin: 0 auto; }
+    .sec { padding: 80px 24px; }
+    .sec-alt { background: var(--bg1); }
+    .inner { max-width: 900px; margin: 0 auto; }
     .label {
       font-size: 11px; font-weight: 600; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--amber); margin-bottom: 14px;
+      text-transform: uppercase; color: var(--blue2); margin-bottom: 14px;
+      font-family: 'JetBrains Mono', monospace;
     }
     .sec-title {
-      font-family: 'Noto Serif KR', 'Lora', serif;
-      font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 600;
-      line-height: 1.3; color: var(--ink); margin-bottom: 14px; word-break: keep-all;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.6rem, 4.5vw, 2.6rem); font-weight: 800;
+      line-height: 1.2; color: var(--ink); margin-bottom: 14px;
+      letter-spacing: -.02em; word-break: keep-all;
     }
-    .sec-desc { font-size: 1.05rem; color: var(--ink-soft); max-width: 540px; margin-bottom: 48px; word-break: keep-all; }
+    .sec-title em { font-style: normal; color: var(--blue2); }
+    .sec-desc { font-size: 1rem; color: var(--ink2); max-width: 560px; margin-bottom: 48px; word-break: keep-all; }
 
-    /* STEPS */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .step {
-      background: var(--paper); border: 1px solid var(--border);
-      border-radius: 20px; padding: 32px 28px; box-shadow: var(--shadow);
+    /* SKILL GRID */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
-    .step-n {
-      width: 44px; height: 44px; background: var(--green-lt); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 600;
-      color: var(--green); margin-bottom: 18px;
+    @media (max-width: 700px) {
+      .skills { grid-template-columns: repeat(2, 1fr); }
     }
-    .step h3 { font-family: 'Noto Serif KR', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
-    .step p { font-size: .93rem; color: var(--ink-soft); line-height: 1.65; }
+    @media (max-width: 440px) {
+      .skills { grid-template-columns: 1fr; }
+    }
+    .skill {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 24px 20px;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill:hover { border-color: rgba(59,130,246,.35); transform: translateY(-2px); }
+    .skill-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .skill-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem; font-weight: 600; color: var(--blue2);
+      letter-spacing: .04em; margin-bottom: 6px;
+    }
+    .skill h3 { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .skill p { font-size: .875rem; color: var(--ink3); line-height: 1.6; }
 
-    /* GETS */
-    .gets { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; }
-    .get {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px 22px; text-align: center;
+    /* WHY BEYOND AI */
+    .compare {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-bottom: 40px;
     }
-    .get-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
-    .get h3 { font-family: 'Noto Serif KR', serif; font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
-    .get p { font-size: .88rem; color: var(--ink-dim); }
+    @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
+    .compare-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 28px 22px;
+    }
+    .compare-card.ai { border-color: rgba(239,68,68,.2); }
+    .compare-card.human { border-color: rgba(59,130,246,.3); }
+    .compare-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+      display: inline-block; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace;
+    }
+    .compare-tag.ai { background: rgba(239,68,68,.12); color: #F87171; }
+    .compare-tag.human { background: rgba(59,130,246,.12); color: var(--blue2); }
+    .compare-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+    .compare-card ul { list-style: none; }
+    .compare-card ul li {
+      font-size: .875rem; color: var(--ink2); padding: 5px 0;
+      border-bottom: 1px solid var(--ink4); display: flex; gap: 8px;
+    }
+    .compare-card ul li:last-child { border-bottom: none; }
+    .compare-card ul li::before { color: var(--ink3); flex-shrink: 0; }
+    .compare-card.ai ul li::before { content: "✗"; color: #F87171; }
+    .compare-card.human ul li::before { content: "✓"; color: var(--blue2); }
 
-    /* YOUTUBE BAND */
+    /* BROADCAST BAND */
     .yt-band {
-      background: linear-gradient(135deg, var(--green) 0%, #2A5035 100%);
-      border-radius: 24px; padding: 52px 44px; color: #fff;
-      display: flex; flex-direction: column; gap: 20px;
+      background: linear-gradient(135deg, #1a2050 0%, #0D1232 100%);
+      border: 1px solid rgba(59,130,246,.25);
+      border-radius: 16px; padding: 48px 40px;
+      display: flex; flex-direction: column; gap: 16px;
     }
-    .yt-band h2 { font-family: 'Noto Serif KR', 'Lora', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.3; }
-    .yt-band p { font-size: 1rem; opacity: .84; max-width: 480px; }
-    .btn-white {
-      background: #fff; color: var(--green); border: none; border-radius: 50px;
-      padding: 14px 32px; font-size: 1rem; font-weight: 700; font-family: inherit;
-      cursor: pointer; text-decoration: none; display: inline-block; transition: transform .2s;
+    .yt-band .label { color: var(--cyan); }
+    .yt-band h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800;
+      color: var(--ink); line-height: 1.3; letter-spacing: -.02em;
     }
-    .btn-white:hover { transform: translateY(-2px); }
-
-    /* PREMIUM */
-    .prem {
-      background: var(--ink); border-radius: 24px; padding: 52px 44px;
-      color: var(--warm); margin-top: 24px;
+    .yt-band p { font-size: .975rem; color: var(--ink2); max-width: 480px; }
+    .btn-blue {
+      background: var(--blue); color: #fff; border: none; border-radius: 8px;
+      padding: 13px 28px; font-size: .975rem; font-weight: 700; font-family: inherit;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      transition: opacity .2s, transform .2s; align-self: flex-start;
     }
-    .prem-tag {
-      display: inline-block; background: var(--amber); color: #fff;
-      border-radius: 20px; padding: 4px 16px; font-size: 12px; font-weight: 600;
-      letter-spacing: .05em; margin-bottom: 20px;
-    }
-    .prem h2 { font-family: 'Noto Serif KR', 'Lora', serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 600; color: #fff; margin-bottom: 14px; line-height: 1.35; }
-    .prem > p { font-size: 1rem; opacity: .72; max-width: 480px; margin-bottom: 28px; }
-    .prem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 36px; }
-    .prem-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10); border-radius: 14px; padding: 20px; }
-    .prem-item h4 { font-size: .92rem; color: var(--amber-lt); margin-bottom: 6px; font-weight: 500; }
-    .prem-item p { font-size: .84rem; opacity: .55; margin: 0; }
-    .btn-amber {
-      background: var(--amber); color: #fff; border: none; border-radius: 50px;
-      padding: 14px 34px; font-size: 1rem; font-weight: 600; font-family: inherit;
-      cursor: pointer; text-decoration: none; display: inline-block; transition: transform .2s;
-    }
-    .btn-amber:hover { transform: translateY(-2px); }
+    .btn-blue:hover { opacity: .85; transform: translateY(-2px); }
 
     /* FOOTER */
-    footer { padding: 48px 24px; text-align: center; border-top: 1px solid var(--border); }
-    footer p { font-size: .88rem; color: var(--ink-dim); }
-    footer a { color: var(--amber); text-decoration: none; }
+    footer {
+      padding: 40px 24px; text-align: center;
+      border-top: 1px solid var(--ink4);
+    }
+    footer p { font-size: .85rem; color: var(--ink3); }
+    footer a { color: var(--blue2); text-decoration: none; }
+    footer a:hover { color: var(--cyan); }
 
     /* LANG SWITCH */
     html[data-lang="en"] [data-ko] { display: none; }
@@ -187,14 +219,13 @@
 
     @media (max-width: 600px) {
       .hero { padding: 100px 20px 64px; }
-      .yt-band, .prem { padding: 36px 24px; }
-      .sec { padding: 64px 20px; }
+      .yt-band { padding: 32px 24px; }
+      .sec { padding: 60px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Language bar -->
   <div class="lang-bar">
     <button class="lang-btn active" onclick="setLang(this,'ko')">한국어</button>
     <button class="lang-btn" onclick="setLang(this,'en')">English</button>
@@ -202,20 +233,20 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="badge" data-ko>AI 미셔너 · 글로벌 할머니·할아버지 플랫폼</div>
-    <div class="badge" data-en>AI Missionary · Global Grandparent Platform</div>
+    <div class="badge" data-ko>교육 방송국 · @BeingEduartEngineer-4</div>
+    <div class="badge" data-en>Education Broadcast · @BeingEduartEngineer-4</div>
 
-    <h1 data-ko>말하면 <em>남습니다</em></h1>
-    <h1 data-en>Your Voice,<br><em>Forever</em></h1>
+    <h1 data-ko>AI 시대,<br><em>사람만</em> 할 수 있는<br><strong>6가지</strong></h1>
+    <h1 data-en>In the AI Era,<br><em>Only Humans</em> Can Do<br><strong>These 6</strong></h1>
 
-    <p class="hero-sub" data-ko>할머니·할아버지의 이야기가 책이 되고,<br>영상이 되고, 가족에게 전해집니다.<br>폰 하나면 충분합니다.</p>
-    <p class="hero-sub" data-en>Grandparents' stories become books, videos,<br>and lasting memories for family.<br>Just a phone. Nothing more.</p>
+    <p class="hero-sub" data-ko>AI는 생성(generate)한다. 인간은 편집(edit)한다.<br>6대 스킬셋은 AI가 대체할 수 없는 인간 고유 역량이다.</p>
+    <p class="hero-sub" data-en>AI generates. Humans edit.<br>The 6 skillsets are what no AI can replace — human-only territory.</p>
 
     <div class="cta-row">
-      <a href="https://www.youtube.com/@eae-univ" target="_blank" class="btn-pri" data-ko>YouTube 채널 보기</a>
-      <a href="https://www.youtube.com/@eae-univ" target="_blank" class="btn-pri" data-en>Watch on YouTube</a>
-      <a href="#premium" class="btn-ghost" data-ko>프리미엄 서비스</a>
-      <a href="#premium" class="btn-ghost" data-en>Premium Service</a>
+      <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" class="btn-pri" data-ko>▶ 방송 시청하기</a>
+      <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" class="btn-pri" data-en>▶ Watch Channel</a>
+      <a href="#skills" class="btn-ghost" data-ko>6대 스킬셋 보기</a>
+      <a href="#skills" class="btn-ghost" data-en>See 6 Skillsets</a>
     </div>
 
     <div class="scroll-hint">
@@ -224,150 +255,140 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="sec">
+  <!-- 6대 스킬셋 -->
+  <section class="sec" id="skills">
     <div class="inner">
-      <p class="label" data-ko>어떻게 하나요</p>
-      <p class="label" data-en>How it works</p>
-      <h2 class="sec-title" data-ko>말하기만 하면 됩니다</h2>
-      <h2 class="sec-title" data-en>Just start speaking</h2>
-      <p class="sec-desc" data-ko>어려운 건 없습니다. 앱 설치도, 코딩도, 복잡한 설정도 필요 없습니다.<br>말씀하시면 나머지는 알아서 됩니다.</p>
-      <p class="sec-desc" data-en>No tech skills needed. No complicated setup.<br>Just speak — we handle everything else.</p>
+      <p class="label" data-ko>6대 스킬셋</p>
+      <p class="label" data-en>6 Core Skillsets</p>
+      <h2 class="sec-title" data-ko>편집술의 <em>6개 도메인</em></h2>
+      <h2 class="sec-title" data-en>6 Domains of <em>Editorial Mastery</em></h2>
+      <p class="sec-desc" data-ko>없는 걸 만드는 게 아니다. 있는 걸 해체하고 재조합한다. 6대 스킬셋은 모두 편집술의 구체적 표현이다.</p>
+      <p class="sec-desc" data-en>Not creating from nothing. Deconstructing what exists and recombining it. Each skillset is editorial mastery in a specific domain.</p>
 
-      <div class="steps">
-        <div class="step">
-          <div class="step-n">1</div>
-          <h3 data-ko>말씀하세요</h3>
-          <h3 data-en>You speak</h3>
-          <p data-ko>살아온 이야기, 기억나는 일, 가족에게 하고 싶은 말. 무엇이든 괜찮습니다.</p>
-          <p data-en>Your life story, cherished memories, words for your family. Anything at all.</p>
+      <div class="skills">
+        <div class="skill">
+          <span class="skill-icon">🛠️</span>
+          <div class="skill-name">PENON</div>
+          <h3 data-ko>구조 · 도식</h3>
+          <h3 data-en>Structure · Diagram</h3>
+          <p data-ko>아이디어를 뼈대로 만드는 기술. 복잡한 것을 한 장으로 정리한다.</p>
+          <p data-en>Turning ideas into skeletal structures. Condensing complexity into one page.</p>
         </div>
-        <div class="step">
-          <div class="step-n">2</div>
-          <h3 data-ko>정리됩니다</h3>
-          <h3 data-en>We organize</h3>
-          <p data-ko>이야기가 글이 되고, 챕터로 나뉘고, 책처럼 아름답게 정돈됩니다.</p>
-          <p data-en>Words become text, shaped into chapters, arranged into something beautiful.</p>
+        <div class="skill">
+          <span class="skill-icon">🎵</span>
+          <div class="skill-name">EML</div>
+          <h3 data-ko>감정 · 음악</h3>
+          <h3 data-en>Emotion · Music</h3>
+          <p data-ko>감정을 언어화하는 기술. 분위기를 읽고 재현한다.</p>
+          <p data-en>Translating emotion into language. Reading and recreating atmosphere.</p>
         </div>
-        <div class="step">
-          <div class="step-n">3</div>
-          <h3 data-ko>전해집니다</h3>
-          <h3 data-en>It reaches family</h3>
-          <p data-ko>PDF, 오디오북, 영상 — 원하는 형태로 가족에게 영원히 남겨집니다.</p>
-          <p data-en>PDF, audiobook, video — in the form you choose, for the family you love.</p>
+        <div class="skill">
+          <span class="skill-icon">🎨</span>
+          <div class="skill-name">QSKETCH</div>
+          <h3 data-ko>시각 · 드로잉</h3>
+          <h3 data-en>Visual · Drawing</h3>
+          <p data-ko>눈으로 생각하는 기술. 손으로 아이디어를 빠르게 포착한다.</p>
+          <p data-en>Thinking with your eyes. Capturing ideas quickly by hand.</p>
+        </div>
+        <div class="skill">
+          <span class="skill-icon">🧠</span>
+          <div class="skill-name">PHL</div>
+          <h3 data-ko>개념 · 토큰</h3>
+          <h3 data-en>Concept · Token</h3>
+          <p data-ko>개념을 정의하는 기술. 단어 하나로 세계를 바꾼다.</p>
+          <p data-en>Defining concepts precisely. One word can change a worldview.</p>
+        </div>
+        <div class="skill">
+          <span class="skill-icon">✍️</span>
+          <div class="skill-name">MAL</div>
+          <h3 data-ko>언어 · 문장</h3>
+          <h3 data-en>Language · Writing</h3>
+          <p data-ko>말을 글로 바꾸는 기술. 대화를 출판물로 변환한다.</p>
+          <p data-en>Turning speech into writing. Converting conversation into publication.</p>
+        </div>
+        <div class="skill">
+          <span class="skill-icon">🔧</span>
+          <div class="skill-name">PATCHTECH</div>
+          <h3 data-ko>기술 · 물성</h3>
+          <h3 data-en>Tech · Embodiment</h3>
+          <p data-ko>아이디어를 물건으로 만드는 기술. 소프트웨어·하드웨어를 조립한다.</p>
+          <p data-en>Turning ideas into things. Assembling software and hardware.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WHAT YOU GET -->
-  <section class="sec sec-paper">
+  <!-- WHY BEYOND AI -->
+  <section class="sec sec-alt">
     <div class="inner">
-      <p class="label" data-ko>받으실 것들</p>
-      <p class="label" data-en>What you receive</p>
-      <h2 class="sec-title" data-ko>이야기 하나가 이렇게 됩니다</h2>
-      <h2 class="sec-title" data-en>One story. Many forms.</h2>
-      <p class="sec-desc" data-ko>말 한 마디가 여러 형태로 남습니다.</p>
-      <p class="sec-desc" data-en>A single story, preserved in every form that matters.</p>
+      <p class="label" data-ko>Beyond AI 근거</p>
+      <p class="label" data-en>Why Beyond AI</p>
+      <h2 class="sec-title" data-ko>AI는 <em>생성</em>한다.<br>인간은 <em>편집</em>한다.</h2>
+      <h2 class="sec-title" data-en>AI <em>generates</em>.<br>Humans <em>edit</em>.</h2>
+      <p class="sec-desc" data-ko>AI의 기본 동작은 생성(generation)이다. 편집술의 기본 동작은 선택(curation)과 재조합(recombination)이다. 주체가 다르다.</p>
+      <p class="sec-desc" data-en>AI's default operation is generation. Editorial mastery's default is curation and recombination. The agent is fundamentally different.</p>
 
-      <div class="gets">
-        <div class="get">
-          <span class="get-icon">📖</span>
-          <h3 data-ko>말하는 자서전</h3>
-          <h3 data-en>Talking Memoir</h3>
-          <p data-ko>목소리가 살아있는 나만의 자서전</p>
-          <p data-en>Your autobiography, in your own voice</p>
+      <div class="compare">
+        <div class="compare-card ai">
+          <span class="compare-tag ai" data-ko>AI 가능</span>
+          <span class="compare-tag ai" data-en>AI Can Do</span>
+          <h3 data-ko>AI가 하는 것</h3>
+          <h3 data-en>What AI Does</h3>
+          <ul data-ko>
+            <li>프롬프트 입력 → 결과물 생성</li>
+            <li>데이터에서 패턴 추출</li>
+            <li>기존 형식 모방 및 반복</li>
+            <li>빠른 초안 생성</li>
+          </ul>
+          <ul data-en>
+            <li>Prompt → generate output</li>
+            <li>Extract patterns from data</li>
+            <li>Imitate and repeat existing formats</li>
+            <li>Generate fast drafts</li>
+          </ul>
         </div>
-        <div class="get">
-          <span class="get-icon">🎧</span>
-          <h3 data-ko>가족 오디오북</h3>
-          <h3 data-en>Family Audiobook</h3>
-          <p data-ko>언제 어디서든 들을 수 있는</p>
-          <p data-en>Listen anywhere, anytime</p>
-        </div>
-        <div class="get">
-          <span class="get-icon">🎬</span>
-          <h3 data-ko>인생 영상</h3>
-          <h3 data-en>Life Video</h3>
-          <p data-ko>유튜브에 남길 수 있는 나의 이야기</p>
-          <p data-en>Your story, shared on YouTube</p>
-        </div>
-        <div class="get">
-          <span class="get-icon">📄</span>
-          <h3 data-ko>인쇄용 PDF</h3>
-          <h3 data-en>Printable Book</h3>
-          <p data-ko>책처럼 인쇄해서 선물로 드릴 수 있는</p>
-          <p data-en>Print as a real book to gift</p>
+        <div class="compare-card human">
+          <span class="compare-tag human" data-ko>인간 고유</span>
+          <span class="compare-tag human" data-en>Human Only</span>
+          <h3 data-ko>인간만 하는 것</h3>
+          <h3 data-en>What Humans Do</h3>
+          <ul data-ko>
+            <li>원본 수집 → 직접 판단 → 재조합</li>
+            <li>맥락에 따른 가치 판단</li>
+            <li>감정 읽기와 공감</li>
+            <li>몸으로 배운 기술 전달</li>
+          </ul>
+          <ul data-en>
+            <li>Collect originals → judge → recombine</li>
+            <li>Value judgment based on context</li>
+            <li>Reading emotions and empathy</li>
+            <li>Transferring embodied skill</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- YOUTUBE FREE -->
+  <!-- YOUTUBE BROADCAST -->
   <section class="sec">
     <div class="inner">
-      <p class="label" data-ko>무료로 시작하기</p>
-      <p class="label" data-en>Start for free</p>
       <div class="yt-band">
-        <h2 data-ko>먼저 유튜브에서<br>만나보세요</h2>
-        <h2 data-en>Start with YouTube,<br>completely free</h2>
-        <p data-ko>할머니·할아버지를 위한 강의, 이야기, 인생 레슨. 전 세계 자막 포함. 무료입니다.</p>
-        <p data-en>Lectures, stories, and life wisdom for grandparents. Global subtitles included. Always free.</p>
-        <a href="https://www.youtube.com/@eae-univ" target="_blank" class="btn-white" data-ko>채널 바로가기 →</a>
-        <a href="https://www.youtube.com/@eae-univ" target="_blank" class="btn-white" data-en>Go to Channel →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PREMIUM -->
-  <section class="sec sec-paper" id="premium">
-    <div class="inner">
-      <p class="label" data-ko>프리미엄 서비스</p>
-      <p class="label" data-en>Premium service</p>
-      <div class="prem">
-        <span class="prem-tag" data-ko>한국 전용 · 박씨 직접 판서</span>
-        <span class="prem-tag" data-en>Korea Only · Personal Instruction</span>
-        <h2 data-ko>더 깊게.<br>더 고급스럽게.</h2>
-        <h2 data-en>Deeper.<br>More personal.</h2>
-        <p data-ko>유튜브로 시작하셨다면, 이제 직접 함께 만들어 드립니다. 판서, 맞춤 편집, 가족 아카이브까지.</p>
-        <p data-en>Loved the free content? Now we build it together — personalized, hand-crafted, just for your family.</p>
-
-        <div class="prem-grid">
-          <div class="prem-item">
-            <h4 data-ko>직접 판서 강의</h4>
-            <h4 data-en>Live Instruction</h4>
-            <p data-ko>함께 이야기를 정리합니다</p>
-            <p data-en>We shape your story together</p>
-          </div>
-          <div class="prem-item">
-            <h4 data-ko>맞춤 편집</h4>
-            <h4 data-en>Custom Editing</h4>
-            <p data-ko>나만의 스타일로 다듬어 드립니다</p>
-            <p data-en>Tailored to your unique voice</p>
-          </div>
-          <div class="prem-item">
-            <h4 data-ko>가족 아카이브</h4>
-            <h4 data-en>Family Archive</h4>
-            <p data-ko>영원히 보관되는 가족 기록물</p>
-            <p data-en>A forever archive for your family</p>
-          </div>
-          <div class="prem-item">
-            <h4 data-ko>AI 음성 보존</h4>
-            <h4 data-en>Voice Preservation</h4>
-            <p data-ko>목소리를 디지털로 남겨드립니다</p>
-            <p data-en>Your voice, preserved forever</p>
-          </div>
-        </div>
-        <a href="https://www.youtube.com/@eae-univ" target="_blank" class="btn-amber" data-ko>문의하기</a>
-        <a href="https://www.youtube.com/@eae-univ" target="_blank" class="btn-amber" data-en>Get in touch</a>
+        <p class="label" data-ko>YouTube 방송국</p>
+        <p class="label" data-en>YouTube Broadcast</p>
+        <h2 data-ko>@BeingEduartEngineer-4<br>에서 방송 중</h2>
+        <h2 data-en>Broadcasting on<br>@BeingEduartEngineer-4</h2>
+        <p data-ko>6대 스킬셋 방송. 편집술 강의. AI 시대 인간 역량 교육. 무료.</p>
+        <p data-en>6 Skillset broadcasts. Editorial mastery lectures. Human capacity training for the AI era. Free.</p>
+        <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" class="btn-blue" data-ko>▶ 채널 바로가기</a>
+        <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank" class="btn-blue" data-en>▶ Go to Channel</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p data-ko>© 2026 EAE · 말하면 남습니다 · <a href="https://www.youtube.com/@eae-univ" target="_blank">YouTube</a></p>
-    <p data-en>© 2026 EAE · Your Voice, Forever · <a href="https://www.youtube.com/@eae-univ" target="_blank">YouTube</a></p>
+    <p data-ko>© 2026 EAE · Beyond AI 6대 스킬셋 방송국 · <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank">YouTube @BeingEduartEngineer-4</a> · <a href="https://dtslib1979.github.io/eae-univ/" target="_blank">EAE 출판사</a></p>
+    <p data-en>© 2026 EAE · Beyond AI 6 Skillsets · <a href="https://www.youtube.com/@BeingEduartEngineer-4" target="_blank">YouTube @BeingEduartEngineer-4</a> · <a href="https://dtslib1979.github.io/eae-univ/" target="_blank">EAE Press</a></p>
   </footer>
 
   <script>
@@ -376,7 +397,6 @@
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
-    // Auto-detect
     if (!navigator.language.startsWith('ko')) {
       document.documentElement.setAttribute('data-lang', 'en');
       document.querySelectorAll('.lang-btn')[0].classList.remove('active');

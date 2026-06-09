@@ -284,13 +284,16 @@ eae.kr/
 
 **YouTube 채널:** https://www.youtube.com/@BeingEduartEngineer-4 (4대 카테고리 공통)
 
-### 두 레포지토리 관계
+### 두 레포지토리 관계 (2026-06-09 확정)
 
 ```
-eae-univ (로컬 렛저, 비공개)  →  eae.kr (액추얼 렛저, 공개)
-publish-eae-kr.sh가 전기(轉記)한다.
-eae.kr에 직접 콘텐츠를 만들지 않는다 — 전기만 한다.
+eae-univ (출판사)     독립 레포. @EAE-University 채널. 교양서·개론서·오디오북.
+eae.kr   (방송국)     독립 레포. @BeingEduartEngineer-4 채널. 6대 스킬셋 방송.
 ```
+
+- **종속 관계 없음.** 두 레포는 각자 독립 채널을 가진 독립 레포다.
+- **단방향 참조만 허용**: eae.kr의 `eae-blueprint` 카테고리가 @EAE-University 채널 링크를 참조하는 것은 유지 (출판사 설계 레이어 연결).
+- `publish-eae-kr.sh` 전기(轉記) 구조 폐기. eae.kr MDX는 eae.kr에서 직접 작성.
 
 ### ⚠️ eae-blueprint 카테고리 전용 규칙
 

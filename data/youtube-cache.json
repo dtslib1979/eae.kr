@@ -122,5 +122,10 @@
       "duration": "PT7S",
       "url": "https://youtu.be/ZqsC_QJhccQ"
     }
-  ]
+  ],
+  "playlists": {
+    "study": "PLp4XpLOr--JThzBx90hGUVpliO8A1YnjM"
+  },
+  "study_moved": 11,
+  "study_date": "2026-06-08"
 }

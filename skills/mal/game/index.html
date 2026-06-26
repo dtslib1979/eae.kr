@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAL — Sensory Language Games</title>
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/cave-ui.css">
+  <link rel="stylesheet" href="../shared/skillset-colors.css">
+  <style>
+    body { background: #09090f; color: #e8e8e8; font-family: 'Inter', sans-serif; }
+    .game-container { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
+    .game-header { display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 0; border-bottom: 1px solid #2a2a2a; margin-bottom: 2rem; }
+    .game-title { font-size: 1.5rem; font-weight: 600; color: var(--skill-mal); }
+    .back-btn { color: #888; text-decoration: none; font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace; }
+    .back-btn:hover { color: #e8e8e8; }
+
+    .tab-bar { display: flex; gap: 0; margin-bottom: 2rem; border-bottom: 1px solid #2a2a2a; }
+    .tab-btn { padding: 0.75rem 1.5rem; background: none; border: none; border-bottom: 2px solid transparent;
+      color: #888; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn:hover { color: #e8e8e8; }
+    .tab-btn.active { color: var(--skill-mal); border-bottom-color: var(--skill-mal); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .prompt-box { padding: 1.5rem; background: #141420; border: 1px solid #2a2a2a;
+      border-radius: 8px; margin-bottom: 1.5rem; }
+    .prompt-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+      color: #666; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .prompt-text { font-size: 1.1rem; line-height: 1.8; }
+
+    .submit-btn { padding: 0.75rem 2rem; background: var(--skill-mal); border: none;
+      border-radius: 4px; color: #000; font-weight: 600; font-size: 0.9rem;
+      cursor: pointer; transition: all 0.2s; }
+    .submit-btn:hover { filter: brightness(1.1); }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .next-btn { margin-top: 1rem; padding: 0.75rem 2rem; background: #333; border: none;
+      border-radius: 4px; color: #e8e8e8; cursor: pointer; }
+    .next-btn:hover { background: #444; }
+
+    .result-card { padding: 1.5rem; background: #141420; border: 1px solid #2a2a2a;
+      border-radius: 8px; margin-top: 1.5rem; display: none; }
+    .result-card.show { display: block; }
+    .result-grade { font-family: 'JetBrains Mono', monospace; font-size: 3rem;
+      font-weight: 600; text-align: center; }
+    .result-grade.A { color: #2a9d8f; } .result-grade.B { color: #4fc3f7; }
+    .result-grade.C { color: #f7c948; } .result-grade.D { color: #f4a261; }
+    .result-grade.F { color: #e63946; }
+    .result-score { text-align: center; font-family: 'JetBrains Mono', monospace; color: #888; margin: 0.5rem 0; }
+    .result-detail { font-size: 0.85rem; color: #888; line-height: 1.6; }
+    .result-xp { text-align: center; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem; color: #f7931e; margin-top: 1rem; }
+
+    /* Synesthesia sliders */
+    .sense-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 600px) { .sense-grid { grid-template-columns: 1fr; } }
+    .sense-item { padding: 1rem; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px; }
+    .sense-name { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      color: #888; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .sense-options { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .sense-opt { padding: 0.35rem 0.7rem; background: #0d0d1a; border: 1px solid #333;
+      border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s;
+      font-family: 'JetBrains Mono', monospace; color: #aaa; }
+    .sense-opt:hover { border-color: var(--skill-mal); color: #e8e8e8; }
+    .sense-opt.selected { background: rgba(78,205,196,0.15); border-color: var(--skill-mal); color: var(--skill-mal); }
+
+    .emotion-word { font-size: 1.8rem; font-weight: 600; color: var(--skill-mal);
+      text-align: center; margin: 1rem 0; }
+    .round-info { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666; }
+    .action-row { display: flex; gap: 1rem; align-items: center; margin-top: 1rem; }
+
+    /* Fingerprint */
+    .fp-input { width: 100%; min-height: 100px; background: #0d0d1a; border: 1px solid #2a2a2a;
+      border-radius: 8px; padding: 1rem; color: #e8e8e8; font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; line-height: 1.6; resize: vertical; }
+    .fp-input::placeholder { color: #444; }
+    .fp-input:focus { outline: none; border-color: var(--skill-mal); }
+    .radar-wrap { display: flex; justify-content: center; margin: 1.5rem 0; }
+    .radar-canvas { background: #0d0d1a; border: 1px solid #2a2a2a; border-radius: 8px; }
+    .fp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    .fp-stat { padding: 0.75rem; background: #1a1a1a; border: 1px solid #2a2a2a;
+      border-radius: 6px; text-align: center; }
+    .fp-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      color: #666; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .fp-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;
+      color: var(--skill-mal); }
+    .sentence-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .sentence-list li { padding: 0.75rem 1rem; background: #1a1a1a; border: 1px solid #2a2a2a;
+      border-radius: 6px; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .sentence-list li .idx { font-family: 'JetBrains Mono', monospace; color: #666;
+      font-size: 0.75rem; margin-right: 0.5rem; }
+  </style>
+</head>
+<body>
+<div class="game-container">
+  <div class="game-header">
+    <div class="game-title">MAL</div>
+    <a href="../shared/shell.html" class="back-btn">&larr; B1 Skills</a>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="synesthesia">Synesthesia Lab</button>
+    <button class="tab-btn" data-tab="fingerprint">Fingerprint Finder</button>
+    <button class="tab-btn" data-tab="boss" style="color:var(--ember,#d4a574)">BOSS</button>
+  </div>
+
+  <!-- ==================== GAME 1: SYNESTHESIA LAB ==================== -->
+  <div id="tab-synesthesia" class="tab-content active">
+    <div class="prompt-box">
+      <div class="prompt-label">Mission</div>
+      <p class="prompt-text">감정 단어가 주어지면 6가지 감각으로 번역하라. 기준 공감각 매핑과 비교하여 채점.</p>
+    </div>
+
+    <div class="round-info" id="syn-round">Round 1 / 5</div>
+    <div class="emotion-word" id="syn-emotion">joy</div>
+
+    <div class="sense-grid" id="syn-senses"></div>
+
+    <div class="action-row">
+      <button class="submit-btn" id="syn-submit" onclick="SYN.submit()">Submit</button>
+      <span class="round-info" id="syn-feedback"></span>
+    </div>
+
+    <div class="result-card" id="syn-result">
+      <div class="result-grade" id="syn-grade"></div>
+      <div class="result-score" id="syn-score-text"></div>
+      <div class="result-detail" id="syn-detail"></div>
+      <div class="result-xp" id="syn-xp"></div>
+      <button class="next-btn" onclick="SYN.restart()">Play Again</button>
+    </div>
+  </div>
+
+  <!-- ==================== GAME 2: FINGERPRINT FINDER ==================== -->
+  <div id="tab-fingerprint" class="tab-content">
+    <div class="prompt-box">
+      <div class="prompt-label">Mission</div>
+      <p class="prompt-text">5문장 이상 입력하면 품사 빈도를 분석하여 당신의 언어 지문(Fingerprint)을 생성합니다. 레이더 차트로 시각화.</p>
+    </div>
+
+    <textarea class="fp-input" id="fp-input" rows="8"
+      placeholder="아무 글이나 5문장 이상 입력하세요. 일기, 감상, 메모 뭐든 OK.&#10;&#10;예: 오늘 하늘이 맑았다. 바람이 차갑게 불었다. 카페에서 커피를 마셨다. 음악이 좋았다. 집에 가는 길이 예뻤다."></textarea>
+
+    <div class="action-row" style="margin-bottom:1rem;">
+      <button class="submit-btn" id="fp-analyze" onclick="FP.analyze()">Analyze</button>
+      <span class="round-info" id="fp-status"></span>
+    </div>
+
+    <div id="fp-results" style="display:none;">
+      <div class="radar-wrap">
+        <canvas class="radar-canvas" id="fp-radar" width="320" height="320"></canvas>
+      </div>
+
+      <div class="fp-stats" id="fp-stats"></div>
+
+      <div class="prompt-box" style="margin-top:1rem;">
+        <div class="prompt-label">Sentences Analyzed</div>
+        <ol class="sentence-list" id="fp-sentences"></ol>
+      </div>
+
+      <div class="result-card show" id="fp-result-card">
+        <div class="result-grade" id="fp-grade"></div>
+        <div class="result-score" id="fp-score-text"></div>
+        <div class="result-detail" id="fp-detail"></div>
+        <div class="result-xp" id="fp-xp"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- ═══ BOSS: Language Fingerprint Card ═══ -->
+  <div id="tab-boss" class="tab-content">
+    <div class="prompt-box" style="border-color:var(--ember,#d4a574)">
+      <div class="prompt-label" style="color:var(--ember,#d4a574)">BOSS — Language Fingerprint Card</div>
+      <p style="color:#aaa;font-size:0.85rem">Write 3 sentences describing the concept below. Then convert each into a sensory version using synesthesia. Your language fingerprint will be analyzed.</p>
+    </div>
+
+    <div id="boss-concept" style="font-size:1.2rem;color:var(--skill-mal);text-align:center;margin:1.5rem 0;font-weight:500"></div>
+
+    <div style="margin-bottom:1.5rem">
+      <label style="font-size:0.8rem;color:#666;font-family:'JetBrains Mono',monospace">Original Sentence 1</label>
+      <textarea class="boss-input" id="boss-s1" rows="2" placeholder="Write a plain sentence about the concept..." style="width:100%;background:#141420;border:1px solid #2a2a2a;color:#e8e8e8;padding:0.75rem;border-radius:6px;font-family:'Inter',sans-serif;resize:none;margin-bottom:0.5rem"></textarea>
+      <label style="font-size:0.8rem;color:#d4a574;font-family:'JetBrains Mono',monospace">Sensory Version 1</label>
+      <textarea class="boss-input" id="boss-v1" rows="2" placeholder="Rewrite using synesthesia (color, texture, sound, taste, smell, temperature)..." style="width:100%;background:#141420;border:1px solid #2a2a2a;color:#e8e8e8;padding:0.75rem;border-radius:6px;font-family:'Inter',sans-serif;resize:none;margin-bottom:1rem"></textarea>
+
+      <label style="font-size:0.8rem;color:#666;font-family:'JetBrains Mono',monospace">Original Sentence 2</label>
+      <textarea class="boss-input" id="boss-s2" rows="2" placeholder="Second plain sentence..." style="width:100%;background:#141420;border:1px solid #2a2a2a;color:#e8e8e8;padding:0.75rem;border-radius:6px;font-family:'Inter',sans-serif;resize:none;margin-bottom:0.5rem"></textarea>
+      <label style="font-size:0.8rem;color:#d4a574;font-family:'JetBrains Mono',monospace">Sensory Version 2</label>
+      <textarea class="boss-input" id="boss-v2" rows="2" placeholder="Synesthetic rewrite..." style="width:100%;background:#141420;border:1px solid #2a2a2a;color:#e8e8e8;padding:0.75rem;border-radius:6px;font-family:'Inter',sans-serif;resize:none;margin-bottom:1rem"></textarea>
+
+      <label style="font-size:0.8rem;color:#666;font-family:'JetBrains Mono',monospace">Original Sentence 3</label>
+      <textarea class="boss-input" id="boss-s3" rows="2" placeholder="Third plain sentence..." style="width:100%;background:#141420;border:1px solid #2a2a2a;color:#e8e8e8;padding:0.75rem;border-radius:6px;font-family:'Inter',sans-serif;resize:none;margin-bottom:0.5rem"></textarea>
+      <label style="font-size:0.8rem;color:#d4a574;font-family:'JetBrains Mono',monospace">Sensory Version 3</label>
+      <textarea class="boss-input" id="boss-v3" rows="2" placeholder="Synesthetic rewrite..." style="width:100%;background:#141420;border:1px solid #2a2a2a;color:#e8e8e8;padding:0.75rem;border-radius:6px;font-family:'Inter',sans-serif;resize:none"></textarea>
+    </div>
+
+    <div style="text-align:center;margin-bottom:1rem">
+      <button class="submit-btn" id="boss-mal-submit">Generate Fingerprint Card</button>
+    </div>
+
+    <div class="result-card" id="boss-mal-result">
+      <div class="result-grade" id="boss-mal-grade"></div>
+      <div class="result-score" id="boss-mal-score"></div>
+      <div class="result-detail" id="boss-mal-detail" style="white-space:pre-line;text-align:left"></div>
+      <div class="result-xp" id="boss-mal-xp"></div>
+      <button class="next-btn show" id="boss-mal-next">Next Concept</button>
+    </div>
+  </div>
+
+<!-- Engine imports -->
+<script src="../../engine/score-engine.js"></script>
+<script src="../../engine/xp-system.js"></script>
+
+<script>
+/* ── Tab Navigation ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ══════════════════════════════════════════════
+   SYNESTHESIA MAP — loaded inline from JSON
+   ══════════════════════════════════════════════ */
+const SYNESTHESIA = {
+  joy:          { temp:'warm',     texture:'soft',       weight:'light',    color:'yellow',      smell:'savory',   sound:'clear' },
+  sadness:      { temp:'hot',      texture:'wet',        weight:'heavy',    color:'grey',        smell:'rain',     sound:'low' },
+  anger:        { temp:'burning',  texture:'sharp',      weight:'hard',     color:'red',         smell:'metallic', sound:'sharp' },
+  fear:         { temp:'cold',     texture:'rigid',      weight:'lead-like',color:'dark',        smell:'none',     sound:'silent' },
+  loneliness:   { temp:'cool',     texture:'transparent',weight:'none',     color:'transparent', smell:'none',     sound:'echo' },
+  anticipation: { temp:'ticklish', texture:'taut',       weight:'floating', color:'dawn',        smell:'grass',    sound:'rising' },
+  trust:        { temp:'warm',     texture:'thick',      weight:'stable',   color:'deep_green',  smell:'earth',    sound:'low_steady' },
+  disgust:      { temp:'lukewarm', texture:'sticky',     weight:'stuck',    color:'murky',       smell:'sour',     sound:'murky' },
+};
+
+const SENSE_OPTIONS = {
+  temp:    ['cold','cool','lukewarm','warm','hot','burning','ticklish'],
+  texture: ['soft','wet','sharp','rigid','transparent','taut','thick','sticky','smooth'],
+  weight:  ['light','heavy','hard','lead-like','none','floating','stable','stuck'],
+  color:   ['yellow','grey','red','dark','transparent','dawn','deep_green','murky','blue','white'],
+  smell:   ['savory','rain','metallic','none','grass','earth','sour','floral','smoky'],
+  sound:   ['clear','low','sharp','silent','echo','rising','low_steady','murky','bright'],
+};
+
+const SENSE_LABELS = {
+  temp: 'Temperature', texture: 'Texture', weight: 'Weight',
+  color: 'Color', smell: 'Smell', sound: 'Sound',
+};
+
+/* ── GAME 1: Synesthesia Lab ── */
+const SYN = (() => {
+  const emotions = Object.keys(SYNESTHESIA);
+  let order = [], round = 0, totalScore = 0, selections = {};
+
+  function shuffle(arr) { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+  function init() {
+    order = shuffle(emotions).slice(0, 5);
+    round = 0; totalScore = 0;
+    document.getElementById('syn-result').classList.remove('show');
+    document.getElementById('syn-feedback').textContent = '';
+    loadRound();
+  }
+
+  function loadRound() {
+    const emotion = order[round];
+    document.getElementById('syn-round').textContent = `Round ${round + 1} / 5`;
+    document.getElementById('syn-emotion').textContent = emotion;
+    document.getElementById('syn-submit').disabled = false;
+    document.getElementById('syn-feedback').textContent = '';
+    selections = {};
+
+    const grid = document.getElementById('syn-senses');
+    grid.innerHTML = '';
+
+    Object.keys(SENSE_LABELS).forEach(sense => {
+      const item = document.createElement('div');
+      item.className = 'sense-item';
+      item.innerHTML = `<div class="sense-name">${SENSE_LABELS[sense]}</div><div class="sense-options" data-sense="${sense}"></div>`;
+      const opts = item.querySelector('.sense-options');
+      shuffle(SENSE_OPTIONS[sense]).forEach(val => {
+        const btn = document.createElement('span');
+        btn.className = 'sense-opt';
+        btn.textContent = val;
+        btn.onclick = () => selectOpt(sense, val, opts);
+        opts.appendChild(btn);
+      });
+      grid.appendChild(item);
+    });
+  }
+
+  function selectOpt(sense, val, container) {
+    container.querySelectorAll('.sense-opt').forEach(o => o.classList.remove('selected'));
+    container.querySelector(`.sense-opt:nth-child(${[...container.children].findIndex(c => c.textContent === val) + 1})`).classList.add('selected');
+    selections[sense] = val;
+  }
+
+  function submit() {
+    const emotion = order[round];
+    const answer = SYNESTHESIA[emotion];
+    const senses = Object.keys(SENSE_LABELS);
+    const filled = senses.filter(s => selections[s]);
+
+    if (filled.length < 6) {
+      document.getElementById('syn-feedback').textContent = `Select all 6 senses (${filled.length}/6)`;
+      return;
+    }
+
+    let matches = 0;
+    senses.forEach(s => { if (selections[s] === answer[s]) matches++; });
+    const roundScore = Math.round((matches / 6) * 100);
+    totalScore += roundScore;
+
+    document.getElementById('syn-feedback').textContent =
+      `${matches}/6 correct — ${roundScore}pts`;
+    document.getElementById('syn-submit').disabled = true;
+
+    // Highlight correct/wrong
+    senses.forEach(s => {
+      const container = document.querySelector(`[data-sense="${s}"]`);
+      container.querySelectorAll('.sense-opt').forEach(o => {
+        if (o.textContent === answer[s]) o.style.borderColor = '#2a9d8f';
+        if (o.classList.contains('selected') && o.textContent !== answer[s]) o.style.borderColor = '#e63946';
+      });
+    });
+
+    setTimeout(() => {
+      round++;
+      if (round < 5) { loadRound(); }
+      else { showResult(); }
+    }, 1800);
+  }
+
+  function showResult() {
+    const avg = totalScore / 5;
+    const scored = window.ScoreEngine ? ScoreEngine.score({
+      accuracy: avg, speed: 70, structure: avg * 0.9, expression: avg * 0.85, creativity: avg * 0.8
+    }, 'mal') : { total: avg, grade: avg >= 75 ? 'A' : avg >= 55 ? 'B' : avg >= 35 ? 'C' : avg >= 15 ? 'D' : 'F' };
+
+    const grade = scored.grade || 'C';
+    document.getElementById('syn-grade').textContent = grade;
+    document.getElementById('syn-grade').className = 'result-grade ' + grade;
+    document.getElementById('syn-score-text').textContent = `${Math.round(scored.total || avg)} / 100`;
+    document.getElementById('syn-detail').textContent = `5 emotions tested. Average match: ${Math.round(avg)}%`;
+
+    const xp = window.XPSystem ? XPSystem.award('mal', 'synesthesia', Math.round(scored.total || avg)) : Math.round(avg * 0.3);
+    document.getElementById('syn-xp').textContent = `+${xp} XP`;
+    document.getElementById('syn-result').classList.add('show');
+  }
+
+  function restart() { init(); }
+
+  init();
+  return { submit, restart };
+})();
+
+
+/* ══════════════════════════════════════════════
+   GAME 2: FINGERPRINT FINDER
+   ══════════════════════════════════════════════ */
+const FP = (() => {
+  // Korean POS approximate patterns (regex-based lightweight analyzer)
+  const POS_PATTERNS = [
+    { name: 'Noun',      regex: /[가-힣]+[은는이가을를의에서로]?/g, weight: 1.0 },
+    { name: 'Verb',      regex: /[가-힣]+[다았었였겠습니]+/g,        weight: 1.2 },
+    { name: 'Adjective', regex: /[가-힣]+[은운던는][다]?/g,          weight: 1.1 },
+    { name: 'Adverb',    regex: /(?:매우|정말|아주|너무|참|꽤|조금|살짝|항상|늘|자주|가끔|어쩌면|아마)/g, weight: 1.3 },
+    { name: 'Sensory',   regex: /(?:따뜻|차갑|뜨겁|시린|부드럽|거칠|달콤|쓴|시큼|향긋|밝|어두|빛나|흐릿|조용|시끄럽|맑|탁)/g, weight: 1.5 },
+    { name: 'Emotion',   regex: /(?:기쁘|슬프|화나|무섭|외로|설레|믿|역겹|행복|불안|평화|그리|그립|좋|싫|사랑)/g, weight: 1.4 },
+  ];
+
+  // English fallback patterns
+  const EN_POS = [
+    { name: 'Noun',      regex: /\b[A-Z]?[a-z]{2,}\b/g,       weight: 1.0 },
+    { name: 'Verb',      regex: /\b(?:is|was|are|were|have|had|do|did|make|go|come|take|give|say|get|know|think|see|want|use|find|tell|ask|work|seem|feel|try|leave|call|run|write|read|play|move|live|believe|bring|happen|write|become|keep|let|begin|show|hear|turn|start|need)\b/gi, weight: 1.2 },
+    { name: 'Adjective', regex: /\b(?:good|great|big|small|old|new|long|high|little|large|young|important|different|beautiful|happy|sad|angry|warm|cold|soft|hard|bright|dark|quiet|loud|sweet|bitter|fresh|deep|light|heavy)\b/gi, weight: 1.1 },
+    { name: 'Adverb',    regex: /\b(?:very|really|quite|just|always|never|often|sometimes|usually|already|still|almost|enough|too|so|well|fast|hard|even|also|again)\b/gi, weight: 1.3 },
+    { name: 'Sensory',   regex: /\b(?:warm|cold|hot|cool|soft|rough|sweet|bitter|sour|fragrant|bright|dark|shiny|blurry|quiet|loud|clear|murky|smooth|sharp|heavy|light|wet|dry)\b/gi, weight: 1.5 },
+    { name: 'Emotion',   regex: /\b(?:happy|sad|angry|afraid|lonely|excited|trust|disgust|love|hate|joy|fear|peace|anxious|grateful|proud|guilty|shame|surprise|content)\b/gi, weight: 1.4 },
+  ];
+
+  function splitSentences(text) {
+    return text.split(/[.!?\n]+/).map(s => s.trim()).filter(s => s.length > 2);
+  }
+
+  function isKorean(text) {
+    return /[가-힣]/.test(text);
+  }
+
+  function analyze() {
+    const text = document.getElementById('fp-input').value.trim();
+    const sentences = splitSentences(text);
+
+    if (sentences.length < 5) {
+      document.getElementById('fp-status').textContent = `Need 5+ sentences (got ${sentences.length})`;
+      return;
+    }
+
+    const patterns = isKorean(text) ? POS_PATTERNS : EN_POS;
+    const counts = {};
+    let totalTokens = 0;
+
+    patterns.forEach(p => {
+      const matches = text.match(p.regex) || [];
+      counts[p.name] = matches.length;
+      totalTokens += matches.length;
+    });
+
+    if (totalTokens === 0) {
+      document.getElementById('fp-status').textContent = 'No analyzable tokens found. Try longer text.';
+      return;
+    }
+
+    // Normalize to percentages
+    const pcts = {};
+    patterns.forEach(p => {
+      pcts[p.name] = Math.round((counts[p.name] / totalTokens) * 100);
+    });
+
+    // Draw radar
+    drawRadar(pcts, patterns.map(p => p.name));
+
+    // Stats
+    const statsEl = document.getElementById('fp-stats');
+    statsEl.innerHTML = patterns.map(p =>
+      `<div class="fp-stat"><div class="fp-stat-label">${p.name}</div><div class="fp-stat-value">${pcts[p.name]}%</div></div>`
+    ).join('');
+
+    // Sentences
+    const listEl = document.getElementById('fp-sentences');
+    listEl.innerHTML = sentences.map((s, i) =>
+      `<li><span class="idx">${i + 1}.</span>${s}</li>`
+    ).join('');
+
+    // Consistency score: low std deviation = high consistency
+    const vals = Object.values(pcts);
+    const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+    const variance = vals.reduce((a, v) => a + Math.pow(v - mean, 2), 0) / vals.length;
+    const std = Math.sqrt(variance);
+    // Higher diversity (moderate std) = more expressive writer
+    // Ideal std is ~10-15; too low = monotone, too high = scattered
+    const diversityScore = Math.max(0, Math.min(100, 100 - Math.abs(std - 12) * 5));
+    const sensoryRatio = (pcts['Sensory'] || 0) + (pcts['Emotion'] || 0);
+    const sensoryScore = Math.min(100, sensoryRatio * 3);
+    const sentenceCount = sentences.length;
+    const lengthScore = Math.min(100, sentenceCount * 8);
+
+    const overall = Math.round(diversityScore * 0.4 + sensoryScore * 0.35 + lengthScore * 0.25);
+
+    const scored = window.ScoreEngine ? ScoreEngine.score({
+      accuracy: diversityScore, speed: lengthScore, structure: diversityScore,
+      expression: sensoryScore, creativity: Math.round((sensoryScore + diversityScore) / 2)
+    }, 'mal') : { total: overall, grade: overall >= 75 ? 'A' : overall >= 55 ? 'B' : overall >= 35 ? 'C' : overall >= 15 ? 'D' : 'F' };
+
+    const grade = scored.grade || 'C';
+    document.getElementById('fp-grade').textContent = grade;
+    document.getElementById('fp-grade').className = 'result-grade ' + grade;
+    document.getElementById('fp-score-text').textContent = `${Math.round(scored.total || overall)} / 100`;
+    document.getElementById('fp-detail').textContent =
+      `Diversity: ${Math.round(diversityScore)} | Sensory: ${Math.round(sensoryScore)} | Volume: ${Math.round(lengthScore)} | ${sentenceCount} sentences, ${totalTokens} tokens`;
+
+    const xp = window.XPSystem ? XPSystem.award('mal', 'fingerprint', Math.round(scored.total || overall)) : Math.round(overall * 0.3);
+    document.getElementById('fp-xp').textContent = `+${xp} XP`;
+
+    document.getElementById('fp-results').style.display = 'block';
+    document.getElementById('fp-status').textContent = '';
+  }
+
+  function drawRadar(pcts, labels) {
+    const canvas = document.getElementById('fp-radar');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.35;
+    const n = labels.length;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid rings
+    for (let ring = 1; ring <= 4; ring++) {
+      const r = R * (ring / 4);
+      ctx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+        const x = cx + r * Math.cos(angle);
+        const y = cy + r * Math.sin(angle);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = '#2a2a2a';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Axis lines + labels
+    ctx.font = '11px "JetBrains Mono", monospace';
+    ctx.fillStyle = '#888';
+    ctx.textAlign = 'center';
+    for (let i = 0; i < n; i++) {
+      const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+      const x1 = cx + R * Math.cos(angle);
+      const y1 = cy + R * Math.sin(angle);
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(x1, y1);
+      ctx.strokeStyle = '#1a1a2a';
+      ctx.stroke();
+
+      const lx = cx + (R + 20) * Math.cos(angle);
+      const ly = cy + (R + 20) * Math.sin(angle);
+      ctx.fillText(labels[i], lx, ly + 4);
+    }
+
+    // Data polygon
+    const maxPct = Math.max(...Object.values(pcts), 50);
+    ctx.beginPath();
+    for (let i = 0; i <= n; i++) {
+      const idx = i % n;
+      const angle = (Math.PI * 2 * idx / n) - Math.PI / 2;
+      const val = (pcts[labels[idx]] || 0) / maxPct;
+      const x = cx + R * val * Math.cos(angle);
+      const y = cy + R * val * Math.sin(angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.fillStyle = 'rgba(78,205,196,0.2)';
+    ctx.fill();
+    ctx.strokeStyle = '#4ecdc4';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Data points
+    for (let i = 0; i < n; i++) {
+      const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+      const val = (pcts[labels[i]] || 0) / maxPct;
+      const x = cx + R * val * Math.cos(angle);
+      const y = cy + R * val * Math.sin(angle);
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#4ecdc4';
+      ctx.fill();
+    }
+  }
+
+  return { analyze };
+})();
+
+/* ═══ BOSS — Language Fingerprint Card ═══ */
+(function() {
+  const CONCEPTS = [
+    'Editing is not creation — it is deconstruction and recombination',
+    'A commit is a sentence, a branch is a chapter',
+    'AI generates, but the editor selects and recombines',
+    'Every tool is a finishing instrument, not the creative source',
+    'The factory produces, but the narrative gives it meaning',
+  ];
+  const SENSORY_WORDS = ['warm','cold','sharp','soft','bright','dark','loud','quiet','sweet','bitter','rough','smooth','heavy','light','thick','thin','red','blue','golden','silver','burn','freeze','echo','whisper','glow','shadow','crisp','fuzzy','metallic','velvet','crystal','muddy','silk','gravel','honey','acid','thunder','hum','flash','fade'];
+
+  let bossConceptIdx = 0;
+
+  function loadBossConcept() {
+    document.getElementById('boss-concept').textContent = CONCEPTS[bossConceptIdx % CONCEPTS.length];
+    ['boss-s1','boss-v1','boss-s2','boss-v2','boss-s3','boss-v3'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('boss-mal-result').classList.remove('show');
+  }
+
+  document.getElementById('boss-mal-submit').addEventListener('click', () => {
+    const originals = [
+      document.getElementById('boss-s1').value.trim(),
+      document.getElementById('boss-s2').value.trim(),
+      document.getElementById('boss-s3').value.trim(),
+    ];
+    const versions = [
+      document.getElementById('boss-v1').value.trim(),
+      document.getElementById('boss-v2').value.trim(),
+      document.getElementById('boss-v3').value.trim(),
+    ];
+
+    const filled = originals.filter(s => s.length > 5).length + versions.filter(s => s.length > 5).length;
+    if (filled < 4) {
+      alert('Write at least 2 original sentences and their sensory versions.');
+      return;
+    }
+
+    // Analyze sensory word usage
+    const allVersionText = versions.join(' ').toLowerCase();
+    const sensoryHits = SENSORY_WORDS.filter(w => allVersionText.includes(w));
+    const sensoryScore = Math.min(100, sensoryHits.length * 15);
+
+    // Word count difference (versions should be richer)
+    const origWords = originals.join(' ').split(/\s+/).filter(Boolean).length;
+    const versWords = versions.join(' ').split(/\s+/).filter(Boolean).length;
+    const enrichment = versWords > origWords ? Math.min(100, ((versWords - origWords) / Math.max(1, origWords)) * 200) : 20;
+
+    // Unique word diversity
+    const allWords = [...originals, ...versions].join(' ').toLowerCase().split(/\s+/).filter(Boolean);
+    const uniqueRatio = new Set(allWords).size / Math.max(1, allWords.length);
+    const diversity = Math.min(100, uniqueRatio * 200);
+
+    const result = ScoreEngine.score({
+      accuracy: sensoryScore,
+      speed: 80,
+      structure: Math.min(100, filled * 17),
+      expression: enrichment,
+      creativity: diversity,
+    });
+
+    document.getElementById('boss-mal-grade').textContent = result.grade;
+    document.getElementById('boss-mal-grade').className = 'result-grade ' + result.grade;
+    document.getElementById('boss-mal-score').textContent = result.total + ' / 100';
+    document.getElementById('boss-mal-detail').textContent =
+      `Sensory words found: ${sensoryHits.join(', ') || 'none'} (${sensoryHits.length})\n` +
+      `Word enrichment: ${origWords} → ${versWords} words (+${versWords - origWords})\n` +
+      `Vocabulary diversity: ${(uniqueRatio * 100).toFixed(0)}%\n` +
+      `Sections completed: ${filled}/6`;
+    const xp = result.grade === 'A' ? 500 : result.grade === 'B' ? 350 : result.grade === 'C' ? 200 : 80;
+    document.getElementById('boss-mal-xp').textContent = '+' + xp + ' XP (BOSS)';
+    document.getElementById('boss-mal-result').classList.add('show');
+    if (typeof XPSystem !== 'undefined') XPSystem.addXP(xp, 'mal', 'boss-' + bossConceptIdx);
+  });
+
+  document.getElementById('boss-mal-next').addEventListener('click', () => { bossConceptIdx++; loadBossConcept(); });
+  loadBossConcept();
+})();
+</script>
+</body>
+</html>
